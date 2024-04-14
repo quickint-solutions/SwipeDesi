@@ -1,9 +1,9 @@
 import { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
-// import './css/global.css';
 import './css/global.css';
 import RouteComponent from './module/pages/Route';
 import { AuthProvider } from './context/AuthContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const ScrollToTopOnRouteChange = () => {
   const { pathname } = useLocation();
@@ -29,10 +29,12 @@ function App() {
   return (
     <Suspense>
       <Router basename="/">
-        <AuthProvider>
-          <ScrollToTopOnRouteChange />
-          <RouteComponent />
-        </AuthProvider>
+        <QueryClientProvider client={new QueryClient()}>
+          <AuthProvider>
+            <ScrollToTopOnRouteChange />
+            <RouteComponent />
+          </AuthProvider>
+        </QueryClientProvider>
       </Router>
     </Suspense>
   );

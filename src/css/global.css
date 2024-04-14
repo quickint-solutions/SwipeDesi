@@ -806,7 +806,11 @@
       height: 20px;
       margin-right: 10px; }
   
-  
+  .nav-link-flex {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+  }
   
   .header .navbar {
     padding: 0; }

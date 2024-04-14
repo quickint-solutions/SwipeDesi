@@ -179,7 +179,7 @@ const RouteComponent: React.FC = () => {
                 <div className="col-12">
                   <div className="d-lg-flex align-items-center text-center">
                     <div className="topbar-left mb-2 mb-lg-0">
-                      <div className="dropdown right-menu d-inline-flex pe-3 topbar-divider">
+                      {/* <div className="dropdown right-menu d-inline-flex pe-3 topbar-divider">
                         <a
                           className="dropdown-toggle"
                           href="#"
@@ -208,7 +208,7 @@ const RouteComponent: React.FC = () => {
                             Italiano
                           </a>
                         </div>
-                      </div>
+                      </div> */}
                       <ul className="list-unstyled ps-2">
                         <li>
                           <a href="#">Gift cards</a>
@@ -379,31 +379,31 @@ const RouteComponent: React.FC = () => {
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
                 <li className="nav-item active">
-                  <a className="nav-link active" aria-current="page" href="mandir.html">
+                  <a className="nav-link active nav-link-flex" aria-current="page" href="mandir.html">
                     <Icon1Svg />
                     <span>Mandir</span>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" aria-current="page" href="#">
+                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
                     <Icon1Svg />
                     <span>Furniture</span>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" aria-current="page" href="#">
+                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
                     <Icon1Svg />
                     <span>Handicraft</span>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" aria-current="page" href="#">
+                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
                     <Icon1Svg />
                     <span>Jewelry</span>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" aria-current="page" href="#">
+                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
                     <Icon1Svg />
                     <span>Pooja Accessories</span>
                   </a>
