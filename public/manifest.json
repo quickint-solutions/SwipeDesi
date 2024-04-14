@@ -1,0 +1,27 @@
+{
+  "theme_color": "#006d63",
+  "background_color": "#fff",
+  "scope": "/",
+  "name": "Mobile Cashier",
+  "short_name": "Mobile Cashier",
+  "description": "Powered By Yodel",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "Yodel192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "Yodel512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone"
+}

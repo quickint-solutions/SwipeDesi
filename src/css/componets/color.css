@@ -1,0 +1,43 @@
+  
+ .theme{
+    /* Green Colore Shade */
+    --green:#008157;
+    --greenRgba:0, 129, 87;
+    --greentone:#80C1A9;
+    --greenshade:#005435;
+    --gradient1:linear-gradient(180deg, #098E55 0%, #00B768 100%);
+    --gradient2:linear-gradient(180deg, #FDB71A -40%, #008157 317.69%);
+    --gradient3:linear-gradient(179.25deg, #008157 -252.14%, #FDB71A 158.89%);
+    /* Yellow Colore Shade */
+    --yellow:#FDB71A;
+    --yellowtone:#FEDB8C;
+    --yellowshade:#DEA121;
+    --yellowshadeRgba:197, 137, 7;
+    --orange:#fb642d;
+    /*  Normal Colore Shade */
+    --black:#000000;
+    --blacktone:#4A4A4A;
+    --gray:#B2B5B6;
+    --graylight:#EEEEEE;
+    --danger:#AD0000;
+     /* Button  */
+    --themeBtn:var(--green);
+    --themeBtnHover:var(--greenshade);
+    --themeBtnHoverRgba:0, 129, 87;
+    --themeBtnColor:#fff;
+     /*Button  */
+    --themeBtnYellow:#DEA121;
+    --themeBtnYellowHover:#DEA121;
+    --themeBtnYellowColor:#000;
+    /* Button  */
+    --themeBtnGrey:#D9D9D9;
+    --themeBtnGreyHover:#cac8c8;
+    --themeBtnGreyColor:#000; 
+    /* Header Color */
+    --headerBg:#eee;
+    /* banner  */
+    --bannerBg:linear-gradient(180deg, #FDB71A -59.09%, #799B3A 140.4%);
+    /* Loader Color */
+    --Mainloader:linear-gradient(90deg, rgba(253, 183, 26, 1) 0%, rgba(0, 129, 87, 0.40) 100%);
+   }
+  
