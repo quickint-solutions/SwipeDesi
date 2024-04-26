@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getCategories } from '../../../apiV2/categories';
 import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { getBanners } from '../../../apiV2/banners';
 
 const buttonStyle = {
   borderRadius: '12px',
@@ -12,7 +12,15 @@ const buttonStyle = {
 };
 
 const Home: React.FC = () => {
-  const {} = useQuery('getCategories', getCategories);
+  const { data: banners, isLoading: bannersLoading } = useQuery('getBanners', getBanners);
+  // get first 2 banners
+  const bannersList = banners?.result?.slice(0, 2) || [];
+  console.log('bannersList -> ', bannersList);
+  // get other Banners
+  const otherBanners = banners?.result?.slice(2) || [];
+  console.log('otherBanners -> ', otherBanners);
+  console.log('bannersLoading -> ', bannersLoading);
+
   return (
     <>
       <div className="topbar d-none d-md-block">

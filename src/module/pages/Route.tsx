@@ -14,6 +14,8 @@ import { getUserDetail } from '../../helpers/common';
 import cartHttpRequest from '../../api/cart/cartHttpRequest';
 import { useAppDispatch, useAppSelector } from '../../api/store/configureStore';
 import { getCartDetail, getCartTotal } from './Cart/cartSlice';
+import { useQuery } from 'react-query';
+import { getCategories } from '../../apiV2/categories';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -49,6 +51,8 @@ const RouteComponent: React.FC = () => {
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
   const [cartDetail, setCartDetail] = useState([]);
   const [cartTotal, setCartTotal] = useState<any>(0);
+
+  const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
 
   useEffect(() => {
     if (storageUserDetail) {
@@ -251,7 +255,7 @@ const RouteComponent: React.FC = () => {
                 />
               </a>
               <form className="form-inline search-form">
-                <div className="form-group mb-0">
+                <div className="form-group z-0">
                   <button className="search-button" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
@@ -378,36 +382,16 @@ const RouteComponent: React.FC = () => {
 
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
-                <li className="nav-item active">
-                  <a className="nav-link active nav-link-flex" aria-current="page" href="mandir.html">
-                    <Icon1Svg />
-                    <span>Mandir</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                    <Icon1Svg />
-                    <span>Furniture</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                    <Icon1Svg />
-                    <span>Handicraft</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                    <Icon1Svg />
-                    <span>Jewelry</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                    <Icon1Svg />
-                    <span>Pooja Accessories</span>
-                  </a>
-                </li>
+                {!categoriesLoading && categories && categories?.result?.length > 0
+                  ? categories?.result?.map((value: any, key: number) => (
+                      <li className="nav-item">
+                        <a className="nav-link nav-link-flex" aria-current="page" href="#">
+                          <Icon1Svg />
+                          <span>{value.name}</span>
+                        </a>
+                      </li>
+                    ))
+                  : ''}
               </ul>
             </div>
             <div className="text-end free-shipping">

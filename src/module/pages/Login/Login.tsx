@@ -19,6 +19,8 @@ import {
   getTestimonialData,
 } from './loginSlice';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { getBanners } from '../../../apiV2/banners';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,9 +35,16 @@ const Login: React.FC = () => {
   const [testimonialData, setTestimonialData] = useState<any>([]);
   const [sliderImages, setSliderImages] = useState([]);
   const [sliderBannerImages, setSliderBannerImages] = useState<any>([]);
-  console.log('storeDara', storeData);
-  console.log('sliderImages', sliderImages);
-  console.log('sliderBannerImages', sliderBannerImages);
+
+  const { data: banners, isLoading: bannersLoading } = useQuery('getBanners', getBanners);
+  // get first 2 banners
+  const bannersList = banners?.result?.slice(0, 2) || [];
+  console.log('bannersList -> ', bannersList);
+  // get other Banners
+  const otherBanners = banners?.result?.slice(2) || [];
+  console.log('otherBanners -> ', otherBanners);
+  console.log('bannersLoading -> ', bannersLoading);
+
   useEffect(() => {
     dispatch(getBannerImages());
     dispatch(getLatestCollectioData());
@@ -121,22 +130,13 @@ const Login: React.FC = () => {
             <div className="col-7">
               <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
-                  {sliderImages.length > 0
-                    ? sliderImages.map((value: any, key: number) => (
+                  {otherBanners.length > 0
+                    ? otherBanners.map((value: any, key: number) => (
                         <div className={key === 0 ? 'carousel-item active' : 'carousel-item'} key={key}>
-                          <img src={value?.ImagePath} className="d-block w-100" alt="..." />
+                          <img src={value?.image} className="d-block w-100" alt="..." />
                         </div>
                       ))
                     : ''}
-                  {/* <div className="carousel-item active">
-                                        <img src={slider011} className="d-block w-100" alt="..." />
-                                    </div>
-                                    <div className="carousel-item">
-                                        <img src={slider011} className="d-block w-100" alt="..." />
-                                    </div>
-                                    <div className="carousel-item">
-                                        <img src={slider011} className="d-block w-100" alt="..." />
-                                    </div> */}
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                   <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -150,22 +150,16 @@ const Login: React.FC = () => {
             </div>
             <div className="col-5">
               <div className="row">
-                {sliderBannerImages.length > 0 ? (
-                  <>
+                {!bannersLoading &&
+                  banners &&
+                  bannersList.length > 0 &&
+                  bannersList.map((banner: any, index: number) => (
                     <div className="col-12">
                       <div className="slider-banner mb-1 mb-lg-2">
-                        <img className="img-fluid" src={sliderBannerImages[0].ImagePath} alt="image" />
+                        <img className="img-fluid" src={banner.image} alt="image" />
                       </div>
                     </div>
-                    <div className="col-12">
-                      <div className="slider-banner">
-                        <img className="img-fluid" src={sliderBannerImages[1].ImagePath} alt="image" />
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  ''
-                )}
+                  ))}
               </div>
             </div>
           </div>
