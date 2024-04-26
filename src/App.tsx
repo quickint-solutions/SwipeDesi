@@ -5,7 +5,6 @@ import RouteComponent from './module/pages/Route';
 import { AuthProvider } from './context/AuthContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import axios from 'axios';
-import { getCategories } from './apiV2/categories.apis';
 
 const ScrollToTopOnRouteChange = () => {
   const { pathname } = useLocation();

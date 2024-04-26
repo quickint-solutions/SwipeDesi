@@ -1,25 +1,17 @@
 import React, { lazy, useState, useEffect } from 'react';
-import { Navigate, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
-// import logoImage from "../../../images/logo.png";
-import logoImage from '../../images/logo.png';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { ReactComponent as Icon1Svg } from '../../images/icon-01.svg';
-import { ReactComponent as Icon2Svg } from '../../images/icon-02.svg';
-import { ReactComponent as Icon3Svg } from '../../images/icon-03.svg';
-import { ReactComponent as Icon4Svg } from '../../images/icon-04.svg';
-import EnglishLang from '../../images/en.png';
-import Product01 from '../../images/product/01.jpg';
 import PayIcon from '../../images/pay-icon.png';
 import loginHttpRequest from '../../api/login/loginHttpRequest';
 import { getUserDetail } from '../../helpers/common';
 import cartHttpRequest from '../../api/cart/cartHttpRequest';
 import { useAppDispatch, useAppSelector } from '../../api/store/configureStore';
 import { getCartDetail, getCartTotal } from './Cart/cartSlice';
-import { useQueries, useQuery } from '@tanstack/react-query';
 import apiV2 from '../../apiV2';
+import { useQuery } from 'react-query';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
-// const Mandir = lazy(() => import("./Login/Mandir"));
 const Home = lazy(() => import('./Home/Home'));
 const ShopSingle = lazy(() => import('./ShopSingle/ShopSingle'));
 const Wishlist = lazy(() => import('./WishList/Wishlist'));
@@ -169,10 +161,11 @@ const RouteComponent: React.FC = () => {
     localStorage.removeItem('UserDetail');
   };
 
-  const CategoryFetch = useQuery('categories', async () => {
-    const response = await apiV2.categories.getCategories();
-    return response.data;
-  });
+  const CategoryFetch = useQuery('categories', apiV2.categories.getCategories);
+
+  console.log('CategoryFetch -> ', CategoryFetch);
+  console.log('typeOf CategoryFetch?.data?.result -> ', typeof CategoryFetch?.data?.result);
+  console.log('typeOf CategoryFetch?.data?.result -> ', CategoryFetch?.data?.result);
 
   return (
     <React.Fragment>
@@ -382,41 +375,20 @@ const RouteComponent: React.FC = () => {
             <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
               <i className="fas fa-align-left"></i>
             </button>
-
-            <div className="navbar-collapse collapse">
-              <ul className="nav navbar-nav">
-                <li className="nav-item active">
-                  <a className="nav-link active nav-link-flex" aria-current="page" href="mandir.html">
-                    <Icon1Svg />
-                    <span>Mandir</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                    <Icon1Svg />
-                    <span>Furniture</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                    <Icon1Svg />
-                    <span>Handicraft</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                    <Icon1Svg />
-                    <span>Jewelry</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                    <Icon1Svg />
-                    <span>Pooja Accessories</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {CategoryFetch?.data?.result.map((e: any) => {
+              return (
+                <div className="navbar-collapse collapse">
+                  <ul className="nav navbar-nav">
+                    <li className="nav-item active">
+                      <a className="nav-link active nav-link-flex" aria-current="page" href="/">
+                        <Icon1Svg />
+                        <span>{e.name}</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })}
             <div className="text-end free-shipping">
               <a href="#">Free shipping for all orders of $1.300</a>
             </div>

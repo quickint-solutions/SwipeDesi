@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCategories } from '../../../apiV2/categories';
 import { useQuery } from 'react-query';
+import { getCategories } from '../../../apiV2/categories.apis';
 
 const buttonStyle = {
   borderRadius: '12px',
