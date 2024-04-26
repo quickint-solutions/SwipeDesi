@@ -19,6 +19,8 @@ import {
   getTestimonialData,
 } from './loginSlice';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import apiV2 from '../../../apiV2';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -110,6 +112,10 @@ const Login: React.FC = () => {
     event.preventDefault();
     navigate('/wishlist');
   };
+
+  const ItemsData = useQuery('items', apiV2.items.fetchItems);
+
+  console.log('ItemsData?.data -> ', ItemsData?.data?.result);
 
   return (
     <>
@@ -408,8 +414,8 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="row">
-            {latestCollectionData.length > 0
-              ? latestCollectionData.map((value: any, key: number) => (
+            {ItemsData?.data?.result.length > 0
+              ? ItemsData?.data?.result.map((value: any, key: number) => (
                   <div className="col-xl-3 col-lg-4 col-md-6" key={key}>
                     <div
                       className="product"

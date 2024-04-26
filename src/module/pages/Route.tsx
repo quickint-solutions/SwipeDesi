@@ -162,11 +162,8 @@ const RouteComponent: React.FC = () => {
   };
 
   const CategoryFetch = useQuery('categories', apiV2.categories.getCategories);
-  const ItemFetch = useQuery('items', apiV2.items.fetchItems);
 
   console.log('CategoryFetch -> ', CategoryFetch.data?.result);
-
-  console.log('ItemFetch -> ', ItemFetch.data?.result);
 
   return (
     <React.Fragment>
