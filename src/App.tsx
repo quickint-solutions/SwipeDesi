@@ -3,7 +3,7 @@ import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 import './css/global.css';
 import RouteComponent from './module/pages/Route';
 import { AuthProvider } from './context/AuthContext';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import axios from 'axios';
 import { getCategories } from './apiV2/categories.apis';
 
@@ -21,9 +21,6 @@ axios.defaults.baseURL = 'http://localhost:3000/api';
 
 function App() {
   useEffect(() => {
-    getCategories().then(res => {
-      console.log('res -> ', res);
-    });
     window.onpopstate = function (event) {
       let isCallFromRannger = localStorage.getItem('IsCallFromPOS');
       let rangerData = localStorage.getItem('UserDetail') != null ? JSON.parse(localStorage.getItem('UserDetail') || '') : null;
