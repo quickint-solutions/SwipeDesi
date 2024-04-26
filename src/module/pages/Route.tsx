@@ -14,6 +14,8 @@ import { getUserDetail } from '../../helpers/common';
 import cartHttpRequest from '../../api/cart/cartHttpRequest';
 import { useAppDispatch, useAppSelector } from '../../api/store/configureStore';
 import { getCartDetail, getCartTotal } from './Cart/cartSlice';
+import { useQueries, useQuery } from '@tanstack/react-query';
+import apiV2 from '../../apiV2';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -166,6 +168,11 @@ const RouteComponent: React.FC = () => {
     setUserData(null);
     localStorage.removeItem('UserDetail');
   };
+
+  const CategoryFetch = useQuery('categories', async () => {
+    const response = await apiV2.categories.getCategories();
+    return response.data;
+  });
 
   return (
     <React.Fragment>
