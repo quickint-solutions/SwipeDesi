@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getCategories } from '../../../apiV2/categories';
+import { useQuery } from 'react-query';
 
 const buttonStyle = {
   borderRadius: '12px',
@@ -10,6 +12,7 @@ const buttonStyle = {
 };
 
 const Home: React.FC = () => {
+  const {} = useQuery('getCategories', getCategories);
   return (
     <>
       <div className="topbar d-none d-md-block">
