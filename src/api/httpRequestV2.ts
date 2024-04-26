@@ -82,14 +82,14 @@ headerAxios.interceptors.request.use((config: any) => {
   return config;
 });
 
-export const authorizedRequests = {
+export const authorizedRequestsV2 = {
   get: (url: string, params?: URLSearchParams) => authorizeAxios.get(url, { params }).then(responseBody),
   post: (url: string, body: {}) => authorizeAxios.post(url, body).then(responseBody),
   put: (url: string, body: {}) => authorizeAxios.put(url, body).then(responseBody),
   delete: (url: string) => authorizeAxios.delete(url).then(responseBody),
 };
 
-export const apiRequests = {
+export const apiRequestsV2 = {
   get: (url: string, params?: URLSearchParams) => headerAxios.get(url, { params }).then(responseBody),
   post: (url: string, body: {}) => headerAxios.post(url, body).then(responseBody),
   put: (url: string, body: {}) => headerAxios.put(url, body).then(responseBody),

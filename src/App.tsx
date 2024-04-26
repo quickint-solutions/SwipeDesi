@@ -4,6 +4,8 @@ import './css/global.css';
 import RouteComponent from './module/pages/Route';
 import { AuthProvider } from './context/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import axios from 'axios';
+import { getCategories } from './apiV2/categories';
 
 const ScrollToTopOnRouteChange = () => {
   const { pathname } = useLocation();
@@ -15,8 +17,13 @@ const ScrollToTopOnRouteChange = () => {
   return null;
 };
 
+axios.defaults.baseURL = '';
+
 function App() {
   useEffect(() => {
+    getCategories().then(res => {
+      console.log('res -> ', res);
+    });
     window.onpopstate = function (event) {
       let isCallFromRannger = localStorage.getItem('IsCallFromPOS');
       let rangerData = localStorage.getItem('UserDetail') != null ? JSON.parse(localStorage.getItem('UserDetail') || '') : null;
