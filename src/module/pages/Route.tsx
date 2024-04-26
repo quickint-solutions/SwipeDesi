@@ -183,36 +183,6 @@ const RouteComponent: React.FC = () => {
                 <div className="col-12">
                   <div className="d-lg-flex align-items-center text-center">
                     <div className="topbar-left mb-2 mb-lg-0">
-                      {/* <div className="dropdown right-menu d-inline-flex pe-3 topbar-divider">
-                        <a
-                          className="dropdown-toggle"
-                          href="#"
-                          id="dropdownMenuButton2"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <img className="img-fluid" src={EnglishLang} alt="" /> English<i className="fas fa-chevron-down fa-xs"></i>
-                        </a>
-                        <div className="dropdown-menu mt-0" aria-labelledby="dropdownMenuButton2">
-                          <a className="dropdown-item" href="#">
-                            <img className="img-fluid country-flag" src={EnglishLang} alt="" />
-                            English
-                          </a>
-                          <a className="dropdown-item" href="#">
-                            <img className="img-fluid country-flag" src={EnglishLang} alt="" />
-                            Francais
-                          </a>
-                          <a className="dropdown-item" href="#">
-                            <img className="img-fluid country-flag" src={EnglishLang} alt="" />
-                            Deutsch
-                          </a>
-                          <a className="dropdown-item" href="#">
-                            <img className="img-fluid country-flag" src={EnglishLang} alt="" />
-                            Italiano
-                          </a>
-                        </div>
-                      </div> */}
                       <ul className="list-unstyled ps-2">
                         <li>
                           <a href="#">Gift cards</a>
@@ -386,7 +356,7 @@ const RouteComponent: React.FC = () => {
                   ? categories?.result?.map((value: any, key: number) => (
                       <li className="nav-item">
                         <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                          <Icon1Svg />
+                          <img src={value.icon} style={{ height: 18 }} />
                           <span>{value.name}</span>
                         </a>
                       </li>
