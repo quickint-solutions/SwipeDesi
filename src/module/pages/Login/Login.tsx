@@ -21,6 +21,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getBanners } from '../../../apiV2/banners';
+import { getCategories } from '../../../apiV2/categories';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +36,8 @@ const Login: React.FC = () => {
   const [testimonialData, setTestimonialData] = useState<any>([]);
   const [sliderImages, setSliderImages] = useState([]);
   const [sliderBannerImages, setSliderBannerImages] = useState<any>([]);
+
+  const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
 
   const { data: banners, isLoading: bannersLoading } = useQuery('getBanners', getBanners);
   // get first 2 banners
@@ -183,20 +186,21 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="feature-categories-wrapper">
-            {bannerCategoryData.length > 0
-              ? bannerCategoryData.map((value: any, key: number) => (
+            {categories?.result?.length > 0
+              ? categories?.result.map((value: any, key: number) => (
                   <div className="featured-categories-column text-center" key={key}>
                     <div className="feature-categories-inner">
                       <div className="categories-img">
                         <a href="javascript:void(0)">
                           {' '}
-                          <img className="img-fluid" src={value.imagePath} alt="images" />
+                          <img className="img-fluid" style={{}} src={value.image} alt="images" />
                         </a>
                       </div>
-                      <div className="categories-product text-center">{value.products} Products</div>
+                      {/* TODO: CHANGE TO REAL NUMBER */}
+                      <div className="categories-product text-center">5 Products</div>
                     </div>
                     <h6 className="categories-title fw-medium mt-3">
-                      <a href="javascript:void(0)">{value.categoryName}</a>
+                      <a href="javascript:void(0)">{value.name}</a>
                     </h6>
                   </div>
                 ))

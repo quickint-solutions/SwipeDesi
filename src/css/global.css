@@ -1317,7 +1317,7 @@
   }
    
   .categories-product {
-    height: 90%;
+      height: 90%;
       width: 90%;
       background: #fff;
       margin: 0 auto;
@@ -1353,6 +1353,8 @@
   .categories-img img{
     transition: all .5s ease;
     width: 100%;
+    height: 100%;
+    max-height: 100%;
     border-radius: 50%;
   }
   
