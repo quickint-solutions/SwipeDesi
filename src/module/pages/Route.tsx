@@ -14,19 +14,18 @@ import { getUserDetail } from '../../helpers/common';
 import cartHttpRequest from '../../api/cart/cartHttpRequest';
 import { useAppDispatch, useAppSelector } from '../../api/store/configureStore';
 import { getCartDetail, getCartTotal } from './Cart/cartSlice';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { getCategories } from '../../apiV2/categories';
+import { signup } from '../../apiV2/signup';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
-// const Mandir = lazy(() => import("./Login/Mandir"));
 const Home = lazy(() => import('./Home/Home'));
 const ShopSingle = lazy(() => import('./ShopSingle/ShopSingle'));
 const Wishlist = lazy(() => import('./WishList/Wishlist'));
 const Cart = lazy(() => import('./Cart/Cart'));
 const Checkout = lazy(() => import('./Checkout/Checkout'));
 const Category = lazy(() => import('./Category/Category'));
-
 const RouteComponent: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -39,14 +38,19 @@ const RouteComponent: React.FC = () => {
   const [userData, setUserData] = useState(null);
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
   const [registrationDetail, setRegistrationDetail] = useState({
-    name: '',
+    first: '',
+    last: '',
+    countryCode: '',
+    number: '',
     email: '',
-    pwd: '',
-    address: '',
-    phoneNumber: '',
-    postalCode: '',
-    fname: '',
-    lname: '',
+    password: '',
+    line1: '',
+    line2: '',
+    city: '',
+    state: '',
+    country: '',
+    zip: '',
+    profileImage: '',
   });
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
   const [cartDetail, setCartDetail] = useState([]);
@@ -141,29 +145,14 @@ const RouteComponent: React.FC = () => {
     }));
   };
 
-  const submitRegistrationDetail = async () => {
-    let requestParam = {
-      username: registrationDetail.name,
-      password: registrationDetail.pwd,
-      email: registrationDetail.email,
-      firstName: registrationDetail.fname,
-      lastName: registrationDetail.lname,
-      addressLine1: registrationDetail.address,
-      city: 'Ahmedabad',
-      state: 'Gujarat',
-      postalCode: registrationDetail.postalCode,
-      country: 'India',
-      phoneNumber: registrationDetail.phoneNumber,
-    };
-    let registrationData = await loginHttpRequest.postRegistationDetail(requestParam);
-    if (registrationData?.dateRegistered) {
-      dispatch(getCartDetail(registrationData.userID));
-      (window as any).$('#formLoginRegister').modal('hide');
-      setUserData(registrationData);
-      localStorage.setItem('UserDetail', JSON.stringify(registrationData));
-      setIsShowLoginForm(true);
-    }
-  };
+  const { mutate: handleSignup } = useMutation(signup, {
+    onSuccess: data => {
+      console.log('data -> ', data);
+    },
+    onError: error => {
+      console.log('error -> ', error);
+    },
+  });
 
   const handleUserLogout = () => {
     navigate('/');
@@ -453,16 +442,49 @@ const RouteComponent: React.FC = () => {
                           <input
                             type="text"
                             className="form-control"
-                            value={registrationDetail.name}
-                            name="uname"
-                            id="uname"
-                            placeholder="User Name"
-                            onChange={e => handleRegistrationDetail('name', e.target.value)}
+                            value={registrationDetail.first}
+                            name="first"
+                            id="first"
+                            placeholder="First Name"
+                            onChange={e => handleRegistrationDetail('first', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-12 name">
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={registrationDetail.last}
+                            name="lastName"
+                            id="lastName"
+                            placeholder="last Name"
+                            onChange={e => handleRegistrationDetail('last', e.target.value)}
                           />
                         </div>
                         <div className="mb-3 col-sm-12 email">
                           <input
-                            type="email"
+                            type="text"
+                            className="form-control"
+                            value={registrationDetail.countryCode}
+                            name="countryCode"
+                            id="countryCode"
+                            placeholder="Country Code"
+                            onChange={e => handleRegistrationDetail('countryCode', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-12 email">
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={registrationDetail.number}
+                            name="number"
+                            id="number"
+                            placeholder="Number"
+                            onChange={e => handleRegistrationDetail('number', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-12 name">
+                          <input
+                            type="text"
                             className="form-control"
                             value={registrationDetail.email}
                             name="email"
@@ -471,26 +493,15 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('email', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 name">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.address}
-                            name="address"
-                            id="address"
-                            placeholder="Address"
-                            onChange={e => handleRegistrationDetail('address', e.target.value)}
-                          />
-                        </div>
                         <div className="mb-3 col-sm-12 password">
                           <input
                             className="form-control"
                             type="password"
-                            value={registrationDetail.pwd}
+                            value={registrationDetail.password}
                             name="password"
                             id="password"
                             placeholder="Password"
-                            onChange={e => handleRegistrationDetail('pwd', e.target.value)}
+                            onChange={e => handleRegistrationDetail('password', e.target.value)}
                           />
                         </div>
 
@@ -509,49 +520,70 @@ const RouteComponent: React.FC = () => {
                           <input
                             className="form-control"
                             type="text"
-                            value={registrationDetail.fname}
-                            name="fname"
-                            id="fname"
-                            placeholder="First Name"
-                            onChange={e => handleRegistrationDetail('fname', e.target.value)}
+                            value={registrationDetail.line1}
+                            name="line1"
+                            id="line1"
+                            placeholder="Line1"
+                            onChange={e => handleRegistrationDetail('line1', e.target.value)}
                           />
                         </div>
                         <div className="mb-3 col-sm-12 password">
                           <input
                             className="form-control"
                             type="text"
-                            value={registrationDetail.lname}
-                            name="lname"
-                            id="lname"
-                            placeholder="Last Name"
-                            onChange={e => handleRegistrationDetail('lname', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-12 email">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.phoneNumber}
-                            name="phonenumber"
-                            id="phonenumber"
-                            placeholder="Phone number"
-                            onChange={e => handleRegistrationDetail('phoneNumber', e.target.value)}
+                            value={registrationDetail.line2}
+                            name="line2"
+                            id="line2"
+                            placeholder="Line2"
+                            onChange={e => handleRegistrationDetail('line2', e.target.value)}
                           />
                         </div>
                         <div className="mb-3 col-sm-12 password">
                           <input
                             className="form-control"
                             type="text"
-                            value={registrationDetail.postalCode}
-                            name="postalcode"
-                            id="postalcode"
-                            placeholder="Postalcode"
-                            onChange={e => handleRegistrationDetail('postalCode', e.target.value)}
+                            value={registrationDetail.city}
+                            name="city"
+                            id="city"
+                            placeholder="City"
+                            onChange={e => handleRegistrationDetail('city', e.target.value)}
                           />
                         </div>
-
+                        <div className="mb-3 col-sm-12 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.state}
+                            name="state"
+                            id="state"
+                            placeholder="State"
+                            onChange={e => handleRegistrationDetail('state', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-12 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.country}
+                            name="country"
+                            id="country"
+                            placeholder="Country"
+                            onChange={e => handleRegistrationDetail('country', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-12 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.zip}
+                            name="zip"
+                            id="zip"
+                            placeholder="Zip"
+                            onChange={e => handleRegistrationDetail('zip', e.target.value)}
+                          />
+                        </div>
                         <div className="col-sm-12 d-grid mb-3">
-                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => submitRegistrationDetail()}>
+                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleSignup(registrationDetail)}>
                             Register
                           </button>
                         </div>
