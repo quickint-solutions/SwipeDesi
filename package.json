@@ -3,7 +3,10 @@
   "homepage": ".",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000/api",
+  "createProxyMiddleware": {
+    "target": "http://localhost:3000/api",
+    "changeOrigin": true
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",

@@ -7,6 +7,20 @@ import logoImage from '../../../images/logo.png';
 import { ReactComponent as QuoteSvg } from '../../../images/testimonial/quote.svg';
 import EnglishLang from '../../../images/en.png';
 import AvtarIcon01 from '../../../images/avatar/01.jpg';
+import BgImage from '../../../images/bg/banner-sale-off.jpg';
+import BgImage1 from '../../../images/bg/bg-01.jpg';
+import furnitureImage from '../../../images/furniture/img-01.jpg';
+import furnitureImage1 from '../../../images/furniture/img-02.jpg';
+import furnitureImage2 from '../../../images/furniture/img-03.jpg';
+import BlogImage from '../../../images/blogimage/blog-01.jpg';
+import BlogImage1 from '../../../images/blogimage/blog-02.jpg';
+import BlogImage2 from '../../../images/blogimage/blog-03.jpg';
+import Instagram1 from '../../../images/instagram/instagram-01.jpg';
+import Instagram2 from '../../../images/instagram/instagram-02.jpg';
+import Instagram3 from '../../../images/instagram/instagram-03.jpg';
+import Instagram4 from '../../../images/instagram/instagram-04.jpg';
+import Instagram5 from '../../../images/instagram/instagram-05.jpg';
+
 import { useAppDispatch, useAppSelector } from '../../../api/store/configureStore';
 import {
   getBannerCategoryData,
@@ -273,7 +287,12 @@ const Login: React.FC = () => {
           ? saleBannerData.map((value: any, key: number) => (
               <div
                 className="banner-inner py-5"
-                style={{ backgroundImage: 'url(' + value.imagePath + ')', backgroundSize: 'cover', backgroundPosition: 'center center' }}
+                style={{
+                  backgroundImage: `url(${value.image}), url(${BgImage})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center center',
+                }}
+                key={key}
               >
                 <div className="container">
                   <div className="banner-content position-relative text-end">
@@ -289,6 +308,7 @@ const Login: React.FC = () => {
             ))
           : ''}
       </section>
+
       {/* <!--=================================
             banner wrapper--> */}
 
@@ -318,7 +338,7 @@ const Login: React.FC = () => {
                 {bestCollectionData.length > 0 ? (
                   <>
                     <div className="furniture-img">
-                      <img className="img-fluid" src={bestCollectionData[0].imagePath} alt="img" />
+                      <img className="img-fluid" src={furnitureImage} alt="img" />
                     </div>
                     <div className="furniture-info">
                       <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
@@ -341,7 +361,7 @@ const Login: React.FC = () => {
                         <div className="col-12">
                           <div className="furniture-collection mb-4 mt-lg-0 mt-4">
                             <div className="furniture-img">
-                              <img className="img-fluid" src={value.imagePath} alt="img" />
+                              <img className="img-fluid" src={furnitureImage1} alt="img" />
                               {/* <a href="javascript:void(0)"> <img className="img-fluid" src={value.imagePath} alt="images" /></a> */}
                             </div>
                             <div className="furniture-info">
@@ -844,7 +864,7 @@ const Login: React.FC = () => {
       {testimonialData.length ? (
         <section
           className="position-relative testimonial-dark-bg bg-overlay-black-6 space-pt bg-holder"
-          style={{ backgroundImage: 'url(' + testimonialData[0]?.imagePath + ')' }}
+          style={{ backgroundImage: ` url(${BgImage1})` }}
         >
           <div className="container">
             <div className="row">
@@ -940,12 +960,12 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="row">
-            {recentArticleData.length > 0
+            {/* {recentArticleData.length > 0
               ? recentArticleData.map((value: any, key: number) => (
                   <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
                     <div className="blog-post">
                       <div className="blog-img">
-                        <img className="img-fluid" src={value.imagePath} alt="#" />
+                        <img className="img-fluid" src={BlogImage} alt="#" />
                       </div>
                       <div className="blog-info">
                         <span>{moment(new Date(value.date)).format('MMM DD, YYYY')}</span>
@@ -959,43 +979,55 @@ const Login: React.FC = () => {
                     </div>
                   </div>
                 ))
-              : ''}
-            {/* <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                            <div className="blog-post">
-                                <div className="blog-img">
-                                    <img className="img-fluid" src={Blog01} alt="#" />
-                                </div>
-                                <div className="blog-info">
-                                    <span>February 4, 2022</span>
-                                    <h4 className="blog-tittle"><a href="blog-single.html">Better than snoozing: driving an EV</a></h4>
-                                    <a className="blog-link" href="blog-single.html">Read More<i className="fa-solid fa-arrow-right-long ps-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                            <div className="blog-post">
-                                <div className="blog-img">
-                                    <img className="img-fluid" src={Blog02} alt="#" />
-                                </div>
-                                <div className="blog-info">
-                                    <span>March 8, 2022</span>
-                                    <h4 className="blog-tittle"><a href="blog-single.html">Saving the world, one charge at a time</a></h4>
-                                    <a className="blog-link" href="blog-single.html">Read More<i className="fa-solid fa-arrow-right-long ps-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6">
-                            <div className="blog-post mb-0">
-                                <div className="blog-img">
-                                    <img className="img-fluid" src={Blog03} alt="#" />
-                                </div>
-                                <div className="blog-info">
-                                    <span>April 7, 2022</span>
-                                    <h4 className="blog-tittle"><a href="blog-single.html">It’s time to plug-in to the new road ahead!</a></h4>
-                                    <a className="blog-link" href="blog-single.html">Read More<i className="fa-solid fa-arrow-right-long ps-2"></i></a>
-                                </div>
-                            </div>
-                        </div> */}
+              : ''} */}
+            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
+              <div className="blog-post">
+                <div className="blog-img">
+                  <img className="img-fluid" src={BlogImage} alt="#" />
+                </div>
+                <div className="blog-info">
+                  <span>April 27, 2024</span>
+                  <h4 className="blog-tittle">
+                    <a href="blog-single.html">Article 1</a>
+                  </h4>
+                  <a className="blog-link" href="blog-single.html">
+                    Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
+              <div className="blog-post">
+                <div className="blog-img">
+                  <img className="img-fluid" src={BlogImage1} alt="#" />
+                </div>
+                <div className="blog-info">
+                  <span>April 27, 2024</span>
+                  <h4 className="blog-tittle">
+                    <a href="blog-single.html">Article 1</a>
+                  </h4>
+                  <a className="blog-link" href="blog-single.html">
+                    Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-6">
+              <div className="blog-post mb-0">
+                <div className="blog-img">
+                  <img className="img-fluid" src={BlogImage2} alt="#" />
+                </div>
+                <div className="blog-info">
+                  <span>April 27, 2024</span>
+                  <h4 className="blog-tittle">
+                    <a href="blog-single.html">Article 1</a>
+                  </h4>
+                  <a className="blog-link" href="blog-single.html">
+                    Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1023,36 +1055,42 @@ const Login: React.FC = () => {
             <div className="col-xl-12 col-lg-12 h-100">
               {spotlightData.length > 0 ? (
                 <OwlCarousel className="owl-theme" items={6} nav={true} dots={false}>
-                  {spotlightData.map((value: any, key: number) => (
+                  {/* {spotlightData.map((value: any, key: number) => (
                     <div key={key}>
                       <img src={value.imagePath} alt="Image" />
                     </div>
-                  ))}
-                  {/* {spotlightData.length > 0 ?
-                                    spotlightData.map((value: any, key: number) => (
-                                        <div className="text-center" key={key}>
-                                            <a href="j#"><img className="img-fluid" src={value.imagePath} alt="#" /></a>
-                                        </div>
-                                    ))
-                                    : ""} */}
-                  {/* <div className="text-center">
-                                    <a href="#"><img className="img-fluid" src={Instagram01} alt="#" /></a>
-                                </div>
-                                <div className="text-center">
-                                    <a href="#"><img className="img-fluid" src={Instagram02} alt="#" /></a>
-                                </div>
-                                <div className="text-center">
-                                    <a href="#"><img className="img-fluid" src={Instagram03} alt="#" /></a>
-                                </div>
-                                <div className="text-center">
-                                    <a href="#"><img className="img-fluid" src={Instagram04} alt="#" /></a>
-                                </div>
-                                <div className="text-center">
-                                    <a href="#"><img className="img-fluid" src={Instagram05} alt="#" /></a>
-                                </div>
-                                <div className="text-center">
-                                    <a href="#"><img className="img-fluid" src={Instagram06} alt="#" /></a>
-                                </div> */}
+                  ))} */}
+
+                  <div className="text-center">
+                    <a href="#">
+                      <img className="img-fluid" src={Instagram1} alt="#" />
+                    </a>
+                  </div>
+                  <div className="text-center">
+                    <a href="#">
+                      <img className="img-fluid" src={Instagram2} alt="#" />
+                    </a>
+                  </div>
+                  <div className="text-center">
+                    <a href="#">
+                      <img className="img-fluid" src={Instagram3} alt="#" />
+                    </a>
+                  </div>
+                  <div className="text-center">
+                    <a href="#">
+                      <img className="img-fluid" src={Instagram4} alt="#" />
+                    </a>
+                  </div>
+                  <div className="text-center">
+                    <a href="#">
+                      <img className="img-fluid" src={Instagram5} alt="#" />
+                    </a>
+                  </div>
+                  <div className="text-center">
+                    <a href="#">
+                      <img className="img-fluid" src={Instagram2} alt="#" />
+                    </a>
+                  </div>
                 </OwlCarousel>
               ) : (
                 ''
