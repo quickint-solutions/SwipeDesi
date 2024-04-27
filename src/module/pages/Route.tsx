@@ -147,6 +147,7 @@ const RouteComponent: React.FC = () => {
 
   const { mutate: handleSignup } = useMutation(signup, {
     onSuccess: data => {
+      (window as any).$('#formLoginRegister').modal('hide');
       console.log('data -> ', data);
     },
     onError: error => {
