@@ -1,4 +1,4 @@
-import React, { lazy, useState, useEffect } from 'react';
+import React, { lazy, useState, useEffect, useContext } from 'react';
 import { Navigate, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 // import logoImage from "../../../images/logo.png";
 import logoImage from '../../images/logo.png';
@@ -18,6 +18,7 @@ import { useMutation, useQuery } from 'react-query';
 import { getCategories } from '../../apiV2/categories';
 import { signup } from '../../apiV2/signup';
 import { login } from '../../apiV2/login';
+import { AuthContext } from '../../context/auth.context';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -146,20 +147,24 @@ const RouteComponent: React.FC = () => {
     }));
   };
 
+  const auth = useContext(AuthContext);
+
   const { mutate: handleLogin } = useMutation(login, {
     onSuccess: data => {
+      auth.login(data.data, data.token);
+      // set modal close
       (window as any).$('#formLoginRegister').modal('hide');
-      console.log('data -> ', data);
     },
     onError: error => {
-      console.log('error -> ', error);
+      alert('Invalid email or password');
+      (window as any).$('#formLoginRegister').modal('hide');
     },
   });
 
   const { mutate: handleSignup } = useMutation(signup, {
     onSuccess: data => {
       (window as any).$('#formLoginRegister').modal('hide');
-      console.log('data -> ', data);
+      alert('User registered successfully, Please Login now!');
     },
     onError: error => {
       console.log('error -> ', error);
@@ -236,8 +241,8 @@ const RouteComponent: React.FC = () => {
 
               <div className="add-listing">
                 <div className="account-action">
-                  {storageUserDetail ? (
-                    <a href="javascript:void(0)" className="account-icon" onClick={() => handleUserLogout()}>
+                  {auth.user ? (
+                    <a href="javascript:void(0)" className="account-icon" onClick={() => auth.logout()}>
                       <i className="bi bi-person"></i>
                       <span>LogOut</span>
                     </a>
@@ -450,7 +455,7 @@ const RouteComponent: React.FC = () => {
                     <h4 className="form-title">REGISTER</h4>
                     {isShowRefisterFirstScreen ? (
                       <div className="row content">
-                        <div className="mb-3 col-sm-12 name">
+                        <div className="mb-3 col-sm-6 name">
                           <input
                             type="text"
                             className="form-control"
@@ -461,7 +466,7 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('first', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 name">
+                        <div className="mb-3 col-sm-6 name">
                           <input
                             type="text"
                             className="form-control"
@@ -472,7 +477,7 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('last', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 email">
+                        <div className="mb-3 col-sm-3 email">
                           <input
                             type="text"
                             className="form-control"
@@ -483,7 +488,7 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('countryCode', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 email">
+                        <div className="mb-3 col-sm-9 email">
                           <input
                             type="text"
                             className="form-control"
@@ -550,7 +555,7 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('line2', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 password">
+                        <div className="mb-3 col-sm-6 password">
                           <input
                             className="form-control"
                             type="text"
@@ -561,7 +566,7 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('city', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 password">
+                        <div className="mb-3 col-sm-6 password">
                           <input
                             className="form-control"
                             type="text"
@@ -572,7 +577,7 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('state', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 password">
+                        <div className="mb-3 col-sm-6 password">
                           <input
                             className="form-control"
                             type="text"
@@ -583,7 +588,7 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('country', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 password">
+                        <div className="mb-3 col-sm-6 password">
                           <input
                             className="form-control"
                             type="text"

@@ -2,10 +2,9 @@ import { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 import './css/global.css';
 import RouteComponent from './module/pages/Route';
-import { AuthProvider } from './context/AuthContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import axios from 'axios';
-import { getCategories } from './apiV2/categories';
+import { AuthProvider } from './context/auth.context';
 
 const ScrollToTopOnRouteChange = () => {
   const { pathname } = useLocation();
@@ -17,7 +16,7 @@ const ScrollToTopOnRouteChange = () => {
   return null;
 };
 
-axios.defaults.baseURL = 'http://localhost:3333/';
+axios.defaults.baseURL = 'http://localhost:3333/api/';
 
 function App() {
   useEffect(() => {
