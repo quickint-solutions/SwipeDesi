@@ -17,6 +17,7 @@ import { getCartDetail, getCartTotal } from './Cart/cartSlice';
 import { useMutation, useQuery } from 'react-query';
 import { getCategories } from '../../apiV2/categories';
 import { signup } from '../../apiV2/signup';
+import { login } from '../../apiV2/login';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -32,8 +33,8 @@ const RouteComponent: React.FC = () => {
   const storeData = useAppSelector((state: any) => state.cartSlice);
   const storageUserDetail = getUserDetail();
   const [userDetail, setUserDetail] = useState({
-    name: '',
-    pwd: '',
+    email: '',
+    password: '',
   });
   const [userData, setUserData] = useState(null);
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
@@ -97,7 +98,7 @@ const RouteComponent: React.FC = () => {
   };
 
   const handleLoginEvent = async () => {
-    let loginData = await loginHttpRequest.postLoginEvent(userDetail.name, userDetail.pwd);
+    let loginData = await loginHttpRequest.postLoginEvent(userDetail.email, userDetail.password);
     if (loginData) {
       dispatch(getCartDetail(loginData.userID));
       (window as any).$('#formLoginRegister').modal('hide');
@@ -105,24 +106,17 @@ const RouteComponent: React.FC = () => {
       localStorage.setItem('UserDetail', JSON.stringify(loginData));
       setIsShowLoginForm(true);
       setUserDetail({
-        name: '',
-        pwd: '',
+        email: '',
+        password: '',
       });
     }
-  };
-
-  const handleUserCredential = (key: string, value: any) => {
-    setUserDetail((values: any) => ({
-      ...values,
-      [key]: value,
-    }));
   };
 
   const closeLoginModal = () => {
     setIsShowLoginForm(true);
     setUserDetail({
-      name: '',
-      pwd: '',
+      email: '',
+      password: '',
     });
   };
 
@@ -144,6 +138,23 @@ const RouteComponent: React.FC = () => {
       [key]: value,
     }));
   };
+
+  const handleUserCredential = (key: string, value: any) => {
+    setUserDetail((values: any) => ({
+      ...values,
+      [key]: value,
+    }));
+  };
+
+  const { mutate: handleLogin } = useMutation(login, {
+    onSuccess: data => {
+      (window as any).$('#formLoginRegister').modal('hide');
+      console.log('data -> ', data);
+    },
+    onError: error => {
+      console.log('error -> ', error);
+    },
+  });
 
   const { mutate: handleSignup } = useMutation(signup, {
     onSuccess: data => {
@@ -390,24 +401,24 @@ const RouteComponent: React.FC = () => {
                         <input
                           type="text"
                           className="form-control"
-                          value={userDetail.name}
+                          value={userDetail.email}
                           required
                           name="username"
                           id="username"
-                          placeholder="Your name"
-                          onChange={e => handleUserCredential('name', e.target.value)}
+                          placeholder="Your Email"
+                          onChange={e => handleUserCredential('email', e.target.value)}
                         />
                       </div>
                       <div className="mb-3 col-sm-12 password">
                         <input
                           className="form-control"
                           type="password"
-                          value={userDetail.pwd}
+                          value={userDetail.password}
                           required
                           name="password"
                           id="password"
                           placeholder="Password"
-                          onChange={e => handleUserCredential('pwd', e.target.value)}
+                          onChange={e => handleUserCredential('password', e.target.value)}
                         />
                       </div>
                       <div className="mb-3 col-sm-12 rememberme-lost d-flex justify-content-between">
@@ -422,7 +433,7 @@ const RouteComponent: React.FC = () => {
                         </div>
                       </div>
                       <div className="col-sm-12 d-grid mb-3">
-                        <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleLoginEvent()}>
+                        <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleLogin(userDetail)}>
                           Sign in
                         </button>
                       </div>
