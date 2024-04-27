@@ -17,7 +17,7 @@ const ScrollToTopOnRouteChange = () => {
   return null;
 };
 
-axios.defaults.baseURL = 'http://localhost:3000/api';
+axios.defaults.baseURL = 'http://localhost:3333/';
 
 function App() {
   useEffect(() => {
