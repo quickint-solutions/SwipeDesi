@@ -362,7 +362,7 @@ const RouteComponent: React.FC = () => {
                   ? categories?.result?.map((value: any, key: number) => (
                       <li className="nav-item">
                         <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                          <img src={value.icon} style={{ height: 18 }} />
+                          <img src={value.icon} style={{ width: 18 }} />
                           <span>{value.name}</span>
                         </a>
                       </li>
