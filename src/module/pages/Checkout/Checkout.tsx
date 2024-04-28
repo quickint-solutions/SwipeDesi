@@ -11,11 +11,53 @@ import { AuthContext } from '../../../context/auth.context';
 import { CartContext } from '../../../context/cart.context';
 import { provinces } from '../../../utils/provinces';
 import { tax_structure } from '../../../utils/tax';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useMutation } from 'react-query';
+import { createPaymentIntent } from '../../../apiV2/stripe';
 
 const Checkout: React.FC = () => {
-  const { meta, getCardNumberProps, getExpiryDateProps, getCVCProps, getCardImageProps } = usePaymentInputs();
   const { items, getTotal, getTaxAmount, getFinalTotal } = useContext(CartContext);
   const { user } = useContext(AuthContext);
+
+  const stripe = useStripe();
+  const elements = useElements();
+  const [error, setError] = useState<any>(null);
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const data = await createPayment({ amount: getFinalTotal(tax_structure[0].total) });
+    console.log('data create payment -> ', data);
+
+    const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement) as any,
+        billing_details: {
+          name: billingDetail.firstName + ' ' + billingDetail.lastName,
+        },
+      },
+    });
+
+    if (paymentIntent?.status === 'succeeded') {
+      // TODO: Save order
+    } else {
+      alert('Payment failed');
+    }
+
+    console.log('paymentIntent -> ', paymentIntent);
+
+    if (error) {
+      setError(error.message || "Can't process payment");
+    } else {
+      // Payment succeeded, handle success
+    }
+  };
+
+  const { mutateAsync: createPayment, isLoading } = useMutation(createPaymentIntent);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -320,85 +362,101 @@ const Checkout: React.FC = () => {
                 </div>
                 <div className="checkout-review ">
                   <div className="table-responsive">
-                    <table className="table cart">
-                      <tbody>
-                        <tr>
-                          <th className="border-top-0 product-name" scope="row">
-                            Product
-                          </th>
-                          <th className="border-top-0 product-total" scope="row">
-                            Subtotal
-                          </th>
-                        </tr>
-                        {items.length > 0 ? (
-                          items.map((value: any, key: number) => {
-                            return (
-                              <tr>
-                                <td>
-                                  {value.name || 'NO PRODUCT NAME'} × {value.quantity}{' '}
-                                </td>
-                                <td> ${(value.quantity * value.price).toFixed(2)} </td>
-                              </tr>
-                            );
-                          })
-                        ) : (
-                          <p>Your cart is empty</p>
-                        )}
-                        <tr>
-                          <th className="product-name" scope="row">
-                            Subtotal
-                          </th>
-                          <td className="product-total amount">
-                            <strong> ${getTotal().toFixed(2)}</strong>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th className="product-name" scope="row">
-                            Tax ({taxDetails?.label})
-                          </th>
-                          <td className="product-total amount">
-                            <strong>${taxAmount?.toFixed(2) || '0.00'}</strong>
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <th className="product-total">Shipping</th>
-                          <td>
-                            <form>
-                              <div>
-                                <div className="form-check">
-                                  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
-                                  <label className="form-check-label ps-1" htmlFor="exampleRadios1">
-                                    Flat rate
-                                  </label>
+                    <form onSubmit={handleSubmit}>
+                      <table className="table cart">
+                        <tbody>
+                          <tr>
+                            <th className="border-top-0 product-name" scope="row" style={{ width: 250 }}>
+                              Product
+                            </th>
+                            <th className="border-top-0 product-total" scope="row">
+                              Subtotal
+                            </th>
+                          </tr>
+                          {items.length > 0 ? (
+                            items.map((value: any, key: number) => {
+                              return (
+                                <tr>
+                                  <td>
+                                    {value.name || 'NO PRODUCT NAME'} × {value.quantity}
+                                  </td>
+                                  <td> ${(value.quantity * value.price).toFixed(2)} </td>
+                                </tr>
+                              );
+                            })
+                          ) : (
+                            <p>Your cart is empty</p>
+                          )}
+                          <tr>
+                            <th className="product-name" scope="row">
+                              Subtotal
+                            </th>
+                            <td className="product-total amount">
+                              <strong> ${getTotal().toFixed(2)}</strong>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th className="product-name" scope="row">
+                              Tax ({taxDetails?.label})
+                            </th>
+                            <td className="product-total amount">
+                              <strong>${taxAmount?.toFixed(2) || '0.00'}</strong>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th className="product-total">Shipping</th>
+                            <td>
+                              <form>
+                                <div>
+                                  <div className="form-check">
+                                    <input
+                                      className="form-check-input"
+                                      type="radio"
+                                      name="exampleRadios"
+                                      id="exampleRadios1"
+                                      value="option1"
+                                      checked
+                                    />
+                                    <label className="form-check-label ps-1" htmlFor="exampleRadios1">
+                                      Flat rate
+                                    </label>
+                                  </div>
+                                  <div className="form-check">
+                                    <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+                                    <label className="form-check-label ps-1" htmlFor="exampleRadios2">
+                                      Local pickup
+                                    </label>
+                                  </div>
                                 </div>
-                                <div className="form-check">
-                                  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-                                  <label className="form-check-label ps-1" htmlFor="exampleRadios2">
-                                    Local pickup
-                                  </label>
-                                </div>
-                              </div>
-                            </form>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th className="product-total" scope="row">
-                            Total
-                          </th>
-                          <td className="product-total amount text-primary">
-                            <strong>${getFinalTotal(taxDetails?.total || 0)} </strong>
-                          </td>
-                        </tr>
-                      </tfoot>
-                    </table>
+                              </form>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th className="product-total">Card Details</th>
+                            <td>
+                              <CardElement />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th className="product-total" scope="row">
+                              Total
+                            </th>
+                            <td className="product-total amount text-primary">
+                              <strong>${getFinalTotal(taxDetails?.total || 0)} </strong>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </form>
                   </div>
 
                   <div className="col-12  mt-4">
-                    <a href="javascript:void(0)" className="btn btn-secondary checkout-button d-grid" onClick={() => saveBillingAddress()}>
+                    {/* <a href="javascript:void(0)" className="btn btn-secondary checkout-button d-grid" onClick={() => saveBillingAddress()}> */}
+                    <button className="btn btn-secondary checkout-button d-grid" type="submit" style={{ width: '100%' }} onClick={handleSubmit}>
                       Place Order
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>

@@ -6,6 +6,10 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import axios from 'axios';
 import { AuthProvider } from './context/auth.context';
 import { CartProvider } from './context/cart.context';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe('pk_test_51OhE1ILaWLKJ299MykVFUl8LtKHkoxLYA2ck8f1fW5nVH83u4p3KXOOsnJBTiLgmXEkihHO0PWMB8M5ugiqrFwL400uSiPzNjc');
 
 const ScrollToTopOnRouteChange = () => {
   const { pathname } = useLocation();
@@ -34,12 +38,14 @@ function App() {
     <Suspense>
       <Router basename="/">
         <QueryClientProvider client={new QueryClient()}>
-          <AuthProvider>
-            <CartProvider>
-              <ScrollToTopOnRouteChange />
-              <RouteComponent />
-            </CartProvider>
-          </AuthProvider>
+          <Elements stripe={stripePromise}>
+            <AuthProvider>
+              <CartProvider>
+                <ScrollToTopOnRouteChange />
+                <RouteComponent />
+              </CartProvider>
+            </AuthProvider>
+          </Elements>
         </QueryClientProvider>
       </Router>
     </Suspense>
