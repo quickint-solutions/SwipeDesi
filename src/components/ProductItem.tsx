@@ -14,9 +14,12 @@ export default function ProductItem({ product }: { product: any }) {
   return (
     <div className="col-xl-4 col-md-6">
       <div className="product">
-        <div className="product-label">
-          <span className="onsale">{product.discount || 0}</span>
-        </div>
+        {product.discount && (
+          <div className="product-label">
+            <span className="onsale">{product.discount || 0}</span>
+          </div>
+        )}
+
         <div className="product-image">
           <div className="product-thumb-inner">
             <a href="#">

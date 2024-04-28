@@ -253,7 +253,7 @@ const RouteComponent: React.FC = () => {
                                 <a
                                   className="col btn btn-sm btn-primary ms-0 mt-1 mt-sm-0 ms-sm-2 px-4"
                                   href="javascript:void(0)"
-                                  onClick={() => navigate('/Checkout')}
+                                  onClick={() => navigate('/checkout')}
                                 >
                                   Checkout
                                 </a>
@@ -551,9 +551,9 @@ const RouteComponent: React.FC = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/Cart" element={<Cart />} />
-        <Route path="/Checkout" element={<Checkout />} />
-        <Route path="/Category" element={<Category />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/category" element={<Category />} />
       </Routes>
 
       {/* <!--=================================

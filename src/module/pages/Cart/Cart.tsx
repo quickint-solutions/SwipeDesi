@@ -360,7 +360,7 @@ const Cart: React.FC = () => {
                     </table>
                   </div>
                   <div className="text-center">
-                    <a href="javascript:void(0)" className="btn btn-primary checkout-button" onClick={() => navigate('/Checkout')}>
+                    <a href="javascript:void(0)" className="btn btn-primary checkout-button" onClick={() => navigate('/checkout')}>
                       Proceed to checkout
                     </a>
                   </div>

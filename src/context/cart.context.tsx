@@ -11,6 +11,8 @@ interface ICartProvider {
   getTotal: () => number;
   isItemInCart: (item: any) => boolean;
   getTotalCount: () => number;
+  getTaxAmount: (tax: number) => number;
+  getFinalTotal: (tax: number) => number;
 }
 
 export const CartContext = createContext<ICartProvider>({
@@ -21,6 +23,8 @@ export const CartContext = createContext<ICartProvider>({
   getTotal: () => 0,
   isItemInCart: () => false,
   getTotalCount: () => 0,
+  getTaxAmount: () => 0,
+  getFinalTotal: () => 0,
 });
 
 export const useCart = () => {
@@ -29,6 +33,17 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }: any) => {
   const [items, setItems] = useState<any>([]);
+
+  useEffect(() => {
+    if (items.length) localStorage.setItem('cart', JSON.stringify(items));
+  }, [items]);
+
+  useEffect(() => {
+    const cart = localStorage.getItem('cart');
+    if (cart) {
+      setItems(JSON.parse(cart));
+    }
+  }, []);
 
   const addItem = (item: any) => {
     item = { ...item, price: Number(item.price) };
@@ -67,6 +82,17 @@ export const CartProvider = ({ children }: any) => {
     return items.reduce((acc: number, item: any) => acc + item.quantity, 0);
   };
 
+  const getTaxAmount = (tax: number) => {
+    const total = getTotal();
+    return total * (tax / 100);
+  };
+
+  const getFinalTotal = (tax: number) => {
+    const total = getTotal();
+    const taxAmount = getTaxAmount(tax);
+    return total + taxAmount;
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -77,6 +103,8 @@ export const CartProvider = ({ children }: any) => {
         getTotal,
         isItemInCart,
         getTotalCount,
+        getTaxAmount,
+        getFinalTotal,
       }}
     >
       {children}
