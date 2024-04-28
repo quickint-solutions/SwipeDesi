@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import OwlCarousel from 'react-owl-carousel';
@@ -14,6 +14,8 @@ import { getUserDetail } from '../../../helpers/common';
 import cartHttpRequest from '../../../api/cart/cartHttpRequest';
 import { useQuery } from 'react-query';
 import { getItemsById } from '../../../apiV2/items';
+import { AuthContext } from '../../../context/auth.context';
+import { CartContext } from '../../../context/cart.context';
 
 const ShopSingle: React.FC = () => {
   const navigate = useNavigate();
@@ -51,26 +53,20 @@ const ShopSingle: React.FC = () => {
     }
   };
 
+  const { user } = useContext(AuthContext);
+  const { addItem, isItemInCart, items } = useContext(CartContext);
+
   const addToCart = async () => {
     let productId = searchParams.get('productId');
-    if (userDetail) {
-      let requestParam = {
-        productID: productId ? Number(productId) : 0,
-        quantity: quantity,
-        userID: userDetail?.userID,
-      };
-      let cartData = await cartHttpRequest.addProductToCart(requestParam);
-      if (cartData?.status) {
-        navigate('/Cart');
-      } else {
-        alert(cartData?.message);
-      }
+    if (user) {
+      addItem(itemDetails, quantity);
+      alert(quantity + ' Product added to cart');
     } else {
       (window as any).$('#formLoginRegister').modal('show');
     }
   };
 
-  console.log('relatedProductData', relatedProductData);
+  const findCartItem = items.find((cartItem: any) => cartItem._id === itemDetails._id);
 
   return (
     <>
@@ -154,6 +150,10 @@ const ShopSingle: React.FC = () => {
                           <span> Add To Cart </span>{' '}
                         </a>
                       </div>
+                      <div style={{ marginTop: 5 }}>
+                        {isItemInCart(itemDetails) ? `${findCartItem.quantity} quantity of this item is already in cart` : null}
+                      </div>
+
                       <div className="product-summary">
                         <a className="" href="javascript:void(0)" onClick={() => addToWishlist()}>
                           <i className="far fa-heart"></i>Add to Wishlist

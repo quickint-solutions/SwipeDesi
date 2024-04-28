@@ -5,7 +5,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 interface ICartProvider {
   items: any;
-  addItem: (item: any) => void;
+  addItem: (item: any, quantity?: number) => void;
   updateQuantity: (item: any, quantity: number) => void;
   removeItem: (item: any) => void;
   getTotal: () => number;
@@ -13,6 +13,7 @@ interface ICartProvider {
   getTotalCount: () => number;
   getTaxAmount: (tax: number) => number;
   getFinalTotal: (tax: number) => number;
+  applyCoupon: (coupon: string) => void;
 }
 
 export const CartContext = createContext<ICartProvider>({
@@ -25,6 +26,7 @@ export const CartContext = createContext<ICartProvider>({
   getTotalCount: () => 0,
   getTaxAmount: () => 0,
   getFinalTotal: () => 0,
+  applyCoupon: () => {},
 });
 
 export const useCart = () => {
@@ -33,27 +35,37 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }: any) => {
   const [items, setItems] = useState<any>([]);
+  const [coupon, setCoupon] = useState<string>('');
 
   useEffect(() => {
     if (items.length) localStorage.setItem('cart', JSON.stringify(items));
+    else localStorage.removeItem('cart');
+
+    if (coupon) localStorage.setItem('coupon', coupon);
+    else localStorage.removeItem('coupon');
   }, [items]);
 
   useEffect(() => {
     const cart = localStorage.getItem('cart');
+    const coupon = localStorage.getItem('coupon');
     if (cart) {
       setItems(JSON.parse(cart));
     }
+
+    if (coupon) {
+      setCoupon(coupon);
+    }
   }, []);
 
-  const addItem = (item: any) => {
+  const addItem = (item: any, quantity: number = 1) => {
     item = { ...item, price: Number(item.price) };
     const existingItem = items.find((i: any) => i._id === item._id);
 
     if (existingItem) {
-      existingItem.quantity += 1;
+      existingItem.quantity += quantity || 1;
       setItems([...items]);
     } else {
-      setItems([...items, { ...item, quantity: 1 }]);
+      setItems([...items, { ...item, quantity: quantity || 1 }]);
     }
   };
 
@@ -93,6 +105,19 @@ export const CartProvider = ({ children }: any) => {
     return total + taxAmount;
   };
 
+  const applyCoupon = async (couponId: string) => {
+    try {
+      const response = await axios.get(`/coupons/validate?code=${couponId}`);
+      if (response.data.length) {
+        setCoupon(coupon);
+      } else {
+        throw new Error('Invalid coupon');
+      }
+    } catch (error) {
+      throw new Error('Invalid coupon');
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -105,6 +130,7 @@ export const CartProvider = ({ children }: any) => {
         getTotalCount,
         getTaxAmount,
         getFinalTotal,
+        applyCoupon,
       }}
     >
       {children}

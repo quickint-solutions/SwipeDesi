@@ -48,7 +48,7 @@ const Checkout: React.FC = () => {
     }
   }, []);
 
-  const taxDetails = tax_structure.find((value: any) => value.province === billingDetail.state);
+  const taxDetails = tax_structure.find((value: any) => value.province === billingDetail.state) || tax_structure[0];
   const taxAmount = getTaxAmount(taxDetails?.total || 0);
 
   const handleChangeBillingDetail = (key: string, value: any) => {
@@ -332,7 +332,6 @@ const Checkout: React.FC = () => {
                         </tr>
                         {items.length > 0 ? (
                           items.map((value: any, key: number) => {
-                            console.log('value -> ', value);
                             return (
                               <tr>
                                 <td>
