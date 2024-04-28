@@ -14,6 +14,7 @@ interface ICartProvider {
   getTaxAmount: (tax: number) => number;
   getFinalTotal: (tax: number) => number;
   applyCoupon: (coupon: string) => void;
+  emptyCart: () => void;
 }
 
 export const CartContext = createContext<ICartProvider>({
@@ -27,6 +28,7 @@ export const CartContext = createContext<ICartProvider>({
   getTaxAmount: () => 0,
   getFinalTotal: () => 0,
   applyCoupon: () => {},
+  emptyCart: () => {},
 });
 
 export const useCart = () => {
@@ -105,6 +107,13 @@ export const CartProvider = ({ children }: any) => {
     return total + taxAmount;
   };
 
+  const emptyCart = () => {
+    setItems([]);
+    setCoupon('');
+    localStorage.setItem('cart', JSON.stringify([]));
+    localStorage.removeItem('coupon');
+  };
+
   const applyCoupon = async (couponId: string) => {
     try {
       const response = await axios.get(`/coupons/validate?code=${couponId}`);
@@ -130,6 +139,7 @@ export const CartProvider = ({ children }: any) => {
         getTotalCount,
         getTaxAmount,
         getFinalTotal,
+        emptyCart,
         applyCoupon,
       }}
     >

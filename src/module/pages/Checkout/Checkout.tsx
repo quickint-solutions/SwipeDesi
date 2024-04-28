@@ -14,9 +14,10 @@ import { tax_structure } from '../../../utils/tax';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useMutation } from 'react-query';
 import { createPaymentIntent } from '../../../apiV2/stripe';
+import { createOrderAPI } from '../../../apiV2/orders';
 
 const Checkout: React.FC = () => {
-  const { items, getTotal, getTaxAmount, getFinalTotal } = useContext(CartContext);
+  const { items, getTotal, getTaxAmount, getFinalTotal, emptyCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
 
   const stripe = useStripe();
@@ -33,17 +34,49 @@ const Checkout: React.FC = () => {
     const data = await createPayment({ amount: getFinalTotal(tax_structure[0].total) });
     console.log('data create payment -> ', data);
 
+    const orderID = Math.floor(Math.random() * 1000000);
+
     const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
       payment_method: {
         card: elements.getElement(CardElement) as any,
         billing_details: {
           name: billingDetail.firstName + ' ' + billingDetail.lastName,
         },
+        metadata: {
+          orderID,
+        },
       },
     });
 
+    console.log('paymentIntent -> ', paymentIntent);
+
     if (paymentIntent?.status === 'succeeded') {
-      // TODO: Save order
+      const orderItems = items.map((value: any) => ({
+        item: value._id,
+        quantity: value.quantity,
+        rate: value.price,
+      }));
+      const order = await createOrder({
+        orderId: orderID,
+        subTotal: getFinalTotal(tax_structure[0].total),
+        shipping: 'shipping',
+        tax: tax_structure[0].total,
+        items: orderItems,
+        address: {
+          line1: billingDetail.addressLine1,
+          line2: billingDetail.addressLine2,
+          state: billingDetail.state,
+          city: billingDetail.city,
+          country: billingDetail.country,
+          zip: billingDetail.zip,
+        },
+      });
+
+      alert('Payment succeeded');
+
+      emptyCart();
+
+      navigate('/');
     } else {
       alert('Payment failed');
     }
@@ -58,6 +91,7 @@ const Checkout: React.FC = () => {
   };
 
   const { mutateAsync: createPayment, isLoading } = useMutation(createPaymentIntent);
+  const { mutateAsync: createOrder, isLoading: createOrderLoading } = useMutation(createOrderAPI);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
