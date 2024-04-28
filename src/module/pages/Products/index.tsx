@@ -5,7 +5,14 @@ import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
 
 export default function Products() {
-  const { data: getProducts } = useQuery('products', getItems);
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get('category');
+
+  const { data: getProducts } = useQuery('products', async () => {
+    const response = await getItems({ categories: category });
+    return response;
+  });
+
   const { data: categoriesList } = useQuery('categories', getCategories);
   const [search, setSearch] = useState('');
 

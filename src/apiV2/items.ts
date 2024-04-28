@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-export const getItems = async () => {
-  const response = await axios.get('/item');
+export const getItems = async (params?: any) => {
+  const response = await axios.get('/item', {
+    params: {
+      filter: params.categories ? JSON.stringify({ categories: params.categories }) : '',
+    },
+  });
   return response.data;
 };
 
