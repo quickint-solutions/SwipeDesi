@@ -5,6 +5,7 @@ import RouteComponent from './module/pages/Route';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import axios from 'axios';
 import { AuthProvider } from './context/auth.context';
+import { CartProvider } from './context/cart.context';
 
 const ScrollToTopOnRouteChange = () => {
   const { pathname } = useLocation();
@@ -34,8 +35,10 @@ function App() {
       <Router basename="/">
         <QueryClientProvider client={new QueryClient()}>
           <AuthProvider>
-            <ScrollToTopOnRouteChange />
-            <RouteComponent />
+            <CartProvider>
+              <ScrollToTopOnRouteChange />
+              <RouteComponent />
+            </CartProvider>
           </AuthProvider>
         </QueryClientProvider>
       </Router>

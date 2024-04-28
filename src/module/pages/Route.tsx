@@ -20,6 +20,7 @@ import { signup } from '../../apiV2/signup';
 import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
+import { CartContext } from '../../context/cart.context';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -31,14 +32,13 @@ const Checkout = lazy(() => import('./Checkout/Checkout'));
 const Category = lazy(() => import('./Category/Category'));
 const RouteComponent: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const storeData = useAppSelector((state: any) => state.cartSlice);
+
   const storageUserDetail = getUserDetail();
   const [userDetail, setUserDetail] = useState({
     email: '',
     password: '',
   });
-  const [userData, setUserData] = useState(null);
+
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
   const [registrationDetail, setRegistrationDetail] = useState({
     first: '',
@@ -56,63 +56,11 @@ const RouteComponent: React.FC = () => {
     profileImage: '',
   });
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
-  const [cartDetail, setCartDetail] = useState([]);
-  const [cartTotal, setCartTotal] = useState<any>(0);
+
+  const { user } = useContext(AuthContext);
+  const { items, getTotal, getTotalCount, removeItem } = useContext(CartContext);
 
   const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
-
-  useEffect(() => {
-    if (storageUserDetail) {
-      dispatch(getCartDetail(storageUserDetail.userID));
-      // dispatch(getCartTotal(storageUserDetail.userID));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (storeData?.cartDetail?.length > 0) {
-      setCartDetail(storeData?.cartDetail);
-      dispatch(getCartTotal(storeData?.cartDetail[0].cartID));
-      // getCartTotal(storeData?.cartDetail[0].cartID);
-    } else {
-      setCartDetail([]);
-    }
-  }, [storeData?.cartDetail]);
-
-  useEffect(() => {
-    if (storeData?.cartTotal) {
-      debugger;
-      setCartTotal(storeData?.cartTotal?.Total);
-      // getCartTotal(storeData?.cartDetail[0].cartID);
-    }
-  }, [storeData?.cartTotal]);
-
-  const removeItemFromCart = async (cartData: any) => {
-    let requestParam = {
-      productID: cartData?.productID,
-      userID: cartData?.userID,
-    };
-    let removeData = await cartHttpRequest.removeCartItem(requestParam);
-    if (removeData?.status) {
-      dispatch(getCartDetail(storageUserDetail.userID));
-    } else {
-      alert(removeData?.message);
-    }
-  };
-
-  const handleLoginEvent = async () => {
-    let loginData = await loginHttpRequest.postLoginEvent(userDetail.email, userDetail.password);
-    if (loginData) {
-      dispatch(getCartDetail(loginData.userID));
-      (window as any).$('#formLoginRegister').modal('hide');
-      setUserData(loginData);
-      localStorage.setItem('UserDetail', JSON.stringify(loginData));
-      setIsShowLoginForm(true);
-      setUserDetail({
-        email: '',
-        password: '',
-      });
-    }
-  };
 
   const closeLoginModal = () => {
     setIsShowLoginForm(true);
@@ -171,12 +119,6 @@ const RouteComponent: React.FC = () => {
       console.log('error -> ', error);
     },
   });
-
-  const handleUserLogout = () => {
-    navigate('/');
-    setUserData(null);
-    localStorage.removeItem('UserDetail');
-  };
 
   return (
     <React.Fragment>
@@ -266,7 +208,7 @@ const RouteComponent: React.FC = () => {
                     </a>
                   </div>
                   <div className="cart dropdown woo-action-icon">
-                    {storageUserDetail ? (
+                    {user ? (
                       <>
                         <button
                           className="dropdown-toggle p-0"
@@ -277,50 +219,32 @@ const RouteComponent: React.FC = () => {
                           aria-expanded="false"
                         >
                           <i className="bi bi-cart3"></i>
-                          <span className="cart-count">{cartDetail.length}</span>
+                          <span className="cart-count">{getTotalCount()}</span>
                         </button>
-                        {cartDetail.length > 0 ? (
+                        {items.length > 0 ? (
                           <div className="dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <ul className="cart-list ps-0">
-                              {cartDetail.map((value: any, key: number) => (
-                                <li className="d-flex" key={key}>
-                                  <a className="remove-item" href="javascript:void(0)" onClick={() => removeItemFromCart(value)}>
-                                    <i className="fas fa-times"></i>
-                                  </a>
-                                  <img
-                                    className="img-fluid me-3"
-                                    src={process.env.REACT_APP_IMAGE_BASE_URL + value.imagePath?.replace('~', '')}
-                                    alt="cartImg"
-                                  />
-                                  <div className="cart-info">
-                                    <a href="javascript:void(0)">{value.productName}</a>
-                                    <span className="d-block">
-                                      {value.quantity} x {value.price?.toFixed(2)}
-                                    </span>
-                                  </div>
-                                </li>
-                              ))}
-                              {/* <li className="d-flex">
-                                                    <a className="remove-item" href="#"><i className="fas fa-times"></i></a>
-                                                    <img className="img-fluid me-3" src={Product01} alt="" />
-                                                    <div className="cart-info">
-                                                        <a href="#">Extra Fine Wool Jumpers</a>
-                                                        <span className="d-block">1 x 12.49</span>
-                                                    </div>
-                                                </li>
-                                                <li className="d-flex">
-                                                    <a className="remove-item" href="#"><i className="fas fa-times"></i></a>
-                                                    <img className="img-fluid me-3" src={Product01} alt="" />
-                                                    <div className="cart-info">
-                                                        <a href="#"> Men’s Standard Fit Crew T-Shirt</a>
-                                                        <span className="d-block">1 x 28.72</span>
-                                                    </div>
-                                                </li> */}
+                              {items.map((value: any, key: number) => {
+                                return (
+                                  <li className="d-flex" key={key}>
+                                    <a className="remove-item" href="javascript:void(0)" onClick={() => removeItem(value)}>
+                                      <i className="fas fa-times"></i>
+                                    </a>
+                                    <img className="img-fluid me-3" src={value.images[0]} alt="cartImg" />
+                                    <div className="cart-info">
+                                      <a href="javascript:void(0)">{value.name || 'NO PRODUCT NAME'}</a>
+                                      <span className="d-block">
+                                        {value.quantity} x {value.price?.toFixed(2)}
+                                      </span>
+                                    </div>
+                                  </li>
+                                );
+                              })}
                             </ul>
                             <div className="cart-footer">
                               <div className="d-flex mb-3">
                                 <b className="me-auto text-dark">Subtotal:</b>
-                                <span>${cartTotal?.toFixed(2)}</span>
+                                <span>${getTotal()?.toFixed(2)}</span>
                               </div>
                               <div className="d-inline-block d-sm-flex">
                                 <a className="col btn btn-secondary btn-sm me-2 px-4" href="javascript:void(0)" onClick={() => navigate('/Cart')}>

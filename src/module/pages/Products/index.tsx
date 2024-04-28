@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
+import ProductItem from '../../../components/ProductItem';
 
 export default function Products() {
   const { data: getProducts } = useQuery('products', getItems);
-  console.log('getProducts -> ', getProducts);
+  const [search, setSearch] = useState('');
 
   return (
     <div>
@@ -418,7 +419,17 @@ export default function Products() {
               <div className="blog-sidebar-post-divider"></div>
               <div className="row mt-4">
                 <div className="col-lg-4">
-                  <input type="search" id="shop-filter-search" className="search-field mb-3" placeholder="Search products…" value="" name="s" />
+                  <input
+                    type="search"
+                    onChange={e => {
+                      setSearch(e.target.value);
+                    }}
+                    id="shop-filter-search"
+                    className="search-field mb-3"
+                    placeholder="Search products…"
+                    value={search}
+                    name="s"
+                  />
                 </div>
                 <div className="col-lg-4">
                   <div className="mb-3 select-border">
@@ -487,59 +498,7 @@ export default function Products() {
 
               <div className="row">
                 {getProducts?.result.map((product: any) => {
-                  return (
-                    <div className="col-xl-4 col-md-6">
-                      <div className="product">
-                        <div className="product-label">
-                          <span className="onsale">{product.discount || 0}</span>
-                        </div>
-                        <div className="product-image">
-                          <div className="product-thumb-inner">
-                            <a href="#">
-                              <img className="img-fluid" src={product.images[0]} alt="image" />
-                            </a>
-                          </div>
-                          <div className="custom-icon">
-                            <ul className="list-unstyled">
-                              <li>
-                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist">
-                                  <i className="far fa-heart"></i>
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">
-                                  <i className="fas fa-shopping-cart"></i>
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare">
-                                  <i className="fa-solid fa-code-compare"></i>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="product-btn">
-                            <a href="#" className="btn btn-light d-block">
-                              Add To cart<i className="fas fa-arrow-right-long ps-3"></i>
-                            </a>
-                          </div>
-                        </div>
-                        <div className="product-content">
-                          <div className="product-info">
-                            <div className="product-title">
-                              <h3>
-                                <a href="shop-single.html">{product.name || `no product name`}</a>
-                              </h3>
-                            </div>
-                          </div>
-
-                          <div className="product-prize">
-                            <p>${product.price || 0}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
+                  return <ProductItem key={product._id} product={product} />;
                 })}
               </div>
             </div>
