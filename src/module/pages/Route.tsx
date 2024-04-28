@@ -1,4 +1,4 @@
-import React, { lazy, useState, useEffect } from 'react';
+import React, { lazy, useState, useEffect, useContext } from 'react';
 import { Navigate, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 // import logoImage from "../../../images/logo.png";
 import logoImage from '../../images/logo.png';
@@ -14,111 +14,59 @@ import { getUserDetail } from '../../helpers/common';
 import cartHttpRequest from '../../api/cart/cartHttpRequest';
 import { useAppDispatch, useAppSelector } from '../../api/store/configureStore';
 import { getCartDetail, getCartTotal } from './Cart/cartSlice';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { getCategories } from '../../apiV2/categories';
+import { signup } from '../../apiV2/signup';
+import { login } from '../../apiV2/login';
+import { AuthContext } from '../../context/auth.context';
+import Products from './Products';
+import { CartContext } from '../../context/cart.context';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
-// const Mandir = lazy(() => import("./Login/Mandir"));
 const Home = lazy(() => import('./Home/Home'));
 const ShopSingle = lazy(() => import('./ShopSingle/ShopSingle'));
 const Wishlist = lazy(() => import('./WishList/Wishlist'));
 const Cart = lazy(() => import('./Cart/Cart'));
 const Checkout = lazy(() => import('./Checkout/Checkout'));
 const Category = lazy(() => import('./Category/Category'));
-
 const RouteComponent: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const storeData = useAppSelector((state: any) => state.cartSlice);
+
   const storageUserDetail = getUserDetail();
   const [userDetail, setUserDetail] = useState({
-    name: '',
-    pwd: '',
+    email: '',
+    password: '',
   });
-  const [userData, setUserData] = useState(null);
+
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
   const [registrationDetail, setRegistrationDetail] = useState({
-    name: '',
+    first: '',
+    last: '',
+    countryCode: '',
+    number: '',
     email: '',
-    pwd: '',
-    address: '',
-    phoneNumber: '',
-    postalCode: '',
-    fname: '',
-    lname: '',
+    password: '',
+    line1: '',
+    line2: '',
+    city: '',
+    state: '',
+    country: '',
+    zip: '',
+    profileImage: '',
   });
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
-  const [cartDetail, setCartDetail] = useState([]);
-  const [cartTotal, setCartTotal] = useState<any>(0);
+
+  const { user } = useContext(AuthContext);
+  const { items, getTotal, getTotalCount, removeItem } = useContext(CartContext);
 
   const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
-
-  useEffect(() => {
-    if (storageUserDetail) {
-      dispatch(getCartDetail(storageUserDetail.userID));
-      // dispatch(getCartTotal(storageUserDetail.userID));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (storeData?.cartDetail?.length > 0) {
-      setCartDetail(storeData?.cartDetail);
-      dispatch(getCartTotal(storeData?.cartDetail[0].cartID));
-      // getCartTotal(storeData?.cartDetail[0].cartID);
-    } else {
-      setCartDetail([]);
-    }
-  }, [storeData?.cartDetail]);
-
-  useEffect(() => {
-    if (storeData?.cartTotal) {
-      debugger;
-      setCartTotal(storeData?.cartTotal?.Total);
-      // getCartTotal(storeData?.cartDetail[0].cartID);
-    }
-  }, [storeData?.cartTotal]);
-
-  const removeItemFromCart = async (cartData: any) => {
-    let requestParam = {
-      productID: cartData?.productID,
-      userID: cartData?.userID,
-    };
-    let removeData = await cartHttpRequest.removeCartItem(requestParam);
-    if (removeData?.status) {
-      dispatch(getCartDetail(storageUserDetail.userID));
-    } else {
-      alert(removeData?.message);
-    }
-  };
-
-  const handleLoginEvent = async () => {
-    let loginData = await loginHttpRequest.postLoginEvent(userDetail.name, userDetail.pwd);
-    if (loginData) {
-      dispatch(getCartDetail(loginData.userID));
-      (window as any).$('#formLoginRegister').modal('hide');
-      setUserData(loginData);
-      localStorage.setItem('UserDetail', JSON.stringify(loginData));
-      setIsShowLoginForm(true);
-      setUserDetail({
-        name: '',
-        pwd: '',
-      });
-    }
-  };
-
-  const handleUserCredential = (key: string, value: any) => {
-    setUserDetail((values: any) => ({
-      ...values,
-      [key]: value,
-    }));
-  };
 
   const closeLoginModal = () => {
     setIsShowLoginForm(true);
     setUserDetail({
-      name: '',
-      pwd: '',
+      email: '',
+      password: '',
     });
   };
 
@@ -141,35 +89,36 @@ const RouteComponent: React.FC = () => {
     }));
   };
 
-  const submitRegistrationDetail = async () => {
-    let requestParam = {
-      username: registrationDetail.name,
-      password: registrationDetail.pwd,
-      email: registrationDetail.email,
-      firstName: registrationDetail.fname,
-      lastName: registrationDetail.lname,
-      addressLine1: registrationDetail.address,
-      city: 'Ahmedabad',
-      state: 'Gujarat',
-      postalCode: registrationDetail.postalCode,
-      country: 'India',
-      phoneNumber: registrationDetail.phoneNumber,
-    };
-    let registrationData = await loginHttpRequest.postRegistationDetail(requestParam);
-    if (registrationData?.dateRegistered) {
-      dispatch(getCartDetail(registrationData.userID));
-      (window as any).$('#formLoginRegister').modal('hide');
-      setUserData(registrationData);
-      localStorage.setItem('UserDetail', JSON.stringify(registrationData));
-      setIsShowLoginForm(true);
-    }
+  const handleUserCredential = (key: string, value: any) => {
+    setUserDetail((values: any) => ({
+      ...values,
+      [key]: value,
+    }));
   };
 
-  const handleUserLogout = () => {
-    navigate('/');
-    setUserData(null);
-    localStorage.removeItem('UserDetail');
-  };
+  const auth = useContext(AuthContext);
+
+  const { mutate: handleLogin } = useMutation(login, {
+    onSuccess: data => {
+      auth.login(data.data, data.token);
+      // set modal close
+      (window as any).$('#formLoginRegister').modal('hide');
+    },
+    onError: error => {
+      alert('Invalid email or password');
+      (window as any).$('#formLoginRegister').modal('hide');
+    },
+  });
+
+  const { mutate: handleSignup } = useMutation(signup, {
+    onSuccess: data => {
+      (window as any).$('#formLoginRegister').modal('hide');
+      alert('User registered successfully, Please Login now!');
+    },
+    onError: error => {
+      console.log('error -> ', error);
+    },
+  });
 
   return (
     <React.Fragment>
@@ -235,10 +184,10 @@ const RouteComponent: React.FC = () => {
 
               <div className="add-listing">
                 <div className="account-action">
-                  {storageUserDetail ? (
-                    <a href="javascript:void(0)" className="account-icon" onClick={() => handleUserLogout()}>
+                  {auth.user ? (
+                    <a href="javascript:void(0)" className="account-icon" onClick={() => auth.logout()}>
                       <i className="bi bi-person"></i>
-                      <span>LogOut</span>
+                      <span>Log Out</span>
                     </a>
                   ) : (
                     <a href="javascript:void(0)" className="account-icon" data-bs-toggle="modal" data-bs-target="#formLoginRegister">
@@ -259,7 +208,7 @@ const RouteComponent: React.FC = () => {
                     </a>
                   </div>
                   <div className="cart dropdown woo-action-icon">
-                    {storageUserDetail ? (
+                    {user ? (
                       <>
                         <button
                           className="dropdown-toggle p-0"
@@ -270,50 +219,32 @@ const RouteComponent: React.FC = () => {
                           aria-expanded="false"
                         >
                           <i className="bi bi-cart3"></i>
-                          <span className="cart-count">{cartDetail.length}</span>
+                          <span className="cart-count">{getTotalCount()}</span>
                         </button>
-                        {cartDetail.length > 0 ? (
+                        {items.length > 0 ? (
                           <div className="dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <ul className="cart-list ps-0">
-                              {cartDetail.map((value: any, key: number) => (
-                                <li className="d-flex" key={key}>
-                                  <a className="remove-item" href="javascript:void(0)" onClick={() => removeItemFromCart(value)}>
-                                    <i className="fas fa-times"></i>
-                                  </a>
-                                  <img
-                                    className="img-fluid me-3"
-                                    src={process.env.REACT_APP_IMAGE_BASE_URL + value.imagePath?.replace('~', '')}
-                                    alt="cartImg"
-                                  />
-                                  <div className="cart-info">
-                                    <a href="javascript:void(0)">{value.productName}</a>
-                                    <span className="d-block">
-                                      {value.quantity} x {value.price?.toFixed(2)}
-                                    </span>
-                                  </div>
-                                </li>
-                              ))}
-                              {/* <li className="d-flex">
-                                                    <a className="remove-item" href="#"><i className="fas fa-times"></i></a>
-                                                    <img className="img-fluid me-3" src={Product01} alt="" />
-                                                    <div className="cart-info">
-                                                        <a href="#">Extra Fine Wool Jumpers</a>
-                                                        <span className="d-block">1 x 12.49</span>
-                                                    </div>
-                                                </li>
-                                                <li className="d-flex">
-                                                    <a className="remove-item" href="#"><i className="fas fa-times"></i></a>
-                                                    <img className="img-fluid me-3" src={Product01} alt="" />
-                                                    <div className="cart-info">
-                                                        <a href="#"> Men’s Standard Fit Crew T-Shirt</a>
-                                                        <span className="d-block">1 x 28.72</span>
-                                                    </div>
-                                                </li> */}
+                              {items.map((value: any, key: number) => {
+                                return (
+                                  <li className="d-flex" key={key}>
+                                    <a className="remove-item" href="javascript:void(0)" onClick={() => removeItem(value)}>
+                                      <i className="fas fa-times"></i>
+                                    </a>
+                                    <img className="img-fluid me-3" src={value.images[0]} alt="cartImg" />
+                                    <div className="cart-info">
+                                      <a href="javascript:void(0)">{value.name || 'NO PRODUCT NAME'}</a>
+                                      <span className="d-block">
+                                        {value.quantity} x {value.price?.toFixed(2)}
+                                      </span>
+                                    </div>
+                                  </li>
+                                );
+                              })}
                             </ul>
                             <div className="cart-footer">
                               <div className="d-flex mb-3">
                                 <b className="me-auto text-dark">Subtotal:</b>
-                                <span>${cartTotal?.toFixed(2)}</span>
+                                <span>${getTotal()?.toFixed(2)}</span>
                               </div>
                               <div className="d-inline-block d-sm-flex">
                                 <a className="col btn btn-secondary btn-sm me-2 px-4" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
@@ -322,7 +253,7 @@ const RouteComponent: React.FC = () => {
                                 <a
                                   className="col btn btn-sm btn-primary ms-0 mt-1 mt-sm-0 ms-sm-2 px-4"
                                   href="javascript:void(0)"
-                                  onClick={() => navigate('/Checkout')}
+                                  onClick={() => navigate('/checkout')}
                                 >
                                   Checkout
                                 </a>
@@ -356,7 +287,7 @@ const RouteComponent: React.FC = () => {
                   ? categories?.result?.map((value: any, key: number) => (
                       <li className="nav-item">
                         <a className="nav-link nav-link-flex" aria-current="page" href="#">
-                          <img src={value.icon} style={{ height: 18 }} />
+                          <img src={value.icon} style={{ width: 18 }} />
                           <span>{value.name}</span>
                         </a>
                       </li>
@@ -400,24 +331,24 @@ const RouteComponent: React.FC = () => {
                         <input
                           type="text"
                           className="form-control"
-                          value={userDetail.name}
+                          value={userDetail.email}
                           required
                           name="username"
                           id="username"
-                          placeholder="Your name"
-                          onChange={e => handleUserCredential('name', e.target.value)}
+                          placeholder="Your Email"
+                          onChange={e => handleUserCredential('email', e.target.value)}
                         />
                       </div>
                       <div className="mb-3 col-sm-12 password">
                         <input
                           className="form-control"
                           type="password"
-                          value={userDetail.pwd}
+                          value={userDetail.password}
                           required
                           name="password"
                           id="password"
                           placeholder="Password"
-                          onChange={e => handleUserCredential('pwd', e.target.value)}
+                          onChange={e => handleUserCredential('password', e.target.value)}
                         />
                       </div>
                       <div className="mb-3 col-sm-12 rememberme-lost d-flex justify-content-between">
@@ -432,7 +363,7 @@ const RouteComponent: React.FC = () => {
                         </div>
                       </div>
                       <div className="col-sm-12 d-grid mb-3">
-                        <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleLoginEvent()}>
+                        <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleLogin(userDetail)}>
                           Sign in
                         </button>
                       </div>
@@ -449,20 +380,53 @@ const RouteComponent: React.FC = () => {
                     <h4 className="form-title">REGISTER</h4>
                     {isShowRefisterFirstScreen ? (
                       <div className="row content">
-                        <div className="mb-3 col-sm-12 name">
+                        <div className="mb-3 col-sm-6 name">
                           <input
                             type="text"
                             className="form-control"
-                            value={registrationDetail.name}
-                            name="uname"
-                            id="uname"
-                            placeholder="User Name"
-                            onChange={e => handleRegistrationDetail('name', e.target.value)}
+                            value={registrationDetail.first}
+                            name="first"
+                            id="first"
+                            placeholder="First Name"
+                            onChange={e => handleRegistrationDetail('first', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 email">
+                        <div className="mb-3 col-sm-6 name">
                           <input
-                            type="email"
+                            type="text"
+                            className="form-control"
+                            value={registrationDetail.last}
+                            name="lastName"
+                            id="lastName"
+                            placeholder="last Name"
+                            onChange={e => handleRegistrationDetail('last', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-3 email">
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={registrationDetail.countryCode}
+                            name="countryCode"
+                            id="countryCode"
+                            placeholder="Country Code"
+                            onChange={e => handleRegistrationDetail('countryCode', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-9 email">
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={registrationDetail.number}
+                            name="number"
+                            id="number"
+                            placeholder="Number"
+                            onChange={e => handleRegistrationDetail('number', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-12 name">
+                          <input
+                            type="text"
                             className="form-control"
                             value={registrationDetail.email}
                             name="email"
@@ -471,26 +435,15 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('email', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 name">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.address}
-                            name="address"
-                            id="address"
-                            placeholder="Address"
-                            onChange={e => handleRegistrationDetail('address', e.target.value)}
-                          />
-                        </div>
                         <div className="mb-3 col-sm-12 password">
                           <input
                             className="form-control"
                             type="password"
-                            value={registrationDetail.pwd}
+                            value={registrationDetail.password}
                             name="password"
                             id="password"
                             placeholder="Password"
-                            onChange={e => handleRegistrationDetail('pwd', e.target.value)}
+                            onChange={e => handleRegistrationDetail('password', e.target.value)}
                           />
                         </div>
 
@@ -509,49 +462,70 @@ const RouteComponent: React.FC = () => {
                           <input
                             className="form-control"
                             type="text"
-                            value={registrationDetail.fname}
-                            name="fname"
-                            id="fname"
-                            placeholder="First Name"
-                            onChange={e => handleRegistrationDetail('fname', e.target.value)}
+                            value={registrationDetail.line1}
+                            name="line1"
+                            id="line1"
+                            placeholder="Line1"
+                            onChange={e => handleRegistrationDetail('line1', e.target.value)}
                           />
                         </div>
                         <div className="mb-3 col-sm-12 password">
                           <input
                             className="form-control"
                             type="text"
-                            value={registrationDetail.lname}
-                            name="lname"
-                            id="lname"
-                            placeholder="Last Name"
-                            onChange={e => handleRegistrationDetail('lname', e.target.value)}
+                            value={registrationDetail.line2}
+                            name="line2"
+                            id="line2"
+                            placeholder="Line2"
+                            onChange={e => handleRegistrationDetail('line2', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-12 email">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.phoneNumber}
-                            name="phonenumber"
-                            id="phonenumber"
-                            placeholder="Phone number"
-                            onChange={e => handleRegistrationDetail('phoneNumber', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-12 password">
+                        <div className="mb-3 col-sm-6 password">
                           <input
                             className="form-control"
                             type="text"
-                            value={registrationDetail.postalCode}
-                            name="postalcode"
-                            id="postalcode"
-                            placeholder="Postalcode"
-                            onChange={e => handleRegistrationDetail('postalCode', e.target.value)}
+                            value={registrationDetail.city}
+                            name="city"
+                            id="city"
+                            placeholder="City"
+                            onChange={e => handleRegistrationDetail('city', e.target.value)}
                           />
                         </div>
-
+                        <div className="mb-3 col-sm-6 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.state}
+                            name="state"
+                            id="state"
+                            placeholder="State"
+                            onChange={e => handleRegistrationDetail('state', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-6 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.country}
+                            name="country"
+                            id="country"
+                            placeholder="Country"
+                            onChange={e => handleRegistrationDetail('country', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-6 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.zip}
+                            name="zip"
+                            id="zip"
+                            placeholder="Zip"
+                            onChange={e => handleRegistrationDetail('zip', e.target.value)}
+                          />
+                        </div>
                         <div className="col-sm-12 d-grid mb-3">
-                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => submitRegistrationDetail()}>
+                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleSignup(registrationDetail)}>
                             Register
                           </button>
                         </div>
@@ -573,13 +547,13 @@ const RouteComponent: React.FC = () => {
 
       <Routes>
         <Route path="/" element={<Login />} />
-        {/* <Route path="/" element={<Mandir />} /> */}
+        <Route path="/products" element={<Products />} />
         <Route path="/home" element={<Home />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/Cart" element={<Cart />} />
-        <Route path="/Checkout" element={<Checkout />} />
-        <Route path="/Category" element={<Category />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/category" element={<Category />} />
       </Routes>
 
       {/* <!--=================================

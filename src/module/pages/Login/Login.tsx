@@ -36,12 +36,12 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getBanners } from '../../../apiV2/banners';
 import { getCategories } from '../../../apiV2/categories';
+import { getFeaturedItems } from '../../../apiV2/items';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const storeData = useAppSelector((state: any) => state.loginSlice);
-  const [latestCollectionData, setLatestCollectionData] = useState<any>([]);
   const [bestCollectionData, setBestCollectionData] = useState<any>([]);
   const [recentArticleData, setRecentArticleData] = useState([]);
   const [spotlightData, setSpotlightData] = useState<any>([]);
@@ -52,6 +52,8 @@ const Login: React.FC = () => {
   const [sliderBannerImages, setSliderBannerImages] = useState<any>([]);
 
   const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
+
+  const { isLoading: featuredItemsLoading, data: featuredItems } = useQuery('getFeaturedItems', getFeaturedItems);
 
   const { data: banners, isLoading: bannersLoading } = useQuery('getBanners', getBanners);
   // get first 2 banners
@@ -89,12 +91,6 @@ const Login: React.FC = () => {
       setSliderBannerImages(tempArr2);
     }
   }, [storeData?.bannerImages]);
-
-  useEffect(() => {
-    if (storeData?.latestCollectionData && storeData?.latestCollectionData.length > 0) {
-      setLatestCollectionData(storeData?.latestCollectionData);
-    }
-  }, [storeData?.latestCollectionData]);
 
   useEffect(() => {
     if (storeData?.bestCollectionData && storeData?.bestCollectionData.length > 0) {
@@ -426,20 +422,15 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="row">
-            {latestCollectionData.length > 0
-              ? latestCollectionData.map((value: any, key: number) => (
+            {featuredItems?.result?.length > 0
+              ? featuredItems?.result.map((value: any, key: number) => (
                   <div className="col-xl-3 col-lg-4 col-md-6" key={key}>
-                    <div
-                      className="product"
-                      onClick={() => navigate(`/shopSingle?productId=${value.productId}&category=${value.category?.replace(/,/g, '-')}`)}
-                    >
-                      <div className="product-label">
-                        <span className="onsale">17%</span>
-                      </div>
+                    <div className="product" onClick={() => navigate(`/shopSingle?productId=${value._id}`)}>
+                      <div className="product-label">{/* <span className="onsale">17%</span> */}</div>
                       <div className="product-image">
                         <div className="product-thumb-inner">
                           <a href="javascript:void(0)">
-                            <img className="img-fluid" src={value.imagePath} alt="image" />
+                            <img className="img-fluid" src={value.images[0]} alt="image" />
                             {/* <img className="img-fluid" src={Product01} alt="image" /> */}
                           </a>
                         </div>
@@ -472,7 +463,7 @@ const Login: React.FC = () => {
                         <div className="product-info">
                           <div className="product-title">
                             <h3>
-                              <a href="shop-single.html">Hand Carving Sevan Wood Temple</a>
+                              <a href="shop-single.html">{value.name}</a>
                             </h3>
                           </div>
                           <div className="product-star">
@@ -497,7 +488,7 @@ const Login: React.FC = () => {
                         </div>
                         <div className="product-prize">
                           <p>
-                            <span className="me-2">$81,000.00</span>${value.price?.toFixed(2)}
+                            <span className="me-2">$81,000.00</span>${Number(value.price)?.toFixed(2)}
                           </p>
                         </div>
                       </div>

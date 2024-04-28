@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
@@ -8,6 +8,8 @@ import { getUserDetail } from '../../../helpers/common';
 import cartHttpRequest from '../../../api/cart/cartHttpRequest';
 import { useAppDispatch, useAppSelector } from '../../../api/store/configureStore';
 import { getCartDetail, getCartTotal } from './cartSlice';
+import { AuthContext } from '../../../context/auth.context';
+import { CartContext } from '../../../context/cart.context';
 
 const Cart: React.FC = () => {
   const navigate = useNavigate();
@@ -19,11 +21,12 @@ const Cart: React.FC = () => {
   const [couponCode, setCouponCode] = useState('');
   const [couponData, setCouponData] = useState<any>(null);
 
+  const { user } = useContext(AuthContext);
+  const { items, removeItem, updateQuantity, getTotal } = useContext(CartContext);
+
   useEffect(() => {
-    if (userDetail) {
-      // getCartData();
-      dispatch(getCartDetail(userDetail.userID));
-      // dispatch(getCartTotal(userDetail.userID));
+    if (user) {
+      // dispatch(getCartDetail(userDetail.userID));
     } else {
       navigate('/');
     }
@@ -177,24 +180,24 @@ const Cart: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {cartDetail?.length > 0 ? (
-                        cartDetail.map((value: any, key: number) => (
+                      {items?.length > 0 ? (
+                        items.map((value: any, key: number) => (
                           <tr key={key}>
                             <td className="product-remove">
-                              <a href="javascript:void(0)" onClick={() => removeItemFromCart(value)}>
+                              <a href="javascript:void(0)" onClick={() => removeItem(value)}>
                                 <i className="fa-solid fa-xmark"></i>
                               </a>
                             </td>
                             <td className="product-thumbnail">
                               <a href="javascript:void(0)">
-                                <img src={process.env.REACT_APP_IMAGE_BASE_URL + value.imagePath?.replace('~', '')} alt="" />
+                                <img src={value.images[0]} alt="" />
                               </a>
                             </td>
                             <td className="product-name">
-                              <a href="javascript:void(0)">{value.productName}</a>
+                              <a href="javascript:void(0)">{value.name}</a>
                             </td>
                             <td className="product-price">
-                              <span className="amount">${value.price?.toFixed(2)}</span>
+                              <span className="amount">${Number(value.price)?.toFixed(2)}</span>
                             </td>
                             <td className="product-quantity">
                               <form>
@@ -205,7 +208,7 @@ const Cart: React.FC = () => {
                                     min={1}
                                     id="number"
                                     value={value.quantity}
-                                    onChange={e => handleCartQuantity(Number(e.target.value), value)}
+                                    onChange={e => updateQuantity(value, Number(e.target.value || 0))}
                                   />
                                 </div>
                               </form>
@@ -218,52 +221,10 @@ const Cart: React.FC = () => {
                       ) : (
                         <tr>No Record Found</tr>
                       )}
-                      {/* <tr>
-                                                <td className="product-remove"><a href="#"><i className="fa-solid fa-xmark"></i></a></td>
-                                                <td className="product-thumbnail"><a href="#"><img src={Product1} alt="" /></a></td>
-                                                <td className="product-name"><a href="#">Hand Carving Sevan Wood Temple</a></td>
-                                                <td className="product-price"><span className="amount">$180</span></td>
-                                                <td className="product-quantity">
-                                                    <form>
-                                                        <div>
-                                                            <input type="number" className="form-control" id="number" value="1" />
-                                                        </div>
-                                                    </form>
-                                                </td>
-                                                <td className="product-subtotal"><span className="subtotal">$180</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="product-remove"><a href="#"><i className="fa-solid fa-xmark"></i></a></td>
-                                                <td className="product-thumbnail"><a href="#"><img src={Product2} alt="" /></a></td>
-                                                <td className="product-name"><a href="#">Dining Chair</a></td>
-                                                <td className="product-price"><span className="amount">$180</span></td>
-                                                <td className="product-quantity">
-                                                    <form>
-                                                        <div>
-                                                            <input type="number" className="form-control" id="number2" value="2" />
-                                                        </div>
-                                                    </form>
-                                                </td>
-                                                <td className="product-subtotal"><span className="subtotal">$180</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="product-remove"><a href="#"><i className="fa-solid fa-xmark"></i></a></td>
-                                                <td className="product-thumbnail"><a href="#"><img src={Product1} alt="" /></a></td>
-                                                <td className="product-name"><a href="#">Hand Carving Sevan Wood Temple</a></td>
-                                                <td className="product-price"><span className="amount">$200</span></td>
-                                                <td className="product-quantity">
-                                                    <form>
-                                                        <div>
-                                                            <input type="number" className="form-control" id="number3" value="3" />
-                                                        </div>
-                                                    </form>
-                                                </td>
-                                                <td className="product-subtotal"><span className="subtotal">$200</span></td>
-                                            </tr> */}
                     </tbody>
                   </table>
                 </div>
-                {cartDetail?.length > 0 ? (
+                {items?.length > 0 ? (
                   <div className="actions">
                     <div className="coupon mt-2 mt-lg-0 mt-md-0 mt-sm-0">
                       <form>
@@ -296,13 +257,6 @@ const Cart: React.FC = () => {
                         ''
                       )}
                     </div>
-                    <div className="update-cart mt-3 mt-md-0">
-                      {' '}
-                      <a className="btn btn-secondary" href="javascript:void(0)" onClick={() => updateCart()}>
-                        {' '}
-                        Update cart
-                      </a>
-                    </div>
                   </div>
                 ) : (
                   ''
@@ -320,10 +274,10 @@ const Cart: React.FC = () => {
                         <tr className="cart-subtotal">
                           <th>Subtotal</th>
                           <td>
-                            <span className="subtotal">${cartDetail?.length > 0 ? cartTotalData?.Subtotal?.toFixed(2) : '0.00'}</span>
+                            <span className="subtotal">${getTotal()?.toFixed(2)}</span>
                           </td>
                         </tr>
-                        <tr className="shipping">
+                        {/* <tr className="shipping">
                           <th>Shipping</th>
                           <td>
                             <form>
@@ -349,18 +303,18 @@ const Cart: React.FC = () => {
                               Change address <i className="fas fa-shopping-cart ms-2"></i>
                             </a>
                           </td>
-                        </tr>
+                        </tr> */}
                         <tr className="order-total">
                           <th>Total</th>
                           <td>
-                            <span className="amount">${cartDetail?.length > 0 ? cartTotalData?.Total?.toFixed(2) : '0.00'}</span>
+                            <span className="amount">${getTotal()?.toFixed(2)}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                   <div className="text-center">
-                    <a href="javascript:void(0)" className="btn btn-primary checkout-button" onClick={() => navigate('/Checkout')}>
+                    <a href="javascript:void(0)" className="btn btn-primary checkout-button" onClick={() => navigate('/checkout')}>
                       Proceed to checkout
                     </a>
                   </div>
