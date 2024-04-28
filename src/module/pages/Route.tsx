@@ -19,6 +19,7 @@ import { getCategories } from '../../apiV2/categories';
 import { signup } from '../../apiV2/signup';
 import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
+import Products from './Products';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -622,7 +623,7 @@ const RouteComponent: React.FC = () => {
 
       <Routes>
         <Route path="/" element={<Login />} />
-        {/* <Route path="/" element={<Mandir />} /> */}
+        <Route path="/products" element={<Products />} />
         <Route path="/home" element={<Home />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
