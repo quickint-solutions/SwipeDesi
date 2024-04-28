@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
+import { getCategories } from '../../../apiV2/categories';
 
 export default function Products() {
   const { data: getProducts } = useQuery('products', getItems);
+  const { data: categoriesList } = useQuery('categories', getCategories);
   const [search, setSearch] = useState('');
+
+  const categoriesData = categoriesList?.result || [];
 
   return (
     <div>
@@ -57,76 +61,24 @@ export default function Products() {
                   <div className="widget-title">
                     <h5 className="title">Categories</h5>
                   </div>
-                  <div className="widget-content">
-                    <div className="widget-categories">
-                      <ul className="list-unstyled list-style list-style-underline mb-0">
-                        <li>
-                          <a className="d-flex" href="#">
-                            Armchairs{' '}
-                            <span className="ms-auto">
-                              <div className="count">8</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            Dining Chair{' '}
-                            <span className="ms-auto">
-                              <div className="count">5</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            Dining Table{' '}
-                            <span className="ms-auto">
-                              <div className="count">14</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            Lighting{' '}
-                            <span className="ms-auto">
-                              <div className="count">13</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            Living Room
-                            <span className="ms-auto">
-                              <div className="count">10</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            Office{' '}
-                            <span className="ms-auto">
-                              <div className="count">7</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            Sofas{' '}
-                            <span className="ms-auto">
-                              <div className="count">9</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            Table{' '}
-                            <span className="ms-auto">
-                              <div className="count">4</div>
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  {categoriesData.map((category: any) => {
+                    return (
+                      <div className="widget-content">
+                        <div className="widget-categories">
+                          <ul className="list-unstyled list-style list-style-underline mb-0">
+                            <li>
+                              <a className="d-flex" href="#">
+                                {category.name}
+                                <span className="ms-auto">
+                                  <div className="count">8</div>
+                                </span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div className="widget">
                   <div className="widget-title">
