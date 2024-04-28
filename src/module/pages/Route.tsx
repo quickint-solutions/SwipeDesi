@@ -1,13 +1,6 @@
 import React, { lazy, useState, useEffect, useContext } from 'react';
 import { Navigate, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 // import logoImage from "../../../images/logo.png";
-import logoImage from '../../images/logo.png';
-import { ReactComponent as Icon1Svg } from '../../images/icon-01.svg';
-import { ReactComponent as Icon2Svg } from '../../images/icon-02.svg';
-import { ReactComponent as Icon3Svg } from '../../images/icon-03.svg';
-import { ReactComponent as Icon4Svg } from '../../images/icon-04.svg';
-import EnglishLang from '../../images/en.png';
-import Product01 from '../../images/product/01.jpg';
 import PayIcon from '../../images/pay-icon.png';
 import loginHttpRequest from '../../api/login/loginHttpRequest';
 import { getUserDetail } from '../../helpers/common';
@@ -20,7 +13,6 @@ import { signup } from '../../apiV2/signup';
 import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
-import { CartContext } from '../../context/cart.context';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -32,13 +24,14 @@ const Checkout = lazy(() => import('./Checkout/Checkout'));
 const Category = lazy(() => import('./Category/Category'));
 const RouteComponent: React.FC = () => {
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
+  const storeData = useAppSelector((state: any) => state.cartSlice);
   const storageUserDetail = getUserDetail();
   const [userDetail, setUserDetail] = useState({
     email: '',
     password: '',
   });
-
+  const [userData, setUserData] = useState(null);
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
   const [registrationDetail, setRegistrationDetail] = useState({
     first: '',
@@ -56,11 +49,63 @@ const RouteComponent: React.FC = () => {
     profileImage: '',
   });
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
-
-  const { user } = useContext(AuthContext);
-  const { items, getTotal, getTotalCount, removeItem } = useContext(CartContext);
+  const [cartDetail, setCartDetail] = useState([]);
+  const [cartTotal, setCartTotal] = useState<any>(0);
 
   const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
+
+  useEffect(() => {
+    if (storageUserDetail) {
+      dispatch(getCartDetail(storageUserDetail.userID));
+      // dispatch(getCartTotal(storageUserDetail.userID));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (storeData?.cartDetail?.length > 0) {
+      setCartDetail(storeData?.cartDetail);
+      dispatch(getCartTotal(storeData?.cartDetail[0].cartID));
+      // getCartTotal(storeData?.cartDetail[0].cartID);
+    } else {
+      setCartDetail([]);
+    }
+  }, [storeData?.cartDetail]);
+
+  useEffect(() => {
+    if (storeData?.cartTotal) {
+      debugger;
+      setCartTotal(storeData?.cartTotal?.Total);
+      // getCartTotal(storeData?.cartDetail[0].cartID);
+    }
+  }, [storeData?.cartTotal]);
+
+  const removeItemFromCart = async (cartData: any) => {
+    let requestParam = {
+      productID: cartData?.productID,
+      userID: cartData?.userID,
+    };
+    let removeData = await cartHttpRequest.removeCartItem(requestParam);
+    if (removeData?.status) {
+      dispatch(getCartDetail(storageUserDetail.userID));
+    } else {
+      alert(removeData?.message);
+    }
+  };
+
+  const handleLoginEvent = async () => {
+    let loginData = await loginHttpRequest.postLoginEvent(userDetail.email, userDetail.password);
+    if (loginData) {
+      dispatch(getCartDetail(loginData.userID));
+      (window as any).$('#formLoginRegister').modal('hide');
+      setUserData(loginData);
+      localStorage.setItem('UserDetail', JSON.stringify(loginData));
+      setIsShowLoginForm(true);
+      setUserDetail({
+        email: '',
+        password: '',
+      });
+    }
+  };
 
   const closeLoginModal = () => {
     setIsShowLoginForm(true);
@@ -120,6 +165,12 @@ const RouteComponent: React.FC = () => {
     },
   });
 
+  const handleUserLogout = () => {
+    navigate('/');
+    setUserData(null);
+    localStorage.removeItem('UserDetail');
+  };
+
   return (
     <React.Fragment>
       {/* <!--=================================
@@ -131,7 +182,7 @@ const RouteComponent: React.FC = () => {
               <div className="row">
                 <div className="col-12">
                   <div className="d-lg-flex align-items-center text-center">
-                    <div className="topbar-left mb-2 mb-lg-0">
+                    <div className="topbar-left justify-content-center mb-2 mb-lg-0">
                       <ul className="list-unstyled ps-2">
                         <li>
                           <a href="#">Gift cards</a>
@@ -145,12 +196,12 @@ const RouteComponent: React.FC = () => {
                       </ul>
                     </div>
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
-                      <div className="topbar-call d-inline-flex topbar-divider pe-3">
+                      <div className="topbar-call d-inline-flex topbar-divider pe-lg-3">
                         <a href="tel:+1 (403) 801-6969">
                           <i className="bi bi-telephone me-2"></i>+1 (403) 801-69695
                         </a>
                       </div>
-                      <div className="info-box-icon ps-3">
+                      <div className="info-box-icon ps-3 d-none d-lg-flex">
                         <a href="#" className="d-flex align-items-center">
                           {/* <img src="images/topbar-avtar-icon.png" alt="image" /> */}
                           <span className="ps-2">Contact with an expert</span>
@@ -163,7 +214,7 @@ const RouteComponent: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="header-middel">
+        <div className="header-middel d-none d-lg-block">
           <div className="container position-relative">
             <div className="header-middel-container d-flex">
               <a className="navbar-brand" href="javascript:void(0)" onClick={() => navigate('/')}>
@@ -173,8 +224,8 @@ const RouteComponent: React.FC = () => {
                   alt="logo"
                 />
               </a>
-              <form className="form-inline search-form">
-                <div className="form-group z-0">
+              <form className="form-inline search-form d-none d-md-block">
+                <div className="form-group mb-0 z-0">
                   <button className="search-button" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
@@ -208,7 +259,7 @@ const RouteComponent: React.FC = () => {
                     </a>
                   </div>
                   <div className="cart dropdown woo-action-icon">
-                    {user ? (
+                    {storageUserDetail ? (
                       <>
                         <button
                           className="dropdown-toggle p-0"
@@ -219,32 +270,50 @@ const RouteComponent: React.FC = () => {
                           aria-expanded="false"
                         >
                           <i className="bi bi-cart3"></i>
-                          <span className="cart-count">{getTotalCount()}</span>
+                          <span className="cart-count">{cartDetail.length}</span>
                         </button>
-                        {items.length > 0 ? (
+                        {cartDetail.length > 0 ? (
                           <div className="dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <ul className="cart-list ps-0">
-                              {items.map((value: any, key: number) => {
-                                return (
-                                  <li className="d-flex" key={key}>
-                                    <a className="remove-item" href="javascript:void(0)" onClick={() => removeItem(value)}>
-                                      <i className="fas fa-times"></i>
-                                    </a>
-                                    <img className="img-fluid me-3" src={value.images[0]} alt="cartImg" />
-                                    <div className="cart-info">
-                                      <a href="javascript:void(0)">{value.name || 'NO PRODUCT NAME'}</a>
-                                      <span className="d-block">
-                                        {value.quantity} x {value.price?.toFixed(2)}
-                                      </span>
-                                    </div>
-                                  </li>
-                                );
-                              })}
+                              {cartDetail.map((value: any, key: number) => (
+                                <li className="d-flex" key={key}>
+                                  <a className="remove-item" href="javascript:void(0)" onClick={() => removeItemFromCart(value)}>
+                                    <i className="fas fa-times"></i>
+                                  </a>
+                                  <img
+                                    className="img-fluid me-3"
+                                    src={process.env.REACT_APP_IMAGE_BASE_URL + value.imagePath?.replace('~', '')}
+                                    alt="cartImg"
+                                  />
+                                  <div className="cart-info">
+                                    <a href="javascript:void(0)">{value.productName}</a>
+                                    <span className="d-block">
+                                      {value.quantity} x {value.price?.toFixed(2)}
+                                    </span>
+                                  </div>
+                                </li>
+                              ))}
+                              {/* <li className="d-flex">
+                                                    <a className="remove-item" href="#"><i className="fas fa-times"></i></a>
+                                                    <img className="img-fluid me-3" src={Product01} alt="" />
+                                                    <div className="cart-info">
+                                                        <a href="#">Extra Fine Wool Jumpers</a>
+                                                        <span className="d-block">1 x 12.49</span>
+                                                    </div>
+                                                </li>
+                                                <li className="d-flex">
+                                                    <a className="remove-item" href="#"><i className="fas fa-times"></i></a>
+                                                    <img className="img-fluid me-3" src={Product01} alt="" />
+                                                    <div className="cart-info">
+                                                        <a href="#"> Men’s Standard Fit Crew T-Shirt</a>
+                                                        <span className="d-block">1 x 28.72</span>
+                                                    </div>
+                                                </li> */}
                             </ul>
                             <div className="cart-footer">
                               <div className="d-flex mb-3">
                                 <b className="me-auto text-dark">Subtotal:</b>
-                                <span>${getTotal()?.toFixed(2)}</span>
+                                <span>${cartTotal?.toFixed(2)}</span>
                               </div>
                               <div className="d-inline-block d-sm-flex">
                                 <a className="col btn btn-secondary btn-sm me-2 px-4" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
@@ -253,7 +322,7 @@ const RouteComponent: React.FC = () => {
                                 <a
                                   className="col btn btn-sm btn-primary ms-0 mt-1 mt-sm-0 ms-sm-2 px-4"
                                   href="javascript:void(0)"
-                                  onClick={() => navigate('/checkout')}
+                                  onClick={() => navigate('/Checkout')}
                                 >
                                   Checkout
                                 </a>
@@ -277,6 +346,37 @@ const RouteComponent: React.FC = () => {
         </div>
         <nav className="navbar navbar-static-top navbar-expand-lg">
           <div className="container main-header position-relative">
+            <a className="navbar-brand d-flex d-lg-none" href="javascript:void(0)" onClick={() => navigate('/')}>
+              <img className="img-fluid" src="https://dhknd.ca/wp-content/uploads/2021/03/dhknd.ca-logo-web_Final-for-website_300px.jpg" alt="logo" />
+            </a>
+            <div className="add-listing d-flex d-lg-none ms-auto">
+              <div className="account-action">
+                <a href="#" className="account-icon" data-bs-toggle="modal" data-bs-target="#formLoginRegister">
+                  <i className="bi bi-person"></i>
+                </a>
+              </div>
+              <div className="woo-action d-flex align-items-center d-flex d-lg-none">
+                <div className="search-action woo-action-icon">
+                  <a href="#" className="search-icon" title="Search Product">
+                    <i className="bi bi-search"></i>
+                  </a>
+                </div>
+                <div className="cart dropdown woo-action-icon">
+                  <button
+                    className="dropdown-toggle p-0"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i className="bi bi-cart3"></i>
+                    <span className="cart-count">2</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
               <i className="fas fa-align-left"></i>
             </button>
@@ -295,7 +395,7 @@ const RouteComponent: React.FC = () => {
                   : ''}
               </ul>
             </div>
-            <div className="text-end free-shipping">
+            <div className="text-end free-shipping d-none d-lg-block">
               <a href="#">Free shipping for all orders of $1.300</a>
             </div>
           </div>
@@ -551,9 +651,9 @@ const RouteComponent: React.FC = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/category" element={<Category />} />
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/Checkout" element={<Checkout />} />
+        <Route path="/Category" element={<Category />} />
       </Routes>
 
       {/* <!--=================================
