@@ -21,7 +21,7 @@ const ScrollToTopOnRouteChange = () => {
   return null;
 };
 
-axios.defaults.baseURL = 'http://23.23.53.106:3333/api/';
+axios.defaults.baseURL = 'https://staging.api.dhknd.ca/api/';
 
 function App() {
   useEffect(() => {

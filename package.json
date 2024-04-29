@@ -3,7 +3,7 @@
   "homepage": ".",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://23.23.53.106:3333/api/",
+  "proxy": "https://staging.api.dhknd.ca/api/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@stripe/react-stripe-js": "^2.7.0",
