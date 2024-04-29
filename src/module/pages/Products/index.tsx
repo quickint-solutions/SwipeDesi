@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
+import { useNavigate } from 'react-router-dom';
 
 export default function Products() {
   const params = new URLSearchParams(window.location.search);
   const category = params.get('category');
+  const [categoryValue, setCategoryValue] = useState(category);
 
-  const { data: getProducts } = useQuery('products', async () => {
-    const response = await getItems({ categories: category });
+  const navigate = useNavigate();
+
+  const { data: getProducts, refetch: refetchProducts } = useQuery('products', async (params?: any) => {
+    const response = await getItems(params || { categories: category });
     return response;
   });
 
@@ -17,6 +21,10 @@ export default function Products() {
   const [search, setSearch] = useState('');
 
   const categoriesData = categoriesList?.result || [];
+
+  useEffect(() => {
+    refetchProducts();
+  }, [categoryValue]);
 
   return (
     <div>
@@ -74,12 +82,12 @@ export default function Products() {
                         <div className="widget-categories">
                           <ul className="list-unstyled list-style list-style-underline mb-0">
                             <li>
-                              <a className="d-flex" href="#">
+                              <div style={{ cursor: 'pointer', marginBottom: 5 }} className="d-flex" onClick={() => setCategoryValue(category._id)}>
                                 {category.name}
                                 <span className="ms-auto">
-                                  <div className="count">8</div>
+                                  <div className="count">{category.itemCount}</div>
                                 </span>
-                              </a>
+                              </div>
                             </li>
                           </ul>
                         </div>

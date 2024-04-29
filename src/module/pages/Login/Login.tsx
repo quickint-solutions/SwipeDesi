@@ -198,7 +198,12 @@ const Login: React.FC = () => {
           <div className="feature-categories-wrapper">
             {categories?.result?.length > 0
               ? categories?.result.map((value: any, key: number) => (
-                  <div className="featured-categories-column text-center" key={key}>
+                  <div
+                    style={{ cursor: 'pointer' }}
+                    className="featured-categories-column text-center"
+                    key={key}
+                    onClick={() => navigate(`/products?category=${value._id}`)}
+                  >
                     <div className="feature-categories-inner">
                       <div className="categories-img">
                         <a href="javascript:void(0)">
@@ -207,7 +212,7 @@ const Login: React.FC = () => {
                         </a>
                       </div>
                       {/* TODO: CHANGE TO REAL NUMBER */}
-                      <div className="categories-product text-center">5 Products</div>
+                      <div className="categories-product text-center">{value.itemCount} Products</div>
                     </div>
                     <h6 className="categories-title fw-medium mt-3">
                       <a href="javascript:void(0)">{value.name}</a>
