@@ -1,5 +1,8 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/cart.context';
+import { useMutation } from 'react-query';
+import { addWishList } from '../apiV2/wishlist';
+import { AuthContext } from '../context/auth.context';
 
 export default function ProductItem({ product }: { product: any }) {
   const { addItem, isItemInCart } = useContext(CartContext);
@@ -9,7 +12,22 @@ export default function ProductItem({ product }: { product: any }) {
     // alert('Product added to cart');
   };
 
+  const { user } = useContext(AuthContext);
   const isProductInCart = isItemInCart(product);
+
+  const wishListData = {
+    productId: product._id,
+    userId: user._id,
+  };
+
+  const { mutate: addProductToWishList } = useMutation(addWishList, {
+    onSuccess: () => {
+      alert(`Product: ${product?.name || ''} added to wishlist`);
+    },
+    onError: () => {
+      alert(`Error adding Product: ${product.name || ''} to wishlist`);
+    },
+  });
 
   return (
     <div className="col-xl-4 col-md-6">
@@ -29,20 +47,20 @@ export default function ProductItem({ product }: { product: any }) {
           <div className="custom-icon">
             <ul className="list-unstyled">
               <li>
-                <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist">
+                <button data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist" onClick={() => addProductToWishList(wishListData)}>
                   <i className="far fa-heart"></i>
-                </a>
+                </button>
               </li>
               <li>
                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">
                   <i className="fas fa-shopping-cart"></i>
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare">
                   <i className="fa-solid fa-code-compare"></i>
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="product-btn">
