@@ -6,6 +6,8 @@ import Product2 from '../../../images/product/02.jpg';
 import shopSingleHttpRequest from '../../../api/shopSingleHttpRequest';
 import { getUserDetail } from '../../../helpers/common';
 import cartHttpRequest from '../../../api/cart/cartHttpRequest';
+import { useQuery } from 'react-query';
+import { getWishList } from '../../../apiV2/wishlist';
 
 const Wishist: React.FC = () => {
   const navigate = useNavigate();
@@ -13,14 +15,14 @@ const Wishist: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [wishlistData, setWishlistData] = useState([]);
 
-  useEffect(() => {
-    let productId = searchParams.get('productId');
-    if (productId) {
-      getWishlistData(Number(productId));
-    } else {
-      getWishlistData(0);
-    }
-  }, []);
+  // useEffect(() => {
+  //   let productId = searchParams.get('productId');
+  //   if (productId) {
+  //     getWishlistData(Number(productId));
+  //   } else {
+  //     getWishlistData(0);
+  //   }
+  // }, []);
 
   const getWishlistData = async (productId: number) => {
     if (userDetail) {
@@ -60,6 +62,10 @@ const Wishist: React.FC = () => {
       (window as any).$('#formLoginRegister').modal('show');
     }
   };
+
+  const { data: fetchWishlist } = useQuery('wishlistData', getWishList);
+
+  console.log('fetchWishlist -> ', fetchWishlist);
 
   return (
     <>
@@ -108,8 +114,8 @@ const Wishist: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {wishlistData.length > 0
-                        ? wishlistData.map((value: any, key: number) => (
+                      {fetchWishlist.length > 0
+                        ? fetchWishlist?.result?.map((value: any, key: number) => (
                             <tr>
                               <td className="product-remove">
                                 <a href="javascript:void(0)" onClick={() => removeItemFromWishlist(value)}>
@@ -140,37 +146,113 @@ const Wishist: React.FC = () => {
                           ))
                         : ''}
                       {/* <tr>
-                                                <td className="product-remove"><a href="#"><i className="fa-solid fa-xmark"></i></a></td>
-                                                <td className="product-thumbnail"><a href="#"><img src={Product1} alt="" /></a></td>
-                                                <td className="product-name"><a href="#">Yellow worker helmet</a></td>
-                                                <td className="product-price"><span className="amount">$180</span></td>
-                                                <td className="product-stock"><span>In Stock</span></td>
-                                                <td className="product-subtotal"><a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate("/Cart")}> Add to Cart</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="product-remove"><a href="#"><i className="fa-solid fa-xmark"></i></a></td>
-                                                <td className="product-thumbnail"><a href="#"><img src={Product2} alt="" /></a></td>
-                                                <td className="product-name"><a href="#">Screwdriver with handle</a></td>
-                                                <td className="product-price"><span className="amount">$180</span></td>
-                                                <td className="product-stock"><span>In Stock</span></td>
-                                                <td className="product-subtotal"><a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate("/Cart")}> Add to Cart</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="product-remove"><a href="#"><i className="fa-solid fa-xmark"></i></a></td>
-                                                <td className="product-thumbnail"><a href="#"><img src={Product1} alt="" /></a></td>
-                                                <td className="product-name"><a href="#">3d rendered solar panel</a></td>
-                                                <td className="product-price"><span className="amount">$200</span></td>
-                                                <td className="product-stock"><span>In Stock</span></td>
-                                                <td className="product-subtotal"><a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate("/Cart")}> Add to Cart</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="product-remove"><a href="#"><i className="fa-solid fa-xmark"></i></a></td>
-                                                <td className="product-thumbnail"><a href="#"><img src={Product2} alt="" /></a></td>
-                                                <td className="product-name"><a href="#">Screwdriver with handle</a></td>
-                                                <td className="product-price"><span className="amount">$200</span></td>
-                                                <td className="product-stock"><span>In Stock</span></td>
-                                                <td className="product-subtotal"><a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate("/Cart")}> Add to Cart</a></td>
-                                            </tr> */}
+                        <td className="product-remove">
+                          <a href="#">
+                            <i className="fa-solid fa-xmark"></i>
+                          </a>
+                        </td>
+                        <td className="product-thumbnail">
+                          <a href="#">
+                            <img src={Product1} alt="" />
+                          </a>
+                        </td>
+                        <td className="product-name">
+                          <a href="#">Yellow worker helmet</a>
+                        </td>
+                        <td className="product-price">
+                          <span className="amount">$180</span>
+                        </td>
+                        <td className="product-stock">
+                          <span>In Stock</span>
+                        </td>
+                        <td className="product-subtotal">
+                          <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
+                            {' '}
+                            Add to Cart
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="product-remove">
+                          <a href="#">
+                            <i className="fa-solid fa-xmark"></i>
+                          </a>
+                        </td>
+                        <td className="product-thumbnail">
+                          <a href="#">
+                            <img src={Product2} alt="" />
+                          </a>
+                        </td>
+                        <td className="product-name">
+                          <a href="#">Screwdriver with handle</a>
+                        </td>
+                        <td className="product-price">
+                          <span className="amount">$180</span>
+                        </td>
+                        <td className="product-stock">
+                          <span>In Stock</span>
+                        </td>
+                        <td className="product-subtotal">
+                          <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
+                            {' '}
+                            Add to Cart
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="product-remove">
+                          <a href="#">
+                            <i className="fa-solid fa-xmark"></i>
+                          </a>
+                        </td>
+                        <td className="product-thumbnail">
+                          <a href="#">
+                            <img src={Product1} alt="" />
+                          </a>
+                        </td>
+                        <td className="product-name">
+                          <a href="#">3d rendered solar panel</a>
+                        </td>
+                        <td className="product-price">
+                          <span className="amount">$200</span>
+                        </td>
+                        <td className="product-stock">
+                          <span>In Stock</span>
+                        </td>
+                        <td className="product-subtotal">
+                          <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
+                            {' '}
+                            Add to Cart
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="product-remove">
+                          <a href="#">
+                            <i className="fa-solid fa-xmark"></i>
+                          </a>
+                        </td>
+                        <td className="product-thumbnail">
+                          <a href="#">
+                            <img src={Product2} alt="" />
+                          </a>
+                        </td>
+                        <td className="product-name">
+                          <a href="#">Screwdriver with handle</a>
+                        </td>
+                        <td className="product-price">
+                          <span className="amount">$200</span>
+                        </td>
+                        <td className="product-stock">
+                          <span>In Stock</span>
+                        </td>
+                        <td className="product-subtotal">
+                          <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
+                            {' '}
+                            Add to Cart
+                          </a>
+                        </td>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>

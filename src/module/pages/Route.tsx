@@ -20,7 +20,6 @@ const Checkout = lazy(() => import('./Checkout/Checkout'));
 const Category = lazy(() => import('./Category/Category'));
 const RouteComponent: React.FC = () => {
   const navigate = useNavigate();
-
   const storageUserDetail = getUserDetail();
   const [userDetail, setUserDetail] = useState({
     email: '',
@@ -58,13 +57,14 @@ const RouteComponent: React.FC = () => {
     });
   };
 
-  const navigateToWishlist = () => {
-    if (storageUserDetail) {
-      navigate('/Wishlist');
-    } else {
-      (window as any).$('#formLoginRegister').modal('show');
-    }
-  };
+  // const navigateToWishlist = () => {
+  //   if (user) {
+  //     navigate('/Wishlist');
+  //   } else {
+  //     alert('Please login to view wishlist');
+  //     (window as any).$('#formLoginRegister').modal('show');
+  //   }
+  // };
 
   const openLoginPopup = () => {
     (window as any).$('#formLoginRegister').modal('show');
@@ -191,9 +191,9 @@ const RouteComponent: React.FC = () => {
                     </a>
                   </div>
                   <div className="wishlist-action woo-action-icon">
-                    <a href="javascript:void(0)" className="wishlist-icon" onClick={() => navigateToWishlist()}>
-                      <i className="bi bi-heart"></i>
-                    </a>
+                    {/* <a href="javascript:void(0)" className="wishlist-icon" onClick={() => navigateToWishlist()}> */}
+                    <i className="bi bi-heart"></i>
+                    {/* </a> */}
                   </div>
                   <div className="cart dropdown woo-action-icon">
                     {user ? (

@@ -8,3 +8,8 @@ export const addWishList = async (data: any) => {
   const response = await axios.post(`/wishlist`, newData);
   return response.data;
 };
+
+export const getWishList = async () => {
+  const response = await axios.get(`/wishlist/`);
+  return response.data;
+};
