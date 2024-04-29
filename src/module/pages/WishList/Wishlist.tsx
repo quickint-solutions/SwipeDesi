@@ -114,7 +114,7 @@ const Wishist: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {fetchWishlist.length > 0
+                      {fetchWishlist?.result?.length > 0
                         ? fetchWishlist?.result?.map((value: any, key: number) => (
                             <tr>
                               <td className="product-remove">
@@ -128,13 +128,13 @@ const Wishist: React.FC = () => {
                                 </a>
                               </td>
                               <td className="product-name">
-                                <a href="#">{value.ProductName}</a>
+                                <a href="#">{value?.item?.name || 'No name'}</a>
                               </td>
                               <td className="product-price">
-                                <span className="amount">${value.Price?.toFixed(2)}</span>
+                                <span className="amount">${value?.item?.price || 'No price for now'}</span>
                               </td>
                               <td className="product-stock">
-                                <span>In Stock</span>
+                                {value?.item?.stock ? <span>{value?.item?.stock}</span> : <span style={{ color: 'red' }}>{`out of stock`}</span>}
                               </td>
                               <td className="product-subtotal">
                                 <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => addItemToCart(value)}>
@@ -167,7 +167,7 @@ const Wishist: React.FC = () => {
                         </td>
                         <td className="product-subtotal">
                           <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
-                            {' '}
+                        
                             Add to Cart
                           </a>
                         </td>
