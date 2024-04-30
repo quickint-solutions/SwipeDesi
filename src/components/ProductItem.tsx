@@ -17,7 +17,7 @@ export default function ProductItem({ product }: { product: any }) {
 
   const wishListData = {
     productId: product._id,
-    userId: user._id,
+    userId: user?._id,
   };
 
   const { mutate: addProductToWishList } = useMutation(addWishList, {
