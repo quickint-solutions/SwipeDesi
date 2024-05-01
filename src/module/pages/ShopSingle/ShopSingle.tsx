@@ -68,6 +68,8 @@ const ShopSingle: React.FC = () => {
 
   const findCartItem = items.find((cartItem: any) => cartItem._id === itemDetails._id);
 
+  console.log('itemDetails -> ', itemDetails);
+
   return (
     <>
       <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url('${itemDetails?.images?.[0]}')` }}>
@@ -84,11 +86,11 @@ const ShopSingle: React.FC = () => {
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">Shop Single</li>
+                      <li className="breadcrumb-item active">{`Product View`}</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>Shop Single</strong>
+                    <strong>{itemDetails.name || 'No item name'}</strong>
                   </h2>
                 </div>
               </div>
@@ -166,9 +168,9 @@ const ShopSingle: React.FC = () => {
                       <div className="product-detail-meta">
                         <span>SKU: {itemDetails.sku} </span>
 
-                        <span>
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
                           Category:
-                          {itemDetails?.categories?.name}
+                          <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{itemDetails?.categories?.name}</span>
                         </span>
 
                         {/* <span>
