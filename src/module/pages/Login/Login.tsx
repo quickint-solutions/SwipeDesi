@@ -37,6 +37,7 @@ import { useQuery } from 'react-query';
 import { getBanners } from '../../../apiV2/banners';
 import { getCategories } from '../../../apiV2/categories';
 import { getFeaturedItems } from '../../../apiV2/items';
+import ProductItem from '../../../components/ProductItem';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -197,28 +198,31 @@ const Login: React.FC = () => {
           </div>
           <div className="feature-categories-wrapper">
             {categories?.result?.length > 0
-              ? categories?.result.map((value: any, key: number) => (
-                  <div
-                    style={{ cursor: 'pointer' }}
-                    className="featured-categories-column text-center"
-                    key={key}
-                    onClick={() => navigate(`/products?category=${value._id}`)}
-                  >
-                    <div className="feature-categories-inner">
-                      <div className="categories-img">
-                        <a href="javascript:void(0)">
-                          {' '}
-                          <img className="img-fluid" style={{}} src={value.image} alt="images" />
-                        </a>
+              ? categories?.result.map((value: any, key: number) => {
+                  if (value.parentCategory) return null;
+                  return (
+                    <div
+                      style={{ cursor: 'pointer' }}
+                      className="featured-categories-column text-center"
+                      key={key}
+                      onClick={() => navigate(`/products?category=${value._id}`)}
+                    >
+                      <div className="feature-categories-inner">
+                        <div className="categories-img">
+                          <a href="javascript:void(0)">
+                            {' '}
+                            <img className="img-fluid" style={{}} src={value.image} alt="images" />
+                          </a>
+                        </div>
+                        {/* TODO: CHANGE TO REAL NUMBER */}
+                        <div className="categories-product text-center">{value.itemCount} Products</div>
                       </div>
-                      {/* TODO: CHANGE TO REAL NUMBER */}
-                      <div className="categories-product text-center">{value.itemCount} Products</div>
+                      <h6 className="categories-title fw-medium mt-3">
+                        <a href="javascript:void(0)">{value.name}</a>
+                      </h6>
                     </div>
-                    <h6 className="categories-title fw-medium mt-3">
-                      <a href="javascript:void(0)">{value.name}</a>
-                    </h6>
-                  </div>
-                ))
+                  );
+                })
               : ''}
             {/* <div className="featured-categories-column text-center">
                             <div className="feature-categories-inner">
@@ -428,78 +432,7 @@ const Login: React.FC = () => {
           </div>
           <div className="row">
             {featuredItems?.result?.length > 0
-              ? featuredItems?.result.map((value: any, key: number) => (
-                  <div className="col-xl-3 col-lg-4 col-md-6" key={key}>
-                    <div className="product" onClick={() => navigate(`/shopSingle?productId=${value._id}`)}>
-                      <div className="product-label">{/* <span className="onsale">17%</span> */}</div>
-                      <div className="product-image">
-                        <div className="product-thumb-inner">
-                          <a href="javascript:void(0)">
-                            <img className="img-fluid" src={value.images[0]} alt="image" />
-                            {/* <img className="img-fluid" src={Product01} alt="image" /> */}
-                          </a>
-                        </div>
-                        <div className="custom-icon">
-                          <ul className="list-unstyled">
-                            <li>
-                              <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist">
-                                <i className="far fa-heart"></i>
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">
-                                <i className="fas fa-shopping-cart"></i>
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare">
-                                <i className="fa-solid fa-code-compare"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="product-btn">
-                          <a href="javascript:void(0)" className="btn btn-light d-block">
-                            Add To cart<i className="fas fa-arrow-right-long ps-3"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="product-content">
-                        <div className="product-info">
-                          <div className="product-title">
-                            <h3>
-                              <a href="shop-single.html">{value.name}</a>
-                            </h3>
-                          </div>
-                          <div className="product-star">
-                            <ul className="list-unstyled mb-1">
-                              <li>
-                                <i className="fas fa-star"></i>
-                              </li>
-                              <li>
-                                <i className="fas fa-star"></i>
-                              </li>
-                              <li>
-                                <i className="fas fa-star"></i>
-                              </li>
-                              <li>
-                                <i className="fas fa-star"></i>
-                              </li>
-                              <li>
-                                <i className="far fa-star-half-alt"></i>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="product-prize">
-                          <p>
-                            <span className="me-2">$81,000.00</span>${Number(value.price)?.toFixed(2)}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))
+              ? featuredItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
               : ''}
             {/* <div className="col-xl-3 col-lg-4 col-md-6">
                             <div className="product">

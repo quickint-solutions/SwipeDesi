@@ -28,7 +28,7 @@ export default function Products() {
 
   return (
     <div>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: "url('images/bg/mandir-banner.jpg')" }}>
+      <section className="header-inner header-inner-menu bg-overlay-secondary mandir-bg">
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
@@ -281,7 +281,7 @@ export default function Products() {
               </div>
             </div>
             <div className="col-xl-9 col-lg-8 mt-4 mt-md-5 mt-lg-0">
-              <h5 className="widget-title">Product filters</h5>
+              {/* <h5 className="widget-title">Product filters</h5>
               <div className="blog-sidebar-post-divider"></div>
               <div className="row mt-4">
                 <div className="col-lg-4">
@@ -360,11 +360,11 @@ export default function Products() {
                     </select>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="row">
                 {getProducts?.result.map((product: any) => {
-                  return <ProductItem key={product._id} product={product} />;
+                  return <ProductItem key={product._id} product={product} large />;
                 })}
               </div>
             </div>

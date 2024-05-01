@@ -2315,6 +2315,11 @@ button.search-button {
   z-index: 9;
 }
 
+.mandir-bg {
+  background: url(../images/bg/mandir-banner.jpg) no-repeat center center;
+  background-size: cover;
+}
+
 .testimonial-dark-bg .owl-nav {
   padding-top: 30px;
   display: flex;

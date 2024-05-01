@@ -5,7 +5,7 @@ import { addWishList } from '../apiV2/wishlist';
 import { AuthContext } from '../context/auth.context';
 import { useNavigate } from 'react-router-dom';
 
-export default function ProductItem({ product }: { product: any }) {
+export default function ProductItem({ product, large }: { product: any; large?: boolean }) {
   const { addItem, isItemInCart } = useContext(CartContext);
 
   const handleAddToCart = () => {
@@ -18,7 +18,7 @@ export default function ProductItem({ product }: { product: any }) {
   const navigate = useNavigate();
 
   const wishListData = {
-    productId: product._id,
+    productId: product?._id,
     userId: user?._id,
   };
 
@@ -32,7 +32,7 @@ export default function ProductItem({ product }: { product: any }) {
   });
 
   return (
-    <div className="col-xl-4 col-md-6">
+    <div className={`col-xl-${large ? '4' : '3'} col-md-6`}>
       <div className="product">
         {product.discount && (
           <div className="product-label">
@@ -42,21 +42,21 @@ export default function ProductItem({ product }: { product: any }) {
 
         <div className="product-image">
           <div className="product-thumb-inner">
-            <a onClick={() => navigate(`/shopSingle?productId=${product._id}`)}>
+            <a onClick={() => navigate(`/shopSingle?productId=${product?._id}`)}>
               <img className="img-fluid" src={product.images[0]} alt="image" />
             </a>
           </div>
           <div className="custom-icon">
             <ul className="list-unstyled">
               <li>
-                <button data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist" onClick={() => addProductToWishList(wishListData)}>
+                <a data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist" onClick={() => addProductToWishList(wishListData)}>
                   <i className="far fa-heart"></i>
-                </button>
+                </a>
               </li>
               <li>
-                <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">
+                {/* <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">
                   <i className="fas fa-shopping-cart"></i>
-                </a>
+                </a> */}
               </li>
               {/* <li>
                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare">

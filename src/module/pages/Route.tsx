@@ -8,7 +8,7 @@ import { signup } from '../../apiV2/signup';
 import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
-import Myaccount from './Myaccount';
+import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
 
@@ -193,11 +193,13 @@ const RouteComponent: React.FC = () => {
                   )}
                 </div>
                 <div className="woo-action d-flex align-items-center">
-                  <div className="Compare-action woo-action-icon">
-                    <a href="#" className="compare-icon" title="Compare products">
-                      <i className="bi bi-shuffle"></i>
-                    </a>
-                  </div>
+                  {auth.user && (
+                    <div className="Compare-action woo-action-icon" onClick={() => navigate('my-account')} style={{ cursor: 'pointer' }}>
+                      <a className="compare-icon" title="Compare products">
+                        <i className="bi bi-person"></i>
+                      </a>
+                    </div>
+                  )}
                   <div className="wishlist-action woo-action-icon">
                     <a href="javascript:void(0)" className="wishlist-icon" onClick={() => navigateToWishlist()}>
                       <i className="bi bi-heart"></i>
@@ -547,7 +549,7 @@ const RouteComponent: React.FC = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/myaccount" element={<Myaccount />} />
+        <Route path="/my-account" element={<MyAccount />} />
         <Route path="/home" element={<Home />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
