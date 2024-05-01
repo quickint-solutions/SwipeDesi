@@ -13,7 +13,7 @@ import { useAppSelector } from '../../../api/store/configureStore';
 import { getUserDetail } from '../../../helpers/common';
 import cartHttpRequest from '../../../api/cart/cartHttpRequest';
 import { useQuery } from 'react-query';
-import { getItemsById } from '../../../apiV2/items';
+import { getItemsByCategory, getItemsById } from '../../../apiV2/items';
 import { AuthContext } from '../../../context/auth.context';
 import { CartContext } from '../../../context/cart.context';
 
@@ -37,6 +37,14 @@ const ShopSingle: React.FC = () => {
     let productId = searchParams.get('productId');
     if (productId) {
       return await getItemsById(productId);
+    }
+  });
+
+  const { data: itemsByCategory } = useQuery('relatedProductData', async () => {
+    let productId = searchParams.get('productId');
+    if (productId) {
+      let itemDetails = await getItemsById(productId);
+      return await getItemsByCategory(itemDetails?.categories?._id);
     }
   });
 
@@ -84,11 +92,11 @@ const ShopSingle: React.FC = () => {
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">Shop Single</li>
+                      <li className="breadcrumb-item active">{`Product View`}</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>Shop Single</strong>
+                    <strong>{itemDetails?.name || 'No item name'}</strong>
                   </h2>
                 </div>
               </div>
@@ -112,7 +120,7 @@ const ShopSingle: React.FC = () => {
                   </div>
                   <div className="col-md-7">
                     <div className="product-detail">
-                      <h4 className="fw-600">{itemDetails.name}</h4>
+                      <h4 className="fw-600">{itemDetails?.name || 'No Product name'}</h4>
                       <div className="product-price-rating">
                         <div className="product-rating d-flex">
                           <i className="fas fa-star text-warning"></i>
@@ -158,55 +166,38 @@ const ShopSingle: React.FC = () => {
                         <a className="" href="javascript:void(0)" onClick={() => addToWishlist()}>
                           <i className="far fa-heart"></i>Add to Wishlist
                         </a>
-                        <a className="" href="#">
-                          <i className="fa fa-compress-alt" aria-hidden="true"></i>Compare
-                        </a>
                       </div>
                       <hr className="hr-dark" />
                       <div className="product-detail-meta">
                         <span>SKU: {itemDetails.sku} </span>
 
-                        <span>
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
                           Category:
-                          {itemDetails?.categories?.name}
+                          <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{itemDetails?.categories?.name || 'No item category'}</span>
                         </span>
-
-                        {/* <span>
-                          Tags:
-                          {itemDetails?.tags?.length > 0
-                            ? itemDetails?.tags.map((value: any, key: number) => <a href="#"> {value.tag}, </a>)
-                            : '-'}
-                        </span> */}
                       </div>
                       <div className="product-detail-social">
                         <span>Share :</span>
                         <ul>
                           <li>
-                            <a href="#">
-                              <i className="fab fa-facebook-f"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i className="fab fa-instagram"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i className="fab fa-twitter"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i className="fab fa-pinterest-p"></i>
+                            <a
+                              onClick={() => window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href)}`, '_blank')}
+                              target="_blank"
+                            >
+                              <i className="fab fa-whatsapp"></i>
                             </a>
                           </li>
                         </ul>
                       </div>
                     </div>
+                    {itemsByCategory?.result?.map((categoriesItem: any) => {
+                      console.log('categoriesItem -> ', categoriesItem);
+                    })}
                   </div>
                 </div>
-                <div className="row mt-5">
+
+                {/* removed because description already shown above */}
+                {/* <div className="row mt-5">
                   <div className="col-lg-12">
                     <div className="nav-tabs-02">
                       <nav>
@@ -440,7 +431,7 @@ const ShopSingle: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

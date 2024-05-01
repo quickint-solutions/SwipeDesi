@@ -3,6 +3,7 @@ import { CartContext } from '../context/cart.context';
 import { useMutation } from 'react-query';
 import { addWishList } from '../apiV2/wishlist';
 import { AuthContext } from '../context/auth.context';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductItem({ product }: { product: any }) {
   const { addItem, isItemInCart } = useContext(CartContext);
@@ -14,6 +15,7 @@ export default function ProductItem({ product }: { product: any }) {
 
   const { user } = useContext(AuthContext);
   const isProductInCart = isItemInCart(product);
+  const navigate = useNavigate();
 
   const wishListData = {
     productId: product._id,
@@ -40,7 +42,7 @@ export default function ProductItem({ product }: { product: any }) {
 
         <div className="product-image">
           <div className="product-thumb-inner">
-            <a href="#">
+            <a onClick={() => navigate(`/shopSingle?productId=${product._id}`)}>
               <img className="img-fluid" src={product.images[0]} alt="image" />
             </a>
           </div>

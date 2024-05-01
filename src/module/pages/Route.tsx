@@ -9,6 +9,7 @@ import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
 import { CartContext } from '../../context/cart.context';
+import logo from '../../images/logo1.jpg';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -130,6 +131,16 @@ const RouteComponent: React.FC = () => {
                         <li>
                           <a href="#">About Us</a>
                         </li>
+                        <li>
+                          <a href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=fr&_x_tr_hl=en-US&_x_tr_pto=wapp" target="_blank">
+                            French
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=pa&_x_tr_hl=en-US&_x_tr_pto=wapp" target="_blank">
+                            Punjabi
+                          </a>
+                        </li>
                       </ul>
                     </div>
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
@@ -155,11 +166,7 @@ const RouteComponent: React.FC = () => {
           <div className="container position-relative">
             <div className="header-middel-container d-flex">
               <a className="navbar-brand" href="javascript:void(0)" onClick={() => navigate('/')}>
-                <img
-                  className="img-fluid"
-                  src="https://dhknd.ca/wp-content/uploads/2021/03/dhknd.ca-logo-web_Final-for-website_300px.jpg"
-                  alt="logo"
-                />
+                <img className="img-fluid" src={logo} alt="logo" />
               </a>
               <form className="form-inline search-form">
                 <div className="form-group z-0">
