@@ -280,14 +280,17 @@ const RouteComponent: React.FC = () => {
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
                 {!categoriesLoading && categories && categories?.result?.length > 0
-                  ? categories?.result?.map((value: any, key: number) => (
-                      <li className="nav-item" onClick={() => navigate(`/products?category=${value._id}`)}>
-                        <div className="nav-link nav-link-flex" aria-current="page">
-                          <img src={value.icon} style={{ width: 18 }} />
-                          <span>{value.name}</span>
-                        </div>
-                      </li>
-                    ))
+                  ? categories?.result?.map((value: any, key: number) => {
+                      if (value.parentCategory) return null;
+                      return (
+                        <li className="nav-item" onClick={() => navigate(`/products?category=${value._id}`)}>
+                          <div className="nav-link nav-link-flex" aria-current="page">
+                            <img src={value.icon} style={{ width: 18 }} />
+                            <span>{value.name}</span>
+                          </div>
+                        </li>
+                      );
+                    })
                   : ''}
               </ul>
             </div>
