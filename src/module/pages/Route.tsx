@@ -131,6 +131,16 @@ const RouteComponent: React.FC = () => {
                         <li>
                           <a href="#">About Us</a>
                         </li>
+                        <li>
+                          <a href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=fr&_x_tr_hl=en-US&_x_tr_pto=wapp" target="_blank">
+                            French
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=pa&_x_tr_hl=en-US&_x_tr_pto=wapp" target="_blank">
+                            Punjabi
+                          </a>
+                        </li>
                       </ul>
                     </div>
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
