@@ -13,7 +13,7 @@ import { useAppSelector } from '../../../api/store/configureStore';
 import { getUserDetail } from '../../../helpers/common';
 import cartHttpRequest from '../../../api/cart/cartHttpRequest';
 import { useQuery } from 'react-query';
-import { getItemsById } from '../../../apiV2/items';
+import { getItemsByCategory, getItemsById } from '../../../apiV2/items';
 import { AuthContext } from '../../../context/auth.context';
 import { CartContext } from '../../../context/cart.context';
 
@@ -37,6 +37,14 @@ const ShopSingle: React.FC = () => {
     let productId = searchParams.get('productId');
     if (productId) {
       return await getItemsById(productId);
+    }
+  });
+
+  const { data: itemsByCategory } = useQuery('relatedProductData', async () => {
+    let productId = searchParams.get('productId');
+    if (productId) {
+      let itemDetails = await getItemsById(productId);
+      return await getItemsByCategory(itemDetails?.categories?._id);
     }
   });
 
@@ -68,8 +76,6 @@ const ShopSingle: React.FC = () => {
 
   const findCartItem = items.find((cartItem: any) => cartItem._id === itemDetails._id);
 
-  console.log('itemDetails -> ', itemDetails);
-
   return (
     <>
       <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url('${itemDetails?.images?.[0]}')` }}>
@@ -90,7 +96,7 @@ const ShopSingle: React.FC = () => {
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>{itemDetails.name || 'No item name'}</strong>
+                    <strong>{itemDetails?.name || 'No item name'}</strong>
                   </h2>
                 </div>
               </div>
@@ -114,7 +120,7 @@ const ShopSingle: React.FC = () => {
                   </div>
                   <div className="col-md-7">
                     <div className="product-detail">
-                      <h4 className="fw-600">{itemDetails.name}</h4>
+                      <h4 className="fw-600">{itemDetails?.name || 'No Product name'}</h4>
                       <div className="product-price-rating">
                         <div className="product-rating d-flex">
                           <i className="fas fa-star text-warning"></i>
@@ -167,30 +173,31 @@ const ShopSingle: React.FC = () => {
 
                         <span style={{ display: 'flex', alignItems: 'center' }}>
                           Category:
-                          <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{itemDetails?.categories?.name}</span>
+                          <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{itemDetails?.categories?.name || 'No item category'}</span>
                         </span>
-
-                        {/* <span>
-                          Tags:
-                          {itemDetails?.tags?.length > 0
-                            ? itemDetails?.tags.map((value: any, key: number) => <a href="#"> {value.tag}, </a>)
-                            : '-'}
-                        </span> */}
                       </div>
                       <div className="product-detail-social">
                         <span>Share :</span>
                         <ul>
                           <li>
-                            <a href="https://api.whatsapp.com/shopSingle?productId=6628a563accaeb476f1b08d0" target="_blank">
+                            <a
+                              onClick={() => window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href)}`, '_blank')}
+                              target="_blank"
+                            >
                               <i className="fab fa-whatsapp"></i>
                             </a>
                           </li>
                         </ul>
                       </div>
                     </div>
+                    {itemsByCategory?.result?.map((categoriesItem: any) => {
+                      console.log('categoriesItem -> ', categoriesItem);
+                    })}
                   </div>
                 </div>
-                <div className="row mt-5">
+
+                {/* removed because description already shown above */}
+                {/* <div className="row mt-5">
                   <div className="col-lg-12">
                     <div className="nav-tabs-02">
                       <nav>
@@ -424,7 +431,7 @@ const ShopSingle: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
