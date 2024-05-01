@@ -158,9 +158,6 @@ const ShopSingle: React.FC = () => {
                         <a className="" href="javascript:void(0)" onClick={() => addToWishlist()}>
                           <i className="far fa-heart"></i>Add to Wishlist
                         </a>
-                        <a className="" href="#">
-                          <i className="fa fa-compress-alt" aria-hidden="true"></i>Compare
-                        </a>
                       </div>
                       <hr className="hr-dark" />
                       <div className="product-detail-meta">
@@ -182,23 +179,8 @@ const ShopSingle: React.FC = () => {
                         <span>Share :</span>
                         <ul>
                           <li>
-                            <a href="#">
-                              <i className="fab fa-facebook-f"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i className="fab fa-instagram"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i className="fab fa-twitter"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i className="fab fa-pinterest-p"></i>
+                            <a href="https://api.whatsapp.com/shopSingle?productId=6628a563accaeb476f1b08d0" target="_blank">
+                              <i className="fab fa-whatsapp"></i>
                             </a>
                           </li>
                         </ul>
