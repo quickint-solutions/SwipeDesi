@@ -147,7 +147,7 @@ const Category: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="widget">
+                {/* <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Color</h5>
                   </div>
@@ -245,7 +245,7 @@ const Category: React.FC = () => {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="widget">
                   <div className="widget-title">

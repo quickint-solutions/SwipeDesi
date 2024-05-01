@@ -109,15 +109,15 @@ export default function Products() {
                     </div>
                     <div className="price-filter">
                       <div className="price_label">
-                        Price: <span className="from">$10 — $382</span>
+                        Max Price: <span className="from"> Search by price limit</span>
                       </div>
-                      <a className="" href="#">
+                      {/* <a className="" href="#">
                         <i className="fas fa-filter"></i>Filter
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                 </div>
-                <div className="widget">
+                {/* <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Color</h5>
                   </div>
@@ -215,168 +215,67 @@ export default function Products() {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Featured Product</h5>
                   </div>
                   <div className="widget-content">
-                    <div className="widget-product">
-                      <div className="product d-flex align-items-center mb-3">
-                        <div className="product-image">
-                          <div className="product-thumb-inner">
-                            <a href="#">
-                              <img className="img-fluid" src="images/product/02.jpg" alt="image" />
-                            </a>
-                          </div>
-                        </div>
-                        <div className="product-content py-0">
-                          <div className="product-info">
-                            <div className="product-title">
-                              <h3>
-                                <a href="shop-single.html">Dining Chair</a>
-                              </h3>
-                            </div>
-                            <div className="product-star">
-                              <ul className="list-unstyled mb-1">
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="far fa-star-half-alt"></i>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
+                    {getProducts?.result?.slice(0, 3).map((categories: any) => {
+                      console.log('categories -> ', categories);
+                      return (
+                        <>
+                          <div className="widget-product">
+                            <div className="product d-flex align-items-center mb-3">
+                              <div className="product-image">
+                                <div className="product-thumb-inner">
+                                  <a href="#">
+                                    <img className="img-fluid" src={categories.images[0]} alt="image" />
+                                  </a>
+                                </div>
+                              </div>
 
-                          <div className="product-prize">
-                            <p>
-                              <span className="me-2">$81,000.00</span>$95,000.00
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product d-flex align-items-center mb-3">
-                        <div className="product-image">
-                          <div className="product-thumb-inner">
-                            <a href="#">
-                              <img className="img-fluid" src="images/product/02.jpg" alt="image" />
-                            </a>
-                          </div>
-                        </div>
-                        <div className="product-content py-0">
-                          <div className="product-info">
-                            <div className="product-title">
-                              <h3>
-                                <a href="shop-single.html">Dining Chair</a>
-                              </h3>
-                            </div>
-                            <div className="product-star">
-                              <ul className="list-unstyled mb-1">
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="far fa-star-half-alt"></i>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
+                              <div className="product-content py-0">
+                                <div className="product-info">
+                                  <div className="product-title">
+                                    <h3>
+                                      <a onClick={() => {}}>{categories.name || ''}</a>
+                                    </h3>
+                                  </div>
+                                  {/* stars removed */}
+                                  {/* <div className="product-star">
+                                    <ul className="list-unstyled mb-1">
+                                      <li>
+                                        <i className="fas fa-star"></i>
+                                      </li>
+                                      <li>
+                                        <i className="fas fa-star"></i>
+                                      </li>
+                                      <li>
+                                        <i className="fas fa-star"></i>
+                                      </li>
+                                      <li>
+                                        <i className="fas fa-star"></i>
+                                      </li>
+                                      <li>
+                                        <i className="far fa-star-half-alt"></i>
+                                      </li>
+                                    </ul>
+                                  </div> */}
+                                </div>
 
-                          <div className="product-prize">
-                            <p>
-                              <span className="me-2">$81,000.00</span>$95,000.00
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product d-flex align-items-center">
-                        <div className="product-image">
-                          <div className="product-thumb-inner">
-                            <a href="#">
-                              <img className="img-fluid" src="images/product/02.jpg" alt="image" />
-                            </a>
-                          </div>
-                        </div>
-                        <div className="product-content py-0">
-                          <div className="product-info">
-                            <div className="product-title">
-                              <h3>
-                                <a href="shop-single.html">Dining Chair</a>
-                              </h3>
-                            </div>
-                            <div className="product-star">
-                              <ul className="list-unstyled mb-1">
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="fas fa-star"></i>
-                                </li>
-                                <li>
-                                  <i className="far fa-star-half-alt"></i>
-                                </li>
-                              </ul>
+                                <div className="product-prize">
+                                  <p>
+                                    <span className="me-2">${categories.price || 'N/A'}</span>
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           </div>
-
-                          <div className="product-prize">
-                            <p>
-                              <span className="me-2">$81,000.00</span>$95,000.00
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="widget mb-0">
-                  <div className="widget-title">
-                    <h5 className="title">Brands</h5>
-                  </div>
-                  <div className="widget-content">
-                    <div className="popular-brand">
-                      <ul className="list-unstyled mb-0">
-                        <li>
-                          <a href="#"> Daniela Anderson(1)</a>
-                        </li>
-                        <li>
-                          <a href="#"> Caranila(8)</a>
-                        </li>
-                        <li>
-                          <a href="#"> Moosa(4)</a>
-                        </li>
-                        <li>
-                          <a href="#"> Florial(5)</a>
-                        </li>
-                      </ul>
-                    </div>
+                        </>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
