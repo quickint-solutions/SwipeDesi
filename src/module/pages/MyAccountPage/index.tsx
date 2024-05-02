@@ -38,7 +38,6 @@ export default function Myaccount() {
     },
   });
 
-  console.log('user -> ', user);
   return (
     <section className="space-ptb">
       <div className="container">

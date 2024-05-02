@@ -22,8 +22,6 @@ export const updateUserAPI = async (data: any) => {
     },
     profileImage: data.profileImage,
   };
-
-  console.log('updateUserBody -> ', updateUserBody);
-  const response = await axios.put(`/users/${data.userId}`);
+  const response = await axios.put(`/users/${data.userId}`, updateUserBody);
   return response.data;
 };
