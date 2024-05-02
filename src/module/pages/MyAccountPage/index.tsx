@@ -47,9 +47,6 @@ export default function Myaccount() {
                     </button>
                     <button
                       className="text-start nav-link"
-                      id="v-pills-orders-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#v-pills-orders"
                       type="button"
                       role="tab"
                       // aria-controls="v-pills-orders"
@@ -140,7 +137,7 @@ export default function Myaccount() {
                 <div className="row">
                   <div className="col-lg-4 col-md-6 mb-4">
                     <div className="feature-box">
-                      <a href="#">
+                      <a onClick={() => setActiveTab('ORDERS')}>
                         <i className="bi bi-card-checklist"></i>
                         <h6 className="mb-0 feature-title">Orders</h6>
                       </a>
@@ -148,7 +145,7 @@ export default function Myaccount() {
                   </div>
                   <div className="col-lg-4 col-md-6 mb-4">
                     <div className="feature-box">
-                      <a href="#">
+                      <a onClick={() => setActiveTab('ACCOUNT_DETAILS')}>
                         <i className="bi bi-card-checklist"></i>
                         <h6 className="mb-0 feature-title">Account Details</h6>
                       </a>
@@ -164,7 +161,7 @@ export default function Myaccount() {
                   </div>
                   <div className="col-lg-4 col-md-6 mb-4">
                     <div className="feature-box">
-                      <a href="#">
+                      <a onClick={() => logout()}>
                         <i className="bi bi-card-checklist"></i>
                         <h6 className="mb-0 feature-title">Logout</h6>
                       </a>
