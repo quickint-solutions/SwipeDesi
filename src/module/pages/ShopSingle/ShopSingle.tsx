@@ -31,7 +31,6 @@ const ShopSingle: React.FC = () => {
     slidesToScroll: 1,
   };
 
-  const [relatedProductData, setRelatedProductData] = useState([]);
   const [quantity, setQuantity] = useState(1);
 
   const { data: itemDetails } = useQuery('itemDetails', async () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
@@ -12,18 +12,14 @@ export default function Products() {
 
   const navigate = useNavigate();
 
-  const { data: getProducts, refetch: refetchProducts } = useQuery('products', async (params?: any) => {
-    const response = await getItems(params || { categories: category });
-    return response;
-  });
+  const { data: getProducts, mutate } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
-  const [search, setSearch] = useState('');
 
   const categoriesData = categoriesList?.result || [];
 
   useEffect(() => {
-    refetchProducts();
+    mutate({ categories: categoryValue });
   }, [categoryValue]);
 
   return (
@@ -95,7 +91,7 @@ export default function Products() {
                     );
                   })}
                 </div>
-                <div className="widget">
+                {/* <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Filter by price</h5>
                   </div>
@@ -111,12 +107,9 @@ export default function Products() {
                       <div className="price_label">
                         Max Price: <span className="from"> Search by price limit</span>
                       </div>
-                      {/* <a className="" href="#">
-                        <i className="fas fa-filter"></i>Filter
-                      </a> */}
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/* <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Color</h5>
@@ -223,7 +216,6 @@ export default function Products() {
                   </div>
                   <div className="widget-content">
                     {getProducts?.result?.slice(0, 3).map((categories: any) => {
-                      console.log('categories -> ', categories);
                       return (
                         <>
                           <div className="widget-product">
