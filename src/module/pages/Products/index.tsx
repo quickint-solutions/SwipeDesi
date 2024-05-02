@@ -95,7 +95,7 @@ export default function Products() {
                     );
                   })}
                 </div>
-                <div className="widget">
+                {/* <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Filter by price</h5>
                   </div>
@@ -111,12 +111,9 @@ export default function Products() {
                       <div className="price_label">
                         Max Price: <span className="from"> Search by price limit</span>
                       </div>
-                      {/* <a className="" href="#">
-                        <i className="fas fa-filter"></i>Filter
-                      </a> */}
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/* <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Color</h5>
