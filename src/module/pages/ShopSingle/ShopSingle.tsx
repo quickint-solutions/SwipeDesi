@@ -106,6 +106,7 @@ const ShopSingle: React.FC = () => {
         </div>
         {/* <div className="header-inner-shape" style={{ backgroundImage: 'url(' + MandirBgImg2 + ')' }}></div> */}
       </section>
+
       {itemDetails ? (
         <section className="space-ptb shop-single">
           <div className="container">
@@ -189,6 +190,241 @@ const ShopSingle: React.FC = () => {
                             </a>
                           </li>
                         </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row mt-5">
+                  <div className="col-lg-12">
+                    <div className="nav-tabs-02">
+                      <nav>
+                        <ul className="nav nav-tabs mb-4" id="myTab2" role="tablist">
+                          <li className="nav-item" role="presentation">
+                            {' '}
+                            <a
+                              className="nav-link active"
+                              id="nav-description-tab"
+                              data-bs-toggle="tab"
+                              href="#nav-description"
+                              role="tab"
+                              aria-controls="nav-description"
+                              aria-selected="true"
+                            >
+                              Description
+                            </a>
+                          </li>
+                          <li className="nav-item" role="presentation">
+                            <a
+                              className="nav-link"
+                              id="nav-reviews-tab"
+                              data-bs-toggle="tab"
+                              href="#nav-reviews"
+                              role="tab"
+                              aria-controls="nav-reviews"
+                              aria-selected="false"
+                            >
+                              Reviews
+                            </a>
+                          </li>
+                          <li className="nav-item" role="presentation">
+                            <a
+                              className="nav-link"
+                              id="nav-custom-tab"
+                              data-bs-toggle="tab"
+                              href="#nav-custom"
+                              role="tab"
+                              aria-controls="nav-custom"
+                              aria-selected="false"
+                            >
+                              Custom
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+                      <div className="tab-content" id="nav-tabContent">
+                        <div className="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
+                          <div className="row" dangerouslySetInnerHTML={{ __html: itemDetails?.descriptions }}></div>
+                        </div>
+                        <div className="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
+                          <div className="row">
+                            <div className="col-12">
+                              <h5 className="mb-4 fw-600">4 Reviews for women’s fabric mix midi wrap jumpsuit</h5>
+
+                              <div className="commentlist">
+                                <div className="comment-author">
+                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/01.jpg" alt="" />
+                                </div>
+                                <div className="comment-content">
+                                  <div className="reviews">
+                                    <p className="meta">
+                                      <strong>Sara Lisbon </strong>(verified owner) – November 8, 2022
+                                    </p>
+                                    <div className="rating">
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star-half-alt"></i>
+                                      <i className="far fa-star text-warning"></i>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    For those of you who are serious about having more, doing more, giving more and being more, success is achievable
+                                    with some understanding of what to do, some discipline around planning and execution of those plans and belief
+                                    that you can achieve your desires.
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div className="commentlist">
+                                <div className="comment-author">
+                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/01.jpg" alt="" />
+                                </div>
+                                <div className="comment-content">
+                                  <div className="reviews">
+                                    <p className="meta">
+                                      <strong>Sara Lisbon </strong>(verified owner) – November 8, 2022
+                                    </p>
+                                    <div className="rating">
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star-half-alt"></i>
+                                      <i className="far fa-star text-warning"></i>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    For those of you who are serious about having more, doing more, giving more and being more, success is achievable
+                                    with some understanding of what to do, some discipline around planning and execution of those plans and belief
+                                    that you can achieve your desires.
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="commentlist">
+                                <div className="comment-author">
+                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/02.jpg" alt="" />
+                                </div>
+                                <div className="comment-content">
+                                  <div className="reviews">
+                                    <p className="meta">
+                                      <strong>Frank Smith </strong>(verified owner) – November 8, 2022
+                                    </p>
+                                    <div className="rating">
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star-half-alt"></i>
+                                      <i className="far fa-star text-warning"></i>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    There are basically six key areas to higher achievement. Some people will tell you there are four while others may
+                                    tell you there are eight. One thing for certain though, is that irrespective of the number of steps the experts
+                                    talk about, they all originate from the same roots.
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="commentlist">
+                                <div className="comment-author">
+                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/03.jpg" alt="" />
+                                </div>
+                                <div className="comment-content">
+                                  <div className="reviews">
+                                    <p className="meta">
+                                      <strong>Joanna williams </strong>(verified owner) – December 8, 2022
+                                    </p>
+                                    <div className="rating">
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star-half-alt"></i>
+                                      <i className="far fa-star text-warning"></i>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    Success isn’t really that difficult. There is a significant portion of the population here in North America, that
+                                    actually want and need success to be hard! Why? So they then have a built-in excuse when things don’t go their
+                                    way! Pretty sad situation, to say the least.
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="commentlist">
+                                <div className="comment-author">
+                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/04.jpg" alt="" />
+                                </div>
+                                <div className="comment-content">
+                                  <div className="reviews">
+                                    <p className="meta">
+                                      <strong>Felica Queen </strong>(verified owner) – December 8, 2022
+                                    </p>
+                                    <div className="rating">
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star-half-alt"></i>
+                                      <i className="far fa-star text-warning"></i>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    Making a decision to do something – this is the first step. We all know that nothing moves until someone makes a
+                                    decision. The first action is always in making the decision to proceed. This is a fundamental step, which most
+                                    people overlook.
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="mt-4 ">
+                                <h5 className="fw-600">Add a review</h5>
+                                <p>Your email address will not be published. Required fields are marked *</p>
+                              </div>
+                              <form className="row mt-4 align-items-center">
+                                <div className="mb-3 col-sm-6">
+                                  <label className="form-label">Name*</label>
+                                  <input type="text" className="form-control" placeholder="" />
+                                </div>
+                                <div className="mb-3 col-sm-6">
+                                  <label className="form-label">Email</label>
+                                  <input type="email" className="form-control" placeholder="" />
+                                </div>
+                                <div className="col-sm-12">
+                                  <label className="form-label">Your review *</label>
+                                  <div className="mb-3">
+                                    <textarea className="form-control" rows={5} id="comment"></textarea>
+                                  </div>
+                                </div>
+                                <div className="form-check col-sm-12 p-0">
+                                  <div className="form-check mb-3">
+                                    <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked02" checked={false} />
+                                    <label className="form-check-label ps-2" htmlFor="flexCheckChecked02">
+                                      Save my name, email, and website in this browser for the next time I comment.
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="col-sm-12">
+                                  <label className="form-label">Your review *</label>
+                                  <div className="product-rating">
+                                    <i className="fas fa-star text-warning"></i>
+                                    <i className="fas fa-star text-warning"></i>
+                                    <i className="fas fa-star text-warning"></i>
+                                    <i className="far fa-star text-warning"></i>
+                                    <i className="far fa-star text-warning"></i>
+                                  </div>
+                                </div>
+                                <div className="col-sm-12">
+                                  <a className="btn btn-primary btn-md mt-4" href="#">
+                                    {' '}
+                                    Submit{' '}
+                                  </a>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="tab-pane fade" id="nav-custom" role="tabpanel" aria-labelledby="nav-custom-tab">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="row" dangerouslySetInnerHTML={{ __html: itemDetails?.custom }}></div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
