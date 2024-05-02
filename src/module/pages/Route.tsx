@@ -11,6 +11,8 @@ import Products from './Products';
 import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
+import languageLogo from '../../images/en.png';
+import expertLogo from '../../images/topbar-avtar-icon.png';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -122,6 +124,38 @@ const RouteComponent: React.FC = () => {
                 <div className="col-12">
                   <div className="d-lg-flex align-items-center text-center">
                     <div className="topbar-left mb-2 mb-lg-0">
+                      <div className="dropdown right-menu d-inline-flex pe-3 topbar-divider">
+                        <a
+                          className="dropdown-toggle"
+                          href="#"
+                          id="dropdownMenuButton2"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <img className="img-fluid" src={languageLogo} alt="" /> English<i className="fas fa-chevron-down fa-xs"></i>
+                        </a>
+                        <div className="dropdown-menu mt-0" aria-labelledby="dropdownMenuButton2">
+                          <a className="dropdown-item" href="#">
+                            <img className="img-fluid country-flag" src="images/country-flags/02.jpg" alt="" />
+                            English
+                          </a>
+                          <a
+                            className="dropdown-item"
+                            href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=fr&_x_tr_hl=en-US&_x_tr_pto=wapp"
+                          >
+                            <img className="img-fluid country-flag" src="images/country-flags/09.jpg" alt="" />
+                            Francais
+                          </a>
+                          <a
+                            className="dropdown-item"
+                            href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=pa&_x_tr_hl=en-US&_x_tr_pto=wapp"
+                          >
+                            <img className="img-fluid country-flag" src="images/country-flags/12.jpg" alt="" />
+                            Punjabi
+                          </a>
+                        </div>
+                      </div>
                       <ul className="list-unstyled ps-2">
                         <li>
                           <a href="#">Gift cards</a>
@@ -131,16 +165,6 @@ const RouteComponent: React.FC = () => {
                         </li>
                         <li>
                           <a href="#">About Us</a>
-                        </li>
-                        <li>
-                          <a href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=fr&_x_tr_hl=en-US&_x_tr_pto=wapp" target="_blank">
-                            French
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=pa&_x_tr_hl=en-US&_x_tr_pto=wapp" target="_blank">
-                            Punjabi
-                          </a>
                         </li>
                       </ul>
                     </div>
@@ -152,7 +176,7 @@ const RouteComponent: React.FC = () => {
                       </div>
                       <div className="info-box-icon ps-3">
                         <a href="#" className="d-flex align-items-center">
-                          {/* <img src="images/topbar-avtar-icon.png" alt="image" /> */}
+                          <img src={expertLogo} alt="image" />
                           <span className="ps-2">Contact with an expert</span>
                         </a>
                       </div>
@@ -167,7 +191,7 @@ const RouteComponent: React.FC = () => {
           <div className="container position-relative">
             <div className="header-middel-container d-flex">
               <a className="navbar-brand" href="javascript:void(0)" onClick={() => navigate('/')}>
-                <img className="img-fluid" src={logo} alt="logo" />
+                <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo} height="396px" width="150px" alt="logo" />
               </a>
               <form className="form-inline search-form">
                 <div className="form-group z-0">
