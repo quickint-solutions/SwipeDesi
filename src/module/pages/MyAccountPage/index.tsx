@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth.context';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { getOrderAPI } from '../../../apiV2/orders';
+import { updateUserAPI } from '../../../apiV2/user';
 
 export default function Myaccount() {
   const navigate = useNavigate();
@@ -15,9 +16,29 @@ export default function Myaccount() {
     firstName: user?.name?.first,
     lastName: user?.name?.last,
     email: user?.name?.email,
-    password: '',
+    line1: user?.address?.line1,
+    line2: user?.address?.line2,
+    city: user?.address?.city,
+    country: user?.address?.country,
+    zip: user?.address?.zip,
+    state: user?.address?.state,
+    password: user?.address?.password,
+    mobile: user?.phone?.number,
+    countryCode: user?.phone?.countryCode,
+    profileImage: user?.profileImage,
+    userId: user?._id,
   });
 
+  const { mutate: updateUser } = useMutation(updateUserAPI, {
+    onSuccess: data => {
+      console.log('data -> ', data);
+    },
+    onError: error => {
+      console.log('error -> ', error);
+    },
+  });
+
+  console.log('user -> ', user);
   return (
     <section className="space-ptb">
       <div className="container">
@@ -140,7 +161,11 @@ export default function Myaccount() {
                 <div className="row">
                   <div className="col-lg-4 col-md-6 mb-4">
                     <div className="feature-box">
-                      <a href="#">
+                      <a
+                        onClick={() => {
+                          setActiveTab('DASHBOARD');
+                        }}
+                      >
                         <i className="bi bi-card-checklist"></i>
                         <h6 className="mb-0 feature-title">Orders</h6>
                       </a>
@@ -148,7 +173,11 @@ export default function Myaccount() {
                   </div>
                   <div className="col-lg-4 col-md-6 mb-4">
                     <div className="feature-box">
-                      <a href="#">
+                      <a
+                        onClick={() => {
+                          setActiveTab('ACCOUNT_DETAILS');
+                        }}
+                      >
                         <i className="bi bi-card-checklist"></i>
                         <h6 className="mb-0 feature-title">Account Details</h6>
                       </a>
@@ -164,7 +193,11 @@ export default function Myaccount() {
                   </div>
                   <div className="col-lg-4 col-md-6 mb-4">
                     <div className="feature-box">
-                      <a href="#">
+                      <a
+                        onClick={() => {
+                          logout();
+                        }}
+                      >
                         <i className="bi bi-card-checklist"></i>
                         <h6 className="mb-0 feature-title">Logout</h6>
                       </a>
@@ -275,8 +308,120 @@ export default function Myaccount() {
                     }}
                   />
                 </div>
+                <div className="row align-items-center">
+                  <div className="mb-3 col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="line1"
+                      placeholder="Address Line 1"
+                      required
+                      value={userDetails?.line1}
+                      onChange={e => {
+                        setUserDetails({ ...userDetails, line1: e.target.value });
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3 col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="line2"
+                      placeholder="Address Line 2"
+                      required
+                      value={userDetails?.line2}
+                      onChange={e => {
+                        setUserDetails({ ...userDetails, line2: e.target.value });
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="row align-items-center">
+                  <div className="mb-3 col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="city"
+                      placeholder="City"
+                      required
+                      value={userDetails?.city}
+                      onChange={e => {
+                        setUserDetails({ ...userDetails, city: e.target.value });
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3 col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="country"
+                      placeholder="Country"
+                      required
+                      value={userDetails?.country}
+                      onChange={e => {
+                        setUserDetails({ ...userDetails, country: e.target.value });
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="row align-items-center">
+                  <div className="mb-3 col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="zip"
+                      placeholder="Zip"
+                      required
+                      value={userDetails?.zip}
+                      onChange={e => {
+                        setUserDetails({ ...userDetails, zip: e.target.value });
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3 col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="state"
+                      placeholder="Last Name"
+                      required
+                      value={userDetails?.state}
+                      onChange={e => {
+                        setUserDetails({ ...userDetails, state: e.target.value });
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="row align-items-center">
+                  <div className="mb-3 col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="mobile"
+                      placeholder="mobile number"
+                      required
+                      value={userDetails?.mobile}
+                      onChange={e => {
+                        setUserDetails({ ...userDetails, mobile: e.target.value });
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3 col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="countryCode"
+                      placeholder="Country Code"
+                      required
+                      value={userDetails?.countryCode}
+                      onChange={e => {
+                        setUserDetails({ ...userDetails, countryCode: e.target.value });
+                      }}
+                    />
+                  </div>
+                </div>
                 <div className="d-flex mt-4">
-                  <a href="" className="btn btn-primary d-inline">
+                  <a onClick={() => updateUser(userDetails)} className="btn btn-primary d-inline">
                     Save Changes
                   </a>
                 </div>
