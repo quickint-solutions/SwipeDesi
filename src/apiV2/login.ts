@@ -6,8 +6,6 @@ export const login = async (body: any) => {
     password: body.password,
   };
 
-  console.log('loginBody -> ', loginBody);
-
   const response = await axios.post('/auth/login', loginBody);
   return response.data;
 };

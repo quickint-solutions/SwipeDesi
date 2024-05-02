@@ -32,7 +32,6 @@ const Checkout: React.FC = () => {
     }
 
     const data = await createPayment({ amount: getFinalTotal(tax_structure[0].total) });
-    console.log('data create payment -> ', data);
 
     const orderID = Math.floor(Math.random() * 1000000);
 
@@ -47,8 +46,6 @@ const Checkout: React.FC = () => {
         },
       },
     });
-
-    console.log('paymentIntent -> ', paymentIntent);
 
     if (paymentIntent?.status === 'succeeded') {
       const orderItems = items.map((value: any) => ({
@@ -80,8 +77,6 @@ const Checkout: React.FC = () => {
     } else {
       alert('Payment failed');
     }
-
-    console.log('paymentIntent -> ', paymentIntent);
 
     if (error) {
       setError(error.message || "Can't process payment");

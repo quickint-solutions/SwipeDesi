@@ -82,7 +82,7 @@ export default function ProductItem({ product, large }: { product: any; large?: 
           <div className="product-info">
             <div className="product-title">
               <h3>
-                <a href="shop-single.html">{product.name || `no product name`}</a>
+                <a onClick={() => navigate(`/shopSingle?productId=${product?._id}`)}>{product.name || `no product name`}</a>
               </h3>
             </div>
           </div>

@@ -15,11 +15,9 @@ const Home: React.FC = () => {
   const { data: banners, isLoading: bannersLoading } = useQuery('getBanners', getBanners);
   // get first 2 banners
   const bannersList = banners?.result?.slice(0, 2) || [];
-  console.log('bannersList -> ', bannersList);
+
   // get other Banners
   const otherBanners = banners?.result?.slice(2) || [];
-  console.log('otherBanners -> ', otherBanners);
-  console.log('bannersLoading -> ', bannersLoading);
 
   return (
     <>
