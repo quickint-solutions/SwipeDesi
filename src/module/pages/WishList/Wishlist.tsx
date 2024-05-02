@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
 import Product1 from '../../../images/product/01.jpg';
@@ -6,8 +6,9 @@ import Product2 from '../../../images/product/02.jpg';
 import shopSingleHttpRequest from '../../../api/shopSingleHttpRequest';
 import { getUserDetail } from '../../../helpers/common';
 import cartHttpRequest from '../../../api/cart/cartHttpRequest';
-import { useQuery } from 'react-query';
-import { getWishList } from '../../../apiV2/wishlist';
+import { useMutation, useQuery } from 'react-query';
+import { getWishList, removeWishList } from '../../../apiV2/wishlist';
+import { CartContext } from '../../../context/cart.context';
 
 const Wishist: React.FC = () => {
   const navigate = useNavigate();
@@ -24,48 +25,23 @@ const Wishist: React.FC = () => {
   //   }
   // }, []);
 
-  const getWishlistData = async (productId: number) => {
-    if (userDetail) {
-      let wishlistData = await shopSingleHttpRequest.addToWishlist(userDetail?.userID, productId, 'get');
-      setWishlistData(wishlistData);
-    } else {
-      navigate('/');
-    }
-  };
-
-  const removeItemFromWishlist = async (data: any) => {
-    let wishlistData = await shopSingleHttpRequest.addToWishlist(userDetail?.userID, data.ProductID, 'remove');
-    if (wishlistData[0].Status) {
-      let productId = searchParams.get('productId');
-      if (productId) {
-        getWishlistData(Number(productId));
-      } else {
-        getWishlistData(0);
-      }
-    }
-  };
+  const { addItem } = useContext(CartContext);
 
   const addItemToCart = async (data: any) => {
-    if (userDetail) {
-      let requestParam = {
-        productID: data?.ProductID,
-        quantity: 1,
-        userID: userDetail?.userID,
-      };
-      let cartData = await cartHttpRequest.addProductToCart(requestParam);
-      if (cartData?.status) {
-        navigate('/Cart');
-      } else {
-        alert(cartData?.message);
-      }
-    } else {
-      (window as any).$('#formLoginRegister').modal('show');
-    }
+    addItem(data.item);
   };
 
-  const { data: fetchWishlist } = useQuery('wishlistData', getWishList);
+  const { data: fetchWishlist, refetch } = useQuery('wishlistData', getWishList);
 
-  console.log('fetchWishlist -> ', fetchWishlist);
+  const { mutate: removeItemFromWishlist } = useMutation(removeWishList, {
+    onSuccess: () => {
+      refetch();
+      alert('Product removed from wishlist');
+    },
+    onError: () => {
+      alert('Error removing product from wishlist');
+    },
+  });
 
   return (
     <>
@@ -118,7 +94,7 @@ const Wishist: React.FC = () => {
                         ? fetchWishlist?.result?.map((value: any, key: number) => (
                             <tr>
                               <td className="product-remove">
-                                <a href="javascript:void(0)" onClick={() => removeItemFromWishlist(value)}>
+                                <a href="javascript:void(0)" onClick={() => removeItemFromWishlist(value._id)}>
                                   <i className="fa-solid fa-xmark"></i>
                                 </a>
                               </td>

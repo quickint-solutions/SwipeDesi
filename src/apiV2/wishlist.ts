@@ -13,3 +13,8 @@ export const getWishList = async () => {
   const response = await axios.get(`/wishlist/`);
   return response.data;
 };
+
+export const removeWishList = async (data: any) => {
+  const response = await axios.delete(`/wishlist/${data}`);
+  return response.data;
+};

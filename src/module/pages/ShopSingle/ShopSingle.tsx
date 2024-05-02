@@ -136,7 +136,7 @@ const ShopSingle: React.FC = () => {
                         </div>
                         <div className="product-price">
                           <h4>
-                            <del>${Number(itemDetails.price)?.toFixed(2)}</del>
+                            {itemDetails.oldPrice && <del>${Number(itemDetails.price)?.toFixed(2)}</del>}
                             <span>${Number(itemDetails.price)}</span>
                           </h4>
                         </div>
@@ -236,7 +236,7 @@ const ShopSingle: React.FC = () => {
                               aria-controls="nav-custom"
                               aria-selected="false"
                             >
-                              Custom
+                              Installation Guide
                             </a>
                           </li>
                         </ul>
