@@ -38,7 +38,7 @@ export default function Products() {
                     <span></span>
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <a className="text-white text-uppercase" href="index.html">
+                        <a className="text-white text-uppercase" href="/">
                           Home
                         </a>
                       </li>
