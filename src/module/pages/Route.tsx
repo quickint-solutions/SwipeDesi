@@ -5,14 +5,17 @@ import { getUserDetail } from '../../helpers/common';
 import { useMutation, useQuery } from 'react-query';
 import { getCategories } from '../../apiV2/categories';
 import { signup } from '../../apiV2/signup';
+import ContactUs from './ContactUs';
 import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
-import FAQ from './FAQ';
+
 import PrivacyPolicy from './PrivacyPolicy';
+
 import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
+import AboutUs from './AboutUs';
 import languageLogo from '../../images/en.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
 
@@ -579,9 +582,12 @@ const RouteComponent: React.FC = () => {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/about-us" element={<AboutUs />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/category" element={<Category />} />
       </Routes>
