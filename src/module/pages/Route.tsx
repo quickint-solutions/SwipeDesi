@@ -9,7 +9,7 @@ import ContactUs from './ContactUs';
 import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
-import Testimonials from './Testimonials';
+import TermsCondition from './TermsCondition';
 import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
@@ -578,8 +578,8 @@ const RouteComponent: React.FC = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
+        <Route path="/terms-condition" element={<TermsCondition />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
@@ -687,11 +687,7 @@ const RouteComponent: React.FC = () => {
           </div>
         </div>
       </footer>
-      {/* <!--=================================
-      footer--> */}
 
-      {/* <!--=================================
-      Back To Top--> */}
       <div id="back-to-top" className="back-to-top">
         <a href="#">
           <i className="fas fa-angle-up"></i>
