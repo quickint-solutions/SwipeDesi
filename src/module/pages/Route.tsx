@@ -5,6 +5,7 @@ import { getUserDetail } from '../../helpers/common';
 import { useMutation, useQuery } from 'react-query';
 import { getCategories } from '../../apiV2/categories';
 import { signup } from '../../apiV2/signup';
+import ContactUs from './ContactUs';
 import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
@@ -12,6 +13,7 @@ import TermsCondition from './TermsCondition';
 import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
+import AboutUs from './AboutUs';
 import languageLogo from '../../images/en.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
 
@@ -576,10 +578,12 @@ const RouteComponent: React.FC = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/terms-and-conditions" element={<TermsCondition />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
+        <Route path="/terms-condition" element={<TermsCondition />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/about-us" element={<AboutUs />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/category" element={<Category />} />
       </Routes>
@@ -683,11 +687,7 @@ const RouteComponent: React.FC = () => {
           </div>
         </div>
       </footer>
-      {/* <!--=================================
-      footer--> */}
 
-      {/* <!--=================================
-      Back To Top--> */}
       <div id="back-to-top" className="back-to-top">
         <a href="#">
           <i className="fas fa-angle-up"></i>
