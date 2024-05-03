@@ -131,7 +131,7 @@ const RouteComponent: React.FC = () => {
               <div className="row">
                 <div className="col-12">
                   <div className="d-lg-flex align-items-center text-center">
-                    <div className="topbar-left mb-2 mb-lg-0">
+                    <div className="topbar-left justify-content-center mb-2 mb-lg-0">
                       <ul className="list-unstyled ps-2">
                         <li>
                           <a href="#">Gift cards</a>
@@ -150,7 +150,7 @@ const RouteComponent: React.FC = () => {
                           <i className="bi bi-telephone me-2"></i>+1 (403) 801-69695
                         </a>
                       </div>
-                      <div className="info-box-icon ps-3">
+                      <div className="info-box-icon ps-3 d-none d-lg-flex">
                         <a href="#" className="d-flex align-items-center">
                           {/* <img src="images/topbar-avtar-icon.png" alt="image" /> */}
                           <span className="ps-2">Contact with an expert</span>
@@ -163,18 +163,14 @@ const RouteComponent: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="header-middel">
+        <div className="header-middel d-none d-lg-block">
           <div className="container position-relative">
             <div className="header-middel-container d-flex">
               <a className="navbar-brand" href="javascript:void(0)" onClick={() => navigate('/')}>
-                <img
-                  className="img-fluid"
-                  src="https://dhknd.ca/wp-content/uploads/2021/03/dhknd.ca-logo-web_Final-for-website_300px.jpg"
-                  alt="logo"
-                />
+                <img src={logoImage} className="img-fluid" alt="logo" />
               </a>
-              <form className="form-inline search-form">
-                <div className="form-group z-0">
+              <form className="form-inline search-form d-none d-md-block">
+                <div className="form-group mb-0 z-0">
                   <button className="search-button" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
@@ -277,6 +273,27 @@ const RouteComponent: React.FC = () => {
         </div>
         <nav className="navbar navbar-static-top navbar-expand-lg">
           <div className="container main-header position-relative">
+            <a className="navbar-brand d-flex d-lg-none" href="javascript:void(0)" onClick={() => navigate('/')}>
+                <img src={logoImage} className="img-fluid" alt="logo" />
+            </a>
+            <div className="add-listing d-flex d-lg-none ms-auto">
+              <div className="account-action">
+                <a href="#" className="account-icon" data-bs-toggle="modal" data-bs-target="#formLoginRegister">
+                  <i className="bi bi-person"></i>
+                </a>
+              </div>
+              <div className="woo-action d-flex align-items-center d-flex d-lg-none">
+                <div className="search-action woo-action-icon">
+                  <a href="#" className="search-icon" title="Search Product"><i className="bi bi-search"></i></a>
+                </div>
+                <div className="cart dropdown woo-action-icon">
+                  <button className="dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i className="bi bi-cart3"></i>
+                    <span className="cart-count">2</span>
+                  </button>
+                </div>
+              </div>
+            </div>
             <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
               <i className="fas fa-align-left"></i>
             </button>
@@ -295,7 +312,7 @@ const RouteComponent: React.FC = () => {
                   : ''}
               </ul>
             </div>
-            <div className="text-end free-shipping">
+            <div className="text-end free-shipping d-none d-lg-block">
               <a href="#">Free shipping for all orders of $1.300</a>
             </div>
           </div>
@@ -316,7 +333,7 @@ const RouteComponent: React.FC = () => {
         aria-labelledby="formLoginRegisterlabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content">
             <div className="modal-header">
               <button type="button" className="btn-close" onClick={() => closeLoginModal()} data-bs-dismiss="modal" aria-label="Close"></button>
@@ -351,7 +368,7 @@ const RouteComponent: React.FC = () => {
                           onChange={e => handleUserCredential('password', e.target.value)}
                         />
                       </div>
-                      <div className="mb-3 col-sm-12 rememberme-lost d-flex justify-content-between">
+                      <div className="mb-3 col-sm-12 rememberme-lost d-sm-flex justify-content-between">
                         <div className="rememberme">
                           <input name="rememberme" type="checkbox" id="rememberme" value="forever" />
                           <label htmlFor="rememberme" className="inline">

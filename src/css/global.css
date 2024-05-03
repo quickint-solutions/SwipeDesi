@@ -3299,6 +3299,7 @@ login register form
 .login-register-modal .modal-body {
   background-color: #fff;
   padding: 30px;
+  overflow-x: inherit;
 }
 
 .login-register-modal .box-content {
@@ -4304,7 +4305,7 @@ ul.list li i {
 }
 
 .form-inline .btn {
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   right: 0;
   padding: 14px 40px 14px;
@@ -4489,6 +4490,10 @@ ul.list li i {
     margin-bottom: 20px;
   }
 
+    /* .bg-secondary .btn.btn-primary {
+      position: inherit;
+    } */
+
 }
 
 @media (max-width: 768px) {
@@ -4544,6 +4549,9 @@ ul.list li i {
   }
 
   .account-action {
+    /* display: none; */
+  }
+  .search-action.woo-action-icon {
     display: none;
   }
 
