@@ -96,14 +96,16 @@ const Checkout: React.FC = () => {
   const [billingDetail, setBillingDetail] = useState({
     firstName: user?.name?.first,
     lastName: user?.name?.last,
-    companyName: '',
+    companyName: user?.company?.name,
     country: user?.address?.country,
     addressLine1: user?.address?.line1,
     addressLine2: user?.address?.line2,
     city: user?.address?.city,
     state: user?.address?.state,
     zip: user?.address?.zip,
-    phone: '',
+    phone: user?.phone?.number,
+    countryCode: user?.phone?.countryCode,
+    gst: user?.gst,
     email: user?.email,
   });
   const [paymentCardDetail, setPaymentCardDetail] = useState({
@@ -128,6 +130,8 @@ const Checkout: React.FC = () => {
       [key]: value,
     }));
   };
+
+  console.log('user -> ', user);
 
   const saveBillingAddress = async () => {
     let requestParam = {
@@ -309,6 +313,16 @@ const Checkout: React.FC = () => {
                         onChange={e => handleChangeBillingDetail('companyName', e.target.value)}
                       />
                     </div>
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">GST</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Gst NO"
+                        value={billingDetail.gst}
+                        onChange={e => handleChangeBillingDetail('gst', e.target.value)}
+                      />
+                    </div>
                     <div className="mb-3 select-border col-sm-12">
                       <label className="form-label">Country</label>
                       <select className="form-control basic-select" onChange={e => handleChangeBillingDetail('country', e.target.value)}>
@@ -360,6 +374,16 @@ const Checkout: React.FC = () => {
                         placeholder="Postal Code"
                         value={billingDetail.zip}
                         onChange={e => handleChangeBillingDetail('zip', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">Country code</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Phone Number"
+                        value={billingDetail.countryCode}
+                        onChange={e => handleChangeBillingDetail('countryCode', e.target.value)}
                       />
                     </div>
                     <div className="mb-3 col-sm-12">
