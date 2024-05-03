@@ -22,6 +22,7 @@ export const signup = async (body: any) => {
     },
     profileImage: body.profileImage,
   };
+
   const response = await axios.post('/auth/signup', signupBody);
   return response.data;
 };
