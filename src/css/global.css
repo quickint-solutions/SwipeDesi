@@ -4623,11 +4623,15 @@ ul.list li i {
   }
   .add-listing .account-icon {
     padding: 0 10px;
+    width: 42px;
   }
   .add-listing .account-icon i {
     font-size: 16px;
   }
   .add-listing {
     padding-right: 10px;
+  }
+  .add-listing .account-icon span {
+    display: none;
   }
 }

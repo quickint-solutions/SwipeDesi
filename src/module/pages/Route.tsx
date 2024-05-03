@@ -215,13 +215,13 @@ const RouteComponent: React.FC = () => {
                   <div className="account-action">
                     {auth.user ? (
                       <a href="javascript:void(0)" className="account-icon" onClick={() => auth.logout()}>
-                        <i className="bi bi-person"></i>
+                        <i className="bi bi-box-arrow-right"></i>
                         <span>Log Out</span>
                       </a>
                     ) : (
                       <a href="javascript:void(0)" className="account-icon" data-bs-toggle="modal" data-bs-target="#formLoginRegister">
                         <i className="bi bi-person"></i>
-                        <span>Login / Register</span>
+                        <span>Login</span>
                       </a>
                     )}
                   </div>
