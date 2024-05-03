@@ -123,13 +123,13 @@ const RouteComponent: React.FC = () => {
       {/* <!--=================================
             header -->    */}
       <div className="header header-sticky default">
-        <div className="topbar d-none d-md-block">
+        <div className="topbar">
           <div className="container">
             <div className="topbar-inner">
               <div className="row">
                 <div className="col-12">
-                  <div className="d-lg-flex align-items-center text-center">
-                    <div className="topbar-left justify-content-center mb-2 mb-lg-0">
+                  <div className="d-flex align-items-center text-center">
+                    <div className="topbar-left justify-content-center">
                       <div className="dropdown right-menu d-inline-flex pe-3 topbar-divider">
                         <a
                           className="dropdown-toggle"
@@ -162,20 +162,22 @@ const RouteComponent: React.FC = () => {
                           </a>
                         </div>
                       </div>
-                      <ul className="list-unstyled ps-2">
-                        {/* <li>
-                          <a href="#">Gift cards</a>
-                        </li> */}
-                        <li>
-                          <a href="#">Showrooms</a>
-                        </li>
-                        <li>
-                          <a href="#">About Us</a>
-                        </li>
-                      </ul>
+                      <div className='d-none d-sm-block'>
+                        <ul className="list-unstyled ps-2">
+                          {/* <li>
+                            <a href="#">Gift cards</a>
+                          </li> */}
+                          <li>
+                            <a href="#">Showrooms</a>
+                          </li>
+                          <li>
+                            <a href="#">About Us</a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
-                      <div className="topbar-call d-inline-flex topbar-divider pe-3">
+                      <div className="topbar-call d-inline-flex topbar-divider pe-lg-3">
                         <a href="tel:+1 (403) 801-6969">
                           <i className="bi bi-telephone me-2"></i>+14038016969
                         </a>
@@ -193,13 +195,13 @@ const RouteComponent: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="header-middel d-none d-lg-block">
+        <div className="header-middel">
           <div className="container position-relative">
             <div className="header-middel-container d-flex">
               <a className="navbar-brand" href="javascript:void(0)" onClick={() => navigate('/')}>
                 <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo} height="396px" width="150px" alt="logo" />
               </a>
-              <form className="form-inline search-form d-none d-md-block">
+              <form className="form-inline search-form d-none d-lg-block">
                 <div className="form-group mb-0 z-0">
                   <button className="search-button" type="submit">
                     <i className="bi bi-search"></i>
@@ -208,121 +210,124 @@ const RouteComponent: React.FC = () => {
                 </div>
               </form>
 
-              <div className="add-listing">
-                <div className="account-action">
-                  {auth.user ? (
-                    <a href="javascript:void(0)" className="account-icon" onClick={() => auth.logout()}>
-                      <i className="bi bi-person"></i>
-                      <span>Log Out</span>
-                    </a>
-                  ) : (
-                    <a href="javascript:void(0)" className="account-icon" data-bs-toggle="modal" data-bs-target="#formLoginRegister">
-                      <i className="bi bi-person"></i>
-                      <span>Login / Register</span>
-                    </a>
-                  )}
-                </div>
-                <div className="woo-action d-flex align-items-center">
-                  {auth.user && (
-                    <div className="Compare-action woo-action-icon" onClick={() => navigate('my-account')} style={{ cursor: 'pointer' }}>
-                      <a className="compare-icon" title="Compare products">
+              <div className='header-middel-right d-flex'>
+                <div className="add-listing">
+                  <div className="account-action">
+                    {auth.user ? (
+                      <a href="javascript:void(0)" className="account-icon" onClick={() => auth.logout()}>
                         <i className="bi bi-person"></i>
+                        <span>Log Out</span>
                       </a>
-                    </div>
-                  )}
-                  <div className="wishlist-action woo-action-icon">
-                    <a href="javascript:void(0)" className="wishlist-icon" onClick={() => navigateToWishlist()}>
-                      <i className="bi bi-heart"></i>
-                    </a>
-                  </div>
-                  <div className="cart dropdown woo-action-icon">
-                    {user ? (
-                      <>
-                        <button
-                          className="dropdown-toggle p-0"
-                          type="button"
-                          id="dropdownMenuButton"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <i className="bi bi-cart3"></i>
-                          <span className="cart-count">{getTotalCount()}</span>
-                        </button>
-                        {items.length > 0 ? (
-                          <div className="dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <ul className="cart-list ps-0">
-                              {items.map((value: any, key: number) => {
-                                return (
-                                  <li className="d-flex" key={key}>
-                                    <a className="remove-item" href="javascript:void(0)" onClick={() => removeItem(value)}>
-                                      <i className="fas fa-times"></i>
-                                    </a>
-                                    <img className="img-fluid me-3" src={value.images[0]} alt="cartImg" />
-                                    <div className="cart-info">
-                                      <a href="javascript:void(0)">{value.name || 'NO PRODUCT NAME'}</a>
-                                      <span className="d-block">
-                                        {value.quantity} x {value.price?.toFixed(2)}
-                                      </span>
-                                    </div>
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                            <div className="cart-footer">
-                              <div className="d-flex mb-3">
-                                <b className="me-auto text-dark">Subtotal:</b>
-                                <span>${getTotal()?.toFixed(2)}</span>
-                              </div>
-                              <div className="d-inline-block d-sm-flex">
-                                <a className="col btn btn-secondary btn-sm me-2 px-4" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
-                                  View Cart
-                                </a>
-                                <a
-                                  className="col btn btn-sm btn-primary ms-0 mt-1 mt-sm-0 ms-sm-2 px-4"
-                                  href="javascript:void(0)"
-                                  onClick={() => navigate('/checkout')}
-                                >
-                                  Checkout
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <div className="cart-footer">
-                              <div className="d-flex mb-3">
-                                <b className="me-auto text-dark">No items in cart</b>
-                              </div>
-                              <div className="d-inline-block d-sm-flex">
-                                <a
-                                  className="col btn btn-secondary btn-sm me-2 px-4"
-                                  href="javascript:void(0)"
-                                  onClick={() => navigate('/products?category=6628c9ba927e3edd23258e34')}
-                                >
-                                  Check products
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </>
                     ) : (
-                      <button className="dropdown-toggle p-0" type="button" id="dropdownMenuButton" onClick={() => openLoginPopup()}>
-                        <i className="bi bi-cart3"></i>
-                      </button>
+                      <a href="javascript:void(0)" className="account-icon" data-bs-toggle="modal" data-bs-target="#formLoginRegister">
+                        <i className="bi bi-person"></i>
+                        <span>Login / Register</span>
+                      </a>
                     )}
                   </div>
+                  <div className="woo-action d-flex align-items-center">
+                    {auth.user && (
+                      <div className="Compare-action woo-action-icon" onClick={() => navigate('my-account')} style={{ cursor: 'pointer' }}>
+                        <a className="compare-icon" title="Compare products">
+                          <i className="bi bi-person"></i>
+                        </a>
+                      </div>
+                    )}
+                    <div className="wishlist-action woo-action-icon d-none d-md-block">
+                      <a href="javascript:void(0)" className="wishlist-icon" onClick={() => navigateToWishlist()}>
+                        <i className="bi bi-heart"></i>
+                      </a>
+                    </div>
+                    <div className="cart dropdown woo-action-icon">
+                      {user ? (
+                        <>
+                          <button
+                            className="dropdown-toggle p-0"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            <i className="bi bi-cart3"></i>
+                            <span className="cart-count">{getTotalCount()}</span>
+                          </button>
+                          {items.length > 0 ? (
+                            <div className="dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                              <ul className="cart-list ps-0">
+                                {items.map((value: any, key: number) => {
+                                  return (
+                                    <li className="d-flex" key={key}>
+                                      <a className="remove-item" href="javascript:void(0)" onClick={() => removeItem(value)}>
+                                        <i className="fas fa-times"></i>
+                                      </a>
+                                      <img className="img-fluid me-3" src={value.images[0]} alt="cartImg" />
+                                      <div className="cart-info">
+                                        <a href="javascript:void(0)">{value.name || 'NO PRODUCT NAME'}</a>
+                                        <span className="d-block">
+                                          {value.quantity} x {value.price?.toFixed(2)}
+                                        </span>
+                                      </div>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                              <div className="cart-footer">
+                                <div className="d-flex mb-3">
+                                  <b className="me-auto text-dark">Subtotal:</b>
+                                  <span>${getTotal()?.toFixed(2)}</span>
+                                </div>
+                                <div className="d-inline-block d-sm-flex">
+                                  <a className="col btn btn-secondary btn-sm me-2 px-4" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
+                                    View Cart
+                                  </a>
+                                  <a
+                                    className="col btn btn-sm btn-primary ms-0 mt-1 mt-sm-0 ms-sm-2 px-4"
+                                    href="javascript:void(0)"
+                                    onClick={() => navigate('/checkout')}
+                                  >
+                                    Checkout
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                              <div className="cart-footer">
+                                <div className="d-flex mb-3">
+                                  <b className="me-auto text-dark">No items in cart</b>
+                                </div>
+                                <div className="d-inline-block d-sm-flex">
+                                  <a
+                                    className="col btn btn-secondary btn-sm me-2 px-4"
+                                    href="javascript:void(0)"
+                                    onClick={() => navigate('/products?category=6628c9ba927e3edd23258e34')}
+                                  >
+                                    Check products
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <button className="dropdown-toggle p-0" type="button" id="dropdownMenuButton" onClick={() => openLoginPopup()}>
+                          <i className="bi bi-cart3"></i>
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
+                <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                  <i className="fas fa-align-left"></i>
+                </button>
               </div>
             </div>
           </div>
         </div>
         <nav className="navbar navbar-static-top navbar-expand-lg">
           <div className="container main-header position-relative">
-            <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
-              <i className="fas fa-align-left"></i>
-            </button>
+            
 
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
