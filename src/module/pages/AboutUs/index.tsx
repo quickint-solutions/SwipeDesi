@@ -155,17 +155,17 @@ export default function AboutUs() {
                   <div className="team-social">
                     <ul className="list-unstyled d-flex mb-0">
                       <li>
-                        <a href="#">
+                        <a target="_blank" href="https://www.facebook.com/daxesh.dalwadi.946">
                           <i className="fab fa-facebook-f"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a target="_blank" href="https://twitter.com/i/flow/login?redirect_after_login=%2Fdaxdalwadi13">
                           <i className="fab fa-twitter"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a target="_blank" href="https://www.linkedin.com/in/daxesh-dalwadi-aa603a1aa/?originalSubdomain=ca">
                           <i className="fab fa-linkedin-in"></i>
                         </a>
                       </li>
@@ -207,23 +207,8 @@ export default function AboutUs() {
                   <div className="team-social">
                     <ul className="list-unstyled d-flex mb-0">
                       <li>
-                        <a href="#">
+                        <a target="_blank" href="https://www.facebook.com/hima.dalwadi">
                           <i className="fab fa-facebook-f"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fab fa-twitter"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fab fa-linkedin-in"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fab fa-instagram"></i>
                         </a>
                       </li>
                     </ul>
