@@ -4634,4 +4634,10 @@ ul.list li i {
   .add-listing .account-icon span {
     display: none;
   }
+  .login-register-modal .modal-body {
+    padding: 15px;
+  }
+  .login-register-modal form {
+    padding: 40px 20px 20px;
+  }
 }

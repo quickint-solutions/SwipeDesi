@@ -405,7 +405,7 @@ const RouteComponent: React.FC = () => {
                       <div className="mb-3 col-sm-12 rememberme-lost d-sm-flex justify-content-between">
                         <div className="rememberme">
                           <input name="rememberme" type="checkbox" id="rememberme" value="forever" />
-                          <label htmlFor="rememberme" className="inline">
+                          <label htmlFor="rememberme" className="inline ps-1">
                             Remember me
                           </label>
                         </div>
