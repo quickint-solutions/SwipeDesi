@@ -138,8 +138,8 @@ const Login: React.FC = () => {
             banner --> */}
       <section className="banner-02">
         <div className="banner-section-wrapper">
-          <div className="row g-1 g-lg-2">
-            <div className="col-7">
+          <div className="row g-0 g-md-1 g-lg-2">
+            <div className="col-sm-7 col-12 mb-1">
               <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
                   {otherBanners.length > 0
@@ -160,13 +160,13 @@ const Login: React.FC = () => {
                 </button>
               </div>
             </div>
-            <div className="col-5">
-              <div className="row">
+            <div className="col-sm-5 col-12">
+              <div className="row g-1">
                 {!bannersLoading &&
                   banners &&
                   bannersList.length > 0 &&
                   bannersList.map((banner: any, index: number) => (
-                    <div className="col-12">
+                    <div className="col-6 col-sm-12">
                       <div className="slider-banner mb-1 mb-lg-2">
                         <img className="img-fluid" src={banner.image} alt="image" />
                       </div>

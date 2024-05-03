@@ -1186,7 +1186,7 @@ button.search-button {
   font-size: 14px;
   position: absolute;
   left: 0px;
-  top: 38%;
+  top: 50%;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   -webkit-transition: 0.5s ease-in-out;
@@ -3304,6 +3304,7 @@ login register form
 .login-register-modal .modal-body {
   background-color: #fff;
   padding: 30px;
+  overflow-x: inherit;
 }
 
 .login-register-modal .box-content {
@@ -4309,7 +4310,7 @@ ul.list li i {
 }
 
 .form-inline .btn {
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   right: 0;
   padding: 14px 40px 14px;
@@ -4549,7 +4550,11 @@ ul.list li i {
   }
 
   .account-action {
-    display: none;
+    /* display: none; */
+  }
+
+  .search-action.woo-action-icon {
+      display: none;
   }
 
   .featured-categories-column {
