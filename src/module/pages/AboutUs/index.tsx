@@ -10,6 +10,8 @@ import team from '../../../images/team/01.jpg';
 import gallery from '../../../images/gallery/01.jpg';
 import gallery1 from '../../../images/gallery/02.jpg';
 import gallery2 from '../../../images/gallery/03.jpg';
+import team1 from '../../../images/team/Hima-dalwadi.png';
+import team2 from '../../../images/team/Kavya-Dalwadi.jpg';
 
 export default function AboutUs() {
   const params = new URLSearchParams(window.location.search);
@@ -193,15 +195,15 @@ export default function AboutUs() {
             <div className="row g-0 align-items-center">
               <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper left-0 order-1 order-md-2">
                 <div className="team-image position-relative d-flex justify-content-center">
-                  <img className="img-fluid" src={team} alt="" />
+                  <img className="img-fluid" src={team1} alt="" />
                 </div>
               </div>
               <div className="offset-md-2 col-md-10 col-sm-12 team-info-wrapper order-2 order-md-1">
                 <div className="team-detail team-detail-img-left">
                   <h4 className="team-title mb-2">
-                    <a href="team-detail.html">Daxesh Dalwadi</a>
+                    <a href="team-detail.html">Heema Dalwadi</a>
                   </h4>
-                  <span className="team-label">Founder</span>
+                  <span className="team-label">Co - Founder</span>
                   <div className="team-social">
                     <ul className="list-unstyled d-flex mb-0">
                       <li>
@@ -227,10 +229,9 @@ export default function AboutUs() {
                     </ul>
                   </div>
                   <p className="mb-0">
-                    I started dhknd with a dream to accomplish the impossible. And that impossible is to have a smile on the face of every customer we
-                    serve. Dhknd is not only known for its incredible range of products but is also a destination where people love and find it better
-                    in such a competitive niche. Our motto is to keep people connected to where they belong and still stay happy and satisfied with
-                    where they currently live. My company’s goal is to fulfil every requirement of the customer in whichever way possible.
+                    For the past two years, I’ve worked for this organisation with the goal of connecting individuals to their needs through
+                    understanding them. I understand how a buyer’s mind works, and it is my job to solve their mental puzzles. Dhknd is a place where
+                    you may work while having a good time. We’re all giving it our all to drive our company to new heights.
                   </p>
                 </div>
                 <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper right-0 order-1 order-md-2">
@@ -244,9 +245,9 @@ export default function AboutUs() {
               <div className="col-md-10 col-sm-12 team-info-wrapper order-2 order-md-1">
                 <div className="team-detail team-detail-img-right">
                   <h4 className="team-title mb-2">
-                    <a href="team-detail.html">Daxesh Dalwadi</a>
+                    <a href="team-detail.html">Kavya Dalwadi</a>
                   </h4>
-                  <span className="team-label">Founder</span>
+                  <span className="team-label">Assistant Director</span>
                   <div className="team-social">
                     <ul className="list-unstyled d-flex mb-0">
                       <li>
@@ -272,16 +273,18 @@ export default function AboutUs() {
                     </ul>
                   </div>
                   <p className="mb-0">
-                    I started dhknd with a dream to accomplish the impossible. And that impossible is to have a smile on the face of every customer we
-                    serve. Dhknd is not only known for its incredible range of products but is also a destination where people love and find it better
-                    in such a competitive niche. Our motto is to keep people connected to where they belong and still stay happy and satisfied with
-                    where they currently live. My company’s goal is to fulfil every requirement of the customer in whichever way possible.
+                    I am a young entrepreneur in dhknd. I’m in charge of our company’s social media and marketing. Dhknd is a place where you can
+                    interact with every human emotion; we have pleasant memories to remember and terrible times to grow from. We may argue that this
+                    is a location where one can learn to cope with all of life’s emotions. Dhknd has taught me a lot of things that I will never
+                    forget. Dhknd is more than a business; it’s a family. Every day, our lives revolve around this company, and we didn’t realise how
+                    far we’d come, from small home-based displayed shopping to e-commerce, from learning how to post to handling all branding, We’ve
+                    seen this company develop from little to large, and we want to see it continue to expand.
                   </p>
                 </div>
               </div>
               <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper right-0 order-1 order-md-2">
                 <div className="team-image position-relative d-flex justify-content-center">
-                  <img className="img-fluid" src={team} alt="" />
+                  <img className="img-fluid" src={team2} alt="" />
                 </div>
               </div>
             </div>
