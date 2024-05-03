@@ -124,6 +124,7 @@ const RouteComponent: React.FC = () => {
     <React.Fragment>
       {/* <!--=================================
             header -->    */}
+        {/* design  */}
       <div className="header header-sticky default">
         <div className="topbar d-none d-md-block">
           <div className="container">
