@@ -162,7 +162,7 @@ const RouteComponent: React.FC = () => {
                           </a>
                         </div>
                       </div>
-                      <div className='d-none d-sm-block'>
+                      <div className="d-none d-sm-block">
                         <ul className="list-unstyled ps-2">
                           {/* <li>
                             <a href="#">Gift cards</a>
@@ -171,7 +171,7 @@ const RouteComponent: React.FC = () => {
                             <a href="#">Showrooms</a>
                           </li>
                           <li>
-                            <a href="#">About Us</a>
+                            <a href="/about-us">About Us</a>
                           </li>
                         </ul>
                       </div>
@@ -210,7 +210,7 @@ const RouteComponent: React.FC = () => {
                 </div>
               </form>
 
-              <div className='header-middel-right d-flex'>
+              <div className="header-middel-right d-flex">
                 <div className="add-listing">
                   <div className="account-action">
                     {auth.user ? (
@@ -327,8 +327,6 @@ const RouteComponent: React.FC = () => {
         </div>
         <nav className="navbar navbar-static-top navbar-expand-lg">
           <div className="container main-header position-relative">
-            
-
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
                 {!categoriesLoading && categories && categories?.result?.length > 0
