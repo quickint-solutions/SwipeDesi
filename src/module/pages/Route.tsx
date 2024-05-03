@@ -8,6 +8,7 @@ import { signup } from '../../apiV2/signup';
 import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
+import FAQ from './FAQ';
 import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
@@ -574,6 +575,7 @@ const RouteComponent: React.FC = () => {
         <Route path="/" element={<Login />} />
         <Route path="/products" element={<Products />} />
         <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/faq" element={<FAQ />} />
         <Route path="/home" element={<Home />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
