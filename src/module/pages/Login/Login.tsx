@@ -415,7 +415,7 @@ const Login: React.FC = () => {
 
       {/* <!--=================================
             Product --> */}
-      <section className="space-pt pb-md-5 pb-4">
+      <section className="space-pt pb-md-5 pb-4" id="featuredItems">
         <div className="container">
           <div className="row">
             <div className="col-md-12">

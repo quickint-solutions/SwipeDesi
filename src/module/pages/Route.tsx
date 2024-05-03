@@ -139,7 +139,7 @@ const RouteComponent: React.FC = () => {
                           <img className="img-fluid" src={languageLogo} alt="" /> English<i className="fas fa-chevron-down fa-xs"></i>
                         </a>
                         <div className="dropdown-menu mt-0" aria-labelledby="dropdownMenuButton2">
-                          <a className="dropdown-item" href="#">
+                          <a className="dropdown-item">
                             <img className="img-fluid country-flag" src="images/country-flags/02.jpg" alt="" />
                             English
                           </a>
@@ -160,9 +160,9 @@ const RouteComponent: React.FC = () => {
                         </div>
                       </div>
                       <ul className="list-unstyled ps-2">
-                        <li>
+                        {/* <li>
                           <a href="#">Gift cards</a>
-                        </li>
+                        </li> */}
                         <li>
                           <a href="#">Showrooms</a>
                         </li>
@@ -174,11 +174,11 @@ const RouteComponent: React.FC = () => {
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
                       <div className="topbar-call d-inline-flex topbar-divider pe-3">
                         <a href="tel:+1 (403) 801-6969">
-                          <i className="bi bi-telephone me-2"></i>+1 (403) 801-69695
+                          <i className="bi bi-telephone me-2"></i>+14038016969
                         </a>
                       </div>
                       <div className="info-box-icon ps-3">
-                        <a href="#" className="d-flex align-items-center">
+                        <a onClick={() => window.open(`https://wa.me/+14038016969`, '_blank')} className="d-flex align-items-center">
                           <img src={expertLogo} alt="image" />
                           <span className="ps-2">Contact with an expert</span>
                         </a>
@@ -286,7 +286,22 @@ const RouteComponent: React.FC = () => {
                             </div>
                           </div>
                         ) : (
-                          ''
+                          <div className="dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <div className="cart-footer">
+                              <div className="d-flex mb-3">
+                                <b className="me-auto text-dark">No items in cart</b>
+                              </div>
+                              <div className="d-inline-block d-sm-flex">
+                                <a
+                                  className="col btn btn-secondary btn-sm me-2 px-4"
+                                  href="javascript:void(0)"
+                                  onClick={() => navigate('/products?category=6628c9ba927e3edd23258e34')}
+                                >
+                                  Check products
+                                </a>
+                              </div>
+                            </div>
+                          </div>
                         )}
                       </>
                     ) : (

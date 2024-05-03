@@ -47,9 +47,9 @@ const Home: React.FC = () => {
                       </div>
                     </div>
                     <ul className="list-unstyled ps-2">
-                      <li>
+                      {/* <li>
                         <a href="#">Gift cards</a>
-                      </li>
+                      </li> */}
                       <li>
                         <a href="#">Showrooms</a>
                       </li>
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
                   <div className="topbar-right ms-auto justify-content-center align-items-center">
                     <div className="topbar-call d-inline-flex topbar-divider pe-3">
                       <a href="tel:+1 (403) 801-6969">
-                        <i className="bi bi-telephone me-2"></i>+1 (403) 801-69695
+                        <i className="bi bi-telephone me-2"></i>+14038016969
                       </a>
                     </div>
                     <div className="info-box-icon ps-3">
