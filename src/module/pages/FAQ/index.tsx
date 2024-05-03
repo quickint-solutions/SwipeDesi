@@ -4,6 +4,7 @@ import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
 import { useNavigate } from 'react-router-dom';
+import img from '../../../images/bg/mandir-banner.jpg';
 
 export default function FAQ() {
   const params = new URLSearchParams(window.location.search);
@@ -24,7 +25,7 @@ export default function FAQ() {
 
   return (
     <div>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: 'url("images/bg/mandir-banner.jpg")' }}>
+      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url(${img})` }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
