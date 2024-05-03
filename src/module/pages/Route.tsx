@@ -6,10 +6,13 @@ import { useMutation, useQuery } from 'react-query';
 import { getCategories } from '../../apiV2/categories';
 import { signup } from '../../apiV2/signup';
 import ContactUs from './ContactUs';
+import FAQ from './FAQ';
 import { login } from '../../apiV2/login';
+import Testimonials from './Testimonials';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
 import PrivacyPolicy from './PrivacyPolicy';
+import TermsCondition from './TermsCondition';
 import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
@@ -594,6 +597,9 @@ const RouteComponent: React.FC = () => {
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/terms-and-conditions" element={<TermsCondition />} />
+        <Route path="/faq" element={<FAQ />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/contact-us" element={<ContactUs />} />

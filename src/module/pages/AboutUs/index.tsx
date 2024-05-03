@@ -4,6 +4,12 @@ import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
 import { useNavigate } from 'react-router-dom';
+import img from '../../../images/bg/mandir-banner.jpg';
+import AboutImg from '../../../images/bg/about-img.jpg';
+import team from '../../../images/team/01.jpg';
+import gallery from '../../../images/gallery/01.jpg';
+import gallery1 from '../../../images/gallery/02.jpg';
+import gallery2 from '../../../images/gallery/03.jpg';
 
 export default function AboutUs() {
   const params = new URLSearchParams(window.location.search);
@@ -24,7 +30,7 @@ export default function AboutUs() {
 
   return (
     <div>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: 'url(images/bg/01.jpg)' }}>
+      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url(${img})` }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
@@ -56,7 +62,7 @@ export default function AboutUs() {
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-12">
               <div className="about-img mb-5 mb-lg-0">
-                <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                <img className="img-fluid" src={AboutImg} alt="" />
               </div>
             </div>
             <div className="col-lg-6 col-md-12">
@@ -178,7 +184,7 @@ export default function AboutUs() {
               </div>
               <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper right-0 order-1 order-md-2">
                 <div className="team-image position-relative d-flex justify-content-center">
-                  <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                  <img className="img-fluid" src={team} alt="" />
                 </div>
               </div>
             </div>
@@ -187,7 +193,7 @@ export default function AboutUs() {
             <div className="row g-0 align-items-center">
               <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper left-0 order-1 order-md-2">
                 <div className="team-image position-relative d-flex justify-content-center">
-                  <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                  <img className="img-fluid" src={team} alt="" />
                 </div>
               </div>
               <div className="offset-md-2 col-md-10 col-sm-12 team-info-wrapper order-2 order-md-1">
@@ -226,6 +232,9 @@ export default function AboutUs() {
                     in such a competitive niche. Our motto is to keep people connected to where they belong and still stay happy and satisfied with
                     where they currently live. My company’s goal is to fulfil every requirement of the customer in whichever way possible.
                   </p>
+                </div>
+                <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper right-0 order-1 order-md-2">
+                  <div className="team-image position-relative d-flex justify-content-center"></div>
                 </div>
               </div>
             </div>
@@ -272,7 +281,7 @@ export default function AboutUs() {
               </div>
               <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper right-0 order-1 order-md-2">
                 <div className="team-image position-relative d-flex justify-content-center">
-                  <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                  <img className="img-fluid" src={team} alt="" />
                 </div>
               </div>
             </div>
@@ -298,7 +307,7 @@ export default function AboutUs() {
               <div className="col-md-3">
                 <div className="gallery-box">
                   <div className="gallery-images bg-white">
-                    <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                    <img className="img-fluid" src={gallery} alt="" />
                     <div className="gallery-info">
                       <a className="gallery-img popup-icon" href="images/gallery/01.jpg">
                         {' '}
@@ -311,7 +320,7 @@ export default function AboutUs() {
               <div className="col-md-3">
                 <div className="gallery-box">
                   <div className="gallery-images bg-white">
-                    <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                    <img className="img-fluid" src={gallery1} alt="" />
                     <div className="gallery-info">
                       <a className="gallery-img popup-icon" href="images/gallery/02.jpg">
                         {' '}
@@ -324,7 +333,7 @@ export default function AboutUs() {
               <div className="col-md-3">
                 <div className="gallery-box">
                   <div className="gallery-images bg-white">
-                    <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                    <img className="img-fluid" src={gallery2} alt="" />
                     <div className="gallery-info">
                       <a className="gallery-img popup-icon" href="images/gallery/03.jpg">
                         {' '}
@@ -337,7 +346,7 @@ export default function AboutUs() {
               <div className="col-md-3">
                 <div className="gallery-box">
                   <div className="gallery-images bg-white">
-                    <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                    <img className="img-fluid" src={gallery} alt="" />
                     <div className="gallery-info">
                       <a className="gallery-img popup-icon" href="images/gallery/01.jpg">
                         {' '}
@@ -350,7 +359,7 @@ export default function AboutUs() {
               <div className="col-md-3">
                 <div className="gallery-box">
                   <div className="gallery-images bg-white">
-                    <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                    <img className="img-fluid" src={gallery1} alt="" />
                     <div className="gallery-info">
                       <a className="gallery-img popup-icon" href="images/gallery/02.jpg">
                         {' '}
@@ -363,7 +372,7 @@ export default function AboutUs() {
               <div className="col-md-3">
                 <div className="gallery-box">
                   <div className="gallery-images bg-white">
-                    <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                    <img className="img-fluid" src={gallery2} alt="" />
                     <div className="gallery-info">
                       <a className="gallery-img popup-icon" href="images/gallery/03.jpg">
                         {' '}
@@ -376,7 +385,7 @@ export default function AboutUs() {
               <div className="col-md-3">
                 <div className="gallery-box">
                   <div className="gallery-images bg-white">
-                    <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                    <img className="img-fluid" src={gallery} alt="" />
                     <div className="gallery-info">
                       <a className="gallery-img popup-icon" href="images/gallery/02.jpg">
                         {' '}
@@ -389,7 +398,7 @@ export default function AboutUs() {
               <div className="col-md-3">
                 <div className="gallery-box">
                   <div className="gallery-images bg-white">
-                    <img className="img-fluid" src="images/about-img.jpg" alt="" />
+                    <img className="img-fluid" src={gallery1} alt="" />
                     <div className="gallery-info">
                       <a className="gallery-img popup-icon" href="images/gallery/01.jpg">
                         {' '}
