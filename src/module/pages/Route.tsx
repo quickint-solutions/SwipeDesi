@@ -5,6 +5,7 @@ import { getUserDetail } from '../../helpers/common';
 import { useMutation, useQuery } from 'react-query';
 import { getCategories } from '../../apiV2/categories';
 import { signup } from '../../apiV2/signup';
+import ContactUs from './ContactUs';
 import { login } from '../../apiV2/login';
 import { AuthContext } from '../../context/auth.context';
 import Products from './Products';
@@ -577,6 +578,7 @@ const RouteComponent: React.FC = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/category" element={<Category />} />
