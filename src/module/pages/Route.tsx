@@ -651,16 +651,16 @@ const RouteComponent: React.FC = () => {
                 <h4 className="text-white mb-4">Quick links</h4>
                 <ul className="list-unstyled mb-0">
                   <li>
-                    <a href="#">Privacy Policy</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
                   </li>
                   <li>
-                    <a href="#">Terms & Conditions</a>
+                    <a href="/terms-and-conditions">Terms & Conditions</a>
                   </li>
                   <li>
-                    <a href="#">Contact Us</a>
+                    <a href="/contact-us">Contact Us</a>
                   </li>
                   <li>
-                    <a href="#">Testimonials</a>
+                    <a href="/testimonials">Testimonials</a>
                   </li>
                 </ul>
               </div>
