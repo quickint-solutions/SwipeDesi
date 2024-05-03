@@ -140,22 +140,22 @@ export default function ContactUs() {
                 </div>
               </div>
             </div>
+            <div style={{ height: '400px', width: '100%' }}>
+              {/* Google Maps iframe */}
+              <iframe
+                title="Google Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.2506837149044!2d-113.9990259229972!3d51.19603233340157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x537160e36b7269cb%3A0x5b09f369d21078f9!2s260300%20Writing%20Creek%20Cres%20i28%2C%20Balzac%2C%20AB%20T0M%200E0%2C%20Canada!5e0!3m2!1sen!2sin!4v1683714410738!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                style={{ border: 0 }}
+                allowFullScreen={true} // Pass a boolean value instead of an empty string
+                aria-hidden={false} // Pass a boolean value instead of a string
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>
-      <div style={{ height: '400px', width: '100%' }}>
-        {/* Google Maps iframe */}
-        <iframe
-          title="Google Map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.2506837149044!2d-113.9990259229972!3d51.19603233340157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x537160e36b7269cb%3A0x5b09f369d21078f9!2s260300%20Writing%20Creek%20Cres%20i28%2C%20Balzac%2C%20AB%20T0M%200E0%2C%20Canada!5e0!3m2!1sen!2sin!4v1683714410738!5m2!1sen!2sin"
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          style={{ border: 0 }}
-          allowFullScreen={true} // Pass a boolean value instead of an empty string
-          aria-hidden={false} // Pass a boolean value instead of a string
-        ></iframe>
-      </div>
     </div>
   );
 }
