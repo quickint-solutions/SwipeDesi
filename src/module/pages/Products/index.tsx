@@ -72,7 +72,51 @@ export default function Products() {
                   <div className="widget-title">
                     <h5 className="title">Categories</h5>
                   </div>
-                  {categoriesData.map((category: any) => {
+                  <div className="widget-content">
+                    <div className="widget-categories" id="categoriesAccordian">
+                      <div className='categories-list-item'>
+                        <div className="categories-name">
+                          <a href="#cat-item-1" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">Mandir <i className="fas fa-chevron-down fa-xs"></i></a>
+                        </div>
+                        <div id="cat-item-1" className="categories-list collapse show" data-bs-parent="#categoriesAccordian">
+                          <ul className="list-unstyled list-style list-style-underline mb-0">
+                            <li><a className="d-flex" href="#">Haveli</a></li>
+                            <li><a className="d-flex" href="#">Haveli</a></li>
+                            <li><a className="d-flex" href="#">Haveli</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className='categories-list-item'>
+                        <div className="categories-name">
+                          <a href="#cat-item-2" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">Pooja Accessories <i className="fas fa-chevron-down fa-xs"></i></a>
+                        </div>
+                        <div id="cat-item-2" className="categories-list collapse" data-bs-parent="#categoriesAccordian">
+                          <ul className="list-unstyled list-style list-style-underline mb-0">
+                            <li><a className="d-flex" href="#">Decorative strings</a></li>
+                            <li><a className="d-flex" href="#">Garland</a></li>
+                            <li><a className="d-flex" href="#">Diya</a></li>
+                            <li><a className="d-flex" href="#">Shubh Labh</a></li>
+                            <li><a className="d-flex" href="#">Toran</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className='categories-list-item'>
+                        <div className="categories-name">
+                          <a href="#cat-item-3" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">Furniture <i className="fas fa-chevron-down fa-xs"></i></a>
+                        </div>
+                        <div id="cat-item-3" className="categories-list collapse" data-bs-parent="#categoriesAccordian">
+                          <ul className="list-unstyled list-style list-style-underline mb-0">
+                            <li><a className="d-flex" href="#">Decorative strings</a></li>
+                            <li><a className="d-flex" href="#">Garland</a></li>
+                            <li><a className="d-flex" href="#">Diya</a></li>
+                            <li><a className="d-flex" href="#">Shubh Labh</a></li>
+                            <li><a className="d-flex" href="#">Toran</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* {categoriesData.map((category: any) => {
                     return (
                       <div className="widget-content">
                         <div className="widget-categories">
@@ -89,7 +133,7 @@ export default function Products() {
                         </div>
                       </div>
                     );
-                  })}
+                  })} */}
                 </div>
                 {/* <div className="widget">
                   <div className="widget-title">
