@@ -759,8 +759,8 @@ const RouteComponent: React.FC = () => {
                               </button>
                             </div>
                             <div className="col-sm-12 d-grid mb-3 text-center">
-                              <a className="back-to-login">
-                                <i className="bi bi-arrow-left me-2"></i>Back to Login
+                              <a className="back-to-login" onClick={() => setForgotPasswordScreen1(true)} style={{ cursor: 'pointer' }}>
+                                <i className="bi bi-arrow-left me-2"></i>Back to Reset Password
                               </a>
                             </div>
                           </div>
