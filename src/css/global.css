@@ -3105,11 +3105,11 @@ login register form
 **********************/
 
 .login-register-modal form {
-  padding: 60px 30px 30px;
+  padding: 0px 10px 10px;
   position: relative;
 }
 
-.login-register-modal .form-title {
+/* .login-register-modal .form-title {
   font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
@@ -3127,7 +3127,7 @@ login register form
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
-}
+} */
 
 .login-register-modal .modal-header {
   padding: 15px;
@@ -3141,7 +3141,7 @@ login register form
 }
 
 .login-register-modal .form-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 30px;
@@ -3155,7 +3155,7 @@ login register form
 
 .login-register-modal .box-content {
   position: relative;
-  border: 1px solid #ededed;
+  /* border: 1px solid #ededed; */
 }
 
 .login-register-modal .form-login {

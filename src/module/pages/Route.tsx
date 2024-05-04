@@ -408,7 +408,7 @@ const RouteComponent: React.FC = () => {
                           </label>
                         </div>
                         <div className="lost_password">
-                          <a href="#">Lost your password?</a>
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Lost your password?</a>
                         </div>
                       </div>
                       <div className="col-sm-12 d-grid mb-3">
@@ -587,6 +587,37 @@ const RouteComponent: React.FC = () => {
                       </div>
                     )}
                   </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="login-register-modal">
+        <div className="modal" id="forgotPasswordModal">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <div className="box-content">
+                  <div className="form-forgot-password">
+                    <form method="post" className="forgot-password">
+                      <h4 className="form-title">Forgot Password</h4>
+                      <div className="row content">
+                        <div className="mb-3 col-sm-12 email">
+                          <input type="text" className="form-control" name="email" id="email" placeholder="Username or Email" />
+                        </div>
+                        
+                        <div className="col-sm-12 d-grid mb-3">
+                          <button type="submit" className="btn btn-secondary btn-flat">Send Code</button>
+                        </div>
+                        
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
