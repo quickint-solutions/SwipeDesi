@@ -330,7 +330,7 @@ const Login: React.FC = () => {
               </div>
             </div>
             <div className="col-md-12 col-lg-4 col-xl-6 text-lg-end text-start mb-4 mb-lg-0">
-              <a href="#" className="btn btn-primary">
+              <a onClick={() => navigate('/products?category=6628c8c9927e3edd23258e23')} className="btn btn-primary">
                 View All<i className="fas fa-arrow-right-long ps-3"></i>
               </a>
             </div>
