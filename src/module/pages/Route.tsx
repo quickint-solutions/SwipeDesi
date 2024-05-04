@@ -142,7 +142,7 @@ const RouteComponent: React.FC = () => {
                           <img className="img-fluid" src={languageLogo} alt="" /> English<i className="fas fa-chevron-down fa-xs"></i>
                         </a>
                         <div className="dropdown-menu mt-0" aria-labelledby="dropdownMenuButton2">
-                          <a className="dropdown-item">
+                          <a className="dropdown-item" onClick={() => navigate('https://staging.dhknd.ca')}>
                             <img className="img-fluid country-flag" src="images/country-flags/02.jpg" alt="" />
                             English
                           </a>
@@ -168,7 +168,7 @@ const RouteComponent: React.FC = () => {
                             <a href="#">Gift cards</a>
                           </li> */}
                           <li>
-                            <a href="#">Showrooms</a>
+                            <a href="/contact-us">Showrooms</a>
                           </li>
                           <li>
                             <a href="/about-us">About Us</a>
@@ -666,22 +666,21 @@ const RouteComponent: React.FC = () => {
 
             <div className="col-md-6 col-12 offset-lg-1 col-lg-4">
               <div className="footer-newsletter newsletter-style-02">
-                <h4 className="text-white mb-4">Newsletter</h4>
-                <p className="me-5">Subscribe to our newsletter for daily new and updates.</p>
+                <h4 className="text-white mb-4">Get Callback</h4>
                 <form className="form-inline dark-form mb-4">
                   <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Enter email for newsletter" />
+                    <input type="text" className="form-control" placeholder="Enter your phone number" />
                   </div>
                   <button type="submit" className="btn btn-primary">
-                    Get Notified
+                    Book call
                   </button>
                 </form>
-                <div className="form-check">
+                {/* <div className="form-check">
                   <input className="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault" />
                   <label className="form-check-label text-white" htmlFor="flexCheckDefault">
                     I agree to the Privacy Policy.
                   </label>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -695,7 +694,7 @@ const RouteComponent: React.FC = () => {
                     DHKND Management INC
                   </a>{' '}
                   © 2023 CREATED BY{' '}
-                  <a href="#!" className="text-white">
+                  <a href="https://www.webmehigh.com/" target="_blank" className="text-white">
                     WebMeHigh Infotech
                   </a>
                 </p>
