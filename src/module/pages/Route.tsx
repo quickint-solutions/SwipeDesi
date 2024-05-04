@@ -20,6 +20,7 @@ import AboutUs from './AboutUs';
 import languageLogo from '../../images/en.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
 import { getWishList } from '../../apiV2/wishlist';
+import { sendLead } from '../../apiV2/leads';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -36,6 +37,8 @@ const RouteComponent: React.FC = () => {
     email: '',
     password: '',
   });
+
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
   const [registrationDetail, setRegistrationDetail] = useState({
@@ -750,14 +753,29 @@ const RouteComponent: React.FC = () => {
             <div className="col-md-6 col-12 offset-lg-1 col-lg-4">
               <div className="footer-newsletter newsletter-style-02">
                 <h4 className="text-white mb-4">Get Callback</h4>
-                <form className="form-inline dark-form mb-4">
-                  <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Enter your phone number" />
-                  </div>
-                  <button type="submit" className="btn btn-primary">
-                    Book call
-                  </button>
-                </form>
+
+                <div className="form-group">
+                  <input
+                    type="text"
+                    value={phoneNumber}
+                    className="form-control"
+                    placeholder="Enter your phone number"
+                    onChange={e => {
+                      setPhoneNumber(e.target.value);
+                    }}
+                  />
+                </div>
+                <button
+                  onClick={async () => {
+                    setPhoneNumber('');
+                    alert('We will call you back soon');
+                    await sendLead({ phone: phoneNumber, message: 'Call back request', email: 'CALL BACK', name: 'CALL BACK' });
+                  }}
+                  className="btn btn-primary"
+                >
+                  Book call
+                </button>
+
                 {/* <div className="form-check">
                   <input className="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault" />
                   <label className="form-check-label text-white" htmlFor="flexCheckDefault">
