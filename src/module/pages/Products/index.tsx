@@ -104,7 +104,7 @@ export default function Products() {
                                         <div
                                           style={{ cursor: 'pointer', marginBottom: 5 }}
                                           className="d-flex"
-                                          onClick={() => setCategoryValue(category._id)}
+                                          onClick={() => setCategoryValue(subCategory._id)}
                                         >
                                           {subCategory.name}
                                           <span className="ms-auto">
