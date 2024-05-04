@@ -41,7 +41,7 @@ const RouteComponent: React.FC = () => {
   const [registrationDetail, setRegistrationDetail] = useState({
     first: '',
     last: '',
-    countryCode: '',
+    countryCode: '+1',
     number: '',
     email: '',
     password: '',
@@ -111,13 +111,13 @@ const RouteComponent: React.FC = () => {
     },
   });
 
-  const { mutate: handleSignup } = useMutation(signup, {
+  const { mutate: handleSignup, isLoading } = useMutation(signup, {
     onSuccess: data => {
       (window as any).$('#formLoginRegister').modal('hide');
       alert('User registered successfully, Please Login now!');
     },
-    onError: error => {
-      console.log('error -> ', error);
+    onError: (error: any) => {
+      alert(error.response.data.message);
     },
   });
 
@@ -475,7 +475,7 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('last', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-3 email">
+                        {/* <div className="mb-3 col-sm-3 email">
                           <input
                             type="text"
                             className="form-control"
@@ -485,8 +485,8 @@ const RouteComponent: React.FC = () => {
                             placeholder="Country Code"
                             onChange={e => handleRegistrationDetail('countryCode', e.target.value)}
                           />
-                        </div>
-                        <div className="mb-3 col-sm-9 email">
+                        </div> */}
+                        <div className="mb-3 col-sm-12 email">
                           <input
                             type="text"
                             className="form-control"
@@ -521,9 +521,19 @@ const RouteComponent: React.FC = () => {
                         </div>
 
                         <div className="col-sm-12 d-grid mb-3">
-                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(false)}>
+                          <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
+                            <button
+                              disabled={isLoading}
+                              type="button"
+                              className="btn btn-secondary btn-flat"
+                              onClick={() => handleSignup(registrationDetail)}
+                            >
+                              {isLoading ? 'Loading' : 'Register'}
+                            </button>
+                          </div>
+                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(false)}>
                             Next
-                          </button>
+                          </button> */}
                         </div>
                         {/* <div className="col-sm-12 d-grid mb-3">
                                                 <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
