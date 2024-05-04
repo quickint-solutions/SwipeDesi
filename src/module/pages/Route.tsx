@@ -585,14 +585,18 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('zip', e.target.value)}
                           />
                         </div>
-                        <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12  mb-3">
+                        <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
                           <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleSignup(registrationDetail)}>
                             Register
                           </button>
-                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
-                            Back
-                          </button>
                         </div>
+                        <div className="col-sm-12 d-grid mb-3 text-center">
+                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
+                            Back
+                          </button> */}
+                          <a href="#" className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}><i className="bi bi-arrow-left me-2"></i>Back</a>
+                        </div>
+                          
                         {/* <div className="col-sm-12 d-grid mb-3">
                                                 <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
                                             </div> */}
@@ -608,7 +612,7 @@ const RouteComponent: React.FC = () => {
       
       <div className="login-register-modal">
         <div className="modal" id="forgotPasswordModal">
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div className="modal-content">
               <div className="modal-header">
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -617,16 +621,19 @@ const RouteComponent: React.FC = () => {
                 <div className="box-content">
                   <div className="form-forgot-password">
                     <form method="post" className="forgot-password">
-                      <h4 className="form-title">Forgot Password</h4>
+                      <h4 className="form-title mb-2">Forgot Password</h4>
+                      <p className='mb-4 pb-1'>Please enter your username or email address. You will receive a link to create a new password via email.</p>
                       <div className="row content">
                         <div className="mb-3 col-sm-12 email">
                           <input type="text" className="form-control" name="email" id="email" placeholder="Username or Email" />
                         </div>
                         
                         <div className="col-sm-12 d-grid mb-3">
-                          <button type="submit" className="btn btn-secondary btn-flat">Send Code</button>
+                          <button type="submit" className="btn btn-primary btn-flat">Next</button>
                         </div>
-                        
+                        <div className="col-sm-12 d-grid mb-3 text-center">
+                          <a href="#" className="back-to-login"><i className="bi bi-arrow-left me-2"></i>Back to Login</a>
+                        </div>
                       </div>
                     </form>
                   </div>

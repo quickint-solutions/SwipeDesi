@@ -3198,6 +3198,12 @@ login register form
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
+.login-register-modal .back-to-login {
+  color: #121212;
+}
+.login-register-modal .back-to-login:hover {
+  color: #F3601E;
+}
 
 /*********************
  Cart 
