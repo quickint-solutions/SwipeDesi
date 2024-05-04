@@ -19,6 +19,7 @@ import logo from '../../images/logo1.jpg';
 import AboutUs from './AboutUs';
 import languageLogo from '../../images/en.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
+import { getWishList } from '../../apiV2/wishlist';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -56,6 +57,10 @@ const RouteComponent: React.FC = () => {
 
   const { user } = useContext(AuthContext);
   const { items, getTotal, getTotalCount, removeItem } = useContext(CartContext);
+
+  const { data: wishlistData } = useQuery('getWishlist', getWishList);
+
+  console.log('wishlistData -> ', wishlistData);
 
   const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
 
@@ -233,10 +238,17 @@ const RouteComponent: React.FC = () => {
                         </a>
                       </div>
                     )}
-                    <div className="wishlist-action woo-action-icon d-none d-md-block">
-                      <a href="javascript:void(0)" className="wishlist-icon" onClick={() => navigateToWishlist()}>
-                        <i className="bi bi-heart"></i>
-                      </a>
+                    <div className="cart dropdown woo-action-icon">
+                      {wishlistData ? (
+                        <a href="javascript:void(0)" className="wishlist-icon" onClick={() => navigateToWishlist()}>
+                          <i className="bi bi-heart"></i>
+                          <span className="cart-count">{wishlistData?.count}</span>
+                        </a>
+                      ) : (
+                        <a href="javascript:void(0)" className="wishlist-icon" onClick={() => navigateToWishlist()}>
+                          <i className="bi bi-heart"></i>
+                        </a>
+                      )}
                     </div>
                     <div className="cart dropdown woo-action-icon">
                       {user ? (
