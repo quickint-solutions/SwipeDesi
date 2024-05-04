@@ -842,42 +842,48 @@ const Login: React.FC = () => {
 
       {/* <!--=================================
             Testimonial --> */}
-      {testimonialData.length ? (
-        <section
-          className="position-relative testimonial-dark-bg bg-overlay-black-6 space-pt bg-holder"
-          style={{ backgroundImage: ` url(${BgImage1})` }}
-        >
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-5">
-                <div className="section-title section-title-style-1">
-                  <span className="sub-title left-divider">Testimonial</span>
-                  <h2 className="title text-white">What to say about the client</h2>
-                </div>
+
+      <section
+        className="position-relative testimonial-dark-bg bg-overlay-black-6 space-pt bg-holder"
+        style={{ backgroundImage: ` url(${BgImage1})` }}
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-5">
+              <div className="section-title section-title-style-1">
+                <span className="sub-title left-divider">Testimonial</span>
+                <h2 className="title text-white">What to say about the client</h2>
               </div>
-              <div className="col-lg-7">
-                <div className="testimonial-description">
-                  <OwlCarousel className="owl-theme" items={1} nav={true} dots={false} loop={true} margin={10}>
-                    <div className="testimonial">
-                      <div className="testimonial-quote-icon">
-                        <QuoteSvg></QuoteSvg>
+            </div>
+            <div className="col-lg-7">
+              <div className="testimonial-description">
+                <OwlCarousel className="owl-theme" items={1} nav={true} dots={false} loop={true} margin={10}>
+                  <div className="testimonial">
+                    <div className="testimonial-quote-icon">
+                      <QuoteSvg></QuoteSvg>
+                    </div>
+                    <div className="testimonial-content">
+                      <p className="mb-0">
+                        <i>
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                          The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content
+                          here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use
+                          Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+                          Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                        </i>{' '}
+                      </p>
+                    </div>
+                    <div className="testimonial-author info-right">
+                      <div className="testimonial-avatar avatar">
+                        <img className="img-fluid" src={AvtarIcon01} alt="" />
                       </div>
-                      <div className="testimonial-content">
-                        <p className="mb-0">
-                          <i>{testimonialData[0]?.description}</i>{' '}
-                        </p>
-                      </div>
-                      <div className="testimonial-author info-right">
-                        <div className="testimonial-avatar avatar">
-                          <img className="img-fluid" src={AvtarIcon01} alt="" />
-                        </div>
-                        <div className="testimonial-name d-flex align-items-center">
-                          <h6 className="author-tittle">Alice Williams</h6>
-                          <span className="text-white">Product Designer</span>
-                        </div>
+                      <div className="testimonial-name d-flex align-items-center">
+                        <h6 className="author-tittle">Alice Williams</h6>
+                        <span className="text-white">Product Designer</span>
                       </div>
                     </div>
-                    {/* <div className="testimonial">
+                  </div>
+                  {/* <div className="testimonial">
                                         <div className="testimonial-quote-icon">
                                             <QuoteSvg></QuoteSvg>
                                         </div>
@@ -911,15 +917,13 @@ const Login: React.FC = () => {
                                             </div>
                                         </div>
                                     </div> */}
-                  </OwlCarousel>
-                </div>
+                </OwlCarousel>
               </div>
             </div>
           </div>
-        </section>
-      ) : (
-        ''
-      )}
+        </div>
+      </section>
+
       {/* <!--=================================
             Testimonial --> */}
 
@@ -1034,48 +1038,38 @@ const Login: React.FC = () => {
         <div className="container-fluid p-0">
           <div className="row g-0">
             <div className="col-xl-12 col-lg-12 h-100">
-              {spotlightData.length > 0 ? (
-                <OwlCarousel className="owl-theme" items={6} nav={true} dots={false}>
-                  {/* {spotlightData.map((value: any, key: number) => (
-                    <div key={key}>
-                      <img src={value.imagePath} alt="Image" />
-                    </div>
-                  ))} */}
-
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram1} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram2} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram3} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram4} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram5} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram2} alt="#" />
-                    </a>
-                  </div>
-                </OwlCarousel>
-              ) : (
-                ''
-              )}
+              <OwlCarousel className="owl-theme" items={6} nav={true} dots={false}>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram1} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram2} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram3} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram4} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram5} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram2} alt="#" />
+                  </a>
+                </div>
+              </OwlCarousel>
             </div>
           </div>
         </div>
