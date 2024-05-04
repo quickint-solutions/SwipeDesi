@@ -108,6 +108,22 @@ const Checkout: React.FC = () => {
     gst: user?.gst,
     email: user?.email,
   });
+  const [showShippingDetails, setShowShippingDetails] = useState(false);
+  const [shippingDetail, setShippingDetail] = useState({
+    firstName: user?.name?.first,
+    lastName: user?.name?.last,
+    companyName: user?.company?.name,
+    country: user?.address?.country,
+    addressLine1: user?.address?.line1,
+    addressLine2: user?.address?.line2,
+    city: user?.address?.city,
+    state: user?.address?.state,
+    zip: user?.address?.zip,
+    phone: user?.phone?.number,
+    countryCode: user?.phone?.countryCode,
+    gst: user?.gst,
+    email: user?.email,
+  });
   const [paymentCardDetail, setPaymentCardDetail] = useState({
     cardNumber: '',
     cvv: '',
@@ -129,6 +145,9 @@ const Checkout: React.FC = () => {
       ...values,
       [key]: value,
     }));
+  };
+  const handleChangeShippingDetail = (field: string, value: any) => {
+    setShippingDetail({ ...shippingDetail, [field]: value });
   };
 
   console.log('user -> ', user);
@@ -188,6 +207,10 @@ const Checkout: React.FC = () => {
       ...values,
       [key]: value,
     }));
+  };
+
+  const handleCheckboxChange = () => {
+    setShowShippingDetails(!showShippingDetails);
   };
 
   const handleChangeCardNumber = () => {};
@@ -409,6 +432,151 @@ const Checkout: React.FC = () => {
                   </form>
                 </div>
               </div>
+              <div className="form-check mb-3">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="shippingCheckbox"
+                  onChange={handleCheckboxChange}
+                  checked={showShippingDetails}
+                />
+                <label className="form-check-label" htmlFor="shippingCheckbox">
+                  {showShippingDetails === true ? 'Hide shipping details' : 'Show shipping details'}
+                </label>
+              </div>
+
+              {shippingDetail && (
+                <div className="col-md-6">
+                  <div className="section-title mb-4">
+                    <h4 className="title fw-600">Shipping details</h4>
+                  </div>
+                  <div className="checkout checkout-form">
+                    <form className="row">
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">First name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="First Name"
+                          value={shippingDetail.firstName}
+                          onChange={e => handleChangeShippingDetail('firstName', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">Last name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Last Name"
+                          value={shippingDetail.lastName}
+                          onChange={e => handleChangeShippingDetail('lastName', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">Company name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Company Name"
+                          value={shippingDetail.companyName}
+                          onChange={e => handleChangeShippingDetail('companyName', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">GST</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Gst NO"
+                          value={shippingDetail.gst}
+                          onChange={e => handleChangeShippingDetail('gst', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 select-border col-sm-12">
+                        <label className="form-label">Country</label>
+                        <select className="form-control basic-select" onChange={e => handleChangeShippingDetail('country', e.target.value)}>
+                          <option value="Canada">Canada</option>
+                        </select>
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">Street Address</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Address Line 1"
+                          value={shippingDetail.addressLine1}
+                          onChange={e => handleChangeShippingDetail('addressLine1', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="House number and street name"
+                          value={shippingDetail.addressLine2}
+                          onChange={e => handleChangeShippingDetail('addressLine2', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12 select-border">
+                        <label className="form-label">City</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="City"
+                          value={shippingDetail.city}
+                          onChange={e => handleChangeShippingDetail('city', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 select-border col-sm-12">
+                        <label className="form-label">State</label>
+                        <select className="form-control basic-select" onChange={e => handleChangeShippingDetail('state', e.target.value)}>
+                          {/* Map your provinces here */}
+                        </select>
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">ZIP</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Postal Code"
+                          value={shippingDetail.zip}
+                          onChange={e => handleChangeShippingDetail('zip', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">Country code</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Phone Number"
+                          value={shippingDetail.countryCode}
+                          onChange={e => handleChangeShippingDetail('countryCode', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">Phone</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Phone Number"
+                          value={shippingDetail.phone}
+                          onChange={e => handleChangeShippingDetail('phone', e.target.value)}
+                        />
+                      </div>
+                      <div className="col-sm-12 mb-0">
+                        <label className="form-label">Email Address:</label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          placeholder="Email Address"
+                          value={shippingDetail.email}
+                          onChange={e => handleChangeShippingDetail('email', e.target.value)}
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
               <div className="col-md-6 mt-5 mt-md-0">
                 <div className="section-title mb-4">
                   <h4 className="title fw-600">Your order</h4>
