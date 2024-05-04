@@ -55,7 +55,7 @@ const RouteComponent: React.FC = () => {
   });
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
 
-  const { user } = useContext(AuthContext);
+  const { user, search, setSearch } = useContext(AuthContext);
   const { items, getTotal, getTotalCount, removeItem } = useContext(CartContext);
 
   const { data: wishlistData } = useQuery('getWishlist', getWishList);
@@ -204,12 +204,24 @@ const RouteComponent: React.FC = () => {
               <a className="navbar-brand" href="javascript:void(0)" onClick={() => navigate('/')}>
                 <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo} height="396px" width="150px" alt="logo" />
               </a>
-              <form className="form-inline search-form d-none d-lg-block">
+              <form
+                className="form-inline search-form d-none d-lg-block"
+                onSubmit={e => {
+                  e.preventDefault();
+                  navigate(`/products?search=${search}`);
+                }}
+              >
                 <div className="form-group mb-0 z-0">
                   <button className="search-button" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
-                  <input type="text" className="form-control" placeholder="Search for products" />
+                  <input
+                    value={search}
+                    type="text"
+                    className="form-control"
+                    placeholder="Search for products"
+                    onChange={e => setSearch(e.target.value)}
+                  />
                 </div>
               </form>
 
@@ -418,7 +430,9 @@ const RouteComponent: React.FC = () => {
                           </label>
                         </div>
                         <div className="lost_password">
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Lost your password?</a>
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+                            Lost your password?
+                          </a>
                         </div>
                       </div>
                       <div className="col-sm-12 d-grid mb-3">
@@ -592,9 +606,11 @@ const RouteComponent: React.FC = () => {
                           {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
                             Back
                           </button> */}
-                          <a href="#" className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}><i className="bi bi-arrow-left me-2"></i>Back</a>
+                          <a href="#" className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}>
+                            <i className="bi bi-arrow-left me-2"></i>Back
+                          </a>
                         </div>
-                          
+
                         {/* <div className="col-sm-12 d-grid mb-3">
                                                 <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
                                             </div> */}
@@ -607,7 +623,7 @@ const RouteComponent: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="login-register-modal">
         <div className="modal" id="forgotPasswordModal">
           <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -620,17 +636,23 @@ const RouteComponent: React.FC = () => {
                   <div className="form-forgot-password">
                     <form method="post" className="forgot-password">
                       <h4 className="form-title mb-2">Forgot Password</h4>
-                      <p className='mb-4 pb-1'>Please enter your username or email address. You will receive a link to create a new password via email.</p>
+                      <p className="mb-4 pb-1">
+                        Please enter your username or email address. You will receive a link to create a new password via email.
+                      </p>
                       <div className="row content">
                         <div className="mb-3 col-sm-12 email">
                           <input type="text" className="form-control" name="email" id="email" placeholder="Username or Email" />
                         </div>
-                        
+
                         <div className="col-sm-12 d-grid mb-3">
-                          <button type="submit" className="btn btn-primary btn-flat">Next</button>
+                          <button type="submit" className="btn btn-primary btn-flat">
+                            Next
+                          </button>
                         </div>
                         <div className="col-sm-12 d-grid mb-3 text-center">
-                          <a href="#" className="back-to-login"><i className="bi bi-arrow-left me-2"></i>Back to Login</a>
+                          <a href="#" className="back-to-login">
+                            <i className="bi bi-arrow-left me-2"></i>Back to Login
+                          </a>
                         </div>
                       </div>
                     </form>

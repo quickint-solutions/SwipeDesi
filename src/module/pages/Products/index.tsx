@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../context/auth.context';
 
 export default function Products() {
   const params = new URLSearchParams(window.location.search);
@@ -12,15 +13,17 @@ export default function Products() {
 
   const navigate = useNavigate();
 
-  const { data: getProducts, mutate } = useMutation(getItems);
+  const { search } = useContext(AuthContext);
+
+  const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
 
   const categoriesData = categoriesList?.result || [];
 
   useEffect(() => {
-    mutate({ categories: categoryValue });
-  }, [categoryValue]);
+    mutate({ categories: categoryValue, search });
+  }, [categoryValue, search]);
 
   return (
     <div>
@@ -72,6 +75,7 @@ export default function Products() {
                   <div className="widget-title">
                     <h5 className="title">Categories</h5>
                   </div>
+
                   {categoriesData.map((category: any) => {
                     return (
                       <div className="widget-content">
@@ -353,6 +357,11 @@ export default function Products() {
                   </div>
                 </div>
               </div> */}
+
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                {isLoading && <h3>Loading...</h3>}
+                {getProducts?.result?.length === 0 && <h3>No products found</h3>}
+              </div>
 
               <div className="row">
                 {getProducts?.result.map((product: any) => {
