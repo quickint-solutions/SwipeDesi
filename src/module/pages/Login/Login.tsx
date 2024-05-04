@@ -865,11 +865,8 @@ const Login: React.FC = () => {
                     <div className="testimonial-content">
                       <p className="mb-0">
                         <i>
-                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                          The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content
-                          here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use
-                          Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
-                          Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                          It had an amazing experience with you!!! Your products are just awesome and fantastic...Keep up with the same flow... I am
+                          just glad that I bought from you guys!!! You are really doing a great job... And your service is just amazing 👍👍👍👍
                         </i>{' '}
                       </p>
                     </div>
@@ -878,8 +875,55 @@ const Login: React.FC = () => {
                         <img className="img-fluid" src={AvtarIcon01} alt="" />
                       </div>
                       <div className="testimonial-name d-flex align-items-center">
-                        <h6 className="author-tittle">Alice Williams</h6>
-                        <span className="text-white">Product Designer</span>
+                        <h6 className="author-tittle">Pooja Liladhar Bagul</h6>
+                        {/* <span className="text-white">Product Designer</span> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="testimonial">
+                    <div className="testimonial-quote-icon">
+                      <QuoteSvg></QuoteSvg>
+                    </div>
+                    <div className="testimonial-content">
+                      <p className="mb-0">
+                        <i>
+                          Positive: Professionalism, Quality, Responsiveness, Value Perfect quality of all the goods, I have lather bags, wallet, and
+                          I am SO happy about their finishing, color style. Experience of the best service 👌, SO happy to have DHKND in CANADA 🇨🇦.
+                          Specially in CALGARY. Thank you very much DHKND.
+                        </i>{' '}
+                      </p>
+                    </div>
+                    <div className="testimonial-author info-right">
+                      <div className="testimonial-avatar avatar">
+                        <img className="img-fluid" src={AvtarIcon01} alt="" />
+                      </div>
+                      <div className="testimonial-name d-flex align-items-center">
+                        <h6 className="author-tittle">Nikul panchal</h6>
+                        {/* <span className="text-white">Product Designer</span> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="testimonial">
+                    <div className="testimonial-quote-icon">
+                      <QuoteSvg></QuoteSvg>
+                    </div>
+                    <div className="testimonial-content">
+                      <p className="mb-0">
+                        <i>
+                          I ordered panchdhatu mandir from DHKND. Talking about : Size and quality : 5/5 Finishing : 5/5 Design : 5/5 Price : very
+                          fair They have fitted light inside the mandir which make it so beautiful. Everytime when I contact the people , they are
+                          super humble to answer all my questions Highly recommended especially when you are looking for ethnic products from back
+                          home Good to have you in Canada 😃👍
+                        </i>{' '}
+                      </p>
+                    </div>
+                    <div className="testimonial-author info-right">
+                      <div className="testimonial-avatar avatar">
+                        <img className="img-fluid" src={AvtarIcon01} alt="" />
+                      </div>
+                      <div className="testimonial-name d-flex align-items-center">
+                        <h6 className="author-tittle">Jinal Desai</h6>
+                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
                   </div>
