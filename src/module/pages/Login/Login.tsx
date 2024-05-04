@@ -338,6 +338,54 @@ const Login: React.FC = () => {
           <div className="row">
             <div className="col-lg-6">
               <div className="furniture-collection">
+                <div className="furniture-img">
+                  <img className="img-fluid" src={furnitureImage} alt="img" />
+                </div>
+                <div className="furniture-info">
+                  <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
+                  <h3 className="furniture-title text-white mb-3 mb-sm-4">Dining Table Set</h3>
+                  <a href="#" className="btn btn-light">
+                    Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <div className="row">
+                <div className="col-12">
+                  <div className="furniture-collection mb-4 mt-lg-0 mt-4">
+                    <div className="furniture-img">
+                      <img className="img-fluid" src={furnitureImage1} alt="img" />
+                    </div>
+                    <div className="furniture-info">
+                      <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
+                      <h3 className="furniture-title text-white mb-3 mb-sm-4">Wooden Sofa Set</h3>
+                      <a href="#" className="btn btn-light">
+                        Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12">
+                  <div className="furniture-collection">
+                    <div className="furniture-img">
+                      <img className="img-fluid" src={furnitureImage2} alt="img" />
+                    </div>
+                    <div className="furniture-info">
+                      <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
+                      <h3 className="furniture-title text-white mb-3 mb-sm-4">Living Room Furniture</h3>
+                      <a href="#" className="btn btn-light">
+                        Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="furniture-collection">
                 {bestCollectionData.length > 0 ? (
                   <>
                     <div className="furniture-img">
