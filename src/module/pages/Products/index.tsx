@@ -19,7 +19,7 @@ export default function Products() {
 
   const { data: categoriesList } = useQuery('categories', getCategories);
 
-  const categoriesData = categoriesList?.result || [];
+  const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
 
   useEffect(() => {
     mutate({ categories: categoryValue, search });
@@ -75,25 +75,53 @@ export default function Products() {
                   <div className="widget-title">
                     <h5 className="title">Categories</h5>
                   </div>
-
-                  {categoriesData.map((category: any) => {
-                    return (
-                      <div className="widget-content">
-                        <div className="widget-categories">
-                          <ul className="list-unstyled list-style list-style-underline mb-0">
+                  <div className="widget-content">
+                    <div className="widget-categories">
+                      <ul className="list-unstyled list-style list-style-underline mb-0">
+                        {categoriesData.map((category: any) => {
+                          const subCategories = categoriesList?.result?.filter((i: any) => i.parentCategory?._id === category._id) || [];
+                          const totalItems = subCategories?.length
+                            ? category.itemCount
+                            : subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0);
+                          return (
                             <li>
-                              <div style={{ cursor: 'pointer', marginBottom: 5 }} className="d-flex" onClick={() => setCategoryValue(category._id)}>
+                              <div
+                                style={{ cursor: 'pointer', marginBottom: 5 }}
+                                className="d-flex"
+                                onClick={() => (totalItems ? setCategoryValue(category._id) : null)}
+                              >
                                 {category.name}
                                 <span className="ms-auto">
-                                  <div className="count">{category.itemCount}</div>
+                                  <div className="count">{totalItems}</div>
                                 </span>
                               </div>
+                              {subCategories.length > 0 && (
+                                <div className="widget-content" style={{ paddingLeft: 20 }}>
+                                  <div className="widget-categories">
+                                    <ul className="list-unstyled list-style list-style-underline mb-0"></ul>
+                                    {subCategories.map((subCategory: any) => (
+                                      <li>
+                                        <div
+                                          style={{ cursor: 'pointer', marginBottom: 5 }}
+                                          className="d-flex"
+                                          onClick={() => setCategoryValue(category._id)}
+                                        >
+                                          {subCategory.name}
+                                          <span className="ms-auto">
+                                            <div className="count">{subCategory.itemCount}</div>
+                                          </span>
+                                        </div>
+                                      </li>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
                             </li>
-                          </ul>
-                        </div>
-                      </div>
-                    );
-                  })}
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 {/* <div className="widget">
                   <div className="widget-title">
