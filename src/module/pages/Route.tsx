@@ -733,7 +733,7 @@ const RouteComponent: React.FC = () => {
                             </div>
                             <div className="mb-3 col-sm-12 email">
                               <input
-                                type="text"
+                                type="password"
                                 className="form-control"
                                 value={resetPaswordDetails.password1}
                                 name="forgotPaswordOtp"
@@ -744,7 +744,7 @@ const RouteComponent: React.FC = () => {
                             </div>
                             <div className="mb-3 col-sm-12 email">
                               <input
-                                type="text"
+                                type="password"
                                 className="form-control"
                                 value={resetPaswordDetails.password2}
                                 name="forgotPaswordOtp"
