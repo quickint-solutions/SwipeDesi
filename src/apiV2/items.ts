@@ -1,9 +1,16 @@
 import axios from 'axios';
 
 export const getItems = async (params?: any) => {
+  console.log('params -> ', params);
   const response = await axios.get('/item', {
     params: {
-      filter: params.categories ? JSON.stringify({ categories: params.categories }) : '',
+      searchFields: 'name',
+      search: params.search,
+      filter: params.categories
+        ? JSON.stringify({
+            categories: params.categories,
+          })
+        : '',
     },
   });
   return response.data;
