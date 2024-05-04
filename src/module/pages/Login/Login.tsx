@@ -64,14 +64,14 @@ const Login: React.FC = () => {
   const otherBanners = banners?.result?.slice(2) || [];
 
   useEffect(() => {
-    dispatch(getBannerImages());
-    dispatch(getLatestCollectioData());
-    dispatch(getBestCollectionData());
-    dispatch(getRecentArticleData());
-    dispatch(getInTheSpotlightData());
-    dispatch(getBannerCategoryData());
-    dispatch(getSaleBannerData());
-    dispatch(getTestimonialData());
+    // dispatch(getBannerImages());
+    // dispatch(getLatestCollectioData());
+    // dispatch(getBestCollectionData());
+    // dispatch(getRecentArticleData());
+    // dispatch(getInTheSpotlightData());
+    // dispatch(getBannerCategoryData());
+    // dispatch(getSaleBannerData());
+    // dispatch(getTestimonialData());
   }, []);
 
   useEffect(() => {
