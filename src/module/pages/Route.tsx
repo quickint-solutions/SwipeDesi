@@ -573,9 +573,12 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('zip', e.target.value)}
                           />
                         </div>
-                        <div className="col-sm-12 d-grid mb-3">
+                        <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12  mb-3">
                           <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleSignup(registrationDetail)}>
                             Register
+                          </button>
+                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
+                            Back
                           </button>
                         </div>
                         {/* <div className="col-sm-12 d-grid mb-3">
