@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth.context';
 import { useMutation, useQuery } from 'react-query';
 import { getOrderAPI } from '../../../apiV2/orders';
@@ -11,6 +11,8 @@ export default function Myaccount() {
   const [activeTab, setActiveTab] = useState('DASHBOARD');
   const { data: orders } = useQuery('getOrders', getOrderAPI);
   const { user, logout } = useContext(AuthContext);
+  const [searchParams] = useSearchParams();
+  const orderRender = searchParams.get('ORDER');
 
   const [userDetails, setUserDetails] = useState({
     firstName: user?.name?.first,
@@ -31,10 +33,10 @@ export default function Myaccount() {
 
   const { mutate: updateUser } = useMutation(updateUserAPI, {
     onSuccess: data => {
-      console.log('data -> ', data);
+      alert('User details updated successfully');
     },
     onError: error => {
-      console.log('error -> ', error);
+      alert('Error updating user details');
     },
   });
 
@@ -191,8 +193,8 @@ export default function Myaccount() {
               </div>
             ) : null}
 
-            {activeTab === 'ORDERS' ? (
-              <div className="cart-table">
+            {activeTab === 'ORDERS' && orderRender ? (
+              <div className="cart-table" id="ORDERS_VIEW">
                 <div className="table-responsive">
                   <table className="table table-bordered">
                     <thead>

@@ -145,7 +145,13 @@ const Login: React.FC = () => {
                   {otherBanners.length > 0
                     ? otherBanners.map((value: any, key: number) => (
                         <div className={key === 0 ? 'carousel-item active' : 'carousel-item'} key={key}>
-                          <img src={value?.image} className="d-block w-100" alt="..." />
+                          <img
+                            style={{ cursor: 'pointer' }}
+                            src={value?.image}
+                            className="d-block w-100"
+                            alt="..."
+                            onClick={() => navigate(`${value.link}`)}
+                          />
                         </div>
                       ))
                     : ''}

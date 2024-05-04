@@ -60,8 +60,6 @@ const RouteComponent: React.FC = () => {
 
   const { data: wishlistData } = useQuery('getWishlist', getWishList);
 
-  console.log('wishlistData -> ', wishlistData);
-
   const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
 
   const closeLoginModal = () => {

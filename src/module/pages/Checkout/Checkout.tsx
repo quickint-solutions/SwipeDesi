@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { usePaymentInputs } from 'react-payment-inputs';
-import images from 'react-payment-inputs/images';
 import { useNavigate } from 'react-router-dom';
 import checkoutHttpRequest from '../../../api/checkoutHttpRequest';
 import { useAppDispatch, useAppSelector } from '../../../api/store/configureStore';
-import { getUserDetail } from '../../../helpers/common';
 import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
 import { getCartDetail } from '../Cart/cartSlice';
 import { AuthContext } from '../../../context/auth.context';
@@ -70,10 +67,8 @@ const Checkout: React.FC = () => {
       });
 
       alert('Payment succeeded');
-
       emptyCart();
-
-      navigate('/');
+      navigate('/my-account');
     } else {
       alert('Payment failed');
     }
@@ -131,8 +126,6 @@ const Checkout: React.FC = () => {
     }));
   };
 
-  console.log('user -> ', user);
-
   const saveBillingAddress = async () => {
     let requestParam = {
       addressID: 0,
@@ -171,7 +164,7 @@ const Checkout: React.FC = () => {
         let orderData = await checkoutHttpRequest.placeOrder(requestParam);
         if (orderData?.status) {
           dispatch(getCartDetail(user?._id));
-          navigate('/');
+          navigate('/my-account');
         } else {
           alert(orderData?.message);
         }
