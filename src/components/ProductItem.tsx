@@ -87,8 +87,13 @@ export default function ProductItem({ product, large }: { product: any; large?: 
             </div>
           </div>
 
-          <div className="product-prize">
-            <p>${product.price || 0}</p>
+          <div className="product-price">
+            <p>
+              <span className="me-2">
+                <del>${product.oldPrice}</del>
+              </span>
+              <span className="text-primary">${product.price || 'No price'}</span>
+            </p>
           </div>
         </div>
       </div>
