@@ -59,7 +59,7 @@ const RouteComponent: React.FC = () => {
   });
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
 
-  const { user, search, setSearch } = useContext(AuthContext);
+  const { user, search, setSearch, setCategories } = useContext(AuthContext);
   const { items, getTotal, getTotalCount, removeItem } = useContext(CartContext);
 
   const { data: wishlistData } = useQuery('getWishlist', getWishList);
@@ -327,7 +327,7 @@ const RouteComponent: React.FC = () => {
                                   <a
                                     className="col btn btn-secondary btn-sm me-2 px-4"
                                     href="javascript:void(0)"
-                                    onClick={() => navigate('/products?category=6628c9ba927e3edd23258e34')}
+                                    onClick={() => navigate('/products')}
                                   >
                                     Check products
                                   </a>
@@ -360,7 +360,13 @@ const RouteComponent: React.FC = () => {
                   ? categories?.result?.map((value: any, key: number) => {
                       if (value.parentCategory) return null;
                       return (
-                        <li className="nav-item" onClick={() => navigate(`/products?category=${value._id}`)}>
+                        <li
+                          className="nav-item"
+                          onClick={() => {
+                            setCategories(value._id);
+                            navigate(`/products?category=${value._id}`);
+                          }}
+                        >
                           <div className="nav-link nav-link-flex" aria-current="page">
                             <img src={value.icon} style={{ width: 18 }} />
                             <span>{value.name}</span>
@@ -742,6 +748,9 @@ const RouteComponent: React.FC = () => {
                   </li>
                   <li>
                     <a href="/terms-and-conditions">Terms & Conditions</a>
+                  </li>
+                  <li>
+                    <a href="/faq">FAQs</a>
                   </li>
                   <li>
                     <a href="/contact-us">Contact Us</a>
