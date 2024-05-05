@@ -25,8 +25,8 @@ const initialState: loginState = {
 
 export const getLatestCollectioData = createAsyncThunk<any>('login/latestCollectionData', async (_, thunkAPI) => {
   try {
-    const latestCollectionData = await loginHttpRequest.getLatestCollectioData();
-    return latestCollectionData;
+    // const latestCollectionData = await loginHttpRequest.getLatestCollectioData();
+    // return latestCollectionData;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }
@@ -34,8 +34,8 @@ export const getLatestCollectioData = createAsyncThunk<any>('login/latestCollect
 
 export const getBestCollectionData = createAsyncThunk<any>('login/bestCollectionData', async (_, thunkAPI) => {
   try {
-    const bestCollectionData = await loginHttpRequest.getBestCollectionData();
-    return bestCollectionData;
+    // const bestCollectionData = await loginHttpRequest.getBestCollectionData();
+    // return bestCollectionData;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }
@@ -43,8 +43,8 @@ export const getBestCollectionData = createAsyncThunk<any>('login/bestCollection
 
 export const getRecentArticleData = createAsyncThunk<any>('login/recentArticleData', async (_, thunkAPI) => {
   try {
-    const recentArticleData = await loginHttpRequest.getRecentArticleData();
-    return recentArticleData;
+    // const recentArticleData = await loginHttpRequest.getRecentArticleData();
+    // return recentArticleData;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }
@@ -52,8 +52,8 @@ export const getRecentArticleData = createAsyncThunk<any>('login/recentArticleDa
 
 export const getInTheSpotlightData = createAsyncThunk<any>('login/spotlightData', async (_, thunkAPI) => {
   try {
-    const spotlightData = await loginHttpRequest.getSpotlightData();
-    return spotlightData;
+    // const spotlightData = await loginHttpRequest.getSpotlightData();
+    // return spotlightData;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }
@@ -61,8 +61,8 @@ export const getInTheSpotlightData = createAsyncThunk<any>('login/spotlightData'
 
 export const getBannerCategoryData = createAsyncThunk<any>('login/bannerCategory', async (_, thunkAPI) => {
   try {
-    const spotlightData = await loginHttpRequest.getBannerCategory();
-    return spotlightData;
+    // const spotlightData = await loginHttpRequest.getBannerCategory();
+    // return spotlightData;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }
@@ -70,8 +70,8 @@ export const getBannerCategoryData = createAsyncThunk<any>('login/bannerCategory
 
 export const getSaleBannerData = createAsyncThunk<any>('login/saleBannerData', async (_, thunkAPI) => {
   try {
-    const saleBannerData = await loginHttpRequest.getSaleBannerData();
-    return saleBannerData;
+    // const saleBannerData = await loginHttpRequest.getSaleBannerData();
+    // return saleBannerData;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }
@@ -79,8 +79,8 @@ export const getSaleBannerData = createAsyncThunk<any>('login/saleBannerData', a
 
 export const getTestimonialData = createAsyncThunk<any>('login/testionialData', async (_, thunkAPI) => {
   try {
-    const testionialData = await loginHttpRequest.getTestimonialData();
-    return testionialData;
+    // const testionialData = await loginHttpRequest.getTestimonialData();
+    // return testionialData;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }
@@ -88,8 +88,8 @@ export const getTestimonialData = createAsyncThunk<any>('login/testionialData', 
 
 export const getBannerImages = createAsyncThunk<any>('login/bannerImages', async (_, thunkAPI) => {
   try {
-    const bannerImages = await loginHttpRequest.getBannerImages();
-    return bannerImages;
+    // const bannerImages = await loginHttpRequest.getBannerImages();
+    // return bannerImages;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }

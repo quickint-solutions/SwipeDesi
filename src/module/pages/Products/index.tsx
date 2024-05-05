@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../context/auth.context';
 
 export default function Products() {
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get('category');
-  const [categoryValue, setCategoryValue] = useState(category);
+  const { search, categories, setCategories } = useContext(AuthContext);
 
-  const navigate = useNavigate();
-
-  const { data: getProducts, mutate } = useMutation(getItems);
+  const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
 
-  const categoriesData = categoriesList?.result || [];
+  const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
 
   useEffect(() => {
-    mutate({ categories: categoryValue });
-  }, [categoryValue]);
+    mutate({ categories: categories, search });
+  }, [categories, search]);
 
   return (
     <div>
@@ -74,43 +71,101 @@ export default function Products() {
                   </div>
                   <div className="widget-content">
                     <div className="widget-categories" id="categoriesAccordian">
-                      <div className='categories-list-item'>
+                      <div className="categories-list-item">
                         <div className="categories-name">
-                          <a href="#cat-item-1" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">Mandir <i className="fas fa-chevron-down fa-xs"></i></a>
+                          <a href="#cat-item-1" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">
+                            Mandir <i className="fas fa-chevron-down fa-xs"></i>
+                          </a>
                         </div>
                         <div id="cat-item-1" className="categories-list collapse show" data-bs-parent="#categoriesAccordian">
                           <ul className="list-unstyled list-style list-style-underline mb-0">
-                            <li><a className="d-flex" href="#">Haveli</a></li>
-                            <li><a className="d-flex" href="#">Haveli</a></li>
-                            <li><a className="d-flex" href="#">Haveli</a></li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Haveli
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Haveli
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Haveli
+                              </a>
+                            </li>
                           </ul>
                         </div>
                       </div>
-                      <div className='categories-list-item'>
+                      <div className="categories-list-item">
                         <div className="categories-name">
-                          <a href="#cat-item-2" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">Pooja Accessories <i className="fas fa-chevron-down fa-xs"></i></a>
+                          <a href="#cat-item-2" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">
+                            Pooja Accessories <i className="fas fa-chevron-down fa-xs"></i>
+                          </a>
                         </div>
                         <div id="cat-item-2" className="categories-list collapse" data-bs-parent="#categoriesAccordian">
                           <ul className="list-unstyled list-style list-style-underline mb-0">
-                            <li><a className="d-flex" href="#">Decorative strings</a></li>
-                            <li><a className="d-flex" href="#">Garland</a></li>
-                            <li><a className="d-flex" href="#">Diya</a></li>
-                            <li><a className="d-flex" href="#">Shubh Labh</a></li>
-                            <li><a className="d-flex" href="#">Toran</a></li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Decorative strings
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Garland
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Diya
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Shubh Labh
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Toran
+                              </a>
+                            </li>
                           </ul>
                         </div>
                       </div>
-                      <div className='categories-list-item'>
+                      <div className="categories-list-item">
                         <div className="categories-name">
-                          <a href="#cat-item-3" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">Furniture <i className="fas fa-chevron-down fa-xs"></i></a>
+                          <a href="#cat-item-3" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">
+                            Furniture <i className="fas fa-chevron-down fa-xs"></i>
+                          </a>
                         </div>
                         <div id="cat-item-3" className="categories-list collapse" data-bs-parent="#categoriesAccordian">
                           <ul className="list-unstyled list-style list-style-underline mb-0">
-                            <li><a className="d-flex" href="#">Decorative strings</a></li>
-                            <li><a className="d-flex" href="#">Garland</a></li>
-                            <li><a className="d-flex" href="#">Diya</a></li>
-                            <li><a className="d-flex" href="#">Shubh Labh</a></li>
-                            <li><a className="d-flex" href="#">Toran</a></li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Decorative strings
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Garland
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Diya
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Shubh Labh
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Toran
+                              </a>
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -123,17 +178,54 @@ export default function Products() {
                           <ul className="list-unstyled list-style list-style-underline mb-0">
                             <li>
                               <div style={{ cursor: 'pointer', marginBottom: 5 }} className="d-flex" onClick={() => setCategoryValue(category._id)}>
+                  <div className="widget-content">
+                    <div className="widget-categories">
+                      <ul className="list-unstyled list-style list-style-underline mb-0">
+                        {categoriesData.map((category: any) => {
+                          const subCategories = categoriesList?.result?.filter((i: any) => i.parentCategory?._id === category._id) || [];
+                          const totalItems = subCategories?.length
+                            ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0) + category.itemCount
+                            : category.itemCount;
+
+                          return (
+                            <li>
+                              <div
+                                style={{ cursor: 'pointer', marginBottom: 5 }}
+                                className="d-flex"
+                                onClick={() => (totalItems ? setCategories(category._id) : null)}
+                              >
                                 {category.name}
                                 <span className="ms-auto">
-                                  <div className="count">{category.itemCount}</div>
+                                  <div className="count">{totalItems}</div>
                                 </span>
                               </div>
+                              {subCategories.length > 0 && (
+                                <div className="widget-content" style={{ paddingLeft: 20 }}>
+                                  <div className="widget-categories">
+                                    <ul className="list-unstyled list-style list-style-underline mb-0"></ul>
+                                    {subCategories.map((subCategory: any) => (
+                                      <li>
+                                        <div
+                                          style={{ cursor: 'pointer', marginBottom: 5 }}
+                                          className="d-flex"
+                                          onClick={() => setCategories(subCategory._id)}
+                                        >
+                                          {subCategory.name}
+                                          <span className="ms-auto">
+                                            <div className="count">{subCategory.itemCount}</div>
+                                          </span>
+                                        </div>
+                                      </li>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
                             </li>
                           </ul>
                         </div>
                       </div>
                     );
-                  })} */}
+                  })}
                 </div>
                 {/* <div className="widget">
                   <div className="widget-title">
@@ -154,7 +246,7 @@ export default function Products() {
                     </div>
                   </div>
                 </div> */}
-                {/* <div className="widget">
+                  {/* <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Color</h5>
                   </div>
@@ -254,33 +346,33 @@ export default function Products() {
                   </div>
                 </div> */}
 
-                <div className="widget">
-                  <div className="widget-title">
-                    <h5 className="title">Featured Product</h5>
-                  </div>
-                  <div className="widget-content">
-                    {getProducts?.result?.slice(0, 3).map((categories: any) => {
-                      return (
-                        <>
-                          <div className="widget-product">
-                            <div className="product d-flex align-items-center mb-3">
-                              <div className="product-image">
-                                <div className="product-thumb-inner">
-                                  <a href="#">
-                                    <img className="img-fluid" src={categories.images[0]} alt="image" />
-                                  </a>
-                                </div>
-                              </div>
-
-                              <div className="product-content py-0">
-                                <div className="product-info">
-                                  <div className="product-title">
-                                    <h3>
-                                      <a onClick={() => {}}>{categories.name || ''}</a>
-                                    </h3>
+                  <div className="widget">
+                    <div className="widget-title">
+                      <h5 className="title">Featured Product</h5>
+                    </div>
+                    <div className="widget-content">
+                      {getProducts?.result?.slice(0, 3).map((categories: any) => {
+                        return (
+                          <>
+                            <div className="widget-product">
+                              <div className="product d-flex align-items-center mb-3">
+                                <div className="product-image">
+                                  <div className="product-thumb-inner">
+                                    <a href="#">
+                                      <img className="img-fluid" src={categories.images[0]} alt="image" />
+                                    </a>
                                   </div>
-                                  {/* stars removed */}
-                                  {/* <div className="product-star">
+                                </div>
+
+                                <div className="product-content py-0">
+                                  <div className="product-info">
+                                    <div className="product-title">
+                                      <h3>
+                                        <a onClick={() => {}}>{categories.name || ''}</a>
+                                      </h3>
+                                    </div>
+                                    {/* stars removed */}
+                                    {/* <div className="product-star">
                                     <ul className="list-unstyled mb-1">
                                       <li>
                                         <i className="fas fa-star"></i>
@@ -299,25 +391,25 @@ export default function Products() {
                                       </li>
                                     </ul>
                                   </div> */}
-                                </div>
+                                  </div>
 
-                                <div className="product-prize">
-                                  <p>
-                                    <span className="me-2">${categories.price || 'N/A'}</span>
-                                  </p>
+                                  <div className="product-prize">
+                                    <p>
+                                      <span className="me-2">${categories.price || 'N/A'}</span>
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </>
-                      );
-                    })}
+                          </>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-xl-9 col-lg-8 mt-4 mt-md-5 mt-lg-0">
-              {/* <h5 className="widget-title">Product filters</h5>
+              <div className="col-xl-9 col-lg-8 mt-4 mt-md-5 mt-lg-0">
+                {/* <h5 className="widget-title">Product filters</h5>
               <div className="blog-sidebar-post-divider"></div>
               <div className="row mt-4">
                 <div className="col-lg-4">
@@ -398,10 +490,16 @@ export default function Products() {
                 </div>
               </div> */}
 
-              <div className="row">
-                {getProducts?.result.map((product: any) => {
-                  return <ProductItem key={product._id} product={product} large />;
-                })}
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  {isLoading && <h3>Loading...</h3>}
+                  {getProducts?.result?.length === 0 && <h3>No products found</h3>}
+                </div>
+
+                <div className="row">
+                  {getProducts?.result.map((product: any) => {
+                    return <ProductItem key={product._id} product={product} large />;
+                  })}
+                </div>
               </div>
             </div>
           </div>

@@ -9,3 +9,8 @@ export const getOrderAPI = async () => {
   const response = await axios.get(`/order?pageSize=1000`);
   return response.data;
 };
+
+export const getOrderById = async (orderId: string) => {
+  const response = await axios.get(`/order/${orderId}`);
+  return response.data;
+};

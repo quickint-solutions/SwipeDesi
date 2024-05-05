@@ -20,6 +20,8 @@ import AboutUs from './AboutUs';
 import languageLogo from '../../images/en.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
 import { getWishList } from '../../apiV2/wishlist';
+import { sendLead } from '../../apiV2/leads';
+import Order from './Order/Order';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -37,11 +39,13 @@ const RouteComponent: React.FC = () => {
     password: '',
   });
 
+  const [phoneNumber, setPhoneNumber] = useState('');
+
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
   const [registrationDetail, setRegistrationDetail] = useState({
     first: '',
     last: '',
-    countryCode: '',
+    countryCode: '+1',
     number: '',
     email: '',
     password: '',
@@ -55,7 +59,7 @@ const RouteComponent: React.FC = () => {
   });
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
 
-  const { user } = useContext(AuthContext);
+  const { user, search, setSearch, setCategories } = useContext(AuthContext);
   const { items, getTotal, getTotalCount, removeItem } = useContext(CartContext);
 
   const { data: wishlistData } = useQuery('getWishlist', getWishList);
@@ -111,13 +115,13 @@ const RouteComponent: React.FC = () => {
     },
   });
 
-  const { mutate: handleSignup } = useMutation(signup, {
+  const { mutate: handleSignup, isLoading } = useMutation(signup, {
     onSuccess: data => {
       (window as any).$('#formLoginRegister').modal('hide');
       alert('User registered successfully, Please Login now!');
     },
-    onError: error => {
-      console.log('error -> ', error);
+    onError: (error: any) => {
+      alert(error.response.data.message);
     },
   });
 
@@ -204,12 +208,24 @@ const RouteComponent: React.FC = () => {
               <a className="navbar-brand" href="javascript:void(0)" onClick={() => navigate('/')}>
                 <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo} height="396px" width="150px" alt="logo" />
               </a>
-              <form className="form-inline search-form d-none d-lg-block">
+              <form
+                className="form-inline search-form d-none d-lg-block"
+                onSubmit={e => {
+                  e.preventDefault();
+                  navigate(`/products?search=${search}`);
+                }}
+              >
                 <div className="form-group mb-0 z-0">
                   <button className="search-button" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
-                  <input type="text" className="form-control" placeholder="Search for products" />
+                  <input
+                    value={search}
+                    type="text"
+                    className="form-control"
+                    placeholder="Search for products"
+                    onChange={e => setSearch(e.target.value)}
+                  />
                 </div>
               </form>
 
@@ -311,7 +327,7 @@ const RouteComponent: React.FC = () => {
                                   <a
                                     className="col btn btn-secondary btn-sm me-2 px-4"
                                     href="javascript:void(0)"
-                                    onClick={() => navigate('/products?category=6628c9ba927e3edd23258e34')}
+                                    onClick={() => navigate('/products')}
                                   >
                                     Check products
                                   </a>
@@ -323,6 +339,7 @@ const RouteComponent: React.FC = () => {
                       ) : (
                         <button className="dropdown-toggle p-0" type="button" id="dropdownMenuButton" onClick={() => openLoginPopup()}>
                           <i className="bi bi-cart3"></i>
+                          <span className="cart-count">{getTotalCount()}</span>
                         </button>
                       )}
                     </div>
@@ -343,7 +360,13 @@ const RouteComponent: React.FC = () => {
                   ? categories?.result?.map((value: any, key: number) => {
                       if (value.parentCategory) return null;
                       return (
-                        <li className="nav-item" onClick={() => navigate(`/products?category=${value._id}`)}>
+                        <li
+                          className="nav-item"
+                          onClick={() => {
+                            setCategories(value._id);
+                            navigate(`/products?category=${value._id}`);
+                          }}
+                        >
                           <div className="nav-link nav-link-flex" aria-current="page">
                             <img src={value.icon} style={{ width: 18 }} />
                             <span>{value.name}</span>
@@ -418,7 +441,9 @@ const RouteComponent: React.FC = () => {
                           </label>
                         </div>
                         <div className="lost_password">
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Lost your password?</a>
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+                            Lost your password?
+                          </a>
                         </div>
                       </div>
                       <div className="col-sm-12 d-grid mb-3">
@@ -461,7 +486,7 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('last', e.target.value)}
                           />
                         </div>
-                        <div className="mb-3 col-sm-3 email">
+                        {/* <div className="mb-3 col-sm-3 email">
                           <input
                             type="text"
                             className="form-control"
@@ -471,8 +496,8 @@ const RouteComponent: React.FC = () => {
                             placeholder="Country Code"
                             onChange={e => handleRegistrationDetail('countryCode', e.target.value)}
                           />
-                        </div>
-                        <div className="mb-3 col-sm-9 email">
+                        </div> */}
+                        <div className="mb-3 col-sm-12 email">
                           <input
                             type="text"
                             className="form-control"
@@ -507,9 +532,19 @@ const RouteComponent: React.FC = () => {
                         </div>
 
                         <div className="col-sm-12 d-grid mb-3">
-                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(false)}>
+                          <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
+                            <button
+                              disabled={isLoading}
+                              type="button"
+                              className="btn btn-secondary btn-flat"
+                              onClick={() => handleSignup(registrationDetail)}
+                            >
+                              {isLoading ? 'Loading' : 'Register'}
+                            </button>
+                          </div>
+                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(false)}>
                             Next
-                          </button>
+                          </button> */}
                         </div>
                         {/* <div className="col-sm-12 d-grid mb-3">
                                                 <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
@@ -592,9 +627,11 @@ const RouteComponent: React.FC = () => {
                           {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
                             Back
                           </button> */}
-                          <a href="#" className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}><i className="bi bi-arrow-left me-2"></i>Back</a>
+                          <a href="#" className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}>
+                            <i className="bi bi-arrow-left me-2"></i>Back
+                          </a>
                         </div>
-                          
+
                         {/* <div className="col-sm-12 d-grid mb-3">
                                                 <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
                                             </div> */}
@@ -607,7 +644,7 @@ const RouteComponent: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="login-register-modal">
         <div className="modal" id="forgotPasswordModal">
           <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -620,17 +657,23 @@ const RouteComponent: React.FC = () => {
                   <div className="form-forgot-password">
                     <form method="post" className="forgot-password">
                       <h4 className="form-title mb-2">Forgot Password</h4>
-                      <p className='mb-4 pb-1'>Please enter your username or email address. You will receive a link to create a new password via email.</p>
+                      <p className="mb-4 pb-1">
+                        Please enter your username or email address. You will receive a link to create a new password via email.
+                      </p>
                       <div className="row content">
                         <div className="mb-3 col-sm-12 email">
                           <input type="text" className="form-control" name="email" id="email" placeholder="Username or Email" />
                         </div>
-                        
+
                         <div className="col-sm-12 d-grid mb-3">
-                          <button type="submit" className="btn btn-primary btn-flat">Next</button>
+                          <button type="submit" className="btn btn-primary btn-flat">
+                            Next
+                          </button>
                         </div>
                         <div className="col-sm-12 d-grid mb-3 text-center">
-                          <a href="#" className="back-to-login"><i className="bi bi-arrow-left me-2"></i>Back to Login</a>
+                          <a href="#" className="back-to-login">
+                            <i className="bi bi-arrow-left me-2"></i>Back to Login
+                          </a>
                         </div>
                       </div>
                     </form>
@@ -658,6 +701,7 @@ const RouteComponent: React.FC = () => {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/orderDetails" element={<Order />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/category" element={<Category />} />
@@ -706,6 +750,9 @@ const RouteComponent: React.FC = () => {
                     <a href="/terms-and-conditions">Terms & Conditions</a>
                   </li>
                   <li>
+                    <a href="/faq">FAQs</a>
+                  </li>
+                  <li>
                     <a href="/contact-us">Contact Us</a>
                   </li>
                   <li>
@@ -718,14 +765,29 @@ const RouteComponent: React.FC = () => {
             <div className="col-md-6 col-12 offset-lg-1 col-lg-4">
               <div className="footer-newsletter newsletter-style-02">
                 <h4 className="text-white mb-4">Get Callback</h4>
-                <form className="form-inline dark-form mb-4">
-                  <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Enter your phone number" />
-                  </div>
-                  <button type="submit" className="btn btn-primary">
-                    Book call
-                  </button>
-                </form>
+
+                <div className="form-group">
+                  <input
+                    type="text"
+                    value={phoneNumber}
+                    className="form-control"
+                    placeholder="Enter your phone number"
+                    onChange={e => {
+                      setPhoneNumber(e.target.value);
+                    }}
+                  />
+                </div>
+                <button
+                  onClick={async () => {
+                    setPhoneNumber('');
+                    alert('We will call you back soon');
+                    await sendLead({ phone: phoneNumber, message: 'Call back request', email: 'CALL BACK', name: 'CALL BACK' });
+                  }}
+                  className="btn btn-primary"
+                >
+                  Book call
+                </button>
+
                 {/* <div className="form-check">
                   <input className="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault" />
                   <label className="form-check-label text-white" htmlFor="flexCheckDefault">

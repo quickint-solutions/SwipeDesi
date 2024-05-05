@@ -57,78 +57,105 @@ export default function PrivacyPolicy() {
           <div className="row justify-content-center">
             <div className="col-md-12">
               <div className="mb-4">
+                <p>Last updated: March 02, 2021</p>
+                <p>dhknd (“us”, “we”, or “our”) operates the dhknd website (the “Service”).</p>
                 <p>
-                  Without clarity, you send a very garbled message out to the Universe. We know that the Law of Attraction says that we will attract
-                  what we focus on, so if we don’t have clarity, we will attract confusion.
+                  This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.
                 </p>
+                <p>We will not use or share your information with anyone except as described in this Privacy Policy.</p>
                 <p>
-                  The best way is to develop and follow a plan. Start with your goals in mind and then work backwards to develop the plan. What steps
-                  are required to get you to the goals? Make the plan as detailed as possible. Try to visualize and then plan for,{' '}
-                </p>
-                <p>
-                  every possible setback. Commit the plan to paper and then keep it with you at all times. Review it regularly and ensure that every
-                  step takes you closer to your Vision and Goals. If the plan doesn’t support the vision then change it!
+                  We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use
+                  of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy
+                  have the same meanings as in our Terms and Conditions, accessible at https://dhknd.ca
                 </p>
               </div>
               <div className="mb-4">
-                <h4 className="mb-3 fw-600">Personal Information</h4>
-                <ul className="list list-unstyled mb-3">
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> The truth about success
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> If success is a process with a number of defined steps,{' '}
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> Then it is just like any other process.
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> The first action is always in making the decision to proceed.{' '}
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> This is a fundamental step, which most people overlook.
-                  </li>
-                </ul>
+                <h4 className="mb-3 fw-600">Information Collection And Use</h4>
                 <p>
-                  We also know those epic stories, those modern-day legends surrounding the early failures of such supremely successful folks as
-                  Michael Jordan and Bill Gates. We can look a bit further back in time to Albert Einstein or even further back to Abraham Lincoln.
-                  What made each of these people so successful? Motivation.
+                  While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact
+                  or identify you. Personally identifiable information (“Personal Information”) may include, but is not limited to:
+                  <br />
+                  Name
+                  <br />
+                  Email address
+                  <br />
+                  Telephone number
+                  <br />
+                  Address
                 </p>
               </div>
               <div className="mb-4">
-                <h4 className="mb-3 fw-600">Use of User Information.</h4>
+                <h4 className="mb-3 fw-600">Log Data</h4>
                 <p>
-                  The first thing to remember about success is that it is a process – nothing more, nothing less. There is really no magic to it and
-                  it’s not reserved only for a select few people. As such, success really has nothing to do with luck, coincidence or fate. It really
-                  comes down to understanding the steps in the process and then executing on those steps.
+                  We collect information that your browser sends whenever you visit our Service (“Log Data”). This Log Data may include information
+                  such as your computer’s Internet Protocol (“IP”) address, browser type, browser version, the pages of our Service that you visit,
+                  the time and date of your visit, the time spent on those pages and other statistics.
                 </p>
               </div>
-              <div>
-                <h4 className="mb-3 fw-600">Disclosure of User Information.</h4>
+              <div className="mb-4">
+                <h4 className="mb-3 fw-600">Cookies</h4>
                 <p>
-                  There are basically six key areas to higher achievement. Some people will tell you there are four while others may tell you there
-                  are eight. One thing for certain though, is that irrespective of the number of steps the experts talk about, they all originate from
-                  the same roots.<a href="#"> support@example.com</a>{' '}
+                  Cookies are files with small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from
+                  a web site and stored on your computer’s hard drive.
                 </p>
-                <ul className="list list-unstyled mb-3">
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> You are going on a cruise, but when the ship sets sail,{' '}
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> The sad thing is the majority of people have no clue about what they truly want.{' '}
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> Once you have a clear understanding of what you want,
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> Focus is having the unwavering attention to complete what you set out to do.
-                  </li>
-                </ul>
-                <p className="mb-0">
-                  Making a decision to do something – this is the first step. We all know that nothing moves until someone makes a decision. The first
-                  action is always in making the decision to proceed. This is a fundamental step, which most people overlook.
-                  <a href="#"> support@example.com</a>
+                <p>
+                  We use “cookies” to collect information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being
+                  sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.
                 </p>
+              </div>
+              <div className="mb-4">
+                <h4 className="mb-3 fw-600">Service Providers</h4>
+                <p>
+                  We may employ third party companies and individuals to facilitate our Service, to provide the Service on our behalf, to perform
+                  Service-related services or to assist us in analyzing how our Service is used.
+                </p>
+                <p>
+                  These third parties have access to your Personal Information only to perform these tasks on our behalf and are obligated not to
+                  disclose or use it for any other purpose.
+                </p>
+              </div>
+              <div className="mb-4">
+                <h4 className="mb-3 fw-600">Security</h4>
+                <p>
+                  The security of your Personal Information is important to us, but remember that no method of transmission over the Internet, or
+                  method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal
+                  Information, we cannot guarantee its absolute security.
+                </p>
+              </div>
+              <div className="mb-4">
+                <h4 className="mb-3 fw-600">Links To Other Sites</h4>
+                <p>
+                  Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed
+                  to that third party’s site. We strongly advise you to review the Privacy Policy of every site you visit.
+                </p>
+                <p>
+                  We have no control over, and assume no responsibility for the content, privacy policies or practices of any third party sites or
+                  services.
+                </p>
+              </div>
+              <div className="mb-4">
+                <h4 className="mb-3 fw-600">Children’s Privacy</h4>
+                <p>Our Service does not address anyone under the age of 18 (“Children”).</p>
+                <p>
+                  We do not knowingly collect personally identifiable information from children under 18. If you are a parent or guardian and you are
+                  aware that your child has provided us with Personal Information, please contact us. If we discover that a child under 18 has
+                  provided us with Personal Information, we will delete such information from our servers immediately.
+                </p>
+              </div>
+              <div className="mb-4">
+                <h4 className="mb-3 fw-600">Changes To This Privacy Policy</h4>
+                <p>
+                  We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this
+                  page.
+                </p>
+                <p>
+                  You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they
+                  are posted on this page.
+                </p>
+              </div>
+              <div className="mb-4">
+                <h4 className="mb-3 fw-600">Contact Us</h4>
+                <p>If you have any questions about this Privacy Policy, please contact us.</p>
               </div>
             </div>
           </div>

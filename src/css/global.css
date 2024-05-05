@@ -334,6 +334,10 @@ body {
   overflow-x: hidden;
 }
 
+.sora-fonts {
+  font-family: 'Sora', sans-serif;
+}
+
 a {
   outline: medium none !important;
   color: #F3601E;

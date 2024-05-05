@@ -64,14 +64,14 @@ const Login: React.FC = () => {
   const otherBanners = banners?.result?.slice(2) || [];
 
   useEffect(() => {
-    dispatch(getBannerImages());
-    dispatch(getLatestCollectioData());
-    dispatch(getBestCollectionData());
-    dispatch(getRecentArticleData());
-    dispatch(getInTheSpotlightData());
-    dispatch(getBannerCategoryData());
-    dispatch(getSaleBannerData());
-    dispatch(getTestimonialData());
+    // dispatch(getBannerImages());
+    // dispatch(getLatestCollectioData());
+    // dispatch(getBestCollectionData());
+    // dispatch(getRecentArticleData());
+    // dispatch(getInTheSpotlightData());
+    // dispatch(getBannerCategoryData());
+    // dispatch(getSaleBannerData());
+    // dispatch(getTestimonialData());
   }, []);
 
   useEffect(() => {
@@ -842,42 +842,92 @@ const Login: React.FC = () => {
 
       {/* <!--=================================
             Testimonial --> */}
-      {testimonialData.length ? (
-        <section
-          className="position-relative testimonial-dark-bg bg-overlay-black-6 space-pt bg-holder"
-          style={{ backgroundImage: ` url(${BgImage1})` }}
-        >
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-5">
-                <div className="section-title section-title-style-1">
-                  <span className="sub-title left-divider">Testimonial</span>
-                  <h2 className="title text-white">What to say about the client</h2>
-                </div>
+
+      <section
+        className="position-relative testimonial-dark-bg bg-overlay-black-6 space-pt bg-holder"
+        style={{ backgroundImage: ` url(${BgImage1})` }}
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-5">
+              <div className="section-title section-title-style-1">
+                <span className="sub-title left-divider">Testimonial</span>
+                <h2 className="title text-white">What to say about the client</h2>
               </div>
-              <div className="col-lg-7">
-                <div className="testimonial-description">
-                  <OwlCarousel className="owl-theme" items={1} nav={true} dots={false} loop={true} margin={10}>
-                    <div className="testimonial">
-                      <div className="testimonial-quote-icon">
-                        <QuoteSvg></QuoteSvg>
+            </div>
+            <div className="col-lg-7">
+              <div className="testimonial-description">
+                <OwlCarousel className="owl-theme" items={1} nav={true} dots={false} loop={true} margin={10}>
+                  <div className="testimonial">
+                    <div className="testimonial-quote-icon">
+                      <QuoteSvg></QuoteSvg>
+                    </div>
+                    <div className="testimonial-content">
+                      <p className="mb-0">
+                        <i>
+                          It had an amazing experience with you!!! Your products are just awesome and fantastic...Keep up with the same flow... I am
+                          just glad that I bought from you guys!!! You are really doing a great job... And your service is just amazing 👍👍👍👍
+                        </i>{' '}
+                      </p>
+                    </div>
+                    <div className="testimonial-author info-right">
+                      <div className="testimonial-avatar avatar">
+                        <img className="img-fluid" src={AvtarIcon01} alt="" />
                       </div>
-                      <div className="testimonial-content">
-                        <p className="mb-0">
-                          <i>{testimonialData[0]?.description}</i>{' '}
-                        </p>
-                      </div>
-                      <div className="testimonial-author info-right">
-                        <div className="testimonial-avatar avatar">
-                          <img className="img-fluid" src={AvtarIcon01} alt="" />
-                        </div>
-                        <div className="testimonial-name d-flex align-items-center">
-                          <h6 className="author-tittle">Alice Williams</h6>
-                          <span className="text-white">Product Designer</span>
-                        </div>
+                      <div className="testimonial-name d-flex align-items-center">
+                        <h6 className="author-tittle">Pooja Liladhar Bagul</h6>
+                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
-                    {/* <div className="testimonial">
+                  </div>
+                  <div className="testimonial">
+                    <div className="testimonial-quote-icon">
+                      <QuoteSvg></QuoteSvg>
+                    </div>
+                    <div className="testimonial-content">
+                      <p className="mb-0">
+                        <i>
+                          Positive: Professionalism, Quality, Responsiveness, Value Perfect quality of all the goods, I have lather bags, wallet, and
+                          I am SO happy about their finishing, color style. Experience of the best service 👌, SO happy to have DHKND in CANADA 🇨🇦.
+                          Specially in CALGARY. Thank you very much DHKND.
+                        </i>{' '}
+                      </p>
+                    </div>
+                    <div className="testimonial-author info-right">
+                      <div className="testimonial-avatar avatar">
+                        <img className="img-fluid" src={AvtarIcon01} alt="" />
+                      </div>
+                      <div className="testimonial-name d-flex align-items-center">
+                        <h6 className="author-tittle">Nikul panchal</h6>
+                        {/* <span className="text-white">Product Designer</span> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="testimonial">
+                    <div className="testimonial-quote-icon">
+                      <QuoteSvg></QuoteSvg>
+                    </div>
+                    <div className="testimonial-content">
+                      <p className="mb-0">
+                        <i>
+                          I ordered panchdhatu mandir from DHKND. Talking about : Size and quality : 5/5 Finishing : 5/5 Design : 5/5 Price : very
+                          fair They have fitted light inside the mandir which make it so beautiful. Everytime when I contact the people , they are
+                          super humble to answer all my questions Highly recommended especially when you are looking for ethnic products from back
+                          home Good to have you in Canada 😃👍
+                        </i>{' '}
+                      </p>
+                    </div>
+                    <div className="testimonial-author info-right">
+                      <div className="testimonial-avatar avatar">
+                        <img className="img-fluid" src={AvtarIcon01} alt="" />
+                      </div>
+                      <div className="testimonial-name d-flex align-items-center">
+                        <h6 className="author-tittle">Jinal Desai</h6>
+                        {/* <span className="text-white">Product Designer</span> */}
+                      </div>
+                    </div>
+                  </div>
+                  {/* <div className="testimonial">
                                         <div className="testimonial-quote-icon">
                                             <QuoteSvg></QuoteSvg>
                                         </div>
@@ -911,15 +961,13 @@ const Login: React.FC = () => {
                                             </div>
                                         </div>
                                     </div> */}
-                  </OwlCarousel>
-                </div>
+                </OwlCarousel>
               </div>
             </div>
           </div>
-        </section>
-      ) : (
-        ''
-      )}
+        </div>
+      </section>
+
       {/* <!--=================================
             Testimonial --> */}
 
@@ -1034,48 +1082,38 @@ const Login: React.FC = () => {
         <div className="container-fluid p-0">
           <div className="row g-0">
             <div className="col-xl-12 col-lg-12 h-100">
-              {spotlightData.length > 0 ? (
-                <OwlCarousel className="owl-theme" items={6} nav={true} dots={false}>
-                  {/* {spotlightData.map((value: any, key: number) => (
-                    <div key={key}>
-                      <img src={value.imagePath} alt="Image" />
-                    </div>
-                  ))} */}
-
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram1} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram2} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram3} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram4} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram5} alt="#" />
-                    </a>
-                  </div>
-                  <div className="text-center">
-                    <a href="#">
-                      <img className="img-fluid" src={Instagram2} alt="#" />
-                    </a>
-                  </div>
-                </OwlCarousel>
-              ) : (
-                ''
-              )}
+              <OwlCarousel className="owl-theme" items={6} nav={true} dots={false}>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram1} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram2} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram3} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram4} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram5} alt="#" />
+                  </a>
+                </div>
+                <div className="text-center">
+                  <a href="#">
+                    <img className="img-fluid" src={Instagram2} alt="#" />
+                  </a>
+                </div>
+              </OwlCarousel>
             </div>
           </div>
         </div>

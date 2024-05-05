@@ -64,11 +64,25 @@ const Checkout: React.FC = () => {
           country: billingDetail.country,
           zip: billingDetail.zip,
         },
+        shippingAddress: {
+          name: {
+            first: shippingDetail.firstName,
+            last: shippingDetail.lastName,
+          },
+          phone: shippingDetail.phone,
+          companyName: shippingDetail.companyName,
+          line1: shippingDetail.addressLine1,
+          line2: shippingDetail.addressLine2,
+          state: shippingDetail.state,
+          city: shippingDetail.city,
+          country: shippingDetail.country,
+          zip: shippingDetail.zip,
+        },
       });
 
-      alert('Payment succeeded');
+      alert('Order has been placed successfully');
       emptyCart();
-      navigate('/my-account');
+      navigate('/my-account?ORDER=success');
     } else {
       alert('Payment failed');
     }
@@ -84,10 +98,9 @@ const Checkout: React.FC = () => {
   const { mutateAsync: createOrder, isLoading: createOrderLoading } = useMutation(createOrderAPI);
 
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const storeData = useAppSelector((state: any) => state.cartSlice);
-  const [cartData, setCartData] = useState([]);
-  const [productDetail, setProductDetail] = useState<any>(null);
+
+  const [shippingDetailsSameAsBilling, setShippingDetailsSameAsBilling] = useState(false);
+
   const [billingDetail, setBillingDetail] = useState({
     firstName: user?.name?.first,
     lastName: user?.name?.last,
@@ -99,14 +112,24 @@ const Checkout: React.FC = () => {
     state: user?.address?.state,
     zip: user?.address?.zip,
     phone: user?.phone?.number,
-    countryCode: user?.phone?.countryCode,
+    countryCode: '+1',
     gst: user?.gst,
     email: user?.email,
   });
-  const [paymentCardDetail, setPaymentCardDetail] = useState({
-    cardNumber: '',
-    cvv: '',
-    expiryDate: '',
+  const [shippingDetail, setShippingDetail] = useState({
+    firstName: user?.name?.first,
+    lastName: user?.name?.last,
+    companyName: user?.company?.name,
+    country: user?.address?.country,
+    addressLine1: user?.address?.line1,
+    addressLine2: user?.address?.line2,
+    city: user?.address?.city,
+    state: user?.address?.state,
+    zip: user?.address?.zip,
+    phone: user?.phone?.number,
+    countryCode: '+1',
+    gst: user?.gst,
+    email: user?.email,
   });
 
   useEffect(() => {
@@ -124,66 +147,20 @@ const Checkout: React.FC = () => {
       ...values,
       [key]: value,
     }));
-  };
-
-  const saveBillingAddress = async () => {
-    let requestParam = {
-      addressID: 0,
-      userID: user?._id,
-      addressType: 'Billing',
-      fullName: billingDetail.firstName + billingDetail.lastName,
-      companyName: billingDetail.companyName,
-      addressLine1: billingDetail.addressLine1 + billingDetail.addressLine2,
-      addressLine2: '',
-      city: billingDetail.city,
-      state: billingDetail.state,
-      postalCode: billingDetail.zip,
-      country: billingDetail.country,
-      phoneNumber: billingDetail.phone,
-      isDefault: true,
-    };
-    let billingAddressData = await checkoutHttpRequest.saveBillingAddressDetail(requestParam);
-    if (billingAddressData.status) {
-      // alert('Your address updated!');
-      let reqParam = {
-        paymentMethodID: 0,
-        userID: user?._id,
-        cardNumber: paymentCardDetail.cardNumber,
-        expiryDate: paymentCardDetail.expiryDate,
-        cvv: paymentCardDetail.cvv,
-      };
-      let saveCardData = await checkoutHttpRequest.saveCardDetail(reqParam);
-      if (saveCardData?.status) {
-        let requestParam = {
-          cartID: storeData?.cartDetail[0].cartID,
-          userID: user?._id,
-          shippingAddress: billingDetail.addressLine1 + billingDetail.addressLine2,
-          paymentMethod: 'card',
-          paymentStatus: 'pending',
-        };
-        let orderData = await checkoutHttpRequest.placeOrder(requestParam);
-        if (orderData?.status) {
-          dispatch(getCartDetail(user?._id));
-          navigate('/my-account');
-        } else {
-          alert(orderData?.message);
-        }
-      } else {
-        alert(saveCardData.message);
-      }
-    } else {
-      alert('Something went wrong, Please try again!');
+    if (shippingDetailsSameAsBilling) {
+      setShippingDetail((values: any) => ({
+        ...values,
+        [key]: value,
+      }));
     }
   };
 
-  const handlechangePaymentCardDetail = (key: string, value: any) => {
-    setPaymentCardDetail((values: any) => ({
+  const handleChangeShippingDetail = (key: string, value: any) => {
+    setShippingDetail((values: any) => ({
       ...values,
       [key]: value,
     }));
   };
-
-  const handleChangeCardNumber = () => {};
 
   return (
     <>
@@ -369,16 +346,7 @@ const Checkout: React.FC = () => {
                         onChange={e => handleChangeBillingDetail('zip', e.target.value)}
                       />
                     </div>
-                    <div className="mb-3 col-sm-12">
-                      <label className="form-label">Country code</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Phone Number"
-                        value={billingDetail.countryCode}
-                        onChange={e => handleChangeBillingDetail('countryCode', e.target.value)}
-                      />
-                    </div>
+
                     <div className="mb-3 col-sm-12">
                       <label className="form-label">Phone</label>
                       <input
@@ -401,6 +369,146 @@ const Checkout: React.FC = () => {
                     </div>
                   </form>
                 </div>
+                <div className="section-title mb-2 mt-4">
+                  <h4 className="title fw-600">Shipping details</h4>
+                </div>
+                <div className="mb-4" style={{ display: 'flex', alignItems: 'center' }}>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    onChange={() => {
+                      setShippingDetailsSameAsBilling(!shippingDetailsSameAsBilling);
+                      if (!shippingDetailsSameAsBilling) {
+                        setShippingDetail(billingDetail);
+                      }
+                    }}
+                    style={{ marginRight: 10, fontSize: 20 }}
+                    id="flexCheckChecked02"
+                    checked={shippingDetailsSameAsBilling}
+                  />
+                  <span>Same as billing address</span>
+                </div>
+
+                {!shippingDetailsSameAsBilling && (
+                  <div className="checkout checkout-form">
+                    <form className="row">
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">First name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="First Name"
+                          value={shippingDetail.firstName}
+                          onChange={e => handleChangeShippingDetail('firstName', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">Last name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Last Name"
+                          value={shippingDetail.lastName}
+                          onChange={e => handleChangeShippingDetail('lastName', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">Company name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Company Name"
+                          value={shippingDetail.companyName}
+                          onChange={e => handleChangeShippingDetail('companyName', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">GST</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Gst NO"
+                          value={shippingDetail.gst}
+                          onChange={e => handleChangeShippingDetail('gst', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 select-border col-sm-12">
+                        <label className="form-label">Country</label>
+                        <select className="form-control basic-select" onChange={e => handleChangeShippingDetail('country', e.target.value)}>
+                          <option value="Canada">Canada</option>
+                        </select>
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">Street Address</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Address Line 1"
+                          value={shippingDetail.addressLine1}
+                          onChange={e => handleChangeShippingDetail('addressLine1', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="House number and street name"
+                          value={shippingDetail.addressLine2}
+                          onChange={e => handleChangeShippingDetail('addressLine2', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 col-sm-12 select-border">
+                        <label className="form-label">City</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="City"
+                          value={shippingDetail.city}
+                          onChange={e => handleChangeShippingDetail('city', e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3 select-border col-sm-12">
+                        <label className="form-label">State</label>
+                        <select className="form-control basic-select" onChange={e => handleChangeShippingDetail('state', e.target.value)}>
+                          {provinces.map((value: any, key: number) => (
+                            <option value={value.value}>{value.label}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">ZIP</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Postal Code"
+                          value={shippingDetail.zip}
+                          onChange={e => handleChangeShippingDetail('zip', e.target.value)}
+                        />
+                      </div>
+
+                      <div className="mb-3 col-sm-12">
+                        <label className="form-label">Phone</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Phone Number"
+                          value={shippingDetail.phone}
+                          onChange={e => handleChangeShippingDetail('phone', e.target.value)}
+                        />
+                      </div>
+                      <div className="col-sm-12 mb-0">
+                        <label className="form-label">Email Address:</label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          placeholder="Email Address"
+                          value={shippingDetail.email}
+                          onChange={e => handleChangeShippingDetail('email', e.target.value)}
+                        />
+                      </div>
+                    </form>
+                  </div>
+                )}
               </div>
               <div className="col-md-6 mt-5 mt-md-0">
                 <div className="section-title mb-4">
@@ -500,8 +608,14 @@ const Checkout: React.FC = () => {
 
                   <div className="col-12  mt-4">
                     {/* <a href="javascript:void(0)" className="btn btn-secondary checkout-button d-grid" onClick={() => saveBillingAddress()}> */}
-                    <button className="btn btn-secondary checkout-button d-grid" type="submit" style={{ width: '100%' }} onClick={handleSubmit}>
-                      Place Order
+                    <button
+                      disabled={isLoading || createOrderLoading}
+                      className="btn btn-secondary checkout-button d-grid"
+                      type="submit"
+                      style={{ width: '100%' }}
+                      onClick={handleSubmit}
+                    >
+                      {isLoading || createOrderLoading ? 'Processing...' : 'Place Order'}
                     </button>
                   </div>
                 </div>
