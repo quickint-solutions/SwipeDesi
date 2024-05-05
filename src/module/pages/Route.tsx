@@ -750,9 +750,6 @@ const RouteComponent: React.FC = () => {
                     <a href="/terms-and-conditions">Terms & Conditions</a>
                   </li>
                   <li>
-                    <a href="/faq">FAQs</a>
-                  </li>
-                  <li>
                     <a href="/contact-us">Contact Us</a>
                   </li>
                   <li>
