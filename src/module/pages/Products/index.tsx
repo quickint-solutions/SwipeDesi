@@ -81,8 +81,9 @@ export default function Products() {
                         {categoriesData.map((category: any) => {
                           const subCategories = categoriesList?.result?.filter((i: any) => i.parentCategory?._id === category._id) || [];
                           const totalItems = subCategories?.length
-                            ? category.itemCount
-                            : subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0);
+                            ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0)
+                            : category.itemCount;
+
                           return (
                             <li>
                               <div
