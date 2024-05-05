@@ -339,6 +339,7 @@ const RouteComponent: React.FC = () => {
                       ) : (
                         <button className="dropdown-toggle p-0" type="button" id="dropdownMenuButton" onClick={() => openLoginPopup()}>
                           <i className="bi bi-cart3"></i>
+                          <span className="cart-count">{getTotalCount()}</span>
                         </button>
                       )}
                     </div>
