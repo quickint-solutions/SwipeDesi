@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
-import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
 import { useNavigate } from 'react-router-dom';
 import img from '../../../images/bg/mandir-banner.jpg';
@@ -57,78 +56,111 @@ export default function TermsCondition() {
           <div className="row justify-content-center">
             <div className="col-md-12">
               <div className="mb-4">
+                <p>Last updated: March 02, 2021</p>
                 <p>
-                  Without clarity, you send a very garbled message out to the Universe. We know that the Law of Attraction says that we will attract
-                  what we focus on, so if we don’t have clarity, we will attract confusion.
+                  Please read these Terms of Use (“Terms”, “Terms of Use”) carefully before using the https://dhknd.ca website (the “Service”)
+                  operated by dhknd (“us”, “we”, or “our”).
                 </p>
                 <p>
-                  The best way is to develop and follow a plan. Start with your goals in mind and then work backwards to develop the plan. What steps
-                  are required to get you to the goals? Make the plan as detailed as possible. Try to visualize and then plan for,{' '}
+                  Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all
+                  visitors, users and others who access or use the Service.
                 </p>
                 <p>
-                  every possible setback. Commit the plan to paper and then keep it with you at all times. Review it regularly and ensure that every
-                  step takes you closer to your Vision and Goals. If the plan doesn’t support the vision then change it!
-                </p>
-              </div>
-              <div className="mb-4">
-                <h4 className="mb-3 fw-600">Personal Information</h4>
-                <ul className="list list-unstyled mb-3">
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> The truth about success
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> If success is a process with a number of defined steps,{' '}
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> Then it is just like any other process.
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> The first action is always in making the decision to proceed.{' '}
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> This is a fundamental step, which most people overlook.
-                  </li>
-                </ul>
-                <p>
-                  We also know those epic stories, those modern-day legends surrounding the early failures of such supremely successful folks as
-                  Michael Jordan and Bill Gates. We can look a bit further back in time to Albert Einstein or even further back to Abraham Lincoln.
-                  What made each of these people so successful? Motivation.
+                  By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not
+                  access the Service.
                 </p>
               </div>
               <div className="mb-4">
-                <h4 className="mb-3 fw-600">Use of User Information.</h4>
+                <h4 className="mb-3 fw-600">Accounts</h4>
                 <p>
-                  The first thing to remember about success is that it is a process – nothing more, nothing less. There is really no magic to it and
-                  it’s not reserved only for a select few people. As such, success really has nothing to do with luck, coincidence or fate. It really
-                  comes down to understanding the steps in the process and then executing on those steps.
+                  When you create an account with us, you must provide us information that is accurate, complete, and current at all times. Failure to
+                  do so constitutes a breach of the Terms, which may result in immediate termination of your account on our Service.
+                </p>
+                <p>
+                  You are responsible for safeguarding the password that you use to access the Service and for any activities or actions under your
+                  password, whether your password is with our Service or a third-party service.
+                </p>
+                <p>
+                  You agree not to disclose your password to any third party. You must notify us immediately upon becoming aware of any breach of
+                  security or unauthorized use of your account.
+                </p>
+              </div>
+              <div className="mb-4">
+                <h4 className="mb-3 fw-600">Intellectual Property</h4>
+                <p>
+                  The Service and its original content, features and functionality are and will remain the exclusive property of dhknd and its
+                  licensors.
                 </p>
               </div>
               <div>
-                <h4 className="mb-3 fw-600">Disclosure of User Information.</h4>
+                <h4 className="mb-3 fw-600">Links To Other Web Sites</h4>
+                <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by dhknd.</p>
                 <p>
-                  There are basically six key areas to higher achievement. Some people will tell you there are four while others may tell you there
-                  are eight. One thing for certain though, is that irrespective of the number of steps the experts talk about, they all originate from
-                  the same roots.<a href="#"> support@example.com</a>{' '}
+                  dhknd has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web
+                  sites or services. You further acknowledge and agree that dhknd shall not be responsible or liable, directly or indirectly, for any
+                  damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services
+                  available on or through any such web sites or services.
                 </p>
-                <ul className="list list-unstyled mb-3">
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> You are going on a cruise, but when the ship sets sail,{' '}
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> The sad thing is the majority of people have no clue about what they truly want.{' '}
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> Once you have a clear understanding of what you want,
-                  </li>
-                  <li>
-                    <i className="bi bi-check-circle-fill"></i> Focus is having the unwavering attention to complete what you set out to do.
-                  </li>
-                </ul>
-                <p className="mb-0">
-                  Making a decision to do something – this is the first step. We all know that nothing moves until someone makes a decision. The first
-                  action is always in making the decision to proceed. This is a fundamental step, which most people overlook.
-                  <a href="#"> support@example.com</a>
+                <p>
+                  We strongly advise you to read the terms and conditions and privacy policies of any third-party web sites or services that you
+                  visit.
                 </p>
+              </div>
+              <div>
+                <h4 className="mb-3 fw-600">Termination</h4>
+                <p>
+                  We may terminate or suspend access to our Service immediately, without prior notice or liability, for any reason whatsoever,
+                  including without limitation if you breach the Terms.
+                </p>
+                <p>
+                  All provisions of the Terms which by their nature should survive termination shall survive termination, including, without
+                  limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.
+                </p>
+                <p>
+                  We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including
+                  without limitation if you breach the Terms.
+                </p>
+                <p>
+                  Upon termination, your right to use the Service will immediately cease. If you wish to terminate your account, you may simply
+                  discontinue using the Service.
+                </p>
+                <p>
+                  All provisions of the Terms which by their nature should survive termination shall survive termination, including, without
+                  limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.
+                </p>
+              </div>
+              <div>
+                <h4 className="mb-3 fw-600">Disclaimer</h4>
+                <p>
+                  Your use of the Service is at your sole risk. The Service is provided on an “AS IS” and “AS AVAILABLE” basis. The Service is
+                  provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of
+                  merchantability, fitness for a particular purpose, non-infringement or course of performance.
+                </p>
+              </div>
+              <div>
+                <h4 className="mb-3 fw-600">Governing Law</h4>
+                <p>
+                  Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of
+                  these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These
+                  Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have
+                  between us regarding the Service.
+                </p>
+              </div>
+              <div>
+                <h4 className="mb-3 fw-600">Changes</h4>
+                <p>
+                  We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to
+                  provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our
+                  sole discretion.
+                </p>
+                <p>
+                  By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If
+                  you do not agree to the new terms, please stop using the Service.
+                </p>
+              </div>
+              <div>
+                <h4 className="mb-3 fw-600">Contact Us</h4>
+                <p>If you have any questions about this Privacy Policy, please contact us.</p>
               </div>
             </div>
           </div>
