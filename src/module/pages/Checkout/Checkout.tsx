@@ -401,6 +401,136 @@ const Checkout: React.FC = () => {
                     </div>
                   </form>
                 </div>
+                <div className="section-title mb-4 mt-4">
+                  <h4 className="title fw-600">Shipping details</h4>
+                </div>
+                <div className="checkout checkout-form">
+                  <form className="row">
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">First name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="First Name"
+                        value={billingDetail.firstName}
+                        onChange={e => handleChangeBillingDetail('firstName', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">Last name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Last Name"
+                        value={billingDetail.lastName}
+                        onChange={e => handleChangeBillingDetail('lastName', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">Company name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Company Name"
+                        value={billingDetail.companyName}
+                        onChange={e => handleChangeBillingDetail('companyName', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">GST</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Gst NO"
+                        value={billingDetail.gst}
+                        onChange={e => handleChangeBillingDetail('gst', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 select-border col-sm-12">
+                      <label className="form-label">Country</label>
+                      <select className="form-control basic-select" onChange={e => handleChangeBillingDetail('country', e.target.value)}>
+                        <option value="Canada">Canada</option>
+                      </select>
+                    </div>
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">Street Address</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Address Line 1"
+                        value={billingDetail.addressLine1}
+                        onChange={e => handleChangeBillingDetail('addressLine1', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 col-sm-12">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="House number and street name"
+                        value={billingDetail.addressLine2}
+                        onChange={e => handleChangeBillingDetail('addressLine2', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 col-sm-12 select-border">
+                      <label className="form-label">City</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="City"
+                        value={billingDetail.city}
+                        onChange={e => handleChangeBillingDetail('city', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 select-border col-sm-12">
+                      <label className="form-label">State</label>
+                      <select className="form-control basic-select" onChange={e => handleChangeBillingDetail('state', e.target.value)}>
+                        {provinces.map((value: any, key: number) => (
+                          <option value={value.value}>{value.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">ZIP</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Postal Code"
+                        value={billingDetail.zip}
+                        onChange={e => handleChangeBillingDetail('zip', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">Country code</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Phone Number"
+                        value={billingDetail.countryCode}
+                        onChange={e => handleChangeBillingDetail('countryCode', e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3 col-sm-12">
+                      <label className="form-label">Phone</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Phone Number"
+                        value={billingDetail.phone}
+                        onChange={e => handleChangeBillingDetail('phone', e.target.value)}
+                      />
+                    </div>
+                    <div className="col-sm-12 mb-0">
+                      <label className="form-label">Email Address:</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Email Address"
+                        value={billingDetail.email}
+                        onChange={e => handleChangeBillingDetail('email', e.target.value)}
+                      />
+                    </div>
+                  </form>
+                </div>
               </div>
               <div className="col-md-6 mt-5 mt-md-0">
                 <div className="section-title mb-4">
