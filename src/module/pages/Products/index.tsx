@@ -7,13 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth.context';
 
 export default function Products() {
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get('category');
-  const [categoryValue, setCategoryValue] = useState(category);
-
-  const navigate = useNavigate();
-
-  const { search } = useContext(AuthContext);
+  const { search, categories, setCategories } = useContext(AuthContext);
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
@@ -22,8 +16,8 @@ export default function Products() {
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
 
   useEffect(() => {
-    mutate({ categories: categoryValue, search });
-  }, [categoryValue, search]);
+    mutate({ categories: categories, search });
+  }, [categories, search]);
 
   return (
     <div>
@@ -89,7 +83,7 @@ export default function Products() {
                               <div
                                 style={{ cursor: 'pointer', marginBottom: 5 }}
                                 className="d-flex"
-                                onClick={() => (totalItems ? setCategoryValue(category._id) : null)}
+                                onClick={() => (totalItems ? setCategories(category._id) : null)}
                               >
                                 {category.name}
                                 <span className="ms-auto">
@@ -105,7 +99,7 @@ export default function Products() {
                                         <div
                                           style={{ cursor: 'pointer', marginBottom: 5 }}
                                           className="d-flex"
-                                          onClick={() => setCategoryValue(subCategory._id)}
+                                          onClick={() => setCategories(subCategory._id)}
                                         >
                                           {subCategory.name}
                                           <span className="ms-auto">

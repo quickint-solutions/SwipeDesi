@@ -9,6 +9,8 @@ interface IAuthProvider {
   setSearch: (search: string) => void;
   login: (user: any, accessToken: string) => void;
   logout: () => void;
+  categories: string;
+  setCategories: (categories: string) => void;
 }
 
 export const AuthContext = createContext<IAuthProvider>({
@@ -17,6 +19,8 @@ export const AuthContext = createContext<IAuthProvider>({
   setSearch: () => {},
   user: null,
   search: '',
+  setCategories: () => {},
+  categories: '',
 });
 
 export const useAuth = () => {
@@ -26,6 +30,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<any>(null);
   const [search, setSearch] = useState<string>('');
+  const [categories, setCategories] = useState('');
 
   useEffect(() => {
     const user = localStorage.getItem('user');
@@ -53,5 +58,19 @@ export const AuthProvider = ({ children }: any) => {
     setUser(null);
   };
 
-  return <AuthContext.Provider value={{ user, login, logout, search, setSearch }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        search,
+        setSearch,
+        categories,
+        setCategories,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
