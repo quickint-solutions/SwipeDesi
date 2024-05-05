@@ -213,7 +213,7 @@ export default function Myaccount() {
                       </tr>
                     </thead>
                     <tbody>
-                      {orders?.result?.map((order: any) => {
+                      {orders?.result?.reverse()?.map((order: any) => {
                         return (
                           <tr>
                             <td className="product-orders">

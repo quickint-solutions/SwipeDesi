@@ -80,9 +80,9 @@ const Checkout: React.FC = () => {
         },
       });
 
-      alert('Payment succeeded');
+      alert('Order has been placed successfully');
       emptyCart();
-      navigate('/my-account');
+      navigate('/my-account?ORDER=success');
     } else {
       alert('Payment failed');
     }
