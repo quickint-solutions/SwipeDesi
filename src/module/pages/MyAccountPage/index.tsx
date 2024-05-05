@@ -12,7 +12,13 @@ export default function Myaccount() {
   const { data: orders } = useQuery('getOrders', getOrderAPI);
   const { user, logout } = useContext(AuthContext);
   const [searchParams] = useSearchParams();
-  const orderRender = searchParams.get('ORDER');
+
+  useEffect(() => {
+    const orderRender = searchParams.get('ORDER');
+    if (orderRender) {
+      setActiveTab('ORDERS');
+    }
+  }, []);
 
   const [userDetails, setUserDetails] = useState({
     firstName: user?.name?.first,
@@ -193,7 +199,7 @@ export default function Myaccount() {
               </div>
             ) : null}
 
-            {activeTab === 'ORDERS' && orderRender ? (
+            {activeTab === 'ORDERS' ? (
               <div className="cart-table" id="ORDERS_VIEW">
                 <div className="table-responsive">
                   <table className="table table-bordered">
@@ -211,7 +217,9 @@ export default function Myaccount() {
                         return (
                           <tr>
                             <td className="product-orders">
-                              <a href="#">{order.orderId}</a>
+                              <button style={{ background: 'none', border: 'none' }} onClick={() => navigate(`/orderDetails?orderId=${order._id}`)}>
+                                {order.orderId}
+                              </button>
                             </td>
                             <td className="product-date">{new Date(order.createdAt).toLocaleDateString()}</td>
                             <td className="product-status text-success">Completed</td>

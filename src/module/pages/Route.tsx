@@ -21,6 +21,7 @@ import languageLogo from '../../images/en.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
 import { getWishList } from '../../apiV2/wishlist';
 import { sendLead } from '../../apiV2/leads';
+import Order from './Order/Order';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -693,6 +694,7 @@ const RouteComponent: React.FC = () => {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/orderDetails" element={<Order />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/category" element={<Category />} />
