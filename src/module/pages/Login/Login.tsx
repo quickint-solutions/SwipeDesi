@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
@@ -21,36 +21,24 @@ import Instagram3 from '../../../images/instagram/instagram-03.jpg';
 import Instagram4 from '../../../images/instagram/instagram-04.jpg';
 import Instagram5 from '../../../images/instagram/instagram-05.jpg';
 
-import { useAppDispatch, useAppSelector } from '../../../api/store/configureStore';
-import {
-  getBannerCategoryData,
-  getBannerImages,
-  getBestCollectionData,
-  getInTheSpotlightData,
-  getLatestCollectioData,
-  getRecentArticleData,
-  getSaleBannerData,
-  getTestimonialData,
-} from './loginSlice';
+import { useAppSelector } from '../../../api/store/configureStore';
+
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getBanners } from '../../../apiV2/banners';
 import { getCategories } from '../../../apiV2/categories';
 import { getFeaturedItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
+import { AuthContext } from '../../../context/auth.context';
 
 const Login: React.FC = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const storeData = useAppSelector((state: any) => state.loginSlice);
   const [bestCollectionData, setBestCollectionData] = useState<any>([]);
-  const [recentArticleData, setRecentArticleData] = useState([]);
-  const [spotlightData, setSpotlightData] = useState<any>([]);
-  const [bannerCategoryData, setBannerCategoryData] = useState([]);
+
+  const { setCategories } = useContext(AuthContext);
+
   const [saleBannerData, setSaleBannerData] = useState([]);
-  const [testimonialData, setTestimonialData] = useState<any>([]);
-  const [sliderImages, setSliderImages] = useState([]);
-  const [sliderBannerImages, setSliderBannerImages] = useState<any>([]);
 
   const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
 
@@ -62,70 +50,6 @@ const Login: React.FC = () => {
 
   // get other Banners
   const otherBanners = banners?.result?.slice(2) || [];
-
-  useEffect(() => {
-    // dispatch(getBannerImages());
-    // dispatch(getLatestCollectioData());
-    // dispatch(getBestCollectionData());
-    // dispatch(getRecentArticleData());
-    // dispatch(getInTheSpotlightData());
-    // dispatch(getBannerCategoryData());
-    // dispatch(getSaleBannerData());
-    // dispatch(getTestimonialData());
-  }, []);
-
-  useEffect(() => {
-    if (storeData?.bannerImages && storeData?.bannerImages.length > 0) {
-      let tempArr = [] as any;
-      let tempArr2 = [] as any;
-      for (let i = 0; i < 3; i++) {
-        tempArr.push(storeData.bannerImages[i]);
-      }
-      setSliderImages(tempArr);
-      if (storeData?.bannerImages.length > 2) {
-        for (let i = 3; i < storeData?.bannerImages.length; i++) {
-          tempArr2.push(storeData.bannerImages[i]);
-        }
-      }
-      setSliderBannerImages(tempArr2);
-    }
-  }, [storeData?.bannerImages]);
-
-  useEffect(() => {
-    if (storeData?.bestCollectionData && storeData?.bestCollectionData.length > 0) {
-      setBestCollectionData(storeData?.bestCollectionData);
-    }
-  }, [storeData?.bestCollectionData]);
-
-  useEffect(() => {
-    if (storeData?.recentArticleData && storeData?.recentArticleData.length > 0) {
-      setRecentArticleData(storeData?.recentArticleData);
-    }
-  }, [storeData?.recentArticleData]);
-
-  useEffect(() => {
-    if (storeData?.spotlightData && storeData?.spotlightData.length > 0) {
-      setSpotlightData(storeData?.spotlightData);
-    }
-  }, [storeData?.spotlightData]);
-
-  useEffect(() => {
-    if (storeData?.bannerCategoryData && storeData?.bannerCategoryData.length > 0) {
-      setBannerCategoryData(storeData?.bannerCategoryData);
-    }
-  }, [storeData?.bannerCategoryData]);
-
-  useEffect(() => {
-    if (storeData?.saleBannerData && storeData?.saleBannerData.length > 0) {
-      setSaleBannerData(storeData?.saleBannerData);
-    }
-  }, [storeData?.saleBannerData]);
-
-  useEffect(() => {
-    if (storeData?.testimonialData && storeData?.testimonialData.length > 0) {
-      setTestimonialData(storeData?.testimonialData);
-    }
-  }, [storeData?.testimonialData]);
 
   const navigateToWishlist = (event: any) => {
     event.preventDefault();
@@ -209,7 +133,10 @@ const Login: React.FC = () => {
                       style={{ cursor: 'pointer' }}
                       className="featured-categories-column text-center"
                       key={key}
-                      onClick={() => navigate(`/products?category=${value._id}`)}
+                      onClick={() => {
+                        navigate(`/products?category=${value._id}`);
+                        setCategories(value._id);
+                      }}
                     >
                       <div className="feature-categories-inner">
                         <div className="categories-img">
