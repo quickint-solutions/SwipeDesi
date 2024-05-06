@@ -22,6 +22,8 @@ import expertLogo from '../../images/topbar-avtar-icon.png';
 import { getWishList } from '../../apiV2/wishlist';
 import { sendLead } from '../../apiV2/leads';
 import Order from './Order/Order';
+import { Formik, useFormik } from 'formik';
+import * as Yup from 'yup';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -33,7 +35,6 @@ const Checkout = lazy(() => import('./Checkout/Checkout'));
 const Category = lazy(() => import('./Category/Category'));
 const RouteComponent: React.FC = () => {
   const navigate = useNavigate();
-  const storageUserDetail = getUserDetail();
   const [userDetail, setUserDetail] = useState({
     email: '',
     password: '',
@@ -42,21 +43,7 @@ const RouteComponent: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
-  const [registrationDetail, setRegistrationDetail] = useState({
-    first: '',
-    last: '',
-    countryCode: '+1',
-    number: '',
-    email: '',
-    password: '',
-    line1: '',
-    line2: '',
-    city: '',
-    state: '',
-    country: '',
-    zip: '',
-    profileImage: '',
-  });
+
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
 
   const { user, search, setSearch, setCategories } = useContext(AuthContext);
@@ -65,6 +52,39 @@ const RouteComponent: React.FC = () => {
   const { data: wishlistData } = useQuery('getWishlist', getWishList);
 
   const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
+
+  const { mutate: handleSignup, isLoading } = useMutation(signup, {
+    onSuccess: data => {
+      (window as any).$('#formLoginRegister').modal('hide');
+      (window as any).$('#formLoginRegister').modal('show');
+      alert('User registered successfully, Please Login now!');
+    },
+    onError: (error: any) => {
+      alert(error.response.data.message);
+    },
+  });
+
+  const signUpSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email address format').required('Email is required'),
+    password: Yup.string().min(6, 'Password must be 6 characters at minimum').required('Password is required'),
+    first: Yup.string().required('First name is required'),
+    last: Yup.string().required('Last name is required'),
+    number: Yup.string().required('Phone number is required'),
+  });
+
+  const signUpForm = useFormik({
+    initialValues: {
+      first: '',
+      last: '',
+      number: '',
+      email: '',
+      password: '',
+    },
+    validationSchema: signUpSchema,
+    onSubmit: (values: any) => {
+      handleSignup(values);
+    },
+  });
 
   const closeLoginModal = () => {
     setIsShowLoginForm(true);
@@ -87,13 +107,6 @@ const RouteComponent: React.FC = () => {
     (window as any).$('#formLoginRegister').modal('show');
   };
 
-  const handleRegistrationDetail = (key: string, value: any) => {
-    setRegistrationDetail((values: any) => ({
-      ...values,
-      [key]: value,
-    }));
-  };
-
   const handleUserCredential = (key: string, value: any) => {
     setUserDetail((values: any) => ({
       ...values,
@@ -106,22 +119,11 @@ const RouteComponent: React.FC = () => {
   const { mutate: handleLogin } = useMutation(login, {
     onSuccess: data => {
       auth.login(data.data, data.token);
-      // set modal close
       (window as any).$('#formLoginRegister').modal('hide');
     },
     onError: error => {
       alert('Invalid email or password');
       (window as any).$('#formLoginRegister').modal('hide');
-    },
-  });
-
-  const { mutate: handleSignup, isLoading } = useMutation(signup, {
-    onSuccess: data => {
-      (window as any).$('#formLoginRegister').modal('hide');
-      alert('User registered successfully, Please Login now!');
-    },
-    onError: (error: any) => {
-      alert(error.response.data.message);
     },
   });
 
@@ -460,35 +462,36 @@ const RouteComponent: React.FC = () => {
                   </form>
                 </div>
                 <div className={!isShowLoginForm ? 'form-register active' : 'form-register'}>
-                  <form method="post" className="register">
-                    <h4 className="form-title">REGISTER</h4>
-                    {isShowRefisterFirstScreen ? (
-                      <div className="row content">
-                        <div className="mb-3 col-sm-6 name">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.first}
-                            name="first"
-                            id="first"
-                            required
-                            placeholder="First Name"
-                            onChange={e => handleRegistrationDetail('first', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-6 name">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.last}
-                            name="lastName"
-                            id="lastName"
-                            required
-                            placeholder="last Name"
-                            onChange={e => handleRegistrationDetail('last', e.target.value)}
-                          />
-                        </div>
-                        {/* <div className="mb-3 col-sm-3 email">
+                  <Formik initialValues={signUpForm} validationSchema={signUpSchema} onSubmit={values => console.log('values -> ', values)}>
+                    <form className="register">
+                      <h4 className="form-title">REGISTER</h4>
+                      {isShowRefisterFirstScreen ? (
+                        <div className="row content">
+                          <div className="mb-3 col-sm-6 name">
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="first"
+                              id="first"
+                              placeholder="First Name"
+                              required
+                              value={signUpForm.values.first}
+                              onChange={signUpForm.handleChange}
+                            />
+                          </div>
+                          <div className="mb-3 col-sm-6 name">
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="last"
+                              id="lastName"
+                              required
+                              placeholder="last Name"
+                              value={signUpForm.values.last}
+                              onChange={signUpForm.handleChange}
+                            />
+                          </div>
+                          {/* <div className="mb-3 col-sm-3 email">
                           <input
                             type="text"
                             className="form-control"
@@ -499,150 +502,85 @@ const RouteComponent: React.FC = () => {
                             onChange={e => handleRegistrationDetail('countryCode', e.target.value)}
                           />
                         </div> */}
-                        <div className="mb-3 col-sm-12 email">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.number}
-                            name="number"
-                            id="number"
-                            required
-                            placeholder="Number"
-                            onChange={e => handleRegistrationDetail('number', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-12 name">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.email}
-                            name="email"
-                            id="email"
-                            required
-                            placeholder="Email"
-                            onChange={e => handleRegistrationDetail('email', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-12 password">
-                          <input
-                            className="form-control"
-                            type="password"
-                            value={registrationDetail.password}
-                            name="password"
-                            required
-                            id="password"
-                            placeholder="Password"
-                            onChange={e => handleRegistrationDetail('password', e.target.value)}
-                          />
-                        </div>
-
-                        <div className="col-sm-12 d-grid mb-3">
-                          <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
-                            <button
-                              disabled={isLoading}
-                              type="button"
-                              className="btn btn-secondary btn-flat"
-                              onClick={() => handleSignup(registrationDetail)}
-                            >
-                              {isLoading ? 'Loading' : 'Register'}
-                            </button>
+                          <div className="mb-3 col-sm-12 email">
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="number"
+                              id="number"
+                              required
+                              placeholder="Number"
+                              value={signUpForm.values.number}
+                              onChange={signUpForm.handleChange}
+                            />
                           </div>
-                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(false)}>
+                          <div className="mb-3 col-sm-12 name">
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="email"
+                              id="email"
+                              required
+                              placeholder="Email"
+                              value={signUpForm.values.email}
+                              onChange={signUpForm.handleChange}
+                            />
+                          </div>
+                          <div className="mb-3 col-sm-12 password">
+                            <input
+                              className="form-control"
+                              type="password"
+                              name="password"
+                              required
+                              id="password"
+                              placeholder="Password"
+                              value={signUpForm.values.password}
+                              onChange={signUpForm.handleChange}
+                            />
+                          </div>
+
+                          <div className="col-sm-12 d-grid mb-3">
+                            <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
+                              <button
+                                disabled={isLoading}
+                                type="button"
+                                className="btn btn-secondary btn-flat"
+                                onClick={() => signUpForm.handleSubmit()}
+                              >
+                                {isLoading ? 'Loading' : 'Register'}
+                              </button>
+                            </div>
+                            {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(false)}>
                             Next
                           </button> */}
-                        </div>
-                        {/* <div className="col-sm-12 d-grid mb-3">
+                          </div>
+                          {/* <div className="col-sm-12 d-grid mb-3">
                                                 <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
                                             </div> */}
-                      </div>
-                    ) : (
-                      <div className="row content">
-                        <div className="mb-3 col-sm-12 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.line1}
-                            name="line1"
-                            id="line1"
-                            placeholder="Line1"
-                            onChange={e => handleRegistrationDetail('line1', e.target.value)}
-                          />
                         </div>
-                        <div className="mb-3 col-sm-12 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.line2}
-                            name="line2"
-                            id="line2"
-                            placeholder="Line2"
-                            onChange={e => handleRegistrationDetail('line2', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-6 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.city}
-                            name="city"
-                            id="city"
-                            placeholder="City"
-                            onChange={e => handleRegistrationDetail('city', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-6 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.state}
-                            name="state"
-                            id="state"
-                            placeholder="State"
-                            onChange={e => handleRegistrationDetail('state', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-6 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.country}
-                            name="country"
-                            id="country"
-                            placeholder="Country"
-                            onChange={e => handleRegistrationDetail('country', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-6 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.zip}
-                            name="zip"
-                            id="zip"
-                            placeholder="Zip"
-                            onChange={e => handleRegistrationDetail('zip', e.target.value)}
-                          />
-                        </div>
-                        <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
-                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleSignup(registrationDetail)}>
-                            Register
-                          </button>
-                        </div>
-                        <div className="col-sm-12 d-grid mb-3 text-center">
-                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
+                      ) : (
+                        <div className="row content">
+                          <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
+                            <button type="submit" className="btn btn-secondary btn-flat">
+                              Register
+                            </button>
+                          </div>
+                          <div className="col-sm-12 d-grid mb-3 text-center">
+                            {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
                             Back
                           </button> */}
-                          <a href="#" className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}>
-                            <i className="bi bi-arrow-left me-2"></i>Back
-                          </a>
-                        </div>
+                            <a className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}>
+                              <i className="bi bi-arrow-left me-2"></i>Back
+                            </a>
+                          </div>
 
-                        {/* <div className="col-sm-12 d-grid mb-3">
+                          {/* <div className="col-sm-12 d-grid mb-3">
                                                 <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
                                             </div> */}
-                      </div>
-                    )}
-                  </form>
+                        </div>
+                      )}
+                    </form>
+                  </Formik>
                 </div>
               </div>
             </div>
