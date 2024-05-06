@@ -51,6 +51,7 @@ const Login: React.FC = () => {
   const [testimonialData, setTestimonialData] = useState<any>([]);
   const [sliderImages, setSliderImages] = useState([]);
   const [sliderBannerImages, setSliderBannerImages] = useState<any>([]);
+    const { data: categoriesList } = useQuery('categories', getCategories);
 
   const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
 
@@ -201,33 +202,38 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="feature-categories-wrapper">
-            {categories?.result?.length > 0
-              ? categories?.result.map((value: any, key: number) => {
-                  if (value.parentCategory) return null;
-                  return (
-                    <div
-                      style={{ cursor: 'pointer' }}
-                      className="featured-categories-column text-center"
-                      key={key}
-                      onClick={() => navigate(`/products?category=${value._id}`)}
-                    >
-                      <div className="feature-categories-inner">
-                        <div className="categories-img">
-                          <a href="javascript:void(0)">
+           {categories?.result?.length > 0
+    ? categories?.result.map((value: any, key: number) => {
+        if (value.parentCategory) return null;
+        const subCategories = categoriesList?.result?.filter((i: any) => i.parentCategory?._id === value._id) || [];
+        const totalItems = subCategories?.length
+            ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0) + value.itemCount
+            : value.itemCount;
+
+        return (
+            <div
+                style={{ cursor: 'pointer' }}
+                className="featured-categories-column text-center"
+                key={key}
+                onClick={() => navigate(`/products?category=${value._id}`)}
+            >
+                <div className="feature-categories-inner">
+                    <div className="categories-img">
+                        <a href="javascript:void(0)">
                             {' '}
                             <img className="img-fluid" style={{}} src={value.image} alt="images" />
-                          </a>
-                        </div>
-                        {/* TODO: CHANGE TO REAL NUMBER */}
-                        <div className="categories-product text-center">{value.itemCount} Products</div>
-                      </div>
-                      <h6 className="categories-title fw-medium mt-3">
-                        <a href="javascript:void(0)">{value.name}</a>
-                      </h6>
+                        </a>
                     </div>
-                  );
-                })
-              : ''}
+                    <div className="categories-product text-center">{totalItems} Products</div>
+                </div>
+                <h6 className="categories-title fw-medium mt-3">
+                    <a href="javascript:void(0)">{value.name}</a>
+                </h6>
+            </div>
+        );
+    })
+    : ''}
+
             {/* <div className="featured-categories-column text-center">
                             <div className="feature-categories-inner">
                                 <div className="categories-img">
