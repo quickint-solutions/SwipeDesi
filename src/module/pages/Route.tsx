@@ -880,6 +880,9 @@ const RouteComponent: React.FC = () => {
                   <li>
                     <a href="/testimonials">Testimonials</a>
                   </li>
+                  <li>
+                    <a href="/faq">FAQs</a>
+                  </li>
                 </ul>
               </div>
             </div>
