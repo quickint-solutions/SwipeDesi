@@ -3,8 +3,9 @@ import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth.context';
+import { useParams } from 'react-router-dom';
+import Category from '../Category/Category';
 
 export default function Products() {
   const { search, categories, setCategories } = useContext(AuthContext);
@@ -18,6 +19,14 @@ export default function Products() {
   useEffect(() => {
     mutate({ categories: categories, search });
   }, [categories, search]);
+
+  const params = new URLSearchParams(window.location.search);
+  const categoryName = params.get('category');
+  const category = categoriesData.find((i: any) => {
+    if (i._id === categoryName) {
+      return i.name;
+    }
+  });
 
   return (
     <div>
@@ -35,11 +44,11 @@ export default function Products() {
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">Products</li>
+                      <li className="breadcrumb-item active">{category?.name || 'Products'}</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>Products</strong>
+                    <strong>{category?.name || 'Products'}</strong>
                   </h2>
                 </div>
               </div>
