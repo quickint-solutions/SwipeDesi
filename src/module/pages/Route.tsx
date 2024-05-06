@@ -55,9 +55,9 @@ const RouteComponent: React.FC = () => {
 
   const { mutate: handleSignup, isLoading } = useMutation(signup, {
     onSuccess: data => {
-      (window as any).$('#formLoginRegister').modal('hide');
-      (window as any).$('#formLoginRegister').modal('show');
       alert('User registered successfully, Please Login now!');
+      (window as any).$('#formLoginRegister').modal('hide');
+      setIsShowLoginForm(true);
     },
     onError: (error: any) => {
       alert(error.response.data.message);
@@ -123,7 +123,7 @@ const RouteComponent: React.FC = () => {
     },
     onError: error => {
       alert('Invalid email or password');
-      (window as any).$('#formLoginRegister').modal('hide');
+      (window as any).$('#formLoginRegister').modal('show');
     },
   });
 
