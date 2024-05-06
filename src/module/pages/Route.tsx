@@ -471,6 +471,7 @@ const RouteComponent: React.FC = () => {
                             value={registrationDetail.first}
                             name="first"
                             id="first"
+                            required
                             placeholder="First Name"
                             onChange={e => handleRegistrationDetail('first', e.target.value)}
                           />
@@ -482,6 +483,7 @@ const RouteComponent: React.FC = () => {
                             value={registrationDetail.last}
                             name="lastName"
                             id="lastName"
+                            required
                             placeholder="last Name"
                             onChange={e => handleRegistrationDetail('last', e.target.value)}
                           />
@@ -504,6 +506,7 @@ const RouteComponent: React.FC = () => {
                             value={registrationDetail.number}
                             name="number"
                             id="number"
+                            required
                             placeholder="Number"
                             onChange={e => handleRegistrationDetail('number', e.target.value)}
                           />
@@ -515,6 +518,7 @@ const RouteComponent: React.FC = () => {
                             value={registrationDetail.email}
                             name="email"
                             id="email"
+                            required
                             placeholder="Email"
                             onChange={e => handleRegistrationDetail('email', e.target.value)}
                           />
@@ -525,6 +529,7 @@ const RouteComponent: React.FC = () => {
                             type="password"
                             value={registrationDetail.password}
                             name="password"
+                            required
                             id="password"
                             placeholder="Password"
                             onChange={e => handleRegistrationDetail('password', e.target.value)}
