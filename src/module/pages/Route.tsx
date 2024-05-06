@@ -202,14 +202,14 @@ const RouteComponent: React.FC = () => {
                           </a>
                           <a
                             className="dropdown-item"
-                            href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=fr&_x_tr_hl=en-US&_x_tr_pto=wapp"
+                            href="https://www-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=fr&_x_tr_hl=en-US&_x_tr_pto=wapp"
                           >
                             <img className="img-fluid country-flag" src="images/country-flags/09.jpg" alt="" />
                             Francais
                           </a>
                           <a
                             className="dropdown-item"
-                            href="https://staging-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=pa&_x_tr_hl=en-US&_x_tr_pto=wapp"
+                            href="https://www-dhknd-ca.translate.goog/?_x_tr_sl=auto&_x_tr_tl=pa&_x_tr_hl=en-US&_x_tr_pto=wapp"
                           >
                             <img className="img-fluid country-flag" src="images/country-flags/12.jpg" alt="" />
                             Punjabi
