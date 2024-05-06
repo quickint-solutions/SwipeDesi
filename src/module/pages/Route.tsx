@@ -196,7 +196,7 @@ const RouteComponent: React.FC = () => {
                           <img className="img-fluid" src={languageLogo} alt="" /> English<i className="fas fa-chevron-down fa-xs"></i>
                         </a>
                         <div className="dropdown-menu mt-0" aria-labelledby="dropdownMenuButton2">
-                          <a className="dropdown-item" onClick={() => navigate('https://staging.dhknd.ca')}>
+                          <a className="dropdown-item" href="https://www.dhknd.ca/">
                             <img className="img-fluid country-flag" src="images/country-flags/02.jpg" alt="" />
                             English
                           </a>
