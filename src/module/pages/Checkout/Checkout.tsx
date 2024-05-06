@@ -253,7 +253,7 @@ const Checkout: React.FC = () => {
                 </div>
                 <div className="checkout checkout-form">
                   <form className="row">
-                    <div className="mb-3 col-sm-12">
+                    <div className="mb-3 col-sm-6">
                       <label className="form-label">First name</label>
                       <input
                         type="text"
@@ -263,7 +263,7 @@ const Checkout: React.FC = () => {
                         onChange={e => handleChangeBillingDetail('firstName', e.target.value)}
                       />
                     </div>
-                    <div className="mb-3 col-sm-12">
+                    <div className="mb-3 col-sm-6">
                       <label className="form-label">Last name</label>
                       <input
                         type="text"
@@ -273,7 +273,7 @@ const Checkout: React.FC = () => {
                         onChange={e => handleChangeBillingDetail('lastName', e.target.value)}
                       />
                     </div>
-                    <div className="mb-3 col-sm-12">
+                    <div className="mb-3 col-sm-6">
                       <label className="form-label">Company name</label>
                       <input
                         type="text"
@@ -283,7 +283,7 @@ const Checkout: React.FC = () => {
                         onChange={e => handleChangeBillingDetail('companyName', e.target.value)}
                       />
                     </div>
-                    <div className="mb-3 col-sm-12">
+                    <div className="mb-3 col-sm-6">
                       <label className="form-label">GST</label>
                       <input
                         type="text"
@@ -318,7 +318,7 @@ const Checkout: React.FC = () => {
                         onChange={e => handleChangeBillingDetail('addressLine2', e.target.value)}
                       />
                     </div>
-                    <div className="mb-3 col-sm-12 select-border">
+                    <div className="mb-3 col-sm-6 select-border">
                       <label className="form-label">City</label>
                       <input
                         type="text"
@@ -328,7 +328,7 @@ const Checkout: React.FC = () => {
                         onChange={e => handleChangeBillingDetail('city', e.target.value)}
                       />
                     </div>
-                    <div className="mb-3 select-border col-sm-12">
+                    <div className="mb-3 select-border col-sm-6">
                       <label className="form-label">State</label>
                       <select className="form-control basic-select" onChange={e => handleChangeBillingDetail('state', e.target.value)}>
                         {provinces.map((value: any, key: number) => (
@@ -336,7 +336,7 @@ const Checkout: React.FC = () => {
                         ))}
                       </select>
                     </div>
-                    <div className="mb-3 col-sm-12">
+                    <div className="mb-3 col-sm-6">
                       <label className="form-label">ZIP</label>
                       <input
                         type="text"
@@ -347,7 +347,7 @@ const Checkout: React.FC = () => {
                       />
                     </div>
 
-                    <div className="mb-3 col-sm-12">
+                    <div className="mb-3 col-sm-6">
                       <label className="form-label">Phone</label>
                       <input
                         type="text"
@@ -392,7 +392,7 @@ const Checkout: React.FC = () => {
                 {!shippingDetailsSameAsBilling && (
                   <div className="checkout checkout-form">
                     <form className="row">
-                      <div className="mb-3 col-sm-12">
+                      <div className="mb-3 col-sm-6">
                         <label className="form-label">First name</label>
                         <input
                           type="text"
@@ -402,7 +402,7 @@ const Checkout: React.FC = () => {
                           onChange={e => handleChangeShippingDetail('firstName', e.target.value)}
                         />
                       </div>
-                      <div className="mb-3 col-sm-12">
+                      <div className="mb-3 col-sm-6">
                         <label className="form-label">Last name</label>
                         <input
                           type="text"
@@ -412,7 +412,7 @@ const Checkout: React.FC = () => {
                           onChange={e => handleChangeShippingDetail('lastName', e.target.value)}
                         />
                       </div>
-                      <div className="mb-3 col-sm-12">
+                      <div className="mb-3 col-sm-6">
                         <label className="form-label">Company name</label>
                         <input
                           type="text"
@@ -422,7 +422,7 @@ const Checkout: React.FC = () => {
                           onChange={e => handleChangeShippingDetail('companyName', e.target.value)}
                         />
                       </div>
-                      <div className="mb-3 col-sm-12">
+                      <div className="mb-3 col-sm-6">
                         <label className="form-label">GST</label>
                         <input
                           type="text"
@@ -457,7 +457,7 @@ const Checkout: React.FC = () => {
                           onChange={e => handleChangeShippingDetail('addressLine2', e.target.value)}
                         />
                       </div>
-                      <div className="mb-3 col-sm-12 select-border">
+                      <div className="mb-3 col-sm-6 select-border">
                         <label className="form-label">City</label>
                         <input
                           type="text"
@@ -467,7 +467,7 @@ const Checkout: React.FC = () => {
                           onChange={e => handleChangeShippingDetail('city', e.target.value)}
                         />
                       </div>
-                      <div className="mb-3 select-border col-sm-12">
+                      <div className="mb-3 select-border col-sm-6">
                         <label className="form-label">State</label>
                         <select className="form-control basic-select" onChange={e => handleChangeShippingDetail('state', e.target.value)}>
                           {provinces.map((value: any, key: number) => (
@@ -475,7 +475,7 @@ const Checkout: React.FC = () => {
                           ))}
                         </select>
                       </div>
-                      <div className="mb-3 col-sm-12">
+                      <div className="mb-3 col-sm-6">
                         <label className="form-label">ZIP</label>
                         <input
                           type="text"
@@ -486,7 +486,7 @@ const Checkout: React.FC = () => {
                         />
                       </div>
 
-                      <div className="mb-3 col-sm-12">
+                      <div className="mb-3 col-sm-6">
                         <label className="form-label">Phone</label>
                         <input
                           type="text"
