@@ -1,4 +1,4 @@
-import React, { lazy, useState, useContext } from 'react';
+import React, { lazy, useState, useContext, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import PayIcon from '../../images/pay-icon.png';
 import { getUserDetail } from '../../helpers/common';
@@ -22,6 +22,8 @@ import expertLogo from '../../images/topbar-avtar-icon.png';
 import { getWishList } from '../../apiV2/wishlist';
 import { sendLead } from '../../apiV2/leads';
 import Order from './Order/Order';
+import { forgotPasswordAPI } from '../../apiV2/forgotpassword';
+import { resetPasswordAPI } from '../../apiV2/resetPassword';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -42,6 +44,18 @@ const RouteComponent: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
+
+  const [isForgotPassword, setIsForgotPassword] = useState(true);
+  const [forgotPasswordScreen1, setForgotPasswordScreen1] = useState(true);
+  const [forgotPaswordDetails, setForgotPaswordDetails] = useState({
+    email: '',
+  });
+  const [resetPaswordDetails, setResetPaswordDetails] = useState({
+    otp: '',
+    password1: '',
+    password2: '',
+  });
+
   const [registrationDetail, setRegistrationDetail] = useState({
     first: '',
     last: '',
@@ -93,6 +107,18 @@ const RouteComponent: React.FC = () => {
       [key]: value,
     }));
   };
+  const handleResetPasswordDetail = (key: string, value: any) => {
+    setResetPaswordDetails((values: any) => ({
+      ...values,
+      [key]: value,
+    }));
+  };
+  const handleForgotPasswordDetail = (key: string, value: any) => {
+    setForgotPaswordDetails((values: any) => ({
+      ...values,
+      [key]: value,
+    }));
+  };
 
   const handleUserCredential = (key: string, value: any) => {
     setUserDetail((values: any) => ({
@@ -122,6 +148,27 @@ const RouteComponent: React.FC = () => {
     },
     onError: (error: any) => {
       alert(error.response.data.message);
+    },
+  });
+
+  const { mutate: handleForgotPassword } = useMutation(forgotPasswordAPI, {
+    onSuccess: data => {
+      alert('Reset password link has been sent to your email');
+    },
+    onError: error => {
+      console.log('error -> ', error);
+    },
+  });
+
+  const { mutate: handleResetPassword } = useMutation(resetPasswordAPI, {
+    onSuccess: data => {
+      console.log('ForgotPassworddata -> ', data);
+      (window as any).$('#forgotPasswordModal').modal('hide');
+      alert('Password reset successfully please login now!');
+      (window as any).$('#formLoginRegister').modal('show');
+    },
+    onError: error => {
+      console.log('error -> ', error);
     },
   });
 
@@ -406,7 +453,7 @@ const RouteComponent: React.FC = () => {
             <div className="modal-body">
               <div className="box-content">
                 <div className={isShowLoginForm ? 'form-login active' : 'form-login'}>
-                  <form method="post" className="login">
+                  <form className="login">
                     <h4 className="form-title">Sign in</h4>
                     <div className="row content">
                       <div className="mb-3 col-sm-12 username">
@@ -441,7 +488,14 @@ const RouteComponent: React.FC = () => {
                           </label>
                         </div>
                         <div className="lost_password">
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+                          <a
+                            onClick={() => {
+                              setIsForgotPassword(true);
+                              (window as any).$('#formLoginRegister').modal('hide');
+                            }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#forgotPasswordModal"
+                          >
                             Lost your password?
                           </a>
                         </div>
@@ -460,7 +514,7 @@ const RouteComponent: React.FC = () => {
                   </form>
                 </div>
                 <div className={!isShowLoginForm ? 'form-register active' : 'form-register'}>
-                  <form method="post" className="register">
+                  <form className="register">
                     <h4 className="form-title">REGISTER</h4>
                     {isShowRefisterFirstScreen ? (
                       <div className="row content">
@@ -542,8 +596,8 @@ const RouteComponent: React.FC = () => {
                               {isLoading ? 'Loading' : 'Register'}
                             </button>
                           </div>
-                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(false)}>
-                            Next
+                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
+                            Back
                           </button> */}
                         </div>
                         {/* <div className="col-sm-12 d-grid mb-3">
@@ -655,27 +709,98 @@ const RouteComponent: React.FC = () => {
               <div className="modal-body">
                 <div className="box-content">
                   <div className="form-forgot-password">
-                    <form method="post" className="forgot-password">
-                      <h4 className="form-title mb-2">Forgot Password</h4>
-                      <p className="mb-4 pb-1">
-                        Please enter your username or email address. You will receive a link to create a new password via email.
-                      </p>
-                      <div className="row content">
-                        <div className="mb-3 col-sm-12 email">
-                          <input type="text" className="form-control" name="email" id="email" placeholder="Username or Email" />
-                        </div>
+                    <form className="forgot-password">
+                      {forgotPasswordScreen1 ? (
+                        <>
+                          <div className="row content">
+                            <h4 className="form-title mb-2">Forgot Password</h4>
+                            <p className="mb-4 pb-1">
+                              Please enter your username or email address. You will receive a link to create a new password via email.
+                            </p>
+                            <div className="row content">
+                              <div className="mb-3 col-sm-12 email">
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={forgotPaswordDetails.email}
+                                  name="forgotPaswordEmail"
+                                  id="forgotPaswordEmail"
+                                  placeholder="Enter your email"
+                                  onChange={e => handleForgotPasswordDetail('email', e.target.value)}
+                                />
+                              </div>
 
-                        <div className="col-sm-12 d-grid mb-3">
-                          <button type="submit" className="btn btn-primary btn-flat">
-                            Next
-                          </button>
+                              <div className="col-sm-12 d-grid mb-3">
+                                <button
+                                  type="submit"
+                                  className="btn btn-primary btn-flat"
+                                  onClick={() => {
+                                    setForgotPasswordScreen1(false);
+                                    handleForgotPassword(forgotPaswordDetails);
+                                  }}
+                                >
+                                  Next
+                                </button>
+                              </div>
+                              <div className="col-sm-12 d-grid mb-3 text-center">
+                                <a href="#" className="back-to-login">
+                                  <i className="bi bi-arrow-left me-2"></i>Back to Login
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="row content">
+                          <h4 className="form-title mb-2">Reset Password</h4>
+                          <p className="mb-4 pb-1">Please enter your OTP and create a new password.</p>
+                          <div className="row content">
+                            <div className="mb-3 col-sm-12 email">
+                              <input
+                                type="text"
+                                className="form-control"
+                                value={resetPaswordDetails.otp}
+                                name="forgotPaswordOtp"
+                                id="forgotPaswordOtp"
+                                placeholder="Enter your Otp"
+                                onChange={e => handleResetPasswordDetail('otp', e.target.value)}
+                              />
+                            </div>
+                            <div className="mb-3 col-sm-12 email">
+                              <input
+                                type="password"
+                                className="form-control"
+                                value={resetPaswordDetails.password1}
+                                name="forgotPaswordOtp"
+                                id="forgotPaswordOtp"
+                                placeholder="Create New Password"
+                                onChange={e => handleResetPasswordDetail('password1', e.target.value)}
+                              />
+                            </div>
+                            <div className="mb-3 col-sm-12 email">
+                              <input
+                                type="password"
+                                className="form-control"
+                                value={resetPaswordDetails.password2}
+                                name="forgotPaswordOtp"
+                                id="forgotPaswordOtp"
+                                placeholder="Confirm New Password"
+                                onChange={e => handleResetPasswordDetail('password2', e.target.value)}
+                              />
+                            </div>
+                            <div className="col-sm-12 d-grid mb-3">
+                              <button type="button" className="btn btn-primary btn-flat" onClick={() => handleResetPassword(resetPaswordDetails)}>
+                                Reset Password
+                              </button>
+                            </div>
+                            <div className="col-sm-12 d-grid mb-3 text-center">
+                              <a className="back-to-login" onClick={() => setForgotPasswordScreen1(true)} style={{ cursor: 'pointer' }}>
+                                <i className="bi bi-arrow-left me-2"></i>Back to Reset Password
+                              </a>
+                            </div>
+                          </div>
                         </div>
-                        <div className="col-sm-12 d-grid mb-3 text-center">
-                          <a href="#" className="back-to-login">
-                            <i className="bi bi-arrow-left me-2"></i>Back to Login
-                          </a>
-                        </div>
-                      </div>
+                      )}
                     </form>
                   </div>
                 </div>
