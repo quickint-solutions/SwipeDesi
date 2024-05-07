@@ -131,12 +131,11 @@ const Login: React.FC = () => {
 
           <OwlCarousel className="owl-theme" items={1} nav={true} dots={false} loop={true} margin={10}>
             {_.chunk(categories?.result?.filter((i: any) => !i.parentCategory) || [], 5).map((categoriesData: any, key: number) => {
-              console.log('categoriesData -> ', categoriesData);
               return (
                 <div className={`feature-categories-wrapper`}>
                   {categoriesData.map((value: any, key: number) => {
                     if (value.parentCategory) return null;
-                    const subCategories = categoriesData?.filter((i: any) => i.parentCategory?._id === value._id) || [];
+                    const subCategories = categories?.filter((i: any) => i.parentCategory?._id === value._id) || [];
                     const totalItems = subCategories?.length
                       ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0) + value.itemCount
                       : value.itemCount;
