@@ -456,7 +456,7 @@ const ShopSingle: React.FC = () => {
                         <div className="tab-pane fade" id="nav-custom" role="tabpanel" aria-labelledby="nav-custom-tab">
                           <div className="row">
                             <div className="col-12">
-                              <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.custom }}></div>
+                              <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.installationGuide }}></div>
                             </div>
                           </div>
                         </div>
