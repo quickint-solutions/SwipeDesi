@@ -20,6 +20,7 @@ import Instagram2 from '../../../images/instagram/instagram-02.jpg';
 import Instagram3 from '../../../images/instagram/instagram-03.jpg';
 import Instagram4 from '../../../images/instagram/instagram-04.jpg';
 import Instagram5 from '../../../images/instagram/instagram-05.jpg';
+import _ from 'lodash';
 
 import { useAppSelector } from '../../../api/store/configureStore';
 
@@ -127,7 +128,50 @@ const Login: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="feature-categories-wrapper">
+
+          <OwlCarousel className="owl-theme" items={1} nav={true} dots={false} loop={true} margin={10}>
+            {_.chunk(categories?.result?.filter((i: any) => !i.parentCategory) || [], 5).map((categoriesData: any, key: number) => {
+              console.log('categoriesData -> ', categoriesData);
+              return (
+                <div className={`feature-categories-wrapper`}>
+                  {categoriesData.map((value: any, key: number) => {
+                    if (value.parentCategory) return null;
+                    const subCategories = categoriesData?.filter((i: any) => i.parentCategory?._id === value._id) || [];
+                    const totalItems = subCategories?.length
+                      ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0) + value.itemCount
+                      : value.itemCount;
+
+                    return (
+                      <div
+                        style={{ cursor: 'pointer' }}
+                        className="featured-categories-column text-center"
+                        key={key}
+                        onClick={() => {
+                          navigate(`/products?category=${value._id}`);
+                          setCategories(value._id);
+                        }}
+                      >
+                        <div className="feature-categories-inner">
+                          <div className="categories-img">
+                            <a href="javascript:void(0)">
+                              {' '}
+                              <img className="img-fluid" style={{}} src={value.image} alt="images" />
+                            </a>
+                          </div>
+                          <div className="categories-product text-center">{totalItems} Products</div>
+                        </div>
+                        <h6 className="categories-title fw-medium mt-3">
+                          <a href="javascript:void(0)">{value.name}</a>
+                        </h6>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </OwlCarousel>
+
+          {/* <div className="feature-categories-wrapper">
             {categories?.result?.length > 0
               ? categories?.result.map((value: any, key: number) => {
                   if (value.parentCategory) return null;
@@ -162,63 +206,7 @@ const Login: React.FC = () => {
                   );
                 })
               : ''}
-
-            {/* <div className="featured-categories-column text-center">
-                            <div className="feature-categories-inner">
-                                <div className="categories-img">
-                                    <a href="#"> <img className="img-fluid" src={category01} alt="images" /></a>
-                                </div>
-                                <div className="categories-product text-center">
-                                    15 Products
-                                </div>
-                            </div>
-                            <h6 className="categories-title fw-medium mt-3"><a href="#">Mandir</a></h6>
-                        </div>
-                        <div className="featured-categories-column text-center">
-                            <div className="feature-categories-inner">
-                                <div className="categories-img">
-                                    <a href="#"> <img className="img-fluid" src={category02} alt="images" /></a>
-                                </div>
-                                <div className="categories-product text-center">
-                                    10 Products
-                                </div>
-                            </div>
-                            <h6 className="categories-title fw-medium mt-3"><a href="#">Furniture</a></h6>
-                        </div>
-                        <div className="featured-categories-column text-center">
-                            <div className="feature-categories-inner">
-                                <div className="categories-img">
-                                    <a href="#"> <img className="img-fluid" src={category03} alt="images" /></a>
-                                </div>
-                                <div className="categories-product text-center">
-                                    17 Products
-                                </div>
-                            </div>
-                            <h6 className="categories-title fw-medium mt-3"><a href="#">Handicraft</a></h6>
-                        </div>
-                        <div className="featured-categories-column text-center">
-                            <div className="feature-categories-inner">
-                                <div className="categories-img">
-                                    <a href="#"> <img className="img-fluid" src={category04} alt="images" /></a>
-                                </div>
-                                <div className="categories-product text-center">
-                                    27 Products
-                                </div>
-                            </div>
-                            <h6 className="categories-title fw-medium mt-3"><a href="#">Handicraft</a></h6>
-                        </div>
-                        <div className="featured-categories-column text-center">
-                            <div className="feature-categories-inner">
-                                <div className="categories-img">
-                                    <a href="#"> <img className="img-fluid" src={category05} alt="images" /></a>
-                                </div>
-                                <div className="categories-product text-center">
-                                    12 Products
-                                </div>
-                            </div>
-                            <h6 className="categories-title fw-medium mt-3"><a href="#">Pooja Accessories</a></h6>
-                        </div> */}
-          </div>
+          </div> */}
         </div>
       </section>
       {/* <!--=================================
@@ -862,40 +850,6 @@ const Login: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  {/* <div className="testimonial">
-                                        <div className="testimonial-quote-icon">
-                                            <QuoteSvg></QuoteSvg>
-                                        </div>
-                                        <div className="testimonial-content">
-                                            <p className="mb-0 "><i>So, how can we stay on course with all the distractions in our lives? Willpower is a good start, the distractions are everywhere and endless but it’s very difficult to stay on track simply through willpower.</i> </p>
-                                        </div>
-                                        <div className="testimonial-author info-right">
-                                            <div className="testimonial-avatar avatar">
-                                                <img className="img-fluid" src={AvtarIcon02} alt="" />
-                                            </div>
-                                            <div className="testimonial-name d-flex align-items-center">
-                                                <h6 className="author-tittle text-white">Harry Russell</h6>
-                                                <span className="text-white">Advisors</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="testimonial">
-                                        <div className="testimonial-quote-icon">
-                                            <QuoteSvg></QuoteSvg>
-                                        </div>
-                                        <div className="testimonial-content">
-                                            <p className="mb-0 "><i>So, how can we stay on course with all the distractions in our lives? Willpower is a good start, the distractions are everywhere and endless but it’s very difficult to stay on track simply through willpower.</i> </p>
-                                        </div>
-                                        <div className="testimonial-author info-right">
-                                            <div className="testimonial-avatar avatar">
-                                                <img className="img-fluid" src={AvtarIcon03} alt="" />
-                                            </div>
-                                            <div className="testimonial-name d-flex align-items-center">
-                                                <h6 className="author-tittle text-white">Harry Russell</h6>
-                                                <span className="text-white">Advisors</span>
-                                            </div>
-                                        </div>
-                                    </div> */}
                 </OwlCarousel>
               </div>
             </div>
