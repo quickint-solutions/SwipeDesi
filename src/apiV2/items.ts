@@ -6,6 +6,7 @@ export const getItems = async (params?: any) => {
     params: {
       searchFields: 'name',
       search: params.search,
+      pageSize: 1000,
       filter: params.categories
         ? JSON.stringify({
             categories: params.categories,

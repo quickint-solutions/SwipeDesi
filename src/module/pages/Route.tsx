@@ -413,6 +413,7 @@ const RouteComponent: React.FC = () => {
                             setCategories(value._id);
                             navigate(`/products?category=${value._id}`);
                           }}
+                          style={{ cursor: 'pointer' }} // Add cursor style here
                         >
                           <div className="nav-link nav-link-flex" aria-current="page">
                             <img src={value.icon} style={{ width: 18 }} />
@@ -591,7 +592,21 @@ const RouteComponent: React.FC = () => {
                               disabled={isLoading}
                               type="button"
                               className="btn btn-secondary btn-flat"
-                              onClick={() => handleSignup(registrationDetail)}
+                              onClick={() => {
+                                // check all fields are filled
+                                if (
+                                  !registrationDetail.first ||
+                                  !registrationDetail.last ||
+                                  !registrationDetail.number ||
+                                  !registrationDetail.email ||
+                                  !registrationDetail.password
+                                ) {
+                                  alert('Please fill all fields');
+                                  return;
+                                }
+
+                                handleSignup(registrationDetail);
+                              }}
                             >
                               {isLoading ? 'Loading' : 'Register'}
                             </button>
@@ -673,7 +688,23 @@ const RouteComponent: React.FC = () => {
                           />
                         </div>
                         <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
-                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => handleSignup(registrationDetail)}>
+                          <button
+                            type="button"
+                            className="btn btn-secondary btn-flat"
+                            onClick={() => {
+                              if (
+                                !registrationDetail.first ||
+                                !registrationDetail.last ||
+                                !registrationDetail.number ||
+                                !registrationDetail.email ||
+                                !registrationDetail.password
+                              ) {
+                                alert('Please fill all fields');
+                                return;
+                              }
+                              handleSignup(registrationDetail);
+                            }}
+                          >
                             Register
                           </button>
                         </div>

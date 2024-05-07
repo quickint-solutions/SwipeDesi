@@ -24,6 +24,17 @@ const Checkout: React.FC = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
+    // check all fields in billing and shipping details are filled
+    if (Object.values(billingDetail).some((value: any) => value === '')) {
+      alert('Please fill all the fields in billing details');
+      return;
+    }
+
+    if (Object.values(shippingDetail).some((value: any) => value === '')) {
+      alert('Please fill all the fields in shipping details');
+      return;
+    }
+
     if (!stripe || !elements) {
       return;
     }

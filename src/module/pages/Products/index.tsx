@@ -13,6 +13,7 @@ export default function Products() {
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
+  const [openDropdown, setOpenDropdown] = useState(null); // Initialize with null or an initial value
 
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
 
@@ -88,35 +89,38 @@ export default function Products() {
                             : category.itemCount;
 
                           return (
-                            <li>
+                            <li key={category._id}>
                               <div
                                 style={{ cursor: 'pointer', marginBottom: 5 }}
                                 className="d-flex"
-                                onClick={() => (totalItems ? setCategories(category._id) : null)}
+                                onClick={() => (totalItems ? setOpenDropdown(openDropdown === category._id ? null : category._id) : null)}
                               >
                                 {category.name}
                                 <span className="ms-auto">
-                                  <div className="count">{totalItems}</div>
+                                  <div>
+                                    {totalItems} {openDropdown === category._id ? '▼' : '▶'}
+                                  </div>
                                 </span>
                               </div>
-                              {subCategories.length > 0 && (
+                              {openDropdown === category._id && subCategories.length > 0 && (
                                 <div className="widget-content" style={{ paddingLeft: 20 }}>
                                   <div className="widget-categories">
-                                    <ul className="list-unstyled list-style list-style-underline mb-0"></ul>
-                                    {subCategories.map((subCategory: any) => (
-                                      <li>
-                                        <div
-                                          style={{ cursor: 'pointer', marginBottom: 5 }}
-                                          className="d-flex"
-                                          onClick={() => setCategories(subCategory._id)}
-                                        >
-                                          {subCategory.name}
-                                          <span className="ms-auto">
-                                            <div className="count">{subCategory.itemCount}</div>
-                                          </span>
-                                        </div>
-                                      </li>
-                                    ))}
+                                    <ul className="list-unstyled list-style list-style-underline mb-0">
+                                      {subCategories.map((subCategory: any) => (
+                                        <li key={subCategory._id}>
+                                          <div
+                                            style={{ cursor: 'pointer', marginBottom: 5 }}
+                                            className="d-flex"
+                                            onClick={() => setCategories(subCategory._id)}
+                                          >
+                                            {subCategory.name}
+                                            <span className="ms-auto">
+                                              <div className="count">{subCategory.itemCount}</div>
+                                            </span>
+                                          </div>
+                                        </li>
+                                      ))}
+                                    </ul>
                                   </div>
                                 </div>
                               )}
