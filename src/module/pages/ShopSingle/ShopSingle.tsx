@@ -90,10 +90,7 @@ const ShopSingle: React.FC = () => {
 
   return (
     <>
-      <section
-        className="header-inner header-inner-menu bg-overlay-secondary mandir-bg"
-        // style={{ backgroundImage: `url('${categoriesDetails?.image}')` }}
-      >
+      <section className="header-inner header-inner-menu bg-overlay-secondary mandir-bg">
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
@@ -128,10 +125,34 @@ const ShopSingle: React.FC = () => {
               <div className="col-lg-12">
                 <div className="row">
                   <div className="col-md-5 mb-4 mb-md-0">
-                    <div className="slider-slick">
-                      <div className="slider slider-for detail-big-car-gallery">
-                        {itemDetails?.images.map((value: any, key: number) => <img className="img-fluid" src={value} alt="" />)}
+                    <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                      <div className="carousel-inner">
+                        {itemDetails?.images.map((value: any, key: number) => (
+                          <div className={key === 0 ? 'carousel-item active' : 'carousel-item'} key={key}>
+                            <img className="img-fluid" src={value} alt="" />
+                          </div>
+                        ))}
                       </div>
+                      <button
+                        className="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev"
+                        style={{ background: 'rgba(0,0,0,0.1)', padding: 0 }}
+                      >
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                      </button>
+                      <button
+                        className="carousel-control-next"
+                        type="button"
+                        data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next"
+                        style={{ background: 'rgba(0,0,0,0.1)' }}
+                      >
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                      </button>
                     </div>
                   </div>
                   <div className="col-md-7">
