@@ -135,7 +135,7 @@ const Login: React.FC = () => {
                 <div className={`feature-categories-wrapper`}>
                   {categoriesData.map((value: any, key: number) => {
                     if (value.parentCategory) return null;
-                    const subCategories = categories?.filter((i: any) => i.parentCategory?._id === value._id) || [];
+                    const subCategories = categories?.result?.filter((i: any) => i.parentCategory?._id === value._id) || [];
                     const totalItems = subCategories?.length
                       ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0) + value.itemCount
                       : value.itemCount;
