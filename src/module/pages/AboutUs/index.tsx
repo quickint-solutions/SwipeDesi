@@ -297,7 +297,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon" href="images/gallery/01.jpg">
+                      <a className="gallery-img popup-icon">
                         {' '}
                         <i className="fas fa-plus"></i>{' '}
                       </a>
@@ -310,7 +310,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery1} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon" href="images/gallery/02.jpg">
+                      <a className="gallery-img popup-icon">
                         {' '}
                         <i className="fas fa-plus"></i>{' '}
                       </a>
@@ -323,7 +323,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery2} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon" href="images/gallery/03.jpg">
+                      <a className="gallery-img popup-icon">
                         {' '}
                         <i className="fas fa-plus"></i>{' '}
                       </a>
@@ -336,7 +336,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon" href="images/gallery/01.jpg">
+                      <a className="gallery-img popup-icon">
                         {' '}
                         <i className="fas fa-plus"></i>{' '}
                       </a>
@@ -349,7 +349,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery1} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon" href="images/gallery/02.jpg">
+                      <a className="gallery-img popup-icon">
                         {' '}
                         <i className="fas fa-plus"></i>{' '}
                       </a>
@@ -362,7 +362,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery2} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon" href="images/gallery/03.jpg">
+                      <a className="gallery-img popup-icon">
                         {' '}
                         <i className="fas fa-plus"></i>{' '}
                       </a>
@@ -375,7 +375,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon" href="images/gallery/02.jpg">
+                      <a className="gallery-img popup-icon">
                         {' '}
                         <i className="fas fa-plus"></i>{' '}
                       </a>
@@ -388,7 +388,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery1} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon" href="images/gallery/01.jpg">
+                      <a className="gallery-img popup-icon">
                         {' '}
                         <i className="fas fa-plus"></i>
                       </a>
