@@ -414,6 +414,8 @@ const RouteComponent: React.FC = () => {
                             navigate(`/products?category=${value._id}`);
                           }}
                           style={{ cursor: 'pointer' }} // Add cursor style here
+                          data-bs-toggle="collapse"
+                          data-bs-target=".navbar-collapse"
                         >
                           <div className="nav-link nav-link-flex" aria-current="page">
                             <img src={value.icon} style={{ width: 18 }} />
