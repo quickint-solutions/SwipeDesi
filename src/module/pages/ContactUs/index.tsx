@@ -101,7 +101,7 @@ export default function ContactUs() {
                     <ul className="list-unstyled mb-0">
                       <li className="d-flex align-items-center">
                         <i className="bi bi-pin-map"></i>
-                        <span className="text-white">2101-111 Tarawood lane NE, Calgary, T3J5C2, Alberta, Canada</span>
+                        <span className="text-white">260300 Writing Creek Cres, Balzac, AB T4A 0X8 CANADA</span>
                       </li>
                       <li className="d-flex align-items-center">
                         <i className="bi bi-telephone"></i>
