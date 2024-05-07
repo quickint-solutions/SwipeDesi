@@ -413,6 +413,7 @@ const RouteComponent: React.FC = () => {
                             setCategories(value._id);
                             navigate(`/products?category=${value._id}`);
                           }}
+                          style={{ cursor: 'pointer' }} // Add cursor style here
                         >
                           <div className="nav-link nav-link-flex" aria-current="page">
                             <img src={value.icon} style={{ width: 18 }} />
