@@ -874,7 +874,7 @@ const RouteComponent: React.FC = () => {
                 <li>
                   <div className="footer-contact-info">
                     <i className="bi bi-pin-map"></i>
-                    <p className="mb-0">2101-111 Tarawood lane NE, Calgary, T3J5C2, Alberta, Canada</p>
+                    <p className="mb-0">260300 Writing Creek Cres, Balzac, AB T4A 0X8 CANADA</p>
                   </div>
                 </li>
                 <li>

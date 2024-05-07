@@ -248,7 +248,7 @@ const ShopSingle: React.FC = () => {
                       </nav>
                       <div className="tab-content" id="nav-tabContent">
                         <div className="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
-                          <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.descriptions }}></div>
+                          <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.custom }}></div>
                         </div>
                         <div className="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
                           <div className="row">
@@ -426,7 +426,7 @@ const ShopSingle: React.FC = () => {
                         <div className="tab-pane fade" id="nav-custom" role="tabpanel" aria-labelledby="nav-custom-tab">
                           <div className="row">
                             <div className="col-12">
-                              <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.custom }}></div>
+                              <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.installationGuide }}></div>
                             </div>
                           </div>
                         </div>
