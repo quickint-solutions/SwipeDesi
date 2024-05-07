@@ -32,11 +32,11 @@ export default function Testimonials() {
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">Products</li>
+                      <li className="breadcrumb-item active">Testimonials</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>Products</strong>
+                    <strong>Testimonials</strong>
                   </h2>
                 </div>
               </div>

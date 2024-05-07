@@ -825,7 +825,7 @@ const Login: React.FC = () => {
                           Positive: Professionalism, Quality, Responsiveness, Value Perfect quality of all the goods, I have lather bags, wallet, and
                           I am SO happy about their finishing, color style. Experience of the best service 👌, SO happy to have DHKND in CANADA 🇨🇦.
                           Specially in CALGARY. Thank you very much DHKND.
-                        </i>{' '}
+                        </i>
                       </p>
                     </div>
                     <div className="testimonial-author info-right">
