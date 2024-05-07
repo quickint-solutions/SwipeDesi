@@ -1765,6 +1765,19 @@ button.search-button {
   background-color: #F3601E !important;
 }
 
+.owl-nav .owl-prev{
+  width: 50px !important;
+  height: 50px !important;
+  line-height: 50px !important;
+  font-size: 30px !important;
+}
+.owl-nav .owl-next {
+  width: 50px !important;
+  height: 50px !important;
+  line-height: 50px !important;
+  font-size: 30px !important;
+}
+
 .owl-carousel .owl-nav button:hover:before {
   -webkit-transform: scale(1, 1);
   transform: scale(1, 1);
