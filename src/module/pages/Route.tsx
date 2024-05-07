@@ -473,11 +473,16 @@ const RouteComponent: React.FC = () => {
                               className="form-control"
                               name="first"
                               id="first"
-                              placeholder="First Name"
+                              placeholder="First Name *"
                               required
                               value={signUpForm.values.first}
                               onChange={signUpForm.handleChange}
                             />
+                            {signUpForm.touched.first && signUpForm.errors.first ? (
+                              <div className="error" style={{ color: 'red' }}>
+                                First Name is required
+                              </div>
+                            ) : null}
                           </div>
                           <div className="mb-3 col-sm-6 name">
                             <input
@@ -486,10 +491,15 @@ const RouteComponent: React.FC = () => {
                               name="last"
                               id="lastName"
                               required
-                              placeholder="last Name"
+                              placeholder="last Name *"
                               value={signUpForm.values.last}
                               onChange={signUpForm.handleChange}
                             />
+                            {signUpForm.touched.last && signUpForm.errors.last ? (
+                              <div className="error" style={{ color: 'red' }}>
+                                Last Name is required
+                              </div>
+                            ) : null}
                           </div>
                           {/* <div className="mb-3 col-sm-3 email">
                           <input
@@ -509,10 +519,15 @@ const RouteComponent: React.FC = () => {
                               name="number"
                               id="number"
                               required
-                              placeholder="Number"
+                              placeholder="Number *"
                               value={signUpForm.values.number}
                               onChange={signUpForm.handleChange}
                             />
+                            {signUpForm.touched.number && signUpForm.errors.number ? (
+                              <div className="error" style={{ color: 'red' }}>
+                                Number is required
+                              </div>
+                            ) : null}
                           </div>
                           <div className="mb-3 col-sm-12 name">
                             <input
@@ -521,10 +536,15 @@ const RouteComponent: React.FC = () => {
                               name="email"
                               id="email"
                               required
-                              placeholder="Email"
+                              placeholder="Email *"
                               value={signUpForm.values.email}
                               onChange={signUpForm.handleChange}
                             />
+                            {signUpForm.touched.email && signUpForm.errors.email ? (
+                              <div className="error" style={{ color: 'red' }}>
+                                Email is required
+                              </div>
+                            ) : null}
                           </div>
                           <div className="mb-3 col-sm-12 password">
                             <input
@@ -533,10 +553,15 @@ const RouteComponent: React.FC = () => {
                               name="password"
                               required
                               id="password"
-                              placeholder="Password"
+                              placeholder="Password *"
                               value={signUpForm.values.password}
                               onChange={signUpForm.handleChange}
                             />
+                            {signUpForm.touched.password && signUpForm.errors.password ? (
+                              <div className="error" style={{ color: 'red' }}>
+                                Password is required
+                              </div>
+                            ) : null}
                           </div>
 
                           <div className="col-sm-12 d-grid mb-3">
