@@ -17,6 +17,7 @@ import { getItemsByCategory, getItemsById } from '../../../apiV2/items';
 import { AuthContext } from '../../../context/auth.context';
 import { CartContext } from '../../../context/cart.context';
 import ProductItem from '../../../components/ProductItem';
+import { getCategories } from '../../../apiV2/categories';
 
 const ShopSingle: React.FC = () => {
   const navigate = useNavigate();
@@ -40,6 +41,8 @@ const ShopSingle: React.FC = () => {
     }
   });
 
+  const { isLoading: categoriesLoading, data: categories } = useQuery('getCategories', getCategories);
+
   const { data: itemsByCategory } = useQuery('relatedProductData', async () => {
     let productId = searchParams.get('productId');
     if (productId) {
@@ -47,6 +50,9 @@ const ShopSingle: React.FC = () => {
       return await getItemsByCategory(itemDetails?.categories?._id);
     }
   });
+
+  const categoriesDetails =
+    categories?.result?.find((i: any) => i._id === itemDetails?.categories?.parentCategory || itemDetails?.categories?._id) || [];
 
   const addToWishlist = async () => {
     if (userDetail) {
@@ -84,7 +90,10 @@ const ShopSingle: React.FC = () => {
 
   return (
     <>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url('${itemDetails?.images?.[0]}')` }}>
+      <section
+        className="header-inner header-inner-menu bg-overlay-secondary mandir-bg"
+        // style={{ backgroundImage: `url('${categoriesDetails?.image}')` }}
+      >
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
@@ -426,7 +435,7 @@ const ShopSingle: React.FC = () => {
                         <div className="tab-pane fade" id="nav-custom" role="tabpanel" aria-labelledby="nav-custom-tab">
                           <div className="row">
                             <div className="col-12">
-                              <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.installationGuide }}></div>
+                              <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.custom }}></div>
                             </div>
                           </div>
                         </div>
