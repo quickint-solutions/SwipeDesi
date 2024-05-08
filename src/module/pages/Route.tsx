@@ -428,11 +428,7 @@ const RouteComponent: React.FC = () => {
               </ul>
             </div>
             <div className="text-end free-shipping d-none d-lg-block">
-<<<<<<< HEAD
               <a href="#">Transforming houses into homes</a>
-=======
-              <a>Transforming houses into homes</a>
->>>>>>> 34e01ae8594e529b19ccb398a569285cba8b47ae
             </div>
           </div>
         </nav>
