@@ -20,6 +20,8 @@ import Instagram2 from '../../../images/instagram/instagram-02.jpg';
 import Instagram3 from '../../../images/instagram/instagram-03.jpg';
 import Instagram4 from '../../../images/instagram/instagram-04.jpg';
 import Instagram5 from '../../../images/instagram/instagram-05.jpg';
+import zula from '../../../images/zula.jpg';
+import diwan from '../../../images/diwan.jpg';
 import _ from 'lodash';
 
 import { useAppSelector } from '../../../api/store/configureStore';
@@ -291,11 +293,11 @@ const Login: React.FC = () => {
                 <div className="col-12">
                   <div className="furniture-collection mb-4 mt-lg-0 mt-4">
                     <div className="furniture-img">
-                      <img className="img-fluid" src={furnitureImage1} alt="img" />
+                      <img className="img-fluid" src={diwan} alt="img" />
                     </div>
                     <div className="furniture-info">
-                      <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
-                      <h3 className="furniture-title text-white mb-3 mb-sm-4">Wooden Sofa Set</h3>
+                      <p className="text-white text-uppercase mb-2">one of the most popular</p>
+                      <h3 className="furniture-title text-white mb-3 mb-sm-4">Diwan</h3>
                       <a href="#" className="btn btn-light">
                         Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                       </a>
@@ -305,11 +307,11 @@ const Login: React.FC = () => {
                 <div className="col-12">
                   <div className="furniture-collection">
                     <div className="furniture-img">
-                      <img className="img-fluid" src={furnitureImage2} alt="img" />
+                      <img className="img-fluid" src={zula} alt="img" />
                     </div>
                     <div className="furniture-info">
-                      <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
-                      <h3 className="furniture-title text-white mb-3 mb-sm-4">Living Room Furniture</h3>
+                      <p className="text-white text-uppercase mb-2">Handcrafted Traditional Wooden</p>
+                      <h3 className="furniture-title text-white mb-3 mb-sm-4">Carving Zhula</h3>
                       <a href="#" className="btn btn-light">
                         Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                       </a>
@@ -365,30 +367,6 @@ const Login: React.FC = () => {
                       ),
                     )
                   : ''}
-                {/* <div className="col-12">
-                                    <div className="furniture-collection mb-4 mt-lg-0 mt-4">
-                                        <div className="furniture-img">
-                                            <img className="img-fluid" src={FurnitureImg02} alt="img" />
-                                        </div>
-                                        <div className="furniture-info">
-                                            <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
-                                            <h3 className="furniture-title text-white mb-3 mb-sm-4">Wooden Sofa Set</h3>
-                                            <a href="#" className="btn btn-light">Shop Now<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-12">
-                                    <div className="furniture-collection">
-                                        <div className="furniture-img">
-                                            <img className="img-fluid" src={FurnitureImg03} alt="img" />
-                                        </div>
-                                        <div className="furniture-info">
-                                            <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
-                                            <h3 className="furniture-title text-white mb-3 mb-sm-4">Living Room Furniture</h3>
-                                            <a href="#" className="btn btn-light">Shop Now<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                        </div>
-                                    </div>
-                                </div> */}
               </div>
             </div>
           </div>
