@@ -125,36 +125,11 @@ const ShopSingle: React.FC = () => {
               <div className="col-lg-12">
                 <div className="row">
                   <div className="col-md-5 mb-4 mb-md-0">
-                    <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                      <div className="carousel-inner">
-                        {itemDetails?.images.map((value: any, key: number) => (
-                          <div className={key === 0 ? 'carousel-item active' : 'carousel-item'} key={key}>
-                            <img className="img-fluid" src={value} alt="" />
-                          </div>
-                        ))}
-                      </div>
-                      <button
-                        className="carousel-control-prev"
-                        type="button"
-                        data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev"
-                        style={{ background: 'rgba(0,0,0,0.1)', padding: 0 }}
-                      >
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                      </button>
-                      <button
-                        className="carousel-control-next"
-                        type="button"
-                        data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next"
-                        style={{ background: 'rgba(0,0,0,0.1)' }}
-                      >
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                      </button>
-                    </div>
+                    <OwlCarousel autoplayTimeout={3000} autoplay={true} items={1} loop={true} margin={10}>
+                      {itemDetails?.images.map((value: any, key: number) => <img className="img-fluid" src={value} alt="" />)}
+                    </OwlCarousel>
                   </div>
+
                   <div className="col-md-7">
                     <div className="product-detail">
                       <h4 className="fw-600">{itemDetails?.name || 'No Product name'}</h4>
@@ -283,134 +258,129 @@ const ShopSingle: React.FC = () => {
                         <div className="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
                           <div className="row">
                             <div className="col-12">
-                              <h5 className="mb-4 fw-600">4 Reviews for women’s fabric mix midi wrap jumpsuit</h5>
-
+                              <h5 className="mb-4 fw-600">Reviews for DHKND</h5>
                               <div className="commentlist">
-                                <div className="comment-author">
+                                {/* <div className="comment-author">
                                   <img className="avatar avatar-lg rounded-circle" src="images/avatar/01.jpg" alt="" />
-                                </div>
+                                </div> */}
                                 <div className="comment-content">
                                   <div className="reviews">
                                     <p className="meta">
-                                      <strong>Sara Lisbon </strong>(verified owner) – November 8, 2022
+                                      <strong>Baadshah Hai From Fiji </strong> (verified buyer)
                                     </p>
                                     <div className="rating">
                                       <i className="text-warning fas fa-star"></i>
                                       <i className="text-warning fas fa-star"></i>
                                       <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star-half-alt"></i>
-                                      <i className="far fa-star text-warning"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
                                     </div>
                                   </div>
                                   <p>
-                                    For those of you who are serious about having more, doing more, giving more and being more, success is achievable
-                                    with some understanding of what to do, some discipline around planning and execution of those plans and belief
-                                    that you can achieve your desires.
+                                    I was extremely excited about finding this hidden Gem of a place. The owners were very helpful at locating the
+                                    exact Mandir I was in search for. The location had many more unique and stunning Mandirs, Swing sets and
+                                    accessories that are hand-made in Gujarat and possibly other parts of India. The build quality was excellent for
+                                    the product and very fairly priced. The service was exceptional and the owners actually helped me load my
+                                    purchases in my vehicle. It was very much appreciated. Thank you kindly. Looking forward to doing more business
+                                    with you.
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="commentlist">
+                                {/* <div className="comment-author">
+                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/01.jpg" alt="" />
+                                </div> */}
+                                <div className="comment-content">
+                                  <div className="reviews">
+                                    <p className="meta">
+                                      <strong>Deepti Kamal </strong> (verified buyer)
+                                    </p>
+                                    <div className="rating">
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    We had an absolutely fantastic experience with DHKND when we recently bought a temple from them! Heema was
+                                    incredibly kind, courteous and cared about delivering the best product for our needs. The craftsman and quality of
+                                    their work is high and every member of their staff added to the great service. Their shop serves a niche purpose
+                                    so well that I would highly recommend this to anyone looking to purchase a temple or mandir for themselves. They
+                                    went above and beyond the call of duty - helping us not only decide but then carry the heavy temple out, secure it
+                                    in our truck and then even texted us when we got home to ensure we had no problems. Great price, great service and
+                                    incredible people - what more can you ask for!
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="commentlist">
+                                {/* <div className="comment-author">
+                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/01.jpg" alt="" />
+                                </div> */}
+                                <div className="comment-content">
+                                  <div className="reviews">
+                                    <p className="meta">
+                                      <strong>Hemant Tripathi,Surrey, BC </strong> (verified buyer)
+                                    </p>
+                                    <div className="rating">
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    I’m thrilled with the Sevan Wood Mandir and the outstanding service your team provided.
+                                    <br />
+                                    <br />
+                                    The Mandir’s craftsmanship exceeded expectations, adding an elegant touch to our space. The meticulous packaging
+                                    ensured safe delivery to British Columbia, showcasing your commitment to quality.
+                                    <br />
+                                    <br />
+                                    I appreciate the personalized call to showcase other collections and the effort to ensure timely delivery.
+                                    However, a minor inconvenience was the light wiring socket was Indian, requiring an additional converter.
+                                    <br />
+                                    <br />
+                                    Overall, we’re delighted with the product and your service. Thank you for delivering exactly what we were looking
+                                    for.
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="commentlist">
+                                {/* <div className="comment-author">
+                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/01.jpg" alt="" />
+                                </div> */}
+                                <div className="comment-content">
+                                  <div className="reviews">
+                                    <p className="meta">
+                                      <strong>Parijat Hasija </strong> (verified owner)
+                                    </p>
+                                    <div className="rating">
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                      <i className="text-warning fas fa-star"></i>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    Can’t describe Heema ji’s efforts and compassion in words. She helped us to get our new Mandir at our new home
+                                    before hawan in every possible way. Arranging a new beautiful mandir and assembling it in just a one day notice
+                                    time, and then further extending her warm help to drop my mom and wife to our new home, as Mandir won’t fit in
+                                    without lowering my car’s seats, she truly stand out as a true person. I can’t thank enough for her beautiful
+                                    gesture and kindness. Everyone at Hawan praised a lot for this beautiful mandir. Really happy to get a beautiful
+                                    new home for our Kanha 🙏🏻 Thank you Heema ji. Stay blessed 🙏🏻
                                   </p>
                                 </div>
                               </div>
 
-                              <div className="commentlist">
-                                <div className="comment-author">
-                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/01.jpg" alt="" />
-                                </div>
-                                <div className="comment-content">
-                                  <div className="reviews">
-                                    <p className="meta">
-                                      <strong>Sara Lisbon </strong>(verified owner) – November 8, 2022
-                                    </p>
-                                    <div className="rating">
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star-half-alt"></i>
-                                      <i className="far fa-star text-warning"></i>
-                                    </div>
-                                  </div>
-                                  <p>
-                                    For those of you who are serious about having more, doing more, giving more and being more, success is achievable
-                                    with some understanding of what to do, some discipline around planning and execution of those plans and belief
-                                    that you can achieve your desires.
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="commentlist">
-                                <div className="comment-author">
-                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/02.jpg" alt="" />
-                                </div>
-                                <div className="comment-content">
-                                  <div className="reviews">
-                                    <p className="meta">
-                                      <strong>Frank Smith </strong>(verified owner) – November 8, 2022
-                                    </p>
-                                    <div className="rating">
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star-half-alt"></i>
-                                      <i className="far fa-star text-warning"></i>
-                                    </div>
-                                  </div>
-                                  <p>
-                                    There are basically six key areas to higher achievement. Some people will tell you there are four while others may
-                                    tell you there are eight. One thing for certain though, is that irrespective of the number of steps the experts
-                                    talk about, they all originate from the same roots.
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="commentlist">
-                                <div className="comment-author">
-                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/03.jpg" alt="" />
-                                </div>
-                                <div className="comment-content">
-                                  <div className="reviews">
-                                    <p className="meta">
-                                      <strong>Joanna williams </strong>(verified owner) – December 8, 2022
-                                    </p>
-                                    <div className="rating">
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star-half-alt"></i>
-                                      <i className="far fa-star text-warning"></i>
-                                    </div>
-                                  </div>
-                                  <p>
-                                    Success isn’t really that difficult. There is a significant portion of the population here in North America, that
-                                    actually want and need success to be hard! Why? So they then have a built-in excuse when things don’t go their
-                                    way! Pretty sad situation, to say the least.
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="commentlist">
-                                <div className="comment-author">
-                                  <img className="avatar avatar-lg rounded-circle" src="images/avatar/04.jpg" alt="" />
-                                </div>
-                                <div className="comment-content">
-                                  <div className="reviews">
-                                    <p className="meta">
-                                      <strong>Felica Queen </strong>(verified owner) – December 8, 2022
-                                    </p>
-                                    <div className="rating">
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star"></i>
-                                      <i className="text-warning fas fa-star-half-alt"></i>
-                                      <i className="far fa-star text-warning"></i>
-                                    </div>
-                                  </div>
-                                  <p>
-                                    Making a decision to do something – this is the first step. We all know that nothing moves until someone makes a
-                                    decision. The first action is always in making the decision to proceed. This is a fundamental step, which most
-                                    people overlook.
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="mt-4 ">
+                              {/* <div className="mt-4 ">
                                 <h5 className="fw-600">Add a review</h5>
                                 <p>Your email address will not be published. Required fields are marked *</p>
-                              </div>
-                              <form className="row mt-4 align-items-center">
+                              </div> */}
+                              {/* <form className="row mt-4 align-items-center">
                                 <div className="mb-3 col-sm-6">
                                   <label className="form-label">Name*</label>
                                   <input type="text" className="form-control" placeholder="" />
@@ -449,7 +419,7 @@ const ShopSingle: React.FC = () => {
                                     Submit{' '}
                                   </a>
                                 </div>
-                              </form>
+                              </form> */}
                             </div>
                           </div>
                         </div>
