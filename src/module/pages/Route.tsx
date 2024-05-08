@@ -882,7 +882,7 @@ const RouteComponent: React.FC = () => {
                 <li>
                   <div className="footer-contact-info">
                     <i className="bi bi-telephone"></i>
-                    <p className="mb-0">+1 (403) 801-6969,+1 (587) 969-7008</p>
+                    <p className="mb-0">+1 (587) 969-7008</p>
                   </div>
                 </li>
                 <li>

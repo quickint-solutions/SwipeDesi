@@ -105,7 +105,7 @@ export default function ContactUs() {
                       </li>
                       <li className="d-flex align-items-center">
                         <i className="bi bi-telephone"></i>
-                        <span className="text-white">+1 (403) 801-6969, +1 (587) 969-7008</span>
+                        <span className="text-white">+1 (587) 969-7008</span>
                       </li>
                       <li className="d-flex align-items-center">
                         <i className="bi bi-envelope"></i>
