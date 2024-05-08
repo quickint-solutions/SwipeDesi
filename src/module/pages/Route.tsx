@@ -232,7 +232,7 @@ const RouteComponent: React.FC = () => {
                     </div>
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
                       <div className="topbar-call d-inline-flex topbar-divider pe-lg-3">
-                        <a href="tel:+1 (403) 801-6969">
+                        <a href="tel:+1 (587) 969-7008">
                           <i className="bi bi-telephone me-2"></i>+1 (587) 969-7008
                         </a>
                       </div>
