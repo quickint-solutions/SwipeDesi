@@ -60,6 +60,8 @@ const Login: React.FC = () => {
     navigate('/wishlist');
   };
 
+  const isMobile = window.innerWidth < 768;
+
   return (
     <>
       {/* <!--=================================
@@ -121,7 +123,7 @@ const Login: React.FC = () => {
             banner --> */}
       {/* <!--=================================
             feature category --> */}
-      <section className="space-ptb categories-section">
+      <section className="space-ptb categories-section" style={{ paddingBottom: 0 }}>
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -135,8 +137,8 @@ const Login: React.FC = () => {
             </div>
           </div>
 
-          <OwlCarousel className="owl-theme" items={1} nav={true} dots={false} loop={true} margin={10}>
-            {_.chunk(categories?.result?.filter((i: any) => !i.parentCategory) || [], 5).map((categoriesData: any, key: number) => {
+          <OwlCarousel autoplayTimeout={3000} autoplay={true} items={1} loop={true} margin={10}>
+            {_.chunk(categories?.result?.filter((i: any) => !i.parentCategory) || [], isMobile ? 2 : 5).map((categoriesData: any, key: number) => {
               return (
                 <div className={`feature-categories-wrapper`}>
                   {categoriesData.map((value: any, key: number) => {
