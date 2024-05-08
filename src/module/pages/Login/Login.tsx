@@ -33,6 +33,8 @@ import { getCategories } from '../../../apiV2/categories';
 import { getFeaturedItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { AuthContext } from '../../../context/auth.context';
+import { InstagramEmbed } from 'react-social-media-embed';
+import { getInstagram } from '../../../apiV2/instagram';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -50,6 +52,8 @@ const Login: React.FC = () => {
 
   const { isLoading: featuredItemsLoading, data: featuredItems } = useQuery('getFeaturedItems', getFeaturedItems);
 
+  const { isLoading: instagramLoading, data: instagramImages } = useQuery('instagramImages', getInstagram);
+
   const { data: banners, isLoading: bannersLoading } = useQuery('getBanners', getBanners);
   // get first 2 banners
   const bannersList = banners?.result?.slice(0, 2) || [];
@@ -61,6 +65,8 @@ const Login: React.FC = () => {
     event.preventDefault();
     navigate('/wishlist');
   };
+
+  console.log('instagramImages -> ', instagramImages);
 
   const isMobile = window.innerWidth < 768;
 
@@ -989,37 +995,17 @@ const Login: React.FC = () => {
         <div className="container-fluid p-0">
           <div className="row g-0">
             <div className="col-xl-12 col-lg-12 h-100">
+              <div style={{ display: 'flex', justifyContent: 'center' }}></div>
               <OwlCarousel className="owl-theme" items={6} nav={true} dots={false}>
-                <div className="text-center">
-                  <a href="#">
-                    <img className="img-fluid" src={Instagram1} alt="#" />
-                  </a>
-                </div>
-                <div className="text-center">
-                  <a href="#">
-                    <img className="img-fluid" src={Instagram2} alt="#" />
-                  </a>
-                </div>
-                <div className="text-center">
-                  <a href="#">
-                    <img className="img-fluid" src={Instagram3} alt="#" />
-                  </a>
-                </div>
-                <div className="text-center">
-                  <a href="#">
-                    <img className="img-fluid" src={Instagram4} alt="#" />
-                  </a>
-                </div>
-                <div className="text-center">
-                  <a href="#">
-                    <img className="img-fluid" src={Instagram5} alt="#" />
-                  </a>
-                </div>
-                <div className="text-center">
-                  <a href="#">
-                    <img className="img-fluid" src={Instagram2} alt="#" />
-                  </a>
-                </div>
+                {((instagramImages || []) as any)?.data
+                  ?.filter((i: any) => i.thumbnail_url)
+                  ?.map((media: any) => (
+                    <div className="text-center">
+                      <a href="#">
+                        <img className="img-fluid" src={media.thumbnail_url} alt="#" />
+                      </a>
+                    </div>
+                  ))}
               </OwlCarousel>
             </div>
           </div>
