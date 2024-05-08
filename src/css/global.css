@@ -42,7 +42,7 @@
 }
 
 .bg-overlay-secondary:before {
-  background: rgba(18, 18, 18, 0.6);
+  background: rgba(18, 18, 18, 0.2);
   content: "";
   height: 100%;
   left: 0;
