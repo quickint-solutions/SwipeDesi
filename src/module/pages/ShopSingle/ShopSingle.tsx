@@ -90,7 +90,10 @@ const ShopSingle: React.FC = () => {
 
   return (
     <>
-      <section className="header-inner header-inner-menu bg-overlay-secondary mandir-bg">
+      <section
+        className="header-inner header-inner-menu bg-overlay-secondary mandir-bg"
+        style={{ backgroundImage: 'url(' + categoriesDetails?.banner + ')' }}
+      >
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">

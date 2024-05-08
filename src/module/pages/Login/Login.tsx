@@ -288,7 +288,7 @@ const Login: React.FC = () => {
                 <div className="furniture-info">
                   <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
                   <h3 className="furniture-title text-white mb-3 mb-sm-4">Dining Table Set</h3>
-                  <a href="#" className="btn btn-light">
+                  <a href="#" className="btn btn-light" onClick={() => navigate('/products?category=6628c8c9927e3edd23258e23')}>
                     Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                   </a>
                 </div>
@@ -304,7 +304,7 @@ const Login: React.FC = () => {
                     <div className="furniture-info">
                       <p className="text-white text-uppercase mb-2">one of the most popular</p>
                       <h3 className="furniture-title text-white mb-3 mb-sm-4">Diwan</h3>
-                      <a href="#" className="btn btn-light">
+                      <a href="#" className="btn btn-light" onClick={() => navigate('/products?category=6628c8c9927e3edd23258e23')}>
                         Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                       </a>
                     </div>
@@ -1001,7 +1001,7 @@ const Login: React.FC = () => {
                   ?.filter((i: any) => i.thumbnail_url)
                   ?.map((media: any) => (
                     <div className="text-center">
-                      <a href="#">
+                      <a href="https://www.instagram.com/dhknd.ca/">
                         <img className="img-fluid" src={media.thumbnail_url} alt="#" />
                       </a>
                     </div>

@@ -13,7 +13,7 @@ export default function Products() {
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
-  const [openDropdown, setOpenDropdown] = useState(null); // Initialize with null or an initial value
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
 
@@ -29,9 +29,14 @@ export default function Products() {
     }
   });
 
+  const pCategoty = category?.parentCategory ? categoriesList?.result?.find((i: any) => i._id === i.parentCategory?._id) || {} : category;
+
   return (
     <div>
-      <section className="header-inner header-inner-menu bg-overlay-secondary mandir-bg">
+      <section
+        className="header-inner header-inner-menu bg-overlay-secondary mandir-bg"
+        style={{ backgroundImage: 'url(' + pCategoty?.banner + ')' }}
+      >
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
