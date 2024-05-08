@@ -787,8 +787,11 @@ const Login: React.FC = () => {
                     <div className="testimonial-content">
                       <p className="mb-0">
                         <i>
-                          It had an amazing experience with you!!! Your products are just awesome and fantastic...Keep up with the same flow... I am
-                          just glad that I bought from you guys!!! You are really doing a great job... And your service is just amazing 👍👍👍👍
+                          I was extremely excited about finding this hidden Gem of a place. The owners were very helpful at locating the exact Mandir
+                          I was in search for. The location had many more unique and stunning Mandirs, Swing sets and accessories that are hand-made
+                          in Gujarat and possibly other parts of India. The build quality was excellent for the product and very fairly priced. The
+                          service was exceptional and the owners actually helped me load my purchases in my vehicle. It was very much appreciated.
+                          Thank you kindly. Looking forward to doing more business with you.
                         </i>{' '}
                       </p>
                     </div>
@@ -797,7 +800,7 @@ const Login: React.FC = () => {
                         <img className="img-fluid" src={AvtarIcon01} alt="" />
                       </div>
                       <div className="testimonial-name d-flex align-items-center">
-                        <h6 className="author-tittle">Pooja Liladhar Bagul</h6>
+                        <h6 className="author-tittle">Baadshah Hai From Fiji</h6>
                         {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
@@ -809,9 +812,12 @@ const Login: React.FC = () => {
                     <div className="testimonial-content">
                       <p className="mb-0">
                         <i>
-                          Positive: Professionalism, Quality, Responsiveness, Value Perfect quality of all the goods, I have lather bags, wallet, and
-                          I am SO happy about their finishing, color style. Experience of the best service 👌, SO happy to have DHKND in CANADA 🇨🇦.
-                          Specially in CALGARY. Thank you very much DHKND.
+                          We had an absolutely fantastic experience with DHKND when we recently bought a temple from them! Heema was incredibly kind,
+                          courteous and cared about delivering the best product for our needs. The craftsman and quality of their work is high and
+                          every member of their staff added to the great service. Their shop serves a niche purpose so well that I would highly
+                          recommend this to anyone looking to purchase a temple or mandir for themselves. They went above and beyond the call of duty
+                          - helping us not only decide but then carry the heavy temple out, secure it in our truck and then even texted us when we got
+                          home to ensure we had no problems. Great price, great service and incredible people - what more can you ask for
                         </i>
                       </p>
                     </div>
@@ -820,7 +826,7 @@ const Login: React.FC = () => {
                         <img className="img-fluid" src={AvtarIcon01} alt="" />
                       </div>
                       <div className="testimonial-name d-flex align-items-center">
-                        <h6 className="author-tittle">Nikul panchal</h6>
+                        <h6 className="author-tittle"> Deepti Kamal</h6>
                         {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
@@ -832,10 +838,12 @@ const Login: React.FC = () => {
                     <div className="testimonial-content">
                       <p className="mb-0">
                         <i>
-                          I ordered panchdhatu mandir from DHKND. Talking about : Size and quality : 5/5 Finishing : 5/5 Design : 5/5 Price : very
-                          fair They have fitted light inside the mandir which make it so beautiful. Everytime when I contact the people , they are
-                          super humble to answer all my questions Highly recommended especially when you are looking for ethnic products from back
-                          home Good to have you in Canada 😃👍
+                          I’m thrilled with the Sevan Wood Mandir and the outstanding service your team provided. The Mandir’s craftsmanship exceeded
+                          expectations, adding an elegant touch to our space. The meticulous packaging ensured safe delivery to British Columbia,
+                          showcasing your commitment to quality. I appreciate the personalized call to showcase other collections and the effort to
+                          ensure timely delivery. However, a minor inconvenience was the light wiring socket was Indian, requiring an additional
+                          converter. Overall, we’re delighted with the product and your service. Thank you for delivering exactly what we were looking
+                          for
                         </i>{' '}
                       </p>
                     </div>
@@ -844,7 +852,32 @@ const Login: React.FC = () => {
                         <img className="img-fluid" src={AvtarIcon01} alt="" />
                       </div>
                       <div className="testimonial-name d-flex align-items-center">
-                        <h6 className="author-tittle">Jinal Desai</h6>
+                        <h6 className="author-tittle"> Hemant Tripathi,Surrey, BC</h6>
+                        {/* <span className="text-white">Product Designer</span> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="testimonial">
+                    <div className="testimonial-quote-icon">
+                      <QuoteSvg></QuoteSvg>
+                    </div>
+                    <div className="testimonial-content">
+                      <p className="mb-0">
+                        <i>
+                          Can’t describe Heema ji’s efforts and compassion in words. She helped us to get our new Mandir at our new home before hawan
+                          in every possible way. Arranging a new beautiful mandir and assembling it in just a one day notice time, and then further
+                          extending her warm help to drop my mom and wife to our new home, as Mandir won’t fit in without lowering my car’s seats, she
+                          truly stand out as a true person. I can’t thank enough for her beautiful gesture and kindness. Everyone at Hawan praised a
+                          lot for this beautiful mandir. Really happy to get a beautiful new home for our Kanha Thank you Heema ji. Stay blessed
+                        </i>
+                      </p>
+                    </div>
+                    <div className="testimonial-author info-right">
+                      <div className="testimonial-avatar avatar">
+                        <img className="img-fluid" src={AvtarIcon01} alt="" />
+                      </div>
+                      <div className="testimonial-name d-flex align-items-center">
+                        <h6 className="author-tittle"> Parijat Hasija</h6>
                         {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
