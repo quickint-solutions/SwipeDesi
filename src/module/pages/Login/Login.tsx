@@ -102,7 +102,13 @@ const Login: React.FC = () => {
                   bannersList.map((banner: any, index: number) => (
                     <div className="col-6 col-sm-12">
                       <div className="slider-banner mb-1 mb-lg-2">
-                        <img className="img-fluid" src={banner.image} alt="image" />
+                        <img
+                          className="img-fluid"
+                          style={{ cursor: 'pointer' }}
+                          src={banner.image}
+                          alt="image"
+                          onClick={() => navigate(`${banner.link}`)}
+                        />
                       </div>
                     </div>
                   ))}
