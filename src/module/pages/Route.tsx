@@ -225,7 +225,7 @@ const RouteComponent: React.FC = () => {
                             <a href="/contact-us">Showrooms</a>
                           </li>
                           <li>
-                            <a href="/about-us">About Us</a>
+                            <a href="home/about-us">About Us</a>
                           </li>
                         </ul>
                       </div>
@@ -860,7 +860,7 @@ const RouteComponent: React.FC = () => {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/orderDetails" element={<Order />} />
-        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="home/about-us" element={<AboutUs />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/category" element={<Category />} />
       </Routes>
