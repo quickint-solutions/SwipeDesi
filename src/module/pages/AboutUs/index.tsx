@@ -269,7 +269,7 @@ export default function AboutUs() {
               </div>
               <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper right-0 order-1 order-md-2">
                 <div className="team-image position-relative d-flex justify-content-center">
-                  <img className="img-fluid" src={team2} alt="" />
+                  <img className="img-fluid" src={team2} alt="" style={{ height: '470px', width: 'auto' }} />
                 </div>
               </div>
             </div>
