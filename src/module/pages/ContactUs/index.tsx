@@ -108,6 +108,10 @@ export default function ContactUs() {
                         <span className="text-white">+1 (587) 969-7008</span>
                       </li>
                       <li className="d-flex align-items-center">
+                        <i className="bi bi-telephone"></i>
+                        <span className="text-white">+1 (587) 969-7008</span>
+                      </li>
+                      <li className="d-flex align-items-center">
                         <i className="bi bi-envelope"></i>
                         <span className="text-white">dhknd.inc@gmail.com</span>
                       </li>

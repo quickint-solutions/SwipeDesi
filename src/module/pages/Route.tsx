@@ -887,6 +887,12 @@ const RouteComponent: React.FC = () => {
                 </li>
                 <li>
                   <div className="footer-contact-info">
+                    <i className="bi bi-phone"></i>
+                    <p className="mb-0">4038016969</p>
+                  </div>
+                </li>
+                <li>
+                  <div className="footer-contact-info">
                     <i className="bi bi-envelope"></i>
                     {/* <p className="mb-0">dhknd.inc@gmail.com</p> */}
                     <a className="mb-0" href="mailto:dhknd.inc@gmail.com" target="_blank" style={{ color: '#fff' }}>
