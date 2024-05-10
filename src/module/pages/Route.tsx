@@ -253,7 +253,7 @@ const RouteComponent: React.FC = () => {
           <div className="container position-relative">
             <div className="header-middel-container d-flex">
               <a className="navbar-brand" href="javascript:void(0)" onClick={() => navigate('/')}>
-                <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo} height="396px" width="150px" alt="logo" />
+                <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo} height="396px" width="200px" alt="logo" />
               </a>
               <form
                 className="form-inline search-form d-none d-lg-block"
