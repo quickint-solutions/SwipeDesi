@@ -195,7 +195,7 @@ export default function AboutUs() {
             <div className="row g-0 align-items-center">
               <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper left-0 order-1 order-md-2">
                 <div className="team-image position-relative d-flex justify-content-center">
-                  <img className="img-fluid" src={team1} alt="" />
+                  <img className="img-fluid" src={team1} alt="" style={{ height: '390px', width: 'auto' }} />
                 </div>
               </div>
               <div className="offset-md-2 col-md-10 col-sm-12 team-info-wrapper order-2 order-md-1">
