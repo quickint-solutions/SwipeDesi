@@ -185,14 +185,7 @@ const RouteComponent: React.FC = () => {
                   <div className="d-flex align-items-center text-center">
                     <div className="topbar-left justify-content-center">
                       <div className="dropdown right-menu d-inline-flex pe-3 topbar-divider">
-                        <a
-                          className="dropdown-toggle"
-                          href="#"
-                          id="dropdownMenuButton2"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
+                        <a className="dropdown-toggle" href="#" id="dropdownMenuButton2" aria-haspopup="true" aria-expanded="false">
                           <img className="img-fluid" src={languageLogo} alt="" /> English<i className="fas fa-chevron-down fa-xs"></i>
                         </a>
                         <div className="dropdown-menu mt-0" aria-labelledby="dropdownMenuButton2">
@@ -229,6 +222,29 @@ const RouteComponent: React.FC = () => {
                           </li>
                         </ul>
                       </div>
+                    </div>
+                    <div className="topbar-right ms-auto justify-content-center align-items-center">
+                      <li
+                        style={{
+                          listStyle: 'none',
+                        }}
+                      >
+                        <a href="https://www.instagram.com/dhknd.ca/" target="_blank">
+                          <i className="bi bi-instagram" style={{ marginRight: '10px' }}></i>
+                        </a>
+                        <a href="https://ca.linkedin.com/company/dhknd-management" target="_blank">
+                          <i className="fa-brands fa-linkedin" style={{ marginRight: '10px' }}></i>
+                        </a>
+                        <a href="https://www.facebook.com/dhknd.ca/" style={{ marginRight: '10px' }} target="_blank">
+                          <i className="bi bi-facebook"></i>
+                        </a>
+                        <a href="https://www.pinterest.ca/dhkndinc/" style={{ marginRight: '10px' }} target="_blank">
+                          <i className="fa-brands fa-pinterest"></i>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCTH5GzX7ImEPYvTwoVbM8ZQ" style={{ marginRight: '10px' }} target="_blank">
+                          <i className="fa-brands fa-youtube"></i>
+                        </a>
+                      </li>
                     </div>
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
                       <div className="topbar-call d-inline-flex topbar-divider pe-lg-3">
@@ -402,6 +418,11 @@ const RouteComponent: React.FC = () => {
         <nav className="navbar navbar-static-top navbar-expand-lg">
           <div className="container main-header position-relative">
             <div className="navbar-collapse collapse">
+              <a href="/" style={{ color: 'gray', marginRight: '20px' }}>
+                <i className="bi bi-house" style={{ fontStyle: 'normal' }}>
+                  Home
+                </i>
+              </a>
               <ul className="nav navbar-nav">
                 {!categoriesLoading && categories && categories?.result?.length > 0
                   ? categories?.result?.map((value: any, key: number) => {
@@ -882,13 +903,17 @@ const RouteComponent: React.FC = () => {
                 <li>
                   <div className="footer-contact-info">
                     <i className="bi bi-telephone"></i>
-                    <p className="mb-0">+1 (587) 969-7008</p>
+                    <a href="tel:+15879697008">
+                      <p className="mb-0">+1 (587) 969-7008</p>
+                    </a>
                   </div>
                 </li>
                 <li>
                   <div className="footer-contact-info">
-                    <i className="bi bi-phone"></i>
-                    <p className="mb-0">4038016969</p>
+                    <i className="bi bi-telephone-plus"></i>
+                    <a href="tel:+14038016969">
+                      <p className="mb-0">+1 (403) 801-6969</p>
+                    </a>
                   </div>
                 </li>
                 <li>
@@ -910,16 +935,16 @@ const RouteComponent: React.FC = () => {
             </div>
             <div className="col-sm-6 offset-lg-1 col-lg-2 mb-4 mb-lg-0">
               <div className="useful-links">
-                <h4 className="text-white mb-4">Quick links</h4>
+                <h4 className="text-white mb-4">Let's help you</h4>
                 <ul className="list-unstyled mb-0">
                   <li>
-                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/privacy-policy">Shipping rates & policies</a>
                   </li>
                   <li>
                     <a href="/terms-and-conditions">Terms & Conditions</a>
                   </li>
                   <li>
-                    <a href="/contact-us">Contact Us</a>
+                    <a href="/contact-us">Contact us</a>
                   </li>
                   <li>
                     <a href="/testimonials">Testimonials</a>

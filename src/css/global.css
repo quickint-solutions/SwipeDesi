@@ -1033,6 +1033,13 @@ button {
   font-size: 13px;
   line-height: 1;
 }
+.dropdown-menu {
+  display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
 
 .header .topbar-inner a:hover {
   color: #F3601E;
@@ -2116,6 +2123,7 @@ button.search-button {
 
 .testimonial .testimonial-content {
   margin-bottom: 20px;
+  height: 150px;
 }
 
 .testimonial .testimonial-content p {
@@ -2126,6 +2134,10 @@ button.search-button {
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+}
+.testimonial .testimonial-content :hover {
+  color: #F3601E;
+  cursor: pointer;
 }
 
 .testimonial-dark-bg .testimonial-description {

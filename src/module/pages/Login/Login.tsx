@@ -3,23 +3,15 @@ import moment from 'moment';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import logoImage from '../../../images/logo.png';
 import { ReactComponent as QuoteSvg } from '../../../images/testimonial/quote.svg';
-import EnglishLang from '../../../images/en.png';
 import AvtarIcon01 from '../../../images/avatar/01.jpg';
 import BgImage from '../../../images/bg/banner-sale-off.jpg';
 import BgImage1 from '../../../images/bg/bg-01.jpg';
 import furnitureImage from '../../../images/furniture/img-01.jpg';
 import furnitureImage1 from '../../../images/furniture/img-02.jpg';
-import furnitureImage2 from '../../../images/furniture/img-03.jpg';
 import BlogImage from '../../../images/blogimage/blog-01.jpg';
 import BlogImage1 from '../../../images/blogimage/blog-02.jpg';
 import BlogImage2 from '../../../images/blogimage/blog-03.jpg';
-import Instagram1 from '../../../images/instagram/instagram-01.jpg';
-import Instagram2 from '../../../images/instagram/instagram-02.jpg';
-import Instagram3 from '../../../images/instagram/instagram-03.jpg';
-import Instagram4 from '../../../images/instagram/instagram-04.jpg';
-import Instagram5 from '../../../images/instagram/instagram-05.jpg';
 import zula from '../../../images/zula.jpg';
 import diwan from '../../../images/diwan.jpg';
 import _ from 'lodash';
@@ -65,8 +57,6 @@ const Login: React.FC = () => {
     event.preventDefault();
     navigate('/wishlist');
   };
-
-  console.log('instagramImages -> ', instagramImages);
 
   const isMobile = window.innerWidth < 768;
 

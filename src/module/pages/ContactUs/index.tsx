@@ -36,15 +36,15 @@ export default function ContactUs() {
                     <span></span>
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <a className="text-white text-uppercase" href="index.html">
+                        <a className="text-white text-uppercase" href="/">
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">Contact US</li>
+                      <li className="breadcrumb-item active">Contact us</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>Contact US</strong>
+                    <strong>Contact us</strong>
                   </h2>
                 </div>
               </div>
@@ -105,11 +105,15 @@ export default function ContactUs() {
                       </li>
                       <li className="d-flex align-items-center">
                         <i className="bi bi-telephone"></i>
-                        <span className="text-white">+1 (587) 969-7008</span>
+                        <a href="tel:+15879697008">
+                          <span className="text-white">+1 (587) 969-7008</span>
+                        </a>
                       </li>
                       <li className="d-flex align-items-center">
-                        <i className="bi bi-telephone"></i>
-                        <span className="text-white">+1 (587) 969-7008</span>
+                        <i className="bi bi-telephone-plus"></i>
+                        <a href="tel:+14038016969">
+                          <span className="text-white">+1 (403) 801-6969</span>
+                        </a>
                       </li>
                       <li className="d-flex align-items-center">
                         <i className="bi bi-envelope"></i>

@@ -5,6 +5,7 @@
   "private": true,
   "proxy": "https://staging.api.dhknd.ca/api/",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@stripe/react-stripe-js": "^2.7.0",
     "@stripe/stripe-js": "^3.3.0",
