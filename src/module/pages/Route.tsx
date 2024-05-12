@@ -419,7 +419,7 @@ const RouteComponent: React.FC = () => {
           <div className="container main-header position-relative">
             <div className="navbar-collapse collapse">
               <a href="/" style={{ color: 'gray', marginRight: '20px' }}>
-                <i className="bi bi-house" style={{ fontStyle: 'normal' }}>
+                <i className="bi bi-house-fill" style={{ fontStyle: 'normal' }}>
                   Home
                 </i>
               </a>
