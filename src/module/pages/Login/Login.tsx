@@ -135,7 +135,20 @@ const Login: React.FC = () => {
             </div>
           </div>
 
-          <OwlCarousel autoplayTimeout={3000} autoplay={true} items={1} loop={true} margin={10}>
+          <OwlCarousel
+            className="owl-theme"
+            autoplayTimeout={2500}
+            autoplay={true}
+            items={1}
+            loop={true}
+            margin={10}
+            nav={true}
+            dots={true}
+            animateIn="fadeIn"
+            animateOut="fadeOut"
+            autoplayHoverPause={true}
+            mouseDrag={true}
+          >
             {_.chunk(categories?.result?.filter((i: any) => !i.parentCategory) || [], isMobile ? 2 : 5).map((categoriesData: any, key: number) => {
               return (
                 <div className={`feature-categories-wrapper`}>
@@ -145,21 +158,18 @@ const Login: React.FC = () => {
                     const totalItems = subCategories?.length
                       ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0) + value.itemCount
                       : value.itemCount;
-
                     return (
                       <div
                         style={{ cursor: 'pointer' }}
                         className="featured-categories-column text-center"
-                        key={key}
                         onClick={() => {
                           navigate(`/products?category=${value._id}`);
                           setCategories(value._id);
                         }}
                       >
-                        <div className="feature-categories-inner">
+                        <div className="feature-categories-inner" key={key}>
                           <div className="categories-img">
                             <a href="javascript:void(0)">
-                              {' '}
                               <img className="img-fluid" style={{}} src={value.image} alt="images" />
                             </a>
                           </div>
