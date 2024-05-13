@@ -230,17 +230,17 @@ const RouteComponent: React.FC = () => {
                           listStyle: 'none',
                         }}
                       >
-                        <a href="https://www.instagram.com/dhknd.ca/" target="_blank">
-                          <i className="bi bi-instagram" style={{ marginRight: '10px' }}></i>
+                        <a href="https://www.instagram.com/dhknd.ca/" target="_blank" style={{ marginRight: '10px' }}>
+                          <i className="fa-brands fa-square-instagram"></i>
                         </a>
-                        <a href="https://ca.linkedin.com/company/dhknd-management" target="_blank">
-                          <i className="fa-brands fa-linkedin" style={{ marginRight: '10px' }}></i>
-                        </a>
-                        <a href="https://www.facebook.com/dhknd.ca/" style={{ marginRight: '10px' }} target="_blank">
-                          <i className="bi bi-facebook"></i>
+                        <a href="https://ca.linkedin.com/company/dhknd-management" target="_blank" style={{ marginRight: '10px' }}>
+                          <i className="fa-brands fa-linkedin"></i>
                         </a>
                         <a href="https://www.facebook.com/dhknd.ca/" style={{ marginRight: '10px' }} target="_blank">
-                          <i className="bi bi-twitter-x"></i>
+                          <i className="fa-brands fa-square-facebook"></i>
+                        </a>
+                        <a href="https://www.facebook.com/dhknd.ca/" style={{ marginRight: '10px' }} target="_blank">
+                          <i className="fa-brands fa-square-x-twitter"></i>
                         </a>
                         {/* <a href="https://www.pinterest.ca/dhkndinc/" style={{ marginRight: '10px' }} target="_blank">
                           <i className="fa-brands fa-pinterest"></i>
