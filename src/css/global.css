@@ -2135,10 +2135,6 @@ button.search-button {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-.testimonial .testimonial-content :hover {
-  color: #F3601E;
-  cursor: pointer;
-}
 
 .testimonial-dark-bg .testimonial-description {
   padding: 70px 90px 70px 90px;

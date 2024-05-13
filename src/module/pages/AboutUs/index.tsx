@@ -290,7 +290,7 @@ export default function AboutUs() {
           <div className="row">
             <div className="col-lg-12 col-md-6">
               <div className="section-title text-center">
-                <span className="sub-title">Our Villa Gallery</span>
+                <span className="sub-title">Our Gallery</span>
                 <h2 className="title text-uppercase">VISIT OUR STORE I28</h2>
                 <div className="description"></div>
               </div>
@@ -412,7 +412,7 @@ export default function AboutUs() {
           <div className="row">
             <div className="col-lg-12 col-md-6">
               <div className="section-title text-center">
-                <span className="sub-title">Our Villa Gallery</span>
+                <span className="sub-title">Our Gallery</span>
                 <h2 className="title text-uppercase">VISIT OUR STORE I30</h2>
                 <div className="description"></div>
               </div>
