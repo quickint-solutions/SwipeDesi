@@ -225,31 +225,30 @@ const RouteComponent: React.FC = () => {
                       </div>
                     </div>
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
-                      <li
-                        style={{
-                          listStyle: 'none',
-                        }}
-                      >
-                        <a href="https://www.instagram.com/dhknd.ca/" target="_blank" style={{ marginRight: '10px' }}>
-                          <i className="fa-brands fa-square-instagram"></i>
-                        </a>
-                        <a href="https://ca.linkedin.com/company/dhknd-management" target="_blank" style={{ marginRight: '10px' }}>
-                          <i className="fa-brands fa-linkedin"></i>
-                        </a>
-                        <a href="https://www.facebook.com/dhknd.ca/" style={{ marginRight: '10px' }} target="_blank">
-                          <i className="fa-brands fa-square-facebook"></i>
-                        </a>
-                        <a href="https://www.facebook.com/dhknd.ca/" style={{ marginRight: '10px' }} target="_blank">
-                          <i className="fa-brands fa-square-x-twitter"></i>
-                        </a>
-                        {/* <a href="https://www.pinterest.ca/dhkndinc/" style={{ marginRight: '10px' }} target="_blank">
-                          <i className="fa-brands fa-pinterest"></i>
-                        </a>
-                        <a href="https://www.youtube.com/channel/UCTH5GzX7ImEPYvTwoVbM8ZQ" style={{ marginRight: '10px' }} target="_blank">
-                          <i className="fa-brands fa-youtube"></i>
-                        </a> */}
-                      </li>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                        <li>
+                          <a href="https://www.instagram.com/dhknd.ca/" target="_blank">
+                            <i className="fa-brands fa-square-instagram" style={{ fontSize: '20px' }}></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://ca.linkedin.com/company/dhknd-management" target="_blank">
+                            <i className="fa-brands fa-linkedin" style={{ fontSize: '20px' }}></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.facebook.com/dhknd.ca/" target="_blank">
+                            <i className="fa-brands fa-square-facebook" style={{ fontSize: '20px' }}></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.facebook.com/dhknd.ca/" target="_blank">
+                            <i className="fa-brands fa-square-x-twitter" style={{ fontSize: '20px' }}></i>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
+
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
                       <div className="topbar-call d-inline-flex topbar-divider pe-lg-3">
                         <a href="tel:+1 (587) 969-7008">
