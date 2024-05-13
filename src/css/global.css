@@ -62,11 +62,11 @@
 }
 
 .testimonial:hover {
-  background-color: #FFA500;
+  background-color: #F3601E;
 }
 
 .testimonial:hover .testimonial-content i {
-  color: #fff;
+  color: #ffffff;
 }
 
 .bg-overlay-black-1:before {
