@@ -143,7 +143,7 @@ export default function ContactUs() {
                       </li>
                     </ul>
                   </div>
-                  <div className="social-icon">
+                  {/* <div className="social-icon">
                     <ul>
                       <li>
                         <a href="#">
@@ -166,7 +166,7 @@ export default function ContactUs() {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
