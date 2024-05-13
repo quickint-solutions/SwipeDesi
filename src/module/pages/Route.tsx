@@ -19,6 +19,7 @@ import logo from '../../images/logo1.jpg';
 import AboutUs from './AboutUs';
 import languageLogo from '../../images/en.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
+import homeIcon from '../../images/home.png';
 import { getWishList } from '../../apiV2/wishlist';
 import { sendLead } from '../../apiV2/leads';
 import Order from './Order/Order';
@@ -238,12 +239,15 @@ const RouteComponent: React.FC = () => {
                         <a href="https://www.facebook.com/dhknd.ca/" style={{ marginRight: '10px' }} target="_blank">
                           <i className="bi bi-facebook"></i>
                         </a>
-                        <a href="https://www.pinterest.ca/dhkndinc/" style={{ marginRight: '10px' }} target="_blank">
+                        <a href="https://www.facebook.com/dhknd.ca/" style={{ marginRight: '10px' }} target="_blank">
+                          <i className="bi bi-twitter-x"></i>
+                        </a>
+                        {/* <a href="https://www.pinterest.ca/dhkndinc/" style={{ marginRight: '10px' }} target="_blank">
                           <i className="fa-brands fa-pinterest"></i>
                         </a>
                         <a href="https://www.youtube.com/channel/UCTH5GzX7ImEPYvTwoVbM8ZQ" style={{ marginRight: '10px' }} target="_blank">
                           <i className="fa-brands fa-youtube"></i>
-                        </a>
+                        </a> */}
                       </li>
                     </div>
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
@@ -418,12 +422,17 @@ const RouteComponent: React.FC = () => {
         <nav className="navbar navbar-static-top navbar-expand-lg">
           <div className="container main-header position-relative">
             <div className="navbar-collapse collapse">
-              <a href="/" style={{ color: 'gray', marginRight: '20px' }}>
-                <i className="bi bi-house-fill" style={{ fontStyle: 'normal' }}>
-                  Home
-                </i>
-              </a>
               <ul className="nav navbar-nav">
+                <li className="nav-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+                  <div
+                    className="nav-link nav-link-flex"
+                    aria-current="page"
+                    style={{ display: 'flex', alignItems: 'center', placeContent: 'center' }}
+                  >
+                    <img src={homeIcon} style={{ width: '16px' }} />
+                    <span>Home</span>
+                  </div>
+                </li>
                 {!categoriesLoading && categories && categories?.result?.length > 0
                   ? categories?.result?.map((value: any, key: number) => {
                       if (value.parentCategory) return null;

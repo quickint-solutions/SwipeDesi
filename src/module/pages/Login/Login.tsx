@@ -143,7 +143,7 @@ const Login: React.FC = () => {
             loop={true}
             margin={10}
             nav={true}
-            dots={true}
+            dots={false}
             animateIn="fadeIn"
             animateOut="fadeOut"
             autoplayHoverPause={true}
