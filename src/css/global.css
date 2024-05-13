@@ -57,6 +57,18 @@
   z-index: 1;
 }
 
+.testimonial {
+  transition: background-color 0.3s ease;
+}
+
+.testimonial:hover {
+  background-color: #FFA500;
+}
+
+.testimonial:hover .testimonial-content i {
+  color: #fff;
+}
+
 .bg-overlay-black-1:before {
   background: rgba(0, 0, 0, 0.1);
   content: "";
