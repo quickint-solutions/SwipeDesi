@@ -36,7 +36,7 @@ export default function ProductItem({ product, large }: { product: any; large?: 
       <div className="product">
         {product.discount && (
           <div className="product-label">
-            <span className="onsale">%{product.discount || 0}</span>
+            <span className="onsale">{product.discount || 0}%</span>
           </div>
         )}
 
