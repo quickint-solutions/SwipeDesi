@@ -274,7 +274,7 @@ const Login: React.FC = () => {
               </div>
             </div>
             <div className="col-md-12 col-lg-4 col-xl-6 text-lg-end text-start mb-4 mb-lg-0">
-              <a onClick={() => navigate('/products?category=6628c8c9927e3edd23258e23')} className="btn btn-primary">
+              <a href={`/products?category=6628c8c9927e3edd23258e23`} className="btn btn-primary">
                 View All<i className="fas fa-arrow-right-long ps-3"></i>
               </a>
             </div>
@@ -288,7 +288,7 @@ const Login: React.FC = () => {
                 <div className="furniture-info">
                   <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
                   <h3 className="furniture-title text-white mb-3 mb-sm-4">Dining Table Set</h3>
-                  <a href="#" className="btn btn-light" onClick={() => navigate('/products?category=6628c8c9927e3edd23258e23')}>
+                  <a href={`/products?category=6628c8c9927e3edd23258e23`} className="btn btn-light">
                     Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                   </a>
                 </div>
@@ -304,7 +304,7 @@ const Login: React.FC = () => {
                     <div className="furniture-info">
                       <p className="text-white text-uppercase mb-2">one of the most popular</p>
                       <h3 className="furniture-title text-white mb-3 mb-sm-4">Diwan</h3>
-                      <a href="#" className="btn btn-light" onClick={() => navigate('/products?category=6628c8c9927e3edd23258e23')}>
+                      <a href={`/products?category=6628c8c9927e3edd23258e23`} className="btn btn-light">
                         Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                       </a>
                     </div>
@@ -318,7 +318,7 @@ const Login: React.FC = () => {
                     <div className="furniture-info">
                       <p className="text-white text-uppercase mb-2">Handcrafted Traditional Wooden</p>
                       <h3 className="furniture-title text-white mb-3 mb-sm-4">Carving Zhula</h3>
-                      <a href="#" className="btn btn-light">
+                      <a href={`/products?category=6628c8c9927e3edd23258e23`} className="btn btn-light">
                         Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                       </a>
                     </div>
