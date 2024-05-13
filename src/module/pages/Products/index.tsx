@@ -85,6 +85,115 @@ export default function Products() {
                     <h5 className="title">Categories</h5>
                   </div>
                   <div className="widget-content">
+                    <div className="widget-categories" id="categoriesAccordian">
+                      <div className="categories-list-item">
+                        <div className="categories-name">
+                          <a href="#cat-item-1" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">
+                            Mandir <i className="fas fa-chevron-down fa-xs"></i>
+                          </a>
+                        </div>
+                        <div id="cat-item-1" className="categories-list collapse show" data-bs-parent="#categoriesAccordian">
+                          <ul className="list-unstyled list-style list-style-underline mb-0">
+                            <li>
+                              <a className="d-flex" href="#">
+                                Haveli
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Haveli
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Haveli
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="categories-list-item">
+                        <div className="categories-name">
+                          <a href="#cat-item-2" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">
+                            Pooja Accessories <i className="fas fa-chevron-down fa-xs"></i>
+                          </a>
+                        </div>
+                        <div id="cat-item-2" className="categories-list collapse" data-bs-parent="#categoriesAccordian">
+                          <ul className="list-unstyled list-style list-style-underline mb-0">
+                            <li>
+                              <a className="d-flex" href="#">
+                                Decorative strings
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Garland
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Diya
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Shubh Labh
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Toran
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="categories-list-item">
+                        <div className="categories-name">
+                          <a href="#cat-item-3" className="d-flex align-items-center justify-content-between" data-bs-toggle="collapse">
+                            Furniture <i className="fas fa-chevron-down fa-xs"></i>
+                          </a>
+                        </div>
+                        <div id="cat-item-3" className="categories-list collapse" data-bs-parent="#categoriesAccordian">
+                          <ul className="list-unstyled list-style list-style-underline mb-0">
+                            <li>
+                              <a className="d-flex" href="#">
+                                Decorative strings
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Garland
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Diya
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Shubh Labh
+                              </a>
+                            </li>
+                            <li>
+                              <a className="d-flex" href="#">
+                                Toran
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* {categoriesData.map((category: any) => {
+                    return (
+                      <div className="widget-content">
+                        <div className="widget-categories">
+                          <ul className="list-unstyled list-style list-style-underline mb-0">
+                            <li>
+                              <div style={{ cursor: 'pointer', marginBottom: 5 }} className="d-flex" onClick={() => setCategoryValue(category._id)}>
+                  <div className="widget-content">
                     <div className="widget-categories">
                       <ul className="list-unstyled list-style list-style-underline mb-0">
                         {categoriesData.map((category: any) => {
@@ -130,11 +239,11 @@ export default function Products() {
                                 </div>
                               )}
                             </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
+                          </ul>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
                 {/* <div className="widget">
                   <div className="widget-title">
@@ -155,7 +264,7 @@ export default function Products() {
                     </div>
                   </div>
                 </div> */}
-                {/* <div className="widget">
+                  {/* <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Color</h5>
                   </div>
@@ -255,33 +364,33 @@ export default function Products() {
                   </div>
                 </div> */}
 
-                <div className="widget">
-                  <div className="widget-title">
-                    <h5 className="title">Featured Product</h5>
-                  </div>
-                  <div className="widget-content">
-                    {getProducts?.result?.slice(0, 3).map((categories: any) => {
-                      return (
-                        <>
-                          <div className="widget-product">
-                            <div className="product d-flex align-items-center mb-3">
-                              <div className="product-image">
-                                <div className="product-thumb-inner">
-                                  <a href="#">
-                                    <img className="img-fluid" src={categories.images[0]} alt="image" />
-                                  </a>
-                                </div>
-                              </div>
-
-                              <div className="product-content py-0">
-                                <div className="product-info">
-                                  <div className="product-title">
-                                    <h3>
-                                      <a onClick={() => {}}>{categories.name || ''}</a>
-                                    </h3>
+                  <div className="widget">
+                    <div className="widget-title">
+                      <h5 className="title">Featured Product</h5>
+                    </div>
+                    <div className="widget-content">
+                      {getProducts?.result?.slice(0, 3).map((categories: any) => {
+                        return (
+                          <>
+                            <div className="widget-product">
+                              <div className="product d-flex align-items-center mb-3">
+                                <div className="product-image">
+                                  <div className="product-thumb-inner">
+                                    <a href="#">
+                                      <img className="img-fluid" src={categories.images[0]} alt="image" />
+                                    </a>
                                   </div>
-                                  {/* stars removed */}
-                                  {/* <div className="product-star">
+                                </div>
+
+                                <div className="product-content py-0">
+                                  <div className="product-info">
+                                    <div className="product-title">
+                                      <h3>
+                                        <a onClick={() => {}}>{categories.name || ''}</a>
+                                      </h3>
+                                    </div>
+                                    {/* stars removed */}
+                                    {/* <div className="product-star">
                                     <ul className="list-unstyled mb-1">
                                       <li>
                                         <i className="fas fa-star"></i>
@@ -300,25 +409,25 @@ export default function Products() {
                                       </li>
                                     </ul>
                                   </div> */}
-                                </div>
+                                  </div>
 
-                                <div className="product-prize">
-                                  <p>
-                                    <span className="me-2">${categories.price || 'N/A'}</span>
-                                  </p>
+                                  <div className="product-prize">
+                                    <p>
+                                      <span className="me-2">${categories.price || 'N/A'}</span>
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </>
-                      );
-                    })}
+                          </>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-xl-9 col-lg-8 mt-4 mt-md-5 mt-lg-0">
-              {/* <h5 className="widget-title">Product filters</h5>
+              <div className="col-xl-9 col-lg-8 mt-4 mt-md-5 mt-lg-0">
+                {/* <h5 className="widget-title">Product filters</h5>
               <div className="blog-sidebar-post-divider"></div>
               <div className="row mt-4">
                 <div className="col-lg-4">
@@ -399,15 +508,16 @@ export default function Products() {
                 </div>
               </div> */}
 
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                {isLoading && <h3>Loading...</h3>}
-                {getProducts?.result?.length === 0 && <h3>No products found</h3>}
-              </div>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  {isLoading && <h3>Loading...</h3>}
+                  {getProducts?.result?.length === 0 && <h3>No products found</h3>}
+                </div>
 
-              <div className="row">
-                {getProducts?.result.map((product: any) => {
-                  return <ProductItem key={product._id} product={product} large />;
-                })}
+                <div className="row">
+                  {getProducts?.result.map((product: any) => {
+                    return <ProductItem key={product._id} product={product} large />;
+                  })}
+                </div>
               </div>
             </div>
           </div>

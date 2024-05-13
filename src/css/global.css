@@ -2929,9 +2929,20 @@ input[type="radio"]:radio {
 }
 
 .sidebar .widget .widget-categories .list-style-underline li a {
+  padding: 0px 0;
+}
+.sidebar .widget .widget-categories .categories-list-item ul {
+  padding-left: 15px;
+}
+.sidebar .widget .widget-categories .categories-list-item {
   padding: 5px 0;
 }
-
+/* .sidebar .widget .widget-categories .categories-list-item .categories-name a:not(.collapsed) {
+  color: #F3601E;
+} */
+.sidebar .widget .widget-categories .categories-list-item .categories-name a {
+  color: #121212;
+}
 .sidebar .widget .widget-categories .list-style-underline li a span {
   font-size: 10px;
 }
