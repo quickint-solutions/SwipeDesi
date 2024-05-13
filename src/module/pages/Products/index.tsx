@@ -277,7 +277,9 @@ export default function Products() {
                                 <div className="product-info">
                                   <div className="product-title">
                                     <h3>
-                                      <a onClick={() => {}}>{categories.name || ''}</a>
+                                      <a href={`/shopSingle?productId=${categories?._id}`} style={{ cursor: 'pointer' }}>
+                                        {categories.name || ''}
+                                      </a>
                                     </h3>
                                   </div>
                                   {/* stars removed */}
