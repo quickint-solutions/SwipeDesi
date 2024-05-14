@@ -47,7 +47,6 @@ export default function AboutUs() {
               <div className="header-inner-title">
                 <div className="section-title">
                   <div className="sub-title">
-                    <span></span>
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
                         <a className="text-white text-uppercase" href="index.html">
