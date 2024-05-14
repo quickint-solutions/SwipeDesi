@@ -1937,8 +1937,10 @@ button.search-button {
 
 .product-label .onsale {
   color: #fff;
-  background: rgb(158, 11, 15);
-  margin-bottom: 10px;
+  background: #F3601E;
+  border-radius: 50%;
+  width: 40px;
+  height: 70px;
 }
 
 .product-label .featured {
@@ -3898,10 +3900,6 @@ login register form
 .about-img img {
   border: 15px solid #fff;
   box-shadow: 0 5px 20px 0 rgba(18, 18, 18, 0.07);
-}
-
-.founder-text{
-  color: #121212;
 }
 
 .bussiness-location {
