@@ -19,6 +19,7 @@ import logo from '../../images/logo1.jpg';
 import AboutUs from './AboutUs';
 import languageLogo from '../../images/en.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
+import homeIcon from '../../images/home.png';
 import { getWishList } from '../../apiV2/wishlist';
 import { sendLead } from '../../apiV2/leads';
 import Order from './Order/Order';
@@ -185,14 +186,7 @@ const RouteComponent: React.FC = () => {
                   <div className="d-flex align-items-center text-center">
                     <div className="topbar-left justify-content-center">
                       <div className="dropdown right-menu d-inline-flex pe-3 topbar-divider">
-                        <a
-                          className="dropdown-toggle"
-                          href="#"
-                          id="dropdownMenuButton2"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
+                        <a className="dropdown-toggle" href="#" id="dropdownMenuButton2" aria-haspopup="true" aria-expanded="false">
                           <img className="img-fluid" src={languageLogo} alt="" /> English<i className="fas fa-chevron-down fa-xs"></i>
                         </a>
                         <div className="dropdown-menu mt-0" aria-labelledby="dropdownMenuButton2">
@@ -225,11 +219,36 @@ const RouteComponent: React.FC = () => {
                             <a href="/contact-us">Showrooms</a>
                           </li>
                           <li>
-                            <a href="/about-us">About Us</a>
+                            <a href="home/about-us">About Us</a>
                           </li>
                         </ul>
                       </div>
                     </div>
+                    <div className="topbar-right ms-auto justify-content-center align-items-center">
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                        <li>
+                          <a href="https://www.instagram.com/dhknd.ca/" target="_blank">
+                            <i className="fa-brands fa-square-instagram" style={{ fontSize: '20px' }}></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://ca.linkedin.com/company/dhknd-management" target="_blank">
+                            <i className="fa-brands fa-linkedin" style={{ fontSize: '20px' }}></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.facebook.com/dhknd.ca/" target="_blank">
+                            <i className="fa-brands fa-square-facebook" style={{ fontSize: '20px' }}></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.facebook.com/dhknd.ca/" target="_blank">
+                            <i className="fa-brands fa-square-x-twitter" style={{ fontSize: '20px' }}></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
                     <div className="topbar-right ms-auto justify-content-center align-items-center">
                       <div className="topbar-call d-inline-flex topbar-divider pe-lg-3">
                         <a href="tel:+1 (587) 969-7008">
@@ -253,7 +272,7 @@ const RouteComponent: React.FC = () => {
           <div className="container position-relative">
             <div className="header-middel-container d-flex">
               <a className="navbar-brand" href="javascript:void(0)" onClick={() => navigate('/')}>
-                <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo} height="396px" width="150px" alt="logo" />
+                <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo} height="396px" width="200px" alt="logo" />
               </a>
               <form
                 className="form-inline search-form d-none d-lg-block"
@@ -403,6 +422,16 @@ const RouteComponent: React.FC = () => {
           <div className="container main-header position-relative">
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
+                <li className="nav-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+                  <div
+                    className="nav-link nav-link-flex"
+                    aria-current="page"
+                    style={{ display: 'flex', alignItems: 'center', placeContent: 'center' }}
+                  >
+                    <img src={homeIcon} style={{ width: '16px' }} />
+                    <span>Home</span>
+                  </div>
+                </li>
                 {!categoriesLoading && categories && categories?.result?.length > 0
                   ? categories?.result?.map((value: any, key: number) => {
                       if (value.parentCategory) return null;
@@ -854,13 +883,13 @@ const RouteComponent: React.FC = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/terms-and-conditions" element={<TermsCondition />} />
-        <Route path="/faq" element={<FAQ />} />
+        <Route path="/faqs" element={<FAQ />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/orderDetails" element={<Order />} />
-        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="home/about-us" element={<AboutUs />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/category" element={<Category />} />
       </Routes>
@@ -882,7 +911,17 @@ const RouteComponent: React.FC = () => {
                 <li>
                   <div className="footer-contact-info">
                     <i className="bi bi-telephone"></i>
-                    <p className="mb-0">+1 (587) 969-7008</p>
+                    <a href="tel:+15879697008">
+                      <p className="mb-0">+1 (587) 969-7008</p>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div className="footer-contact-info">
+                    <i className="bi bi-telephone-plus"></i>
+                    <a href="tel:+14038016969">
+                      <p className="mb-0">+1 (403) 801-6969</p>
+                    </a>
                   </div>
                 </li>
                 <li>
@@ -891,7 +930,12 @@ const RouteComponent: React.FC = () => {
                     {/* <p className="mb-0">dhknd.inc@gmail.com</p> */}
                     <a className="mb-0" href="mailto:dhknd.inc@gmail.com" target="_blank" style={{ color: '#fff' }}>
                       dhknd.inc@gmail.com
+                      <br></br>
+                      <a className="mb-0" href="mailto:dhknd.customerservices@gmail.com" target="_blank" style={{ color: '#fff' }}>
+                        dhknd.customerservices@gmail.com
+                      </a>
                     </a>
+
                     {/* target="_blank" href="mailto:beachpark@longbeachny.gov" */}
                   </div>
                 </li>
@@ -899,22 +943,22 @@ const RouteComponent: React.FC = () => {
             </div>
             <div className="col-sm-6 offset-lg-1 col-lg-2 mb-4 mb-lg-0">
               <div className="useful-links">
-                <h4 className="text-white mb-4">Quick links</h4>
+                <h4 className="text-white mb-4">Let's help you</h4>
                 <ul className="list-unstyled mb-0">
                   <li>
-                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/privacy-policy">Shipping rates & policies</a>
                   </li>
                   <li>
                     <a href="/terms-and-conditions">Terms & Conditions</a>
                   </li>
                   <li>
-                    <a href="/contact-us">Contact Us</a>
+                    <a href="/contact-us">Contact us</a>
                   </li>
                   <li>
                     <a href="/testimonials">Testimonials</a>
                   </li>
                   <li>
-                    <a href="/faq">FAQs</a>
+                    <a href="/faqs">FAQs</a>
                   </li>
                 </ul>
               </div>

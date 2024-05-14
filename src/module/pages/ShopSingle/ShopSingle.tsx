@@ -118,7 +118,6 @@ const ShopSingle: React.FC = () => {
             </div>
           </div>
         </div>
-        {/* <div className="header-inner-shape" style={{ backgroundImage: 'url(' + MandirBgImg2 + ')' }}></div> */}
       </section>
 
       {itemDetails ? (

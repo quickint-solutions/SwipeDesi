@@ -3,23 +3,15 @@ import moment from 'moment';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import logoImage from '../../../images/logo.png';
 import { ReactComponent as QuoteSvg } from '../../../images/testimonial/quote.svg';
-import EnglishLang from '../../../images/en.png';
 import AvtarIcon01 from '../../../images/avatar/01.jpg';
 import BgImage from '../../../images/bg/banner-sale-off.jpg';
 import BgImage1 from '../../../images/bg/bg-01.jpg';
 import furnitureImage from '../../../images/furniture/img-01.jpg';
 import furnitureImage1 from '../../../images/furniture/img-02.jpg';
-import furnitureImage2 from '../../../images/furniture/img-03.jpg';
 import BlogImage from '../../../images/blogimage/blog-01.jpg';
 import BlogImage1 from '../../../images/blogimage/blog-02.jpg';
 import BlogImage2 from '../../../images/blogimage/blog-03.jpg';
-import Instagram1 from '../../../images/instagram/instagram-01.jpg';
-import Instagram2 from '../../../images/instagram/instagram-02.jpg';
-import Instagram3 from '../../../images/instagram/instagram-03.jpg';
-import Instagram4 from '../../../images/instagram/instagram-04.jpg';
-import Instagram5 from '../../../images/instagram/instagram-05.jpg';
 import zula from '../../../images/zula.jpg';
 import diwan from '../../../images/diwan.jpg';
 import _ from 'lodash';
@@ -65,8 +57,6 @@ const Login: React.FC = () => {
     event.preventDefault();
     navigate('/wishlist');
   };
-
-  console.log('instagramImages -> ', instagramImages);
 
   const isMobile = window.innerWidth < 768;
 
@@ -145,7 +135,20 @@ const Login: React.FC = () => {
             </div>
           </div>
 
-          <OwlCarousel autoplayTimeout={3000} autoplay={true} items={1} loop={true} margin={10}>
+          <OwlCarousel
+            className="owl-theme"
+            autoplayTimeout={2500}
+            autoplay={true}
+            items={1}
+            loop={true}
+            margin={10}
+            nav={true}
+            dots={false}
+            animateIn="fadeIn"
+            animateOut="fadeOut"
+            autoplayHoverPause={true}
+            mouseDrag={true}
+          >
             {_.chunk(categories?.result?.filter((i: any) => !i.parentCategory) || [], isMobile ? 2 : 5).map((categoriesData: any, key: number) => {
               return (
                 <div className={`feature-categories-wrapper`}>
@@ -155,21 +158,18 @@ const Login: React.FC = () => {
                     const totalItems = subCategories?.length
                       ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0) + value.itemCount
                       : value.itemCount;
-
                     return (
                       <div
                         style={{ cursor: 'pointer' }}
                         className="featured-categories-column text-center"
-                        key={key}
                         onClick={() => {
                           navigate(`/products?category=${value._id}`);
                           setCategories(value._id);
                         }}
                       >
-                        <div className="feature-categories-inner">
+                        <div className="feature-categories-inner" key={key}>
                           <div className="categories-img">
                             <a href="javascript:void(0)">
-                              {' '}
                               <img className="img-fluid" style={{}} src={value.image} alt="images" />
                             </a>
                           </div>
@@ -274,7 +274,7 @@ const Login: React.FC = () => {
               </div>
             </div>
             <div className="col-md-12 col-lg-4 col-xl-6 text-lg-end text-start mb-4 mb-lg-0">
-              <a onClick={() => navigate('/products?category=6628c8c9927e3edd23258e23')} className="btn btn-primary">
+              <a href={`/products?category=6628c8c9927e3edd23258e23`} className="btn btn-primary">
                 View All<i className="fas fa-arrow-right-long ps-3"></i>
               </a>
             </div>
@@ -288,7 +288,7 @@ const Login: React.FC = () => {
                 <div className="furniture-info">
                   <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
                   <h3 className="furniture-title text-white mb-3 mb-sm-4">Dining Table Set</h3>
-                  <a href="#" className="btn btn-light" onClick={() => navigate('/products?category=6628c8c9927e3edd23258e23')}>
+                  <a href={`/products?category=6628c8c9927e3edd23258e23`} className="btn btn-light">
                     Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                   </a>
                 </div>
@@ -304,7 +304,7 @@ const Login: React.FC = () => {
                     <div className="furniture-info">
                       <p className="text-white text-uppercase mb-2">one of the most popular</p>
                       <h3 className="furniture-title text-white mb-3 mb-sm-4">Diwan</h3>
-                      <a href="#" className="btn btn-light" onClick={() => navigate('/products?category=6628c8c9927e3edd23258e23')}>
+                      <a href={`/products?category=6628c8c9927e3edd23258e23`} className="btn btn-light">
                         Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                       </a>
                     </div>
@@ -318,7 +318,7 @@ const Login: React.FC = () => {
                     <div className="furniture-info">
                       <p className="text-white text-uppercase mb-2">Handcrafted Traditional Wooden</p>
                       <h3 className="furniture-title text-white mb-3 mb-sm-4">Carving Zhula</h3>
-                      <a href="#" className="btn btn-light">
+                      <a href={`/products?category=6628c8c9927e3edd23258e23`} className="btn btn-light">
                         Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                       </a>
                     </div>

@@ -12,7 +12,15 @@ import gallery1 from '../../../images/gallery/02.jpg';
 import gallery2 from '../../../images/gallery/03.jpg';
 import team1 from '../../../images/team/Hima-dalwadi.png';
 import team2 from '../../../images/team/Kavya-Dalwadi.jpg';
-
+import store1 from '../../../images/storeI28/store1.jpg';
+import store2 from '../../../images/storeI28/store2.jpg';
+import store3 from '../../../images/storeI28/store3.jpg';
+import store4 from '../../../images/storeI28/store4.jpg';
+import store5 from '../../../images/storeI28/store5.jpg';
+import store6 from '../../../images/storeI28/store6.jpg';
+import store7 from '../../../images/storeI28/store7.jpg';
+import store9 from '../../../images/storeI28/store9.jpg';
+import store8 from '../../../images/storeI28/store8.jpg';
 export default function AboutUs() {
   const params = new URLSearchParams(window.location.search);
   const category = params.get('category');
@@ -160,15 +168,16 @@ export default function AboutUs() {
                         </a>
                       </li>
                       <li>
-                        <a target="_blank" href="https://twitter.com/i/flow/login?redirect_after_login=%2Fdaxdalwadi13">
-                          <i className="fab fa-twitter"></i>
-                        </a>
-                      </li>
-                      <li>
                         <a target="_blank" href="https://www.linkedin.com/in/daxesh-dalwadi-aa603a1aa/?originalSubdomain=ca">
                           <i className="fab fa-linkedin-in"></i>
                         </a>
                       </li>
+                      <li>
+                        <a target="_blank" href="https://twitter.com/i/flow/login?redirect_after_login=%2Fdaxdalwadi13">
+                          <i className="fab fa-twitter"></i>
+                        </a>
+                      </li>
+
                       <li>
                         <a href="#">
                           <i className="fab fa-instagram"></i>
@@ -195,7 +204,7 @@ export default function AboutUs() {
             <div className="row g-0 align-items-center">
               <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper left-0 order-1 order-md-2">
                 <div className="team-image position-relative d-flex justify-content-center">
-                  <img className="img-fluid" src={team1} alt="" />
+                  <img className="img-fluid" src={team1} alt="" style={{ height: '390px', width: 'auto' }} />
                 </div>
               </div>
               <div className="offset-md-2 col-md-10 col-sm-12 team-info-wrapper order-2 order-md-1">
@@ -269,24 +278,21 @@ export default function AboutUs() {
               </div>
               <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 team-img-wrapper right-0 order-1 order-md-2">
                 <div className="team-image position-relative d-flex justify-content-center">
-                  <img className="img-fluid" src={team2} alt="" />
+                  <img className="img-fluid" src={team2} alt="" style={{ height: '470px', width: 'auto' }} />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
       <section className="space-pb">
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12 col-md-6">
               <div className="section-title text-center">
-                <span className="sub-title">Gallery</span>
-                <h2 className="title text-uppercase">Our Villa Gallery</h2>
-                <div className="description">
-                  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>
-                </div>
+                <span className="sub-title">Our Gallery</span>
+                <h2 className="title text-uppercase">VISIT OUR STORE I28</h2>
+                <div className="description"></div>
               </div>
             </div>
           </div>
@@ -387,6 +393,154 @@ export default function AboutUs() {
                 <div className="gallery-box">
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery1} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="space-pb">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-12 col-md-6">
+              <div className="section-title text-center">
+                <span className="sub-title">Our Gallery</span>
+                <h2 className="title text-uppercase">VISIT OUR STORE I30</h2>
+                <div className="description"></div>
+              </div>
+            </div>
+          </div>
+          <div className="popup-gallery">
+            <div className="row g-2">
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store1} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>{' '}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store2} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>{' '}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store3} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>{' '}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store4} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>{' '}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store5} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>{' '}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store5} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>{' '}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store6} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>{' '}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store7} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store8} alt="" />
+                    <div className="gallery-info">
+                      <a className="gallery-img popup-icon">
+                        {' '}
+                        <i className="fas fa-plus"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="gallery-box">
+                  <div className="gallery-images bg-white">
+                    <img className="img-fluid" src={store9} alt="" />
                     <div className="gallery-info">
                       <a className="gallery-img popup-icon">
                         {' '}

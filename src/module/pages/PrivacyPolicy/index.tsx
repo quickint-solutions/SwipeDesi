@@ -35,15 +35,15 @@ export default function PrivacyPolicy() {
                     <span></span>
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <a className="text-white text-uppercase" href="index.html">
+                        <a className="text-white text-uppercase" href="/">
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">Privacy Policy</li>
+                      <li className="breadcrumb-item active">Shipping rates and policies</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>Privacy Policy</strong>
+                    <strong>Shipping rates and policies</strong>
                   </h2>
                 </div>
               </div>

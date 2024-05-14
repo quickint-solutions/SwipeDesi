@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
-import { getItems } from '../../../apiV2/items';
-import ProductItem from '../../../components/ProductItem';
-import { getCategories } from '../../../apiV2/categories';
+import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import img from '../../../images/bg/mandir-banner.jpg';
+import { sendLead } from '../../../apiV2/leads';
 
 export default function ContactUs() {
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get('category');
-  const [categoryValue, setCategoryValue] = useState(category);
-
   const navigate = useNavigate();
+  const [lead, setLead] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
 
-  const { data: getProducts, mutate } = useMutation(getItems);
-
-  const { data: categoriesList } = useQuery('categories', getCategories);
-
-  const categoriesData = categoriesList?.result || [];
-
-  useEffect(() => {
-    mutate({ categories: categoryValue });
-  }, [categoryValue]);
-  const GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY';
+  const { mutate: handleLead } = useMutation(sendLead, {
+    onSuccess: lead => {
+      alert('Thank you for contacting us. We will get back to you soon.');
+      navigate('/');
+    },
+    onError: () => {
+      alert('Error sending lead. Please try again later.');
+    },
+  });
 
   return (
     <div>
@@ -36,15 +35,15 @@ export default function ContactUs() {
                     <span></span>
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <a className="text-white text-uppercase" href="index.html">
+                        <a className="text-white text-uppercase" href="/">
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">Contact US</li>
+                      <li className="breadcrumb-item active">Contact us</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>Contact US</strong>
+                    <strong>Contact us</strong>
                   </h2>
                 </div>
               </div>
@@ -67,20 +66,43 @@ export default function ContactUs() {
                 <form>
                   <div className="row align-items-center">
                     <div className="mb-3 col-md-6">
-                      <input type="text" className="form-control" id="first-name" placeholder="First Name" />
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="first-name"
+                        placeholder="First Name"
+                        onChange={e => setLead({ ...lead, name: e.target.value })}
+                      />
                     </div>
                     <div className="mb-3 col-md-6">
-                      <input type="text" className="form-control" id="phone" placeholder="Phone Number" />
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="phone"
+                        placeholder="Phone Number"
+                        onChange={e => setLead({ ...lead, phone: e.target.value })}
+                      />
                     </div>
                     <div className="mb-3 col-md-12">
-                      <input type="email" className="form-control" id="email" placeholder="Email" />
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        placeholder="Email"
+                        onChange={e => setLead({ ...lead, email: e.target.value })}
+                      />
                     </div>
                     <div className="col-lg-12">
-                      <textarea className="form-control" rows={5} placeholder="Message"></textarea>
+                      <textarea
+                        className="form-control"
+                        rows={5}
+                        placeholder="Message"
+                        onChange={e => setLead({ ...lead, message: e.target.value })}
+                      ></textarea>
                     </div>
                   </div>
                   <div className="d-flex mt-4">
-                    <a href="" className="btn btn-primary d-inline">
+                    <a className="btn btn-primary d-inline" onClick={() => handleLead(lead)}>
                       Send your Message
                     </a>
                   </div>
@@ -105,7 +127,15 @@ export default function ContactUs() {
                       </li>
                       <li className="d-flex align-items-center">
                         <i className="bi bi-telephone"></i>
-                        <span className="text-white">+1 (587) 969-7008</span>
+                        <a href="tel:+15879697008">
+                          <span className="text-white">+1 (587) 969-7008</span>
+                        </a>
+                      </li>
+                      <li className="d-flex align-items-center">
+                        <i className="bi bi-telephone-plus"></i>
+                        <a href="tel:+14038016969">
+                          <span className="text-white">+1 (403) 801-6969</span>
+                        </a>
                       </li>
                       <li className="d-flex align-items-center">
                         <i className="bi bi-envelope"></i>
@@ -113,7 +143,7 @@ export default function ContactUs() {
                       </li>
                     </ul>
                   </div>
-                  <div className="social-icon">
+                  {/* <div className="social-icon">
                     <ul>
                       <li>
                         <a href="#">
@@ -136,7 +166,7 @@ export default function ContactUs() {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

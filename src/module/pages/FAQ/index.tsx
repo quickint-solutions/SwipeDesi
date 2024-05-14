@@ -39,11 +39,11 @@ export default function FAQ() {
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">Faq</li>
+                      <li className="breadcrumb-item active">FAQs</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>Faq</strong>
+                    <strong>FAQs</strong>
                   </h2>
                 </div>
               </div>

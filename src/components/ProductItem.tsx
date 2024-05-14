@@ -32,17 +32,17 @@ export default function ProductItem({ product, large }: { product: any; large?: 
   });
 
   return (
-    <div className={`col-xl-${large ? '4' : '3'} col-md-6`}>
+    <div className={`col-xl-${large ? '4' : '3'} col-md-6`} style={{ cursor: 'pointer' }}>
       <div className="product">
         {product.discount && (
           <div className="product-label">
-            <span className="onsale">{product.discount || 0}</span>
+            <span className="onsale">{product.discount || 0}%</span>
           </div>
         )}
 
         <div className="product-image">
           <div className="product-thumb-inner">
-            <a onClick={() => navigate(`/shopSingle?productId=${product?._id}`)}>
+            <a href={`/shopSingle?productId=${product?._id}`}>
               <img className="img-fluid" src={product.images[0]} alt="image" />
             </a>
           </div>

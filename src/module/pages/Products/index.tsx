@@ -4,8 +4,6 @@ import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
 import { AuthContext } from '../../../context/auth.context';
-import { useParams } from 'react-router-dom';
-import Category from '../Category/Category';
 
 export default function Products() {
   const { search, categories, setCategories } = useContext(AuthContext);
@@ -277,7 +275,9 @@ export default function Products() {
                                 <div className="product-info">
                                   <div className="product-title">
                                     <h3>
-                                      <a onClick={() => {}}>{categories.name || ''}</a>
+                                      <a href={`/shopSingle?productId=${categories?._id}`} style={{ cursor: 'pointer' }}>
+                                        {categories.name || ''}
+                                      </a>
                                     </h3>
                                   </div>
                                   {/* stars removed */}

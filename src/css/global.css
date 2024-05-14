@@ -57,6 +57,18 @@
   z-index: 1;
 }
 
+.testimonial {
+  transition: background-color 0.3s ease;
+}
+
+.testimonial:hover {
+  background-color: #F3601E;
+}
+
+.testimonial:hover .testimonial-content i {
+  color: #ffffff;
+}
+
 .bg-overlay-black-1:before {
   background: rgba(0, 0, 0, 0.1);
   content: "";
@@ -1033,6 +1045,13 @@ button {
   font-size: 13px;
   line-height: 1;
 }
+.dropdown-menu {
+  display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
 
 .header .topbar-inner a:hover {
   color: #F3601E;
@@ -1122,7 +1141,6 @@ button {
 }
 
 .header .navbar-brand {
-  padding: 20px 0;
   max-width: 220px;
 }
 
@@ -2116,6 +2134,7 @@ button.search-button {
 
 .testimonial .testimonial-content {
   margin-bottom: 20px;
+  height: 150px;
 }
 
 .testimonial .testimonial-content p {
@@ -4007,6 +4026,7 @@ login register form
   padding-bottom: 10px;
   display: block;
   font-weight: 600;
+  color: #424344;
   text-transform: uppercase;
 }
 
