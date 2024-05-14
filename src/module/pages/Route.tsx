@@ -421,7 +421,7 @@ const RouteComponent: React.FC = () => {
         <nav className="navbar navbar-static-top navbar-expand-lg">
           <div className="container main-header position-relative">
             <div className="navbar-collapse collapse">
-              <ul className="nav navbar-nav">
+              <ul className="nav navbar-nav" style={{ fontWeight: '500' }}>
                 <li className="nav-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
                   <div
                     className="nav-link nav-link-flex"
