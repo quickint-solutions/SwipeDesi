@@ -265,7 +265,7 @@ export default function Products() {
                             <div className="product d-flex align-items-center mb-3">
                               <div className="product-image">
                                 <div className="product-thumb-inner">
-                                  <a href="#">
+                                  <a href={'/shopSingle?productId=' + categories?._id}>
                                     <img className="img-fluid" src={categories.images[0]} alt="image" />
                                   </a>
                                 </div>
