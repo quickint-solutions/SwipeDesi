@@ -80,13 +80,13 @@ export default function AboutUs() {
                   <span className="sub-title left-divider">About DHKND</span>
                   <h2 className="title">DHKND Management Inc Since 2020.</h2>
                 </div>
-                <p>
+                <p className="founder-text">
                   Mr. Daxesh Dalwadi, the founder of Dhknd Management Inc, founded the e-commerce agency in 2020. Dhknd’s mission is to keep
                   individuals connected to their roots while remaining happy and content in their current life. So, after conducting a thorough market
                   analysis, we discovered that immigrants face numerous challenges when they are new to Canada and still emotionally loyal to their
                   home country; they find it difficult to blend into this foreign culture.
                 </p>
-                <p>
+                <p className="founder-text">
                   Some homeland products are sold at a relatively high rate and with little diversity in the local market. So, to tackle this problem,
                   we import things from all over the world and sell them in Canada; this not only makes people feel different, but it also gives them
                   a sense of belonging.
@@ -109,7 +109,7 @@ export default function AboutUs() {
               <div className="section-title section-title-style-1">
                 <h2 className="title">How are we different?</h2>
                 <div className="description">
-                  <p>
+                  <p className="founder-text">
                     <i>
                       Dhknd is on set for a never-ending journey to honor the unique, fascinating beauty of one’s country, and its idiosyncratic
                       cultures and traditions. We are standing here with the commitment to serve the subtleness, and the beauty of your home country
@@ -184,7 +184,7 @@ export default function AboutUs() {
                       </li>
                     </ul>
                   </div>
-                  <p className="mb-0">
+                  <p className="mb-0" style={{ color: 'black' }}>
                     I started dhknd with a dream to accomplish the impossible. And that impossible is to have a smile on the face of every customer we
                     serve. Dhknd is not only known for its incredible range of products but is also a destination where people love and find it better
                     in such a competitive niche. Our motto is to keep people connected to where they belong and still stay happy and satisfied with
@@ -221,7 +221,7 @@ export default function AboutUs() {
                       </li>
                     </ul>
                   </div>
-                  <p className="mb-0">
+                  <p className="mb-0" style={{ color: 'black' }}>
                     For the past two years, I’ve worked for this organisation with the goal of connecting individuals to their needs through
                     understanding them. I understand how a buyer’s mind works, and it is my job to solve their mental puzzles. Dhknd is a place where
                     you may work while having a good time. We’re all giving it our all to drive our company to new heights.
@@ -265,7 +265,7 @@ export default function AboutUs() {
                       </li>
                     </ul>
                   </div>
-                  <p className="mb-0">
+                  <p className="mb-0" style={{ color: 'black' }}>
                     I am a young entrepreneur in dhknd. I’m in charge of our company’s social media and marketing. Dhknd is a place where you can
                     interact with every human emotion; we have pleasant memories to remember and terrible times to grow from. We may argue that this
                     is a location where one can learn to cope with all of life’s emotions. Dhknd has taught me a lot of things that I will never

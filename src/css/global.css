@@ -3900,6 +3900,10 @@ login register form
   box-shadow: 0 5px 20px 0 rgba(18, 18, 18, 0.07);
 }
 
+.founder-text{
+  color: #121212;
+}
+
 .bussiness-location {
   /* background: rgba(243, 96, 30, 0.08); */
   box-shadow: 0 5px 20px 0 rgba(18, 18, 18, 0.07);
