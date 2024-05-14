@@ -246,11 +246,6 @@ const RouteComponent: React.FC = () => {
                             <i className="fa-brands fa-square-x-twitter" style={{ fontSize: '20px' }}></i>
                           </a>
                         </li>
-                        <li>
-                          <a href="https://www.youtube.com/@dhkndcanada1799" target="_blank">
-                            <i className="fa-brands fa-square-youtube" style={{ fontSize: '20px' }}></i>
-                          </a>
-                        </li>
                       </ul>
                     </div>
 
@@ -426,7 +421,7 @@ const RouteComponent: React.FC = () => {
         <nav className="navbar navbar-static-top navbar-expand-lg">
           <div className="container main-header position-relative">
             <div className="navbar-collapse collapse">
-              <ul className="nav navbar-nav" style={{ fontWeight: '500' }}>
+              <ul className="nav navbar-nav">
                 <li className="nav-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
                   <div
                     className="nav-link nav-link-flex"
