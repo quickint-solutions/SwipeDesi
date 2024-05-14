@@ -2,22 +2,22 @@
   "theme_color": "#006d63",
   "background_color": "#fff",
   "scope": "/",
-  "name": "Mobile Cashier",
-  "short_name": "Mobile Cashier",
-  "description": "Powered By Yodel",
+  "name": "DHKND.ca",
+  "short_name": "DHKND.ca",
+  "description": "Powered By Webmehigh",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "favicon.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/png"
     },
     {
-      "src": "Yodel192.png",
+      "src": "favicon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "Yodel512.png",
+      "src": "favicon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
