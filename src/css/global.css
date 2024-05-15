@@ -1801,6 +1801,22 @@ button.search-button {
   transform: scale(1, 1);
 }
 
+.owl-nav {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.owl-nav .owl-prev,
+.owl-nav .owl-next {
+  opacity: 1 !important;
+}
+
+
+.owl-prev:hover,
+.owl-next:hover {
+  background-color: transparent !important;
+}
+
 
 
 .owl-carousel.owl-nav-center .owl-nav {
