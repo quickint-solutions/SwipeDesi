@@ -429,7 +429,7 @@ const RouteComponent: React.FC = () => {
                     style={{ display: 'flex', alignItems: 'center', placeContent: 'center' }}
                   >
                     <img src={homeIcon} style={{ width: '16px' }} />
-                    <span>Home</span>
+                    <span style={{ fontWeight: 'semibold', fontSize: '15px' }}>Home</span>
                   </div>
                 </li>
                 {!categoriesLoading && categories && categories?.result?.length > 0
@@ -448,7 +448,7 @@ const RouteComponent: React.FC = () => {
                         >
                           <div className="nav-link nav-link-flex" aria-current="page">
                             <img src={value.icon} style={{ width: 18 }} />
-                            <span>{value.name}</span>
+                            <span style={{ fontWeight: 'bold', fontSize: '15px' }}>{value.name}</span>
                           </div>
                         </li>
                       );
