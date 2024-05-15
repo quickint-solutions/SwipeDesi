@@ -261,8 +261,13 @@ const RouteComponent: React.FC = () => {
                           <i className="bi bi-telephone me-2"></i>+1 (587) 969-7008
                         </a>
                       </div>
-                      <div className="info-box-icon ps-3 d-none d-lg-flex">
-                        <a onClick={() => window.open(`https://wa.me/+1 (587) 969-7008`, '_blank')} className="d-flex align-items-center">
+                      <div className="info-box-icon ps-3 d-none d-lg-flex" style={{ cursor: 'pointer' }}>
+                        <a
+                          onClick={() =>
+                            window.open(`https://api.whatsapp.com/send?phone=15879697008&text=Hello%20How%20Can%20I%20Help%20You%3F`, '_blank')
+                          }
+                          className="d-flex align-items-center"
+                        >
                           <img src={expertLogo} alt="image" />
                           <span className="ps-2">Contact with an expert</span>
                         </a>
