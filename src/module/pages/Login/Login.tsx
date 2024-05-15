@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getBanners } from '../../../apiV2/banners';
 import { getCategories } from '../../../apiV2/categories';
-import { getFeaturedItems, getHaveliJhulaItems } from '../../../apiV2/items';
+import { getFeaturedItems, getHaveliMandirItems, getPremiumJhulaItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { AuthContext } from '../../../context/auth.context';
 import { InstagramEmbed } from 'react-social-media-embed';
@@ -44,7 +44,9 @@ const Login: React.FC = () => {
 
   const { isLoading: featuredItemsLoading, data: featuredItems } = useQuery('getFeaturedItems', getFeaturedItems);
 
-  const { isLoading: haveliJhulaLoading, data: haveliJhulaItems } = useQuery('getHaveliJhulaItems', getHaveliJhulaItems);
+  const { isLoading: haveliMandirLoading, data: haveliMandirItems } = useQuery('getHaveliMandirItems', getHaveliMandirItems);
+
+  const { isLoading: premiumJhulaLoading, data: premiumJhulaItems } = useQuery('getPremiumJhulaItems', getPremiumJhulaItems);
 
   const { isLoading: instagramLoading, data: instagramImages } = useQuery('instagramImages', getInstagram);
 
@@ -63,7 +65,7 @@ const Login: React.FC = () => {
 
   const isMobile = window.innerWidth < 768;
 
-  console.log('haveliJhulaItems -> ', haveliJhulaItems);
+  console.log('haveliJhulaItems -> ', haveliMandirItems);
 
   return (
     <>
@@ -417,8 +419,8 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="row">
-            {featuredItems?.result?.length > 0
-              ? featuredItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
+            {premiumJhulaItems?.result?.length > 0
+              ? premiumJhulaItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
               : ''}
           </div>
           <div className="row">
@@ -433,8 +435,8 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="row">
-            {featuredItems?.result?.length > 0
-              ? featuredItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
+            {haveliMandirItems?.result?.length > 0
+              ? haveliMandirItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
               : ''}
           </div>
         </div>

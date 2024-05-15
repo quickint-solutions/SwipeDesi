@@ -22,8 +22,13 @@ export const getFeaturedItems = async () => {
   return response.data;
 };
 
-export const getHaveliJhulaItems = async () => {
-  const response = await axios.get('/item?filter={"haveliJhula":true}');
+export const getHaveliMandirItems = async () => {
+  const response = await axios.get('/item?filter={"haveliMandir":true}');
+  return response.data;
+};
+
+export const getPremiumJhulaItems = async () => {
+  const response = await axios.get('/item?filter={"premiumJhula":true}');
   return response.data;
 };
 
