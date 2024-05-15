@@ -22,6 +22,11 @@ export const getFeaturedItems = async () => {
   return response.data;
 };
 
+export const getHaveliJhulaItems = async () => {
+  const response = await axios.get('/item?filter={"haveliJhula":true}');
+  return response.data;
+};
+
 export const getItemsByCategory = async (category_id: string) => {
   const response = await axios.get('/item?filter={"categories":"' + category_id + '"}');
   return response.data;
