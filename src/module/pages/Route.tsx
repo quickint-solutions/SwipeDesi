@@ -246,6 +246,11 @@ const RouteComponent: React.FC = () => {
                             <i className="fa-brands fa-square-x-twitter" style={{ fontSize: '20px' }}></i>
                           </a>
                         </li>
+                        <li>
+                          <a href="https://www.youtube.com/@dhkndcanada1799" target="_blank">
+                            <i className="fa-brands fa-square-youtube" style={{ fontSize: '20px' }}></i>
+                          </a>
+                        </li>
                       </ul>
                     </div>
 
