@@ -27,6 +27,10 @@ export default function Products() {
     }
   });
 
+  useEffect(() => {
+    setCategories(categoryName as string);
+  }, [categoryName]);
+
   const pCategoty = category?.parentCategory ? categoriesList?.result?.find((i: any) => i._id === i.parentCategory?._id) || {} : category;
 
   return (
