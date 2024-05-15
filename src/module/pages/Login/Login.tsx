@@ -146,7 +146,6 @@ const Login: React.FC = () => {
               dots={false}
               animateIn="fadeIn"
               animateOut="fadeOut"
-              autoplayHoverPause={true}
               mouseDrag={true}
             >
               {_.chunk(categories?.result?.filter((i: any) => !i.parentCategory) || []).map((categoriesData: any, key: number) => {
