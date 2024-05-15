@@ -476,9 +476,7 @@ const Login: React.FC = () => {
                       </p>
                     </div>
                     <div className="testimonial-author info-right">
-                      <div className="testimonial-avatar avatar">
-                        <img className="img-fluid" src={AvtarIcon01} alt="" />
-                      </div>
+                      <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle">Baadshah Hai From Fiji</h6>
                         {/* <span className="text-white">Product Designer</span> */}
@@ -502,9 +500,7 @@ const Login: React.FC = () => {
                       </p>
                     </div>
                     <div className="testimonial-author info-right">
-                      <div className="testimonial-avatar avatar">
-                        <img className="img-fluid" src={AvtarIcon01} alt="" />
-                      </div>
+                      <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle"> Deepti Kamal</h6>
                         {/* <span className="text-white">Product Designer</span> */}
@@ -528,9 +524,7 @@ const Login: React.FC = () => {
                       </p>
                     </div>
                     <div className="testimonial-author info-right">
-                      <div className="testimonial-avatar avatar">
-                        <img className="img-fluid" src={AvtarIcon01} alt="" />
-                      </div>
+                      <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle"> Hemant Tripathi,Surrey, BC</h6>
                         {/* <span className="text-white">Product Designer</span> */}
@@ -553,9 +547,7 @@ const Login: React.FC = () => {
                       </p>
                     </div>
                     <div className="testimonial-author info-right">
-                      <div className="testimonial-avatar avatar">
-                        <img className="img-fluid" src={AvtarIcon01} alt="" />
-                      </div>
+                      <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle"> Parijat Hasija</h6>
                         {/* <span className="text-white">Product Designer</span> */}
