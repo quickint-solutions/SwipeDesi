@@ -433,8 +433,8 @@ const RouteComponent: React.FC = () => {
                     aria-current="page"
                     style={{ display: 'flex', alignItems: 'center', placeContent: 'center' }}
                   >
-                    <img src={homeIcon} style={{ width: '16px' }} />
-                    <span style={{ fontWeight: 'bold', fontSize: '15px' }}>Home</span>
+                    <img src={homeIcon} style={{ width: '16px', marginRight: '2px' }} />
+                    <span style={{ fontWeight: '600', fontSize: '15px', marginLeft: '2px' }}>Home</span>
                   </div>
                 </li>
                 {!categoriesLoading && categories && categories?.result?.length > 0
@@ -452,8 +452,8 @@ const RouteComponent: React.FC = () => {
                           data-bs-target=".navbar-collapse"
                         >
                           <div className="nav-link nav-link-flex" aria-current="page">
-                            <img src={value.icon} style={{ width: 18 }} />
-                            <span style={{ fontWeight: 'bold', fontSize: '15px' }}>{value.name}</span>
+                            <img src={value.icon} style={{ width: 18, marginRight: '2px' }} />
+                            <span style={{ fontWeight: '600', fontSize: '15px' }}>{value.name}</span>
                           </div>
                         </li>
                       );
