@@ -1,29 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
-import { getItems } from '../../../apiV2/items';
-import ProductItem from '../../../components/ProductItem';
-import { getCategories } from '../../../apiV2/categories';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useQuery } from 'react-query';
 import img from '../../../images/bg/mandir-banner.jpg';
+import { fetchBlogs } from '../../../apiV2/blogs';
 
 export default function Blogs() {
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get('category');
-  const [categoryValue, setCategoryValue] = useState(category);
-  const [blogs, setBlogs] = useState<any[]>([]);
+  const { data: blogsList } = useQuery('Blogs', fetchBlogs);
 
-  const navigate = useNavigate();
+  const blogsData = blogsList?.result || [];
 
-  const { data: getProducts, mutate } = useMutation(getItems);
-
-  const { data: categoriesList } = useQuery('categories', getCategories);
-
-  const categoriesData = categoriesList?.result || [];
-
-  useEffect(() => {
-    mutate({ categories: categoryValue });
-  }, [categoryValue]);
-
+  console.log('blogsData -> ', blogsData);
   return (
     <div>
       <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url(${img})` }}>
