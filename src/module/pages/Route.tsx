@@ -243,7 +243,7 @@ const RouteComponent: React.FC = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.facebook.com/dhknd.ca/" target="_blank">
+                          <a href="https://www.twitter.com/" target="_blank">
                             <i className="fa-brands fa-square-x-twitter" style={{ fontSize: '20px' }}></i>
                           </a>
                         </li>
