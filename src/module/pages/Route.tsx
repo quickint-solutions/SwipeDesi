@@ -429,7 +429,7 @@ const RouteComponent: React.FC = () => {
                     style={{ display: 'flex', alignItems: 'center', placeContent: 'center' }}
                   >
                     <img src={homeIcon} style={{ width: '16px' }} />
-                    <span style={{ fontWeight: 'semibold', fontSize: '15px' }}>Home</span>
+                    <span style={{ fontWeight: 'bold', fontSize: '15px' }}>Home</span>
                   </div>
                 </li>
                 {!categoriesLoading && categories && categories?.result?.length > 0
