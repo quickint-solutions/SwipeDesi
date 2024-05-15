@@ -18,7 +18,7 @@ import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
 import AboutUs from './AboutUs';
-import languageLogo from '../../images/en.png';
+import languageLogo from '../../images/canada.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
 import homeIcon from '../../images/home.png';
 import { getWishList } from '../../apiV2/wishlist';
@@ -243,7 +243,7 @@ const RouteComponent: React.FC = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.twitter.com/" target="_blank">
+                          <a href="https://www.twitter.com/dhknd.ca/" target="_blank">
                             <i className="fa-brands fa-square-x-twitter" style={{ fontSize: '20px' }}></i>
                           </a>
                         </li>
