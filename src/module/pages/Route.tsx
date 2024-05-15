@@ -7,6 +7,7 @@ import { getCategories } from '../../apiV2/categories';
 import { signup } from '../../apiV2/signup';
 import ContactUs from './ContactUs';
 import FAQ from './FAQ';
+import Blogs from './Blogs';
 import { login } from '../../apiV2/login';
 import Testimonials from './Testimonials';
 import { AuthContext } from '../../context/auth.context';
@@ -889,6 +890,7 @@ const RouteComponent: React.FC = () => {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/terms-and-conditions" element={<TermsCondition />} />
         <Route path="/faqs" element={<FAQ />} />
+        <Route path="/blogs" element={<Blogs />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/contact-us" element={<ContactUs />} />
@@ -964,6 +966,9 @@ const RouteComponent: React.FC = () => {
                   </li>
                   <li>
                     <a href="/faqs">FAQs</a>
+                  </li>
+                  <li>
+                    <a href="/blogs">Blogs</a>
                   </li>
                 </ul>
               </div>
