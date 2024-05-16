@@ -128,7 +128,15 @@ const ShopSingle: React.FC = () => {
                 <div className="row">
                   <div className="col-md-5 mb-4 mb-md-0">
                     <OwlCarousel autoplayTimeout={3000} autoplay={true} items={1} loop={true} margin={10}>
-                      {itemDetails?.images.map((value: any, key: number) => <img className="img-fluid" src={value} alt="" />)}
+                      <div className="product-images">
+                        {itemDetails.discount && (
+                          <div className="product-label">
+                            {' '}
+                            <span className="onsale">{itemDetails.discount}%</span>{' '}
+                          </div>
+                        )}
+                        {itemDetails?.images.map((value: any, key: number) => <img key={key} className="img-fluid" src={value} alt="" />)}
+                      </div>
                     </OwlCarousel>
                   </div>
 
