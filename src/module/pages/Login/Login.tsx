@@ -69,7 +69,6 @@ const Login: React.FC = () => {
   const isMobile = window.innerWidth < 768;
 
   const blogs = blogData?.result?.slice(0, 3) || [];
-  console.log('blogData -> ', blogs);
   return (
     <>
       {/* <!--=================================

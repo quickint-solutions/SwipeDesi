@@ -77,7 +77,7 @@ export default function BlogSingle() {
                       <div className="user d-flex align-items-center me-3">
                         <a>
                           <i className="fa-regular fa-user me-1 text-primary"></i>
-                          <span>Sara Lisbon</span>
+                          <span>Dhknd</span>
                         </a>
                       </div>
                     </div>

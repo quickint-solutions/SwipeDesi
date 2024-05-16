@@ -10,7 +10,7 @@ export default function Blogs() {
   const { data: blogsList } = useQuery('Blogs', fetchBlogs);
   const blogsData = blogsList?.result || [];
 
-  const { search, categories, setCategories } = useContext(AuthContext);
+  const { setCategories } = useContext(AuthContext);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -24,6 +24,7 @@ export default function Blogs() {
       return i.name;
     }
   });
+
   useEffect(() => {
     setCategories(categoryName as string);
   }, [categoryName]);
