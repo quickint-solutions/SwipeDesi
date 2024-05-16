@@ -437,7 +437,7 @@ const RouteComponent: React.FC = () => {
                   <div
                     className="nav-link nav-link-flex"
                     aria-current="page"
-                    style={{ display: 'flex', alignItems: 'center', placeContent: 'center' }}
+                    style={{ display: 'block', alignItems: 'center', placeContent: 'center' }}
                   >
                     <img src={homeIcon} style={{ width: '16px', marginRight: '2px' }} />
                     <span style={{ fontWeight: '600', fontSize: '15px', marginLeft: '2px' }}>Home</span>
