@@ -9,7 +9,7 @@ import { CartProvider } from './context/cart.context';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe('pk_live_51OhE1ILaWLKJ299ML15crwoxPcPSnrPA1Pvx3NClFKd4FikbPnWiWLiKuZIk2SgfdipiUnGHICpibjcPmU9xrrU7008j3eaPLv');
+const stripePromise = loadStripe('pk_live_51IKSIZJvIVD3jVvjJFvRwvAOtq1zaukEOeqLfMNw9MWa9pALPUkH7OCpAlK6IzjwipnqIX9q9dcNwyLZg9mRgs6B0059UfSbHw');
 
 const ScrollToTopOnRouteChange = () => {
   const { pathname } = useLocation();
