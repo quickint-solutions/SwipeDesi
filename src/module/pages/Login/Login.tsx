@@ -27,6 +27,7 @@ import ProductItem from '../../../components/ProductItem';
 import { AuthContext } from '../../../context/auth.context';
 import { InstagramEmbed } from 'react-social-media-embed';
 import { getInstagram } from '../../../apiV2/instagram';
+import { fetchBlogs } from '../../../apiV2/blogs';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -63,10 +64,11 @@ const Login: React.FC = () => {
     navigate('/wishlist');
   };
 
+  const { data: blogData } = useQuery('Blogs Data', fetchBlogs);
+
   const isMobile = window.innerWidth < 768;
 
-  console.log('haveliJhulaItems -> ', haveliMandirItems);
-
+  const blogs = blogData?.result?.slice(0, 3) || [];
   return (
     <>
       {/* <!--=================================
@@ -573,8 +575,8 @@ const Login: React.FC = () => {
           <div className="row d-flex align-items-center mb-4 pb-3">
             <div className="col-md-12 col-lg-8 col-xl-6">
               <div className="section-title section-title-style-1 mb-0">
-                <span className="sub-title left-divider">RECENT ARTICLES</span>
-                <h2 className="title mb-0">Recent articles and news</h2>
+                <span className="sub-title left-divider">RECENT BLOGS</span>
+                <h2 className="title mb-0">Recent articles and Blogs</h2>
               </div>
             </div>
             <div className="col-md-12 col-lg-4 col-xl-6 text-lg-end text-start mt-4 mt-lg-0">
@@ -584,72 +586,28 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="row">
-            {/* {recentArticleData.length > 0
-              ? recentArticleData.map((value: any, key: number) => (
-                  <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <div className="blog-post">
-                      <div className="blog-img">
-                        <img className="img-fluid" src={BlogImage} alt="#" />
-                      </div>
-                      <div className="blog-info">
-                        <span>{moment(new Date(value.date)).format('MMM DD, YYYY')}</span>
-                        <h4 className="blog-tittle">
-                          <a href="blog-single.html">{value.articleName}</a>
-                        </h4>
-                        <a className="blog-link" href="blog-single.html">
-                          Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              : ''} */}
             <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
               <div className="blog-post">
-                <div className="blog-img">
-                  <img className="img-fluid" src={BlogImage} alt="#" />
-                </div>
-                <div className="blog-info">
-                  <span>April 27, 2024</span>
-                  <h4 className="blog-tittle">
-                    <a href="blog-single.html">Article 1</a>
-                  </h4>
-                  <a className="blog-link" href="blog-single.html">
-                    Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <div className="blog-post">
-                <div className="blog-img">
-                  <img className="img-fluid" src={BlogImage1} alt="#" />
-                </div>
-                <div className="blog-info">
-                  <span>April 27, 2024</span>
-                  <h4 className="blog-tittle">
-                    <a href="blog-single.html">Article 1</a>
-                  </h4>
-                  <a className="blog-link" href="blog-single.html">
-                    Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="blog-post mb-0">
-                <div className="blog-img">
-                  <img className="img-fluid" src={BlogImage2} alt="#" />
-                </div>
-                <div className="blog-info">
-                  <span>April 27, 2024</span>
-                  <h4 className="blog-tittle">
-                    <a href="blog-single.html">Article 1</a>
-                  </h4>
-                  <a className="blog-link" href="blog-single.html">
-                    Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
-                  </a>
-                </div>
+                {blogs
+                  ? blogs.map((blog: any, index: any) => {
+                      return (
+                        <div key={index}>
+                          <div className="blog-img">
+                            <img className="img-fluid" src={blog.image} alt={blog.image} />
+                          </div>
+                          <div className="blog-info">
+                            <span>April 27, 2024</span>
+                            <h4 className="blog-tittle">
+                              <a>{blog?.title || 'No title'}</a>
+                            </h4>
+                            <a className="blog-link" href={`/blog-single?id=${blog._id}`}>
+                              Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
+                            </a>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : ''}
               </div>
             </div>
           </div>

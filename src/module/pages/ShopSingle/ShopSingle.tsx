@@ -127,8 +127,43 @@ const ShopSingle: React.FC = () => {
               <div className="col-lg-12">
                 <div className="row">
                   <div className="col-md-5 mb-4 mb-md-0">
-                    <OwlCarousel autoplayTimeout={3000} autoplay={true} items={1} loop={true} margin={10}>
-                      {itemDetails?.images.map((value: any, key: number) => <img className="img-fluid" src={value} alt="" />)}
+                    <OwlCarousel
+                      className="owl-theme"
+                      autoplayTimeout={3000}
+                      autoplay={true}
+                      items={1}
+                      loop={true}
+                      margin={10}
+                      nav={true}
+                      dots={false}
+                      responsive={{ 0: { items: 1 }, 600: { items: 1 }, 1000: { items: 1 } }}
+                    >
+                      {itemDetails?.images.map((image: string | undefined, index: React.Key | null | undefined) => (
+                        <div key={index} className="item">
+                          <div className="product-label">
+                            <span className="onsale">{itemDetails.discount || 0}%</span>
+                          </div>
+                          <img src={image} alt={`Product ${index}`} />
+                        </div>
+                      ))}
+                    </OwlCarousel>
+
+                    <OwlCarousel
+                      className="owl-theme"
+                      autoplayTimeout={3000}
+                      autoplay={true}
+                      items={3}
+                      loop={true}
+                      margin={10}
+                      nav={false}
+                      dots={false}
+                      responsive={{ 0: { items: 3 }, 600: { items: 5 }, 1000: { items: 7 } }}
+                    >
+                      {itemDetails?.images.map((image: string | undefined, index: React.Key | null | undefined) => (
+                        <div key={index} className="item">
+                          <img src={image} alt={`Thumbnail ${index}`} />
+                        </div>
+                      ))}
                     </OwlCarousel>
                   </div>
 
