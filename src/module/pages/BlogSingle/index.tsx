@@ -27,10 +27,7 @@ export default function BlogSingle() {
 
   return (
     <div>
-      <section
-        className="header-inner header-inner-menu bg-overlay-secondary"
-        style={{ backgroundImage: `url(${blogData?.image})`, maxHeight: '300px' }}
-      >
+      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url('images/bg/02.png')` }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
