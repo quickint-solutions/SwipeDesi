@@ -22,6 +22,16 @@ export const getFeaturedItems = async () => {
   return response.data;
 };
 
+export const getHaveliMandirItems = async () => {
+  const response = await axios.get('/item?filter={"haveliMandir":true}');
+  return response.data;
+};
+
+export const getPremiumJhulaItems = async () => {
+  const response = await axios.get('/item?filter={"premiumJhula":true}');
+  return response.data;
+};
+
 export const getItemsByCategory = async (category_id: string) => {
   const response = await axios.get('/item?filter={"categories":"' + category_id + '"}');
   return response.data;

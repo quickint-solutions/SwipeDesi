@@ -254,7 +254,7 @@ export default function AboutUs() {
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href="https://www.linkedin.com/in/kavya-d-613290251/">
                           <i className="fab fa-linkedin-in"></i>
                         </a>
                       </li>
@@ -302,10 +302,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -315,10 +312,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery1} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -328,10 +322,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery2} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -341,10 +332,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -354,10 +342,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery1} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -367,10 +352,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery2} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -380,10 +362,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -393,14 +372,17 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={gallery1} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="popup">
+            <div className="popup-content">
+              <img id="fullImage" src="" alt="" />
+              <span className="close">&times;</span>
             </div>
           </div>
         </div>
@@ -424,10 +406,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store1} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -437,10 +416,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store2} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -450,10 +426,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store3} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -463,10 +436,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store4} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -476,10 +446,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store5} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -489,10 +456,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store5} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -502,10 +466,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store6} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>{' '}
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -515,10 +476,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store7} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -528,10 +486,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store8} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>
@@ -541,10 +496,7 @@ export default function AboutUs() {
                   <div className="gallery-images bg-white">
                     <img className="img-fluid" src={store9} alt="" />
                     <div className="gallery-info">
-                      <a className="gallery-img popup-icon">
-                        {' '}
-                        <i className="fas fa-plus"></i>
-                      </a>
+                      <a className="gallery-img popup-icon"> </a>
                     </div>
                   </div>
                 </div>

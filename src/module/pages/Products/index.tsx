@@ -27,6 +27,10 @@ export default function Products() {
     }
   });
 
+  useEffect(() => {
+    setCategories(categoryName as string);
+  }, [categoryName]);
+
   const pCategoty = category?.parentCategory ? categoriesList?.result?.find((i: any) => i._id === i.parentCategory?._id) || {} : category;
 
   return (
@@ -67,7 +71,7 @@ export default function Products() {
           <div className="row">
             <div className="col-xl-3 col-lg-4">
               <div className="sidebar">
-                <div className="widget">
+                {/* <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Search</h5>
                   </div>
@@ -77,7 +81,7 @@ export default function Products() {
                       <input type="text" className="form-control" placeholder="Search" />
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Categories</h5>
