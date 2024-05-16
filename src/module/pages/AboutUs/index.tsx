@@ -254,7 +254,7 @@ export default function AboutUs() {
                         </a>
                       </li>
                       <li>
-                        <a href="https://www.linkedin.com/in/kavya-d-613290251/?original_referer=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&originalSubdomain=ca">
+                        <a href="https://www.linkedin.com/in/kavya-d-613290251/">
                           <i className="fab fa-linkedin-in"></i>
                         </a>
                       </li>
