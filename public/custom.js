@@ -87,66 +87,16 @@ NOTE: This file contains all scripts for the actual Template.
   /*************************
        Counter
 *************************/
-  POTENZA.counters = function () {
-    var counter = jQuery('.counter');
-    if (counter.length > 0) {
-      $counter.each(function () {
-        var $elem = $(this);
-        $elem.appear(function () {
-          $elem.find('.timer').countTo();
-        });
-      });
-    }
-  };
-
   $(document).ready(function () {
-    var currentImageIndex = 0;
-    var totalImages = $('.gallery-images').length;
-
-    // Function to show the popup with the selected image
-    function showPopup(index) {
-      var imgSrc = $('.gallery-images').eq(index).find('img').attr('src');
+    $('.gallery-img').click(function () {
+      var imgSrc = $(this).parent().prev().attr('src');
       $('#fullImage').attr('src', imgSrc);
       $('.popup').fadeIn();
-      currentImageIndex = index;
-      updateNavigationButtons();
-    }
-
-    // Function to update the navigation buttons
-    function updateNavigationButtons() {
-      $('.prev').toggle(currentImageIndex > 0);
-      $('.next').toggle(currentImageIndex < totalImages - 1);
-    }
-
-    // Click event for next button
-    $('.next').click(function () {
-      if (currentImageIndex < totalImages - 1) {
-        currentImageIndex++;
-        showPopup(currentImageIndex);
-      }
     });
 
-    // Click event for previous button
-    $('.prev').click(function () {
-      if (currentImageIndex > 0) {
-        currentImageIndex--;
-        showPopup(currentImageIndex);
-      }
-    });
-
-    // Click event for gallery images
-    $('.gallery-images').click(function () {
-      var index = $(this).closest('.gallery-box').index();
-      showPopup(index);
-    });
-
-    // Click event for close button
     $('.close').click(function () {
       $('.popup').fadeOut();
     });
-
-    // Initially hide the previous button
-    updateNavigationButtons();
   });
 
   /*************************
@@ -324,6 +274,20 @@ NOTE: This file contains all scripts for the actual Template.
       }
     }
   };
+
+  $(document).ready(function () {
+    // Click event for individual gallery images
+    $('.gallery-images img').click(function () {
+      var imgSrc = $(this).attr('src');
+      $('#fullImage').attr('src', imgSrc);
+      $('.popup').fadeIn();
+    });
+
+    // Click event for close button
+    $('.close').click(function () {
+      $('.popup').fadeOut();
+    });
+  });
 
   /*************************
       Datetimepicker

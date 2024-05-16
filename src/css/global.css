@@ -4126,6 +4126,8 @@ login register form
   opacity: 1;
   top: 50%;
   visibility: visible;
+  height: 100%;
+  width: 100%;
 }
 
 .gallery-box .gallery-info .popup-icon {
@@ -4144,7 +4146,6 @@ login register form
   text-align: center;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background: #F3601E;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   z-index: 1;
