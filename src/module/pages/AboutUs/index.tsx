@@ -403,6 +403,14 @@ export default function AboutUs() {
               </div>
             </div>
           </div>
+          <div className="popup">
+            <div className="popup-content">
+              <span className="prev">&lt;</span>
+              <img id="fullImage" src="" alt="" />
+              <span className="next">&gt;</span>
+              <span className="close">&times;</span>
+            </div>
+          </div>
         </div>
       </section>
 
