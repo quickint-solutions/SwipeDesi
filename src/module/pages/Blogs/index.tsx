@@ -74,7 +74,7 @@ export default function Blogs() {
                           <h4 className="blog-tittle">
                             <a href="blog-single.html">{blog?.title || 'No title given'}</a>
                           </h4>
-                          <a className="blog-link" style={{ cursor: 'pointer' }}>
+                          <a className="blog-link" href="/blog-single" style={{ cursor: 'pointer' }}>
                             Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
                           </a>
                         </div>
