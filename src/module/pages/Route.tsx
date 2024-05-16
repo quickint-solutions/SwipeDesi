@@ -165,7 +165,6 @@ const RouteComponent: React.FC = () => {
 
   const { mutate: handleResetPassword } = useMutation(resetPasswordAPI, {
     onSuccess: data => {
-      console.log('ForgotPassworddata -> ', data);
       (window as any).$('#forgotPasswordModal').modal('hide');
       alert('Password reset successfully please login now!');
       (window as any).$('#formLoginRegister').modal('show');
