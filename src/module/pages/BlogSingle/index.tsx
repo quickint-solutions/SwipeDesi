@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { getBlogsById } from '../../../apiV2/blogs';
 import { AuthContext } from '../../../context/auth.context';
 import { getCategories } from '../../../apiV2/categories';
+import img from '../../../images/bg/mandir-banner.jpg';
 
 export default function BlogSingle() {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -27,7 +28,7 @@ export default function BlogSingle() {
 
   return (
     <div>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url('images/bg/02.png')` }}>
+      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url(${img})` }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
