@@ -8,7 +8,7 @@ import { signup } from '../../apiV2/signup';
 import ContactUs from './ContactUs';
 import FAQ from './FAQ';
 import BlogSingle from './BlogSingle';
-import Blogs from './Blogs/id';
+import Blogs from './Blogs';
 import { login } from '../../apiV2/login';
 import Testimonials from './Testimonials';
 import { AuthContext } from '../../context/auth.context';

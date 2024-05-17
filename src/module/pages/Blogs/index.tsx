@@ -63,9 +63,9 @@ export default function Blogs() {
           <div className="row">
             <div className="col-xl-9 col-lg-8">
               <div className="row">
-                <div className="col-md-6 col-12 mb-4">
-                  {blogsData?.map((blog: any) => {
-                    return (
+                {blogsData?.map((blog: any) => {
+                  return (
+                    <div className="col-md-6 col-12 mb-4">
                       <div className="blog-post" key={blog?._id}>
                         <div className="blog-img">
                           <img className="img-fluid" src={blog?.image} alt="#" />
@@ -80,9 +80,9 @@ export default function Blogs() {
                           </a>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="col-xl-3 col-lg-4 mt-4 mt-md-5 mt-lg-0">
