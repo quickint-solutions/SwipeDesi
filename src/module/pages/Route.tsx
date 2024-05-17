@@ -174,6 +174,27 @@ const RouteComponent: React.FC = () => {
       console.log('error -> ', error);
     },
   });
+  const [isVisible, setIsVisible] = useState(false);
+  // Show or hide the button based on scroll position
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
 
   return (
     <React.Fragment>
@@ -1042,8 +1063,8 @@ const RouteComponent: React.FC = () => {
         </div>
       </footer>
 
-      <div id="back-to-top" className="back-to-top">
-        <a href="#">
+      <div id="back-to-top" className={`back-to-top ${isVisible ? 'show' : ''}`} onClick={scrollToTop}>
+        <a>
           <i className="fas fa-angle-up"></i>
         </a>
       </div>
