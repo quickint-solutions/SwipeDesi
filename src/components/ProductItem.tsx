@@ -37,10 +37,9 @@ export default function ProductItem({ product, large }: { product: any; large?: 
       function () {
         $(`#product-img-${product?._id}`).attr('src', product?.images?.[1] || product?.images?.[0]);
       },
-      function () {
-        $(`#product-img-${product?._id}`).attr('src', product?.images?.[0]);
-      },
+      function () {},
     );
+    $(`#product-img-${product?._id}`).attr('src', product?.images?.[0]);
   });
 
   return (
