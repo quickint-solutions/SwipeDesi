@@ -580,7 +580,7 @@ const Login: React.FC = () => {
               </div>
             </div>
             <div className="col-md-12 col-lg-4 col-xl-6 text-lg-end text-start mt-4 mt-lg-0">
-              <a href="#" className="btn btn-primary">
+              <a href="/Blogs" className="btn btn-primary">
                 Visit the Blog<i className="fas fa-arrow-right-long ps-3"></i>
               </a>
             </div>
