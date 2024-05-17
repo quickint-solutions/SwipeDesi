@@ -53,7 +53,7 @@ export default function BlogSingle() {
           </div>
         </div>
       </section>
-      {/* <div className="header-inner-shape" style={{ backgroundImage: `url(${blogData?.image})` }}></div> */}
+
       <section className="space-ptb">
         <div className="container">
           <div className="row">

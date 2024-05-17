@@ -74,6 +74,7 @@ const RouteComponent: React.FC = () => {
     zip: '',
     profileImage: '',
   });
+
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
 
   const { user, search, setSearch, setCategories } = useContext(AuthContext);
@@ -646,7 +647,6 @@ const RouteComponent: React.FC = () => {
                                   alert('Please fill all fields');
                                   return;
                                 }
-
                                 handleSignup(registrationDetail);
                               }}
                             >

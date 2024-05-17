@@ -586,11 +586,11 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <div className="blog-post">
-                {blogs
-                  ? blogs.map((blog: any, index: any) => {
-                      return (
+            {blogs
+              ? blogs.map((blog: any, index: any) => {
+                  return (
+                    <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                      <div className="blog-post">
                         <div key={index}>
                           <div className="blog-img">
                             <img className="img-fluid" src={blog.image} alt={blog.image} />
@@ -605,11 +605,11 @@ const Login: React.FC = () => {
                             </a>
                           </div>
                         </div>
-                      );
-                    })
-                  : ''}
-              </div>
-            </div>
+                      </div>
+                    </div>
+                  );
+                })
+              : ''}
           </div>
         </div>
       </section>
