@@ -338,7 +338,7 @@
     Typography
 *****************************/
 body {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-size: 15px;
   line-height: 1.8;
@@ -346,8 +346,8 @@ body {
   overflow-x: hidden;
 }
 
-.sora-fonts {
-  font-family: 'Sora', sans-serif;
+.Poppins-fonts {
+  font-family: 'Poppins', sans-serif;
 }
 
 
@@ -3948,14 +3948,14 @@ login register form
 
 .owl-theme2 .owl-nav .owl-prev {
   position: absolute;
-  left: 10px;
-  z-index: 10;
+  left: -5px;
+  z-index: 5;
 }
 
 .owl-theme2 .owl-nav .owl-next {
   position: absolute;
-  right: 10px;
-  z-index: 10;
+  right: -5px;
+  z-index: 5;
 }
 
 
