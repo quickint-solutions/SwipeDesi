@@ -560,7 +560,7 @@ const RouteComponent: React.FC = () => {
                             onClick={() => setShowPassword(!showPassword)}
                             style={{ cursor: 'pointer', backgroundColor: 'transparent' }}
                           >
-                            {showPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
+                            {showPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye-slash-fill"></i>}
                           </span>
                         </div>
                       </div>
@@ -682,7 +682,7 @@ const RouteComponent: React.FC = () => {
                               onClick={() => setShowPassword(!showPassword)}
                               style={{ cursor: 'pointer', backgroundColor: 'transparent' }}
                             >
-                              {showPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
+                              {showPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye-slash-fill"></i>}
                             </span>
                           </div>
                         </div>
@@ -898,7 +898,7 @@ const RouteComponent: React.FC = () => {
                                   onChange={e => handleResetPasswordDetail('password1', e.target.value)}
                                 />
                                 <span className="input-group-text" onClick={() => setShowPassword(!showPassword)} style={{ cursor: 'pointer' }}>
-                                  {showPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
+                                  {showPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye-slash-fill"></i>}
                                 </span>
                               </div>
                             </div>
@@ -919,7 +919,7 @@ const RouteComponent: React.FC = () => {
                                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                   style={{ cursor: 'pointer', backgroundColor: 'transparent' }}
                                 >
-                                  {showConfirmPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
+                                  {showConfirmPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye-slash-fill"></i>}
                                 </span>
                               </div>
                             </div>
