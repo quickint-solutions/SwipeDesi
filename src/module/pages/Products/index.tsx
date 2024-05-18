@@ -8,6 +8,9 @@ import { AuthContext } from '../../../context/auth.context';
 export default function Products() {
   const { search, categories, setCategories } = useContext(AuthContext);
 
+  const [page, setPage] = useState(1);
+  const pageSize = 12;
+
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
@@ -26,6 +29,16 @@ export default function Products() {
       return i.name;
     }
   });
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+  };
+
+  useEffect(() => {
+    if (page >= 0) {
+      getItems({ categories: categories, search, pageSize, page });
+    }
+  }, [page, pageSize]);
 
   useEffect(() => {
     setCategories(categoryName as string);
@@ -71,17 +84,6 @@ export default function Products() {
           <div className="row">
             <div className="col-xl-3 col-lg-4">
               <div className="sidebar">
-                {/* <div className="widget">
-                  <div className="widget-title">
-                    <h5 className="title">Search</h5>
-                  </div>
-                  <div className="widget-content">
-                    <div className="search">
-                      <i className="fas fa-search"></i>
-                      <input type="text" className="form-control" placeholder="Search" />
-                    </div>
-                  </div>
-                </div> */}
                 <div className="widget">
                   <div className="widget-title">
                     <h5 className="title">Categories</h5>
@@ -138,124 +140,6 @@ export default function Products() {
                     </div>
                   </div>
                 </div>
-                {/* <div className="widget">
-                  <div className="widget-title">
-                    <h5 className="title">Filter by price</h5>
-                  </div>
-                  <div className="widget-content">
-                    <div className="mb-3">
-                      <div className="collapse show" id="price">
-                        <div className="property-price-slider">
-                          <input type="text" id="property-price-slider" name="example_name" value="" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="price-filter">
-                      <div className="price_label">
-                        Max Price: <span className="from"> Search by price limit</span>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-                {/* <div className="widget">
-                  <div className="widget-title">
-                    <h5 className="title">Color</h5>
-                  </div>
-                  <div className="widget-content">
-                    <div className="widget-color">
-                      <ul className="list-unstyled list-style list-style-underline mb-0">
-                        <li>
-                          <a className="d-flex" href="#">
-                            <span className="filter-color" style={{ backgroundColor: '#dad810' }}>
-                              <input value="yellow" name="filter_color" type="checkbox" />
-                            </span>
-                            Yellow
-                            <span className="ms-auto">
-                              <div className="count">8</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            <span className="filter-color" style={{ backgroundColor: '#10da21' }}>
-                              <input value="yellow" name="filter_color" type="checkbox" />
-                            </span>
-                            Green
-                            <span className="ms-auto">
-                              <div className="count">16</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            <span className="filter-color" style={{ backgroundColor: '#1072da' }}>
-                              <input value="yellow" name="filter_color" type="checkbox" />
-                            </span>
-                            Blue
-                            <span className="ms-auto">
-                              <div className="count">12</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            <span className="filter-color" style={{ backgroundColor: '#da10a4' }}>
-                              <input value="yellow" name="filter_color" type="checkbox" />
-                            </span>
-                            Pink
-                            <span className="ms-auto">
-                              <div className="count">8</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            <span className="filter-color" style={{ backgroundColor: '#da1021' }}>
-                              <input value="yellow" name="filter_color" type="checkbox" />
-                            </span>
-                            Red
-                            <span className="ms-auto">
-                              <div className="count">18</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            <span className="filter-color" style={{ backgroundColor: '#9b6c07' }}>
-                              <input value="yellow" name="filter_color" type="checkbox" />
-                            </span>
-                            Brown
-                            <span className="ms-auto">
-                              <div className="count">20</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            <span className="filter-color" style={{ backgroundColor: '#9f9f9f' }}>
-                              <input value="yellow" name="filter_color" type="checkbox" />
-                            </span>
-                            Grey
-                            <span className="ms-auto">
-                              <div className="count">12</div>
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex" href="#">
-                            <span className="filter-color" style={{ backgroundColor: '#e2e39d' }}>
-                              <input value="yellow" name="filter_color" type="checkbox" />
-                            </span>
-                            nude
-                            <span className="ms-auto">
-                              <div className="count">9</div>
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div> */}
 
                 <div className="widget">
                   <div className="widget-title">
@@ -284,26 +168,6 @@ export default function Products() {
                                       </a>
                                     </h3>
                                   </div>
-                                  {/* stars removed */}
-                                  {/* <div className="product-star">
-                                    <ul className="list-unstyled mb-1">
-                                      <li>
-                                        <i className="fas fa-star"></i>
-                                      </li>
-                                      <li>
-                                        <i className="fas fa-star"></i>
-                                      </li>
-                                      <li>
-                                        <i className="fas fa-star"></i>
-                                      </li>
-                                      <li>
-                                        <i className="fas fa-star"></i>
-                                      </li>
-                                      <li>
-                                        <i className="far fa-star-half-alt"></i>
-                                      </li>
-                                    </ul>
-                                  </div> */}
                                 </div>
 
                                 <div className="product-prize">
@@ -322,87 +186,6 @@ export default function Products() {
               </div>
             </div>
             <div className="col-xl-9 col-lg-8 mt-4 mt-md-5 mt-lg-0">
-              {/* <h5 className="widget-title">Product filters</h5>
-              <div className="blog-sidebar-post-divider"></div>
-              <div className="row mt-4">
-                <div className="col-lg-4">
-                  <input
-                    type="search"
-                    onChange={e => {
-                      setSearch(e.target.value);
-                    }}
-                    id="shop-filter-search"
-                    className="search-field mb-3"
-                    placeholder="Search products…"
-                    value={search}
-                    name="s"
-                  />
-                </div>
-                <div className="col-lg-4">
-                  <div className="mb-3 select-border">
-                    <select className="form-control basic-select">
-                      <option value="1">Accessories</option>
-                      <option value="3">Belts</option>
-                      <option value="4">Chair</option>
-                      <option value="2">Stick</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="mb-3 select-border">
-                    <select className="form-control basic-select">
-                      <option value="1">Any rating</option>
-                      <option value="2">5 Star</option>
-                      <option value="3">4 Star</option>
-                      <option value="4">3 Star</option>
-                      <option value="5">2 Star</option>
-                      <option value="6">1 Star</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-lg-6">
-                  <div className="mb-3 select-border">
-                    <select className="form-control basic-select">
-                      <option value="1">Any color</option>
-                      <option value="1">Black, brown</option>
-                      <option value="2">Blue</option>
-                      <option value="3">Dark grey</option>
-                      <option value="4">Green</option>
-                      <option value="5">Pink</option>
-                      <option value="6">Red</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="mb-3 select-border">
-                    <select className="form-control basic-select">
-                      <option value="1">Any size</option>
-                      <option value="2">L</option>
-                      <option value="2">M</option>
-                      <option value="3">S</option>
-                      <option value="4">XS</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="row my-2 align-items-center">
-                <div className="col-lg-8">
-                  <p>Showing all {getProducts?.count || 0} results</p>
-                </div>
-                <div className="col-lg-4">
-                  <div className="mb-3 select-border">
-                    <select className="form-control basic-select">
-                      <option value="1">Default sorting</option>
-                      <option value="2">Sort by popularity</option>
-                      <option value="3">Sort by average rating</option>
-                      <option value="4">Sort by latest</option>
-                    </select>
-                  </div>
-                </div>
-              </div> */}
-
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 {isLoading && <h3>Loading...</h3>}
                 {getProducts?.result?.length === 0 && <h3>No products found</h3>}
@@ -412,6 +195,33 @@ export default function Products() {
                 {getProducts?.result.map((product: any) => {
                   return <ProductItem key={product._id} product={product} large />;
                 })}
+              </div>
+              <div className="row">
+                <div className="col-12 text-center mt-4 mt-sm-5">
+                  <nav>
+                    <ul className="pagination justify-content-center mb-0">
+                      <li className="page-item">
+                        <a className="page-link" onClick={() => handlePageChange(page - 1)} aria-label="Previous" style={{ cursor: 'pointer' }}>
+                          <span aria-hidden="true">«</span>
+                          <span className="sr-only">Previous</span>
+                        </a>
+                      </li>
+                      <li className="page-item active">
+                        <span className="page-link">
+                          {page}
+                          <span className="sr-only">(current)</span>
+                        </span>
+                      </li>
+
+                      <li className="page-item">
+                        <a className="page-link" onClick={() => handlePageChange(page + 1)} aria-label="Next" style={{ cursor: 'pointer' }}>
+                          <span aria-hidden="true">»</span>
+                          <span className="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
               </div>
             </div>
           </div>
