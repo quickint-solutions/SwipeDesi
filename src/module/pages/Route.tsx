@@ -45,9 +45,7 @@ const RouteComponent: React.FC = () => {
   });
 
   const [phoneNumber, setPhoneNumber] = useState('');
-
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
-
   const [isForgotPassword, setIsForgotPassword] = useState(true);
   const [forgotPasswordScreen1, setForgotPasswordScreen1] = useState(true);
   const [forgotPaswordDetails, setForgotPaswordDetails] = useState({
@@ -772,7 +770,14 @@ const RouteComponent: React.FC = () => {
                                 </button>
                               </div>
                               <div className="col-sm-12 d-grid mb-3 text-center">
-                                <a className="back-to-login" onClick={() => setIsShowLoginForm(false)}>
+                                <a
+                                  className="back-to-login"
+                                  style={{ cursor: 'pointer' }}
+                                  onClick={() => {
+                                    openLoginPopup();
+                                    (window as any).$('#forgotPasswordModal').modal('hide');
+                                  }}
+                                >
                                   <i className="bi bi-arrow-left me-2"></i>Back to Login
                                 </a>
                               </div>
