@@ -45,7 +45,9 @@ const RouteComponent: React.FC = () => {
   });
 
   const [phoneNumber, setPhoneNumber] = useState('');
+
   const [isShowLoginForm, setIsShowLoginForm] = useState(true);
+
   const [isForgotPassword, setIsForgotPassword] = useState(true);
   const [forgotPasswordScreen1, setForgotPasswordScreen1] = useState(true);
   const [forgotPaswordDetails, setForgotPaswordDetails] = useState({
@@ -157,9 +159,8 @@ const RouteComponent: React.FC = () => {
     onSuccess: data => {
       alert('Reset password link has been sent to your email');
     },
-    onError: (error: any) => {
+    onError: error => {
       console.log('error -> ', error);
-      alert(error.response.data.message);
     },
   });
 
@@ -169,12 +170,10 @@ const RouteComponent: React.FC = () => {
       alert('Password reset successfully please login now!');
       (window as any).$('#formLoginRegister').modal('show');
     },
-    onError: (error: any) => {
-      alert(error.response.data.message);
+    onError: error => {
       console.log('error -> ', error);
     },
   });
-
   const [isVisible, setIsVisible] = useState(false);
   // Show or hide the button based on scroll position
   const toggleVisibility = () => {
@@ -197,6 +196,8 @@ const RouteComponent: React.FC = () => {
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   return (
     <React.Fragment>
       {/* <!--=================================
@@ -512,11 +513,11 @@ const RouteComponent: React.FC = () => {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
+          <div className="modal-content" style={{ overflow: 'hidden' }}>
             <div className="modal-header">
               <button type="button" className="btn-close" onClick={() => closeLoginModal()} data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body" style={{ maxHeight: '80vh', overflowY: 'auto', padding: '1rem' }}>
               <div className="box-content">
                 <div className={isShowLoginForm ? 'form-login active' : 'form-login'}>
                   <form className="login">
@@ -543,20 +544,29 @@ const RouteComponent: React.FC = () => {
                           Password
                           <span style={{ color: 'red' }}>*</span>
                         </label>
-                        <input
-                          className="form-control"
-                          type="password"
-                          value={userDetail.password}
-                          required
-                          name="password"
-                          id="password"
-                          placeholder="Password"
-                          onChange={e => handleUserCredential('password', e.target.value)}
-                        />
+                        <div className="input-group">
+                          <input
+                            className="form-control"
+                            type={showPassword ? 'text' : 'password'}
+                            value={userDetail.password}
+                            required
+                            name="password"
+                            id="password"
+                            placeholder="Password"
+                            onChange={e => handleUserCredential('password', e.target.value)}
+                          />
+                          <span
+                            className="input-group-text"
+                            onClick={() => setShowPassword(!showPassword)}
+                            style={{ cursor: 'pointer', backgroundColor: 'transparent' }}
+                          >
+                            {showPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
+                          </span>
+                        </div>
                       </div>
                       <div className="mb-3 col-sm-12 rememberme-lost d-sm-flex justify-content-between">
                         <div className="rememberme">
-                          <input name="rememberme" style={{ cursor: 'pointer' }} type="checkbox" id="rememberme" value="forever" />
+                          <input name="rememberme" type="checkbox" id="rememberme" value="forever" />
                           <label htmlFor="rememberme" className="inline ps-1">
                             Remember me
                           </label>
@@ -569,7 +579,6 @@ const RouteComponent: React.FC = () => {
                             }}
                             data-bs-toggle="modal"
                             data-bs-target="#forgotPasswordModal"
-                            style={{ cursor: 'pointer' }}
                           >
                             Lost your password?
                           </a>
@@ -582,7 +591,7 @@ const RouteComponent: React.FC = () => {
                       </div>
                       <div className="col-sm-12 d-grid mb-3">
                         <button type="button" className="btn btn-gray btn-flat btn-next-register" onClick={() => setIsShowLoginForm(false)}>
-                          Creat An Account
+                          Create An Account
                         </button>
                       </div>
                     </div>
@@ -619,21 +628,10 @@ const RouteComponent: React.FC = () => {
                             value={registrationDetail.last}
                             name="lastName"
                             id="lastName"
-                            placeholder="last Name"
+                            placeholder="Last Name"
                             onChange={e => handleRegistrationDetail('last', e.target.value)}
                           />
                         </div>
-                        {/* <div className="mb-3 col-sm-3 email">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.countryCode}
-                            name="countryCode"
-                            id="countryCode"
-                            placeholder="Country Code"
-                            onChange={e => handleRegistrationDetail('countryCode', e.target.value)}
-                          />
-                        </div> */}
                         <div className="mb-3 col-sm-12 email">
                           <label className="form-label">
                             Phone Number
@@ -669,15 +667,24 @@ const RouteComponent: React.FC = () => {
                             Password
                             <span style={{ color: 'red' }}>*</span>
                           </label>
-                          <input
-                            className="form-control"
-                            type="password"
-                            value={registrationDetail.password}
-                            name="password"
-                            id="password"
-                            placeholder="Password"
-                            onChange={e => handleRegistrationDetail('password', e.target.value)}
-                          />
+                          <div className="input-group">
+                            <input
+                              className="form-control"
+                              type={showPassword ? 'text' : 'password'}
+                              value={registrationDetail.password}
+                              name="password"
+                              id="password"
+                              placeholder="Password"
+                              onChange={e => handleRegistrationDetail('password', e.target.value)}
+                            />
+                            <span
+                              className="input-group-text"
+                              onClick={() => setShowPassword(!showPassword)}
+                              style={{ cursor: 'pointer', backgroundColor: 'transparent' }}
+                            >
+                              {showPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
+                            </span>
+                          </div>
                         </div>
 
                         <div className="col-sm-12 d-grid mb-3">
@@ -687,7 +694,6 @@ const RouteComponent: React.FC = () => {
                               type="button"
                               className="btn btn-secondary btn-flat"
                               onClick={() => {
-                                // check all fields are filled
                                 if (
                                   !registrationDetail.first ||
                                   !registrationDetail.last ||
@@ -709,7 +715,102 @@ const RouteComponent: React.FC = () => {
                           </button>
                         </div>
                       </div>
-                    ) : null}
+                    ) : (
+                      <div className="row content">
+                        <div className="mb-3 col-sm-12 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.line1}
+                            name="line1"
+                            id="line1"
+                            placeholder="Line1"
+                            onChange={e => handleRegistrationDetail('line1', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-12 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.line2}
+                            name="line2"
+                            id="line2"
+                            placeholder="Line2"
+                            onChange={e => handleRegistrationDetail('line2', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-6 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.city}
+                            name="city"
+                            id="city"
+                            placeholder="City"
+                            onChange={e => handleRegistrationDetail('city', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-6 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.state}
+                            name="state"
+                            id="state"
+                            placeholder="State"
+                            onChange={e => handleRegistrationDetail('state', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-6 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.country}
+                            name="country"
+                            id="country"
+                            placeholder="Country"
+                            onChange={e => handleRegistrationDetail('country', e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3 col-sm-6 password">
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={registrationDetail.zip}
+                            name="zip"
+                            id="zip"
+                            placeholder="Zip"
+                            onChange={e => handleRegistrationDetail('zip', e.target.value)}
+                          />
+                        </div>
+                        <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
+                          <button
+                            type="button"
+                            className="btn btn-secondary btn-flat"
+                            onClick={() => {
+                              if (
+                                !registrationDetail.first ||
+                                !registrationDetail.last ||
+                                !registrationDetail.number ||
+                                !registrationDetail.email ||
+                                !registrationDetail.password
+                              ) {
+                                alert('Please fill all fields');
+                                return;
+                              }
+                              handleSignup(registrationDetail);
+                            }}
+                          >
+                            Register
+                          </button>
+                        </div>
+                        <div className="col-sm-12 d-grid mb-3 text-center">
+                          <a href="#" className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}>
+                            <i className="bi bi-arrow-left me-2"></i>Back
+                          </a>
+                        </div>
+                      </div>
+                    )}
                   </form>
                 </div>
               </div>
@@ -738,10 +839,6 @@ const RouteComponent: React.FC = () => {
                             </p>
                             <div className="row content">
                               <div className="mb-3 col-sm-12 email">
-                                <label className="form-label">
-                                  Please enter your email
-                                  <span style={{ color: 'red' }}>*</span>
-                                </label>
                                 <input
                                   type="text"
                                   className="form-control"
@@ -758,10 +855,6 @@ const RouteComponent: React.FC = () => {
                                   type="submit"
                                   className="btn btn-primary btn-flat"
                                   onClick={() => {
-                                    if (!forgotPaswordDetails.email) {
-                                      alert('Please enter email');
-                                      return;
-                                    }
                                     setForgotPasswordScreen1(false);
                                     handleForgotPassword(forgotPaswordDetails);
                                   }}
@@ -770,14 +863,7 @@ const RouteComponent: React.FC = () => {
                                 </button>
                               </div>
                               <div className="col-sm-12 d-grid mb-3 text-center">
-                                <a
-                                  className="back-to-login"
-                                  style={{ cursor: 'pointer' }}
-                                  onClick={() => {
-                                    openLoginPopup();
-                                    (window as any).$('#forgotPasswordModal').modal('hide');
-                                  }}
-                                >
+                                <a href="#" className="back-to-login">
                                   <i className="bi bi-arrow-left me-2"></i>Back to Login
                                 </a>
                               </div>
@@ -790,10 +876,6 @@ const RouteComponent: React.FC = () => {
                           <p className="mb-4 pb-1">Please enter your OTP and create a new password.</p>
                           <div className="row content">
                             <div className="mb-3 col-sm-12 email">
-                              <label className="form-label">
-                                Please enter your OTP
-                                <span style={{ color: 'red' }}>*</span>
-                              </label>
                               <input
                                 type="text"
                                 className="form-control"
@@ -805,47 +887,45 @@ const RouteComponent: React.FC = () => {
                               />
                             </div>
                             <div className="mb-3 col-sm-12 email">
-                              <label className="form-label">
-                                Please enter your New Password
-                                <span style={{ color: 'red' }}>*</span>
-                              </label>
-                              <input
-                                type="password"
-                                className="form-control"
-                                value={resetPaswordDetails.password1}
-                                name="forgotPaswordOtp"
-                                id="forgotPaswordOtp"
-                                placeholder="Create New Password"
-                                onChange={e => handleResetPasswordDetail('password1', e.target.value)}
-                              />
+                              <div className="input-group">
+                                <input
+                                  type={showPassword ? 'text' : 'password'}
+                                  className="form-control"
+                                  value={resetPaswordDetails.password1}
+                                  name="forgotPaswordOtp"
+                                  id="forgotPaswordOtp"
+                                  placeholder="Create New Password"
+                                  onChange={e => handleResetPasswordDetail('password1', e.target.value)}
+                                />
+                                <span className="input-group-text" onClick={() => setShowPassword(!showPassword)} style={{ cursor: 'pointer' }}>
+                                  {showPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
+                                </span>
+                              </div>
                             </div>
+
                             <div className="mb-3 col-sm-12 email">
-                              <label className="form-label">
-                                Please Confirm your New Password
-                                <span style={{ color: 'red' }}>*</span>
-                              </label>
-                              <input
-                                type="password"
-                                className="form-control"
-                                value={resetPaswordDetails.password2}
-                                name="forgotPaswordOtp"
-                                id="forgotPaswordOtp"
-                                placeholder="Confirm New Password"
-                                onChange={e => handleResetPasswordDetail('password2', e.target.value)}
-                              />
+                              <div className="input-group">
+                                <input
+                                  type={showConfirmPassword ? 'text' : 'password'}
+                                  className="form-control"
+                                  value={resetPaswordDetails.password2}
+                                  name="forgotPaswordOtp"
+                                  id="forgotPaswordOtp"
+                                  placeholder="Confirm New Password"
+                                  onChange={e => handleResetPasswordDetail('password2', e.target.value)}
+                                />
+                                <span
+                                  className="input-group-text"
+                                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                  style={{ cursor: 'pointer', backgroundColor: 'transparent' }}
+                                >
+                                  {showConfirmPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
+                                </span>
+                              </div>
                             </div>
+
                             <div className="col-sm-12 d-grid mb-3">
-                              <button
-                                type="button"
-                                className="btn btn-primary btn-flat"
-                                onClick={() => {
-                                  if (!resetPaswordDetails.otp || !resetPaswordDetails.password1 || !resetPaswordDetails.password2) {
-                                    alert('Please enter all details');
-                                    return;
-                                  }
-                                  handleResetPassword(resetPaswordDetails);
-                                }}
-                              >
+                              <button type="button" className="btn btn-primary btn-flat" onClick={() => handleResetPassword(resetPaswordDetails)}>
                                 Reset Password
                               </button>
                             </div>
