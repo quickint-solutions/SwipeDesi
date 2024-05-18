@@ -522,6 +522,10 @@ const RouteComponent: React.FC = () => {
                     <h4 className="form-title">Sign in</h4>
                     <div className="row content">
                       <div className="mb-3 col-sm-12 username">
+                        <label className="form-label">
+                          Email
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           type="text"
                           className="form-control"
@@ -534,6 +538,10 @@ const RouteComponent: React.FC = () => {
                         />
                       </div>
                       <div className="mb-3 col-sm-12 password">
+                        <label className="form-label">
+                          Password
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           className="form-control"
                           type="password"
@@ -584,6 +592,10 @@ const RouteComponent: React.FC = () => {
                     {isShowRefisterFirstScreen ? (
                       <div className="row content">
                         <div className="mb-3 col-sm-6 name">
+                          <label className="form-label">
+                            First Name
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
                           <input
                             type="text"
                             className="form-control"
@@ -595,6 +607,10 @@ const RouteComponent: React.FC = () => {
                           />
                         </div>
                         <div className="mb-3 col-sm-6 name">
+                          <label className="form-label">
+                            Last Name
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
                           <input
                             type="text"
                             className="form-control"
@@ -617,6 +633,10 @@ const RouteComponent: React.FC = () => {
                           />
                         </div> */}
                         <div className="mb-3 col-sm-12 email">
+                          <label className="form-label">
+                            Phone Number
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
                           <input
                             type="text"
                             className="form-control"
@@ -628,6 +648,10 @@ const RouteComponent: React.FC = () => {
                           />
                         </div>
                         <div className="mb-3 col-sm-12 name">
+                          <label className="form-label">
+                            Email
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
                           <input
                             type="text"
                             className="form-control"
@@ -639,6 +663,10 @@ const RouteComponent: React.FC = () => {
                           />
                         </div>
                         <div className="mb-3 col-sm-12 password">
+                          <label className="form-label">
+                            Password
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
                           <input
                             className="form-control"
                             type="password"
@@ -674,9 +702,9 @@ const RouteComponent: React.FC = () => {
                               {isLoading ? 'Loading' : 'Register'}
                             </button>
                           </div>
-                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
-                            Back
-                          </button> */}
+                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowLoginForm(true)}>
+                            Back to Login
+                          </button>
                         </div>
                         {/* <div className="col-sm-12 d-grid mb-3">
                                                 <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
