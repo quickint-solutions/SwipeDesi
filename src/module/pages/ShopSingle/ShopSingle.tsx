@@ -128,7 +128,7 @@ const ShopSingle: React.FC = () => {
                 <div className="row">
                   <div className="col-md-5 mb-4 mb-md-0">
                     <OwlCarousel
-                      className="owl-theme"
+                      className="owl-theme2"
                       autoplayTimeout={3000}
                       autoplay={true}
                       items={1}
@@ -149,7 +149,7 @@ const ShopSingle: React.FC = () => {
                     </OwlCarousel>
 
                     <OwlCarousel
-                      className="owl-theme"
+                      className="owl-theme2"
                       autoplayTimeout={3000}
                       autoplay={true}
                       items={3}
