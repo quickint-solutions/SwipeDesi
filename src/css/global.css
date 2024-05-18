@@ -338,7 +338,7 @@
     Typography
 *****************************/
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-style: normal;
   font-size: 15px;
   line-height: 1.8;
@@ -346,9 +346,10 @@ body {
   overflow-x: hidden;
 }
 
-.Poppins-fonts {
-  font-family: 'Poppins', sans-serif;
+.sora-fonts {
+  font-family: 'Sora', sans-serif;
 }
+
 
 a {
   outline: medium none !important;
@@ -3936,6 +3937,25 @@ login register form
 .slider-slick .slider-nav .slick-track .slick-slide {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.owl-theme2 .owl-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.owl-theme2 .owl-nav .owl-prev {
+  position: absolute;
+  left: 10px;
+  z-index: 10;
+}
+
+.owl-theme2 .owl-nav .owl-next {
+  position: absolute;
+  right: 10px;
+  z-index: 10;
 }
 
 
