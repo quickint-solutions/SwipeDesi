@@ -159,8 +159,9 @@ const RouteComponent: React.FC = () => {
     onSuccess: data => {
       alert('Reset password link has been sent to your email');
     },
-    onError: error => {
+    onError: (error: any) => {
       console.log('error -> ', error);
+      alert(error.response.data.message);
     },
   });
 
@@ -170,10 +171,12 @@ const RouteComponent: React.FC = () => {
       alert('Password reset successfully please login now!');
       (window as any).$('#formLoginRegister').modal('show');
     },
-    onError: error => {
+    onError: (error: any) => {
+      alert(error.response.data.message);
       console.log('error -> ', error);
     },
   });
+
   const [isVisible, setIsVisible] = useState(false);
   // Show or hide the button based on scroll position
   const toggleVisibility = () => {
@@ -555,7 +558,7 @@ const RouteComponent: React.FC = () => {
                       </div>
                       <div className="mb-3 col-sm-12 rememberme-lost d-sm-flex justify-content-between">
                         <div className="rememberme">
-                          <input name="rememberme" type="checkbox" id="rememberme" value="forever" />
+                          <input name="rememberme" style={{ cursor: 'pointer' }} type="checkbox" id="rememberme" value="forever" />
                           <label htmlFor="rememberme" className="inline ps-1">
                             Remember me
                           </label>
@@ -568,6 +571,7 @@ const RouteComponent: React.FC = () => {
                             }}
                             data-bs-toggle="modal"
                             data-bs-target="#forgotPasswordModal"
+                            style={{ cursor: 'pointer' }}
                           >
                             Lost your password?
                           </a>
@@ -706,113 +710,8 @@ const RouteComponent: React.FC = () => {
                             Back to Login
                           </button>
                         </div>
-                        {/* <div className="col-sm-12 d-grid mb-3">
-                                                <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
-                                            </div> */}
                       </div>
-                    ) : (
-                      <div className="row content">
-                        <div className="mb-3 col-sm-12 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.line1}
-                            name="line1"
-                            id="line1"
-                            placeholder="Line1"
-                            onChange={e => handleRegistrationDetail('line1', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-12 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.line2}
-                            name="line2"
-                            id="line2"
-                            placeholder="Line2"
-                            onChange={e => handleRegistrationDetail('line2', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-6 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.city}
-                            name="city"
-                            id="city"
-                            placeholder="City"
-                            onChange={e => handleRegistrationDetail('city', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-6 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.state}
-                            name="state"
-                            id="state"
-                            placeholder="State"
-                            onChange={e => handleRegistrationDetail('state', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-6 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.country}
-                            name="country"
-                            id="country"
-                            placeholder="Country"
-                            onChange={e => handleRegistrationDetail('country', e.target.value)}
-                          />
-                        </div>
-                        <div className="mb-3 col-sm-6 password">
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={registrationDetail.zip}
-                            name="zip"
-                            id="zip"
-                            placeholder="Zip"
-                            onChange={e => handleRegistrationDetail('zip', e.target.value)}
-                          />
-                        </div>
-                        <div style={{ display: 'flex', gap: '90px' }} className="col-sm-12 d-grid mb-3">
-                          <button
-                            type="button"
-                            className="btn btn-secondary btn-flat"
-                            onClick={() => {
-                              if (
-                                !registrationDetail.first ||
-                                !registrationDetail.last ||
-                                !registrationDetail.number ||
-                                !registrationDetail.email ||
-                                !registrationDetail.password
-                              ) {
-                                alert('Please fill all fields');
-                                return;
-                              }
-                              handleSignup(registrationDetail);
-                            }}
-                          >
-                            Register
-                          </button>
-                        </div>
-                        <div className="col-sm-12 d-grid mb-3 text-center">
-                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
-                            Back
-                          </button> */}
-                          <a href="#" className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}>
-                            <i className="bi bi-arrow-left me-2"></i>Back
-                          </a>
-                        </div>
-
-                        {/* <div className="col-sm-12 d-grid mb-3">
-                                                <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
-                                            </div> */}
-                      </div>
-                    )}
+                    ) : null}
                   </form>
                 </div>
               </div>
@@ -841,6 +740,10 @@ const RouteComponent: React.FC = () => {
                             </p>
                             <div className="row content">
                               <div className="mb-3 col-sm-12 email">
+                                <label className="form-label">
+                                  Please enter your email
+                                  <span style={{ color: 'red' }}>*</span>
+                                </label>
                                 <input
                                   type="text"
                                   className="form-control"
@@ -857,6 +760,10 @@ const RouteComponent: React.FC = () => {
                                   type="submit"
                                   className="btn btn-primary btn-flat"
                                   onClick={() => {
+                                    if (!forgotPaswordDetails.email) {
+                                      alert('Please enter email');
+                                      return;
+                                    }
                                     setForgotPasswordScreen1(false);
                                     handleForgotPassword(forgotPaswordDetails);
                                   }}
@@ -865,7 +772,7 @@ const RouteComponent: React.FC = () => {
                                 </button>
                               </div>
                               <div className="col-sm-12 d-grid mb-3 text-center">
-                                <a href="#" className="back-to-login">
+                                <a className="back-to-login" onClick={() => setIsShowLoginForm(false)}>
                                   <i className="bi bi-arrow-left me-2"></i>Back to Login
                                 </a>
                               </div>
@@ -878,6 +785,10 @@ const RouteComponent: React.FC = () => {
                           <p className="mb-4 pb-1">Please enter your OTP and create a new password.</p>
                           <div className="row content">
                             <div className="mb-3 col-sm-12 email">
+                              <label className="form-label">
+                                Please enter your OTP
+                                <span style={{ color: 'red' }}>*</span>
+                              </label>
                               <input
                                 type="text"
                                 className="form-control"
@@ -889,6 +800,10 @@ const RouteComponent: React.FC = () => {
                               />
                             </div>
                             <div className="mb-3 col-sm-12 email">
+                              <label className="form-label">
+                                Please enter your New Password
+                                <span style={{ color: 'red' }}>*</span>
+                              </label>
                               <input
                                 type="password"
                                 className="form-control"
@@ -900,6 +815,10 @@ const RouteComponent: React.FC = () => {
                               />
                             </div>
                             <div className="mb-3 col-sm-12 email">
+                              <label className="form-label">
+                                Please Confirm your New Password
+                                <span style={{ color: 'red' }}>*</span>
+                              </label>
                               <input
                                 type="password"
                                 className="form-control"
@@ -911,7 +830,17 @@ const RouteComponent: React.FC = () => {
                               />
                             </div>
                             <div className="col-sm-12 d-grid mb-3">
-                              <button type="button" className="btn btn-primary btn-flat" onClick={() => handleResetPassword(resetPaswordDetails)}>
+                              <button
+                                type="button"
+                                className="btn btn-primary btn-flat"
+                                onClick={() => {
+                                  if (!resetPaswordDetails.otp || !resetPaswordDetails.password1 || !resetPaswordDetails.password2) {
+                                    alert('Please enter all details');
+                                    return;
+                                  }
+                                  handleResetPassword(resetPaswordDetails);
+                                }}
+                              >
                                 Reset Password
                               </button>
                             </div>
