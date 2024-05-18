@@ -188,7 +188,7 @@ const ShopSingle: React.FC = () => {
                           </h4>
                         </div>
                       </div>
-                      <p className="sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails.descriptions }}></p>
+                      <p className="Poppins-fonts" dangerouslySetInnerHTML={{ __html: itemDetails.descriptions }}></p>
                       {/* <p className="mb-4 mb-sm-5">The best way is to develop and follow a plan. Start with your goals in mind and then work backwards to develop the plan. What steps are required to get you to the goals? Make the plan as detailed as possible. Try to visualize and then plan for, every possible setback. Commit the plan to paper and then keep it with you at all times. Review it regularly and ensure that every step takes you closer to your Vision and Goals. If the plan doesn’t support the vision then change it!</p> */}
                       <div className="justify-content-start d-flex add-to-cart-input">
                         <div className="input-group">
@@ -290,7 +290,7 @@ const ShopSingle: React.FC = () => {
                       </nav>
                       <div className="tab-content" id="nav-tabContent">
                         <div className="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
-                          <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.custom }}></div>
+                          <div className="row Poppins-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.custom }}></div>
                         </div>
                         <div className="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
                           <div className="row">
@@ -463,7 +463,7 @@ const ShopSingle: React.FC = () => {
                         <div className="tab-pane fade" id="nav-custom" role="tabpanel" aria-labelledby="nav-custom-tab">
                           <div className="row">
                             <div className="col-12">
-                              <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.installationGuide }}></div>
+                              <div className="row Poppins-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.installationGuide }}></div>
                             </div>
                           </div>
                         </div>
