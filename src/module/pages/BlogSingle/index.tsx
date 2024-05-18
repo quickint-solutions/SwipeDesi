@@ -82,7 +82,7 @@ export default function BlogSingle() {
                     <h4 className="blog-tittle">
                       <a>{blogData?.title || 'No title'}</a>
                     </h4>
-                    <p className="sora-fonts" dangerouslySetInnerHTML={{ __html: blogData?.descriptions || 'No description' }}></p>
+                    <p className="Poppins-fonts" dangerouslySetInnerHTML={{ __html: blogData?.descriptions || 'No description' }}></p>
                   </div>
                 </div>
               </div>
