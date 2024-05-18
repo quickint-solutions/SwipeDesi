@@ -338,7 +338,7 @@
     Typography
 *****************************/
 body {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-size: 15px;
   line-height: 1.8;
@@ -346,8 +346,8 @@ body {
   overflow-x: hidden;
 }
 
-.sora-fonts {
-  font-family: 'Sora', sans-serif;
+.Poppins-fonts {
+  font-family: 'Poppins', sans-serif;
 }
 
 
@@ -3939,6 +3939,7 @@ login register form
   margin-right: 5px;
 }
 
+/* Position the navigation arrows */
 .owl-theme2 .owl-nav {
   position: absolute;
   top: 50%;
@@ -3946,16 +3947,47 @@ login register form
   width: 100%;
 }
 
-.owl-theme2 .owl-nav .owl-prev {
-  position: absolute;
-  left: 10px;
-  z-index: 10;
-}
-
+/* Style for left and right arrows */
+.owl-theme2 .owl-nav .owl-prev,
 .owl-theme2 .owl-nav .owl-next {
   position: absolute;
-  right: 10px;
+  width: 40px;
+  /* Adjust size of circle */
+  height: 40px;
+  /* Adjust size of circle */
+  border-radius: 50%;
+  /* Create a circle */
+  background-color: #000;
+  /* Background color of the circle */
+  color: #fff;
+  /* Color of the arrow icon */
+  text-align: center;
+  line-height: 40px;
+  /* Center the arrow icon vertically */
+  font-size: 20px;
+  /* Size of the arrow icon */
   z-index: 10;
+  transition: background-color 0.3s, color 0.3s;
+  /* Smooth transition for color change */
+}
+
+/* Position the left arrow */
+.owl-theme2 .owl-nav .owl-prev {
+  left: 10px;
+}
+
+/* Position the right arrow */
+.owl-theme2 .owl-nav .owl-next {
+  right: 10px;
+}
+
+/* Hover effect for left and right arrows */
+.owl-theme2 .owl-nav .owl-prev:hover,
+.owl-theme2 .owl-nav .owl-next:hover {
+  background-color: #fff;
+  /* Background color on hover */
+  color: #000;
+  /* Arrow icon color on hover */
 }
 
 
