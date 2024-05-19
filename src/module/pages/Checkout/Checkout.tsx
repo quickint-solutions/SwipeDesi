@@ -25,7 +25,16 @@ const Checkout: React.FC = () => {
     event.preventDefault();
 
     // check all fields in billing and shipping details are filled
-    if (Object.values(billingDetail).some((value: any) => value === '')) {
+    if (
+      Object.values(billingDetail).some((value: any, index: any) => {
+        if (value === '') {
+          alert(`Please fill the ${Object.keys(billingDetail)[index]} field`);
+          return true;
+        } else {
+          return false;
+        }
+      })
+    ) {
       alert('Please fill all the fields in billing details');
       return;
     }
