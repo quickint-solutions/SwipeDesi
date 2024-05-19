@@ -99,6 +99,7 @@ const Checkout: React.FC = () => {
     }
 
     if (error) {
+      alert(error.message);
       setError(error.message || "Can't process payment");
     } else {
       // Payment succeeded, handle success
