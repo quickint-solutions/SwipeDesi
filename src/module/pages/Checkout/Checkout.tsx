@@ -266,25 +266,35 @@ const Checkout: React.FC = () => {
                 <div className="checkout checkout-form">
                   <form className="row">
                     <div className="mb-3 col-sm-6">
-                      <label className="form-label">First name</label>
+                      <label className="form-label">
+                        First name
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <input
                         type="text"
                         className="form-control"
                         placeholder="First Name"
+                        required
                         value={billingDetail.firstName}
                         onChange={e => handleChangeBillingDetail('firstName', e.target.value)}
                       />
                     </div>
+
                     <div className="mb-3 col-sm-6">
-                      <label className="form-label">Last name</label>
+                      <label className="form-label">
+                        Last name
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <input
                         type="text"
                         className="form-control"
                         placeholder="Last Name"
+                        required
                         value={billingDetail.lastName}
                         onChange={e => handleChangeBillingDetail('lastName', e.target.value)}
                       />
                     </div>
+
                     <div className="mb-3 col-sm-6">
                       <label className="form-label">Company name</label>
                       <input
@@ -295,6 +305,7 @@ const Checkout: React.FC = () => {
                         onChange={e => handleChangeBillingDetail('companyName', e.target.value)}
                       />
                     </div>
+
                     <div className="mb-3 col-sm-6">
                       <label className="form-label">GST</label>
                       <input
@@ -305,76 +316,110 @@ const Checkout: React.FC = () => {
                         onChange={e => handleChangeBillingDetail('gst', e.target.value)}
                       />
                     </div>
+
                     <div className="mb-3 select-border col-sm-12">
-                      <label className="form-label">Country</label>
+                      <label className="form-label">
+                        Country
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <select className="form-control basic-select" onChange={e => handleChangeBillingDetail('country', e.target.value)}>
                         <option value="Canada">Canada</option>
                       </select>
                     </div>
+
                     <div className="mb-3 col-sm-12">
-                      <label className="form-label">Street Address</label>
+                      <label className="form-label">
+                        Street Address
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <input
                         type="text"
                         className="form-control"
                         placeholder="Address Line 1"
+                        required
                         value={billingDetail.addressLine1}
                         onChange={e => handleChangeBillingDetail('addressLine1', e.target.value)}
                       />
                     </div>
+
                     <div className="mb-3 col-sm-12">
                       <input
                         type="text"
                         className="form-control"
                         placeholder="House number and street name"
+                        required
                         value={billingDetail.addressLine2}
                         onChange={e => handleChangeBillingDetail('addressLine2', e.target.value)}
                       />
                     </div>
+
                     <div className="mb-3 col-sm-6 select-border">
-                      <label className="form-label">City</label>
+                      <label className="form-label">
+                        City
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <input
                         type="text"
                         className="form-control"
                         placeholder="City"
+                        required
                         value={billingDetail.city}
                         onChange={e => handleChangeBillingDetail('city', e.target.value)}
                       />
                     </div>
+
                     <div className="mb-3 select-border col-sm-6">
-                      <label className="form-label">State</label>
+                      <label className="form-label">
+                        State
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <select className="form-control basic-select" onChange={e => handleChangeBillingDetail('state', e.target.value)}>
                         {provinces.map((value: any, key: number) => (
                           <option value={value.value}>{value.label}</option>
                         ))}
                       </select>
                     </div>
+
                     <div className="mb-3 col-sm-6">
-                      <label className="form-label">ZIP</label>
+                      <label className="form-label">
+                        ZIP
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Postal Code"
+                        placeholder="Zip Code"
+                        required
                         value={billingDetail.zip}
                         onChange={e => handleChangeBillingDetail('zip', e.target.value)}
                       />
                     </div>
 
                     <div className="mb-3 col-sm-6">
-                      <label className="form-label">Phone</label>
+                      <label className="form-label">
+                        Phone
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <input
                         type="text"
                         className="form-control"
                         placeholder="Phone Number"
+                        required
                         value={billingDetail.phone}
                         onChange={e => handleChangeBillingDetail('phone', e.target.value)}
                       />
                     </div>
+
                     <div className="col-sm-12 mb-0">
-                      <label className="form-label">Email Address:</label>
+                      <label className="form-label">
+                        Email Address
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <input
                         type="email"
                         className="form-control"
                         placeholder="Email Address"
+                        required
                         value={billingDetail.email}
                         onChange={e => handleChangeBillingDetail('email', e.target.value)}
                       />
@@ -405,21 +450,29 @@ const Checkout: React.FC = () => {
                   <div className="checkout checkout-form">
                     <form className="row">
                       <div className="mb-3 col-sm-6">
-                        <label className="form-label">First name</label>
+                        <label className="form-label">
+                          First name
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           type="text"
                           className="form-control"
                           placeholder="First Name"
+                          required
                           value={shippingDetail.firstName}
                           onChange={e => handleChangeShippingDetail('firstName', e.target.value)}
                         />
                       </div>
                       <div className="mb-3 col-sm-6">
-                        <label className="form-label">Last name</label>
+                        <label className="form-label">
+                          Last name
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           type="text"
                           className="form-control"
                           placeholder="Last Name"
+                          required
                           value={shippingDetail.lastName}
                           onChange={e => handleChangeShippingDetail('lastName', e.target.value)}
                         />
@@ -445,16 +498,23 @@ const Checkout: React.FC = () => {
                         />
                       </div>
                       <div className="mb-3 select-border col-sm-12">
-                        <label className="form-label">Country</label>
+                        <label className="form-label">
+                          Country
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <select className="form-control basic-select" onChange={e => handleChangeShippingDetail('country', e.target.value)}>
                           <option value="Canada">Canada</option>
                         </select>
                       </div>
                       <div className="mb-3 col-sm-12">
-                        <label className="form-label">Street Address</label>
+                        <label className="form-label">
+                          Street Address
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           type="text"
                           className="form-control"
+                          required
                           placeholder="Address Line 1"
                           value={shippingDetail.addressLine1}
                           onChange={e => handleChangeShippingDetail('addressLine1', e.target.value)}
@@ -464,23 +524,30 @@ const Checkout: React.FC = () => {
                         <input
                           type="text"
                           className="form-control"
+                          required
                           placeholder="House number and street name"
                           value={shippingDetail.addressLine2}
                           onChange={e => handleChangeShippingDetail('addressLine2', e.target.value)}
                         />
                       </div>
                       <div className="mb-3 col-sm-6 select-border">
-                        <label className="form-label">City</label>
+                        <label className="form-label">
+                          City <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           type="text"
                           className="form-control"
                           placeholder="City"
+                          required
                           value={shippingDetail.city}
                           onChange={e => handleChangeShippingDetail('city', e.target.value)}
                         />
                       </div>
                       <div className="mb-3 select-border col-sm-6">
-                        <label className="form-label">State</label>
+                        <label className="form-label">
+                          State
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <select className="form-control basic-select" onChange={e => handleChangeShippingDetail('state', e.target.value)}>
                           {provinces.map((value: any, key: number) => (
                             <option value={value.value}>{value.label}</option>
@@ -488,32 +555,44 @@ const Checkout: React.FC = () => {
                         </select>
                       </div>
                       <div className="mb-3 col-sm-6">
-                        <label className="form-label">ZIP</label>
+                        <label className="form-label">
+                          ZIP
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Postal Code"
+                          placeholder="Zip Code"
+                          required
                           value={shippingDetail.zip}
                           onChange={e => handleChangeShippingDetail('zip', e.target.value)}
                         />
                       </div>
 
                       <div className="mb-3 col-sm-6">
-                        <label className="form-label">Phone</label>
+                        <label className="form-label">
+                          Phone
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           type="text"
                           className="form-control"
                           placeholder="Phone Number"
+                          required
                           value={shippingDetail.phone}
                           onChange={e => handleChangeShippingDetail('phone', e.target.value)}
                         />
                       </div>
                       <div className="col-sm-12 mb-0">
-                        <label className="form-label">Email Address:</label>
+                        <label className="form-label">
+                          Email Address
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           type="email"
                           className="form-control"
                           placeholder="Email Address"
+                          required
                           value={shippingDetail.email}
                           onChange={e => handleChangeShippingDetail('email', e.target.value)}
                         />
@@ -572,7 +651,10 @@ const Checkout: React.FC = () => {
                         </tbody>
                         <tfoot>
                           <tr>
-                            <th className="product-total">Shipping</th>
+                            <th className="product-total">
+                              Shipping
+                              <span style={{ color: 'red' }}>*</span>
+                            </th>
                             <td>
                               <form>
                                 <div>
@@ -600,7 +682,10 @@ const Checkout: React.FC = () => {
                             </td>
                           </tr>
                           <tr>
-                            <th className="product-total">Card Details</th>
+                            <th className="product-total">
+                              Card Details
+                              <span style={{ color: 'red' }}>*</span>
+                            </th>
                             <td>
                               <CardElement />
                             </td>

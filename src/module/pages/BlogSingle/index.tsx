@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { getBlogsById } from '../../../apiV2/blogs';
 import { AuthContext } from '../../../context/auth.context';
 import { getCategories } from '../../../apiV2/categories';
+import img from '../../../images/bg/mandir-banner.jpg';
 
 export default function BlogSingle() {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -27,7 +28,7 @@ export default function BlogSingle() {
 
   return (
     <div>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url('images/bg/02.png')` }}>
+      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url(${img})` }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
@@ -53,7 +54,7 @@ export default function BlogSingle() {
           </div>
         </div>
       </section>
-      {/* <div className="header-inner-shape" style={{ backgroundImage: `url(${blogData?.image})` }}></div> */}
+
       <section className="space-ptb">
         <div className="container">
           <div className="row">
@@ -81,7 +82,7 @@ export default function BlogSingle() {
                     <h4 className="blog-tittle">
                       <a>{blogData?.title || 'No title'}</a>
                     </h4>
-                    <p className="sora-fonts" dangerouslySetInnerHTML={{ __html: blogData?.descriptions || 'No description' }}></p>
+                    <p className="Poppins-fonts" dangerouslySetInnerHTML={{ __html: blogData?.descriptions || 'No description' }}></p>
                   </div>
                 </div>
               </div>
