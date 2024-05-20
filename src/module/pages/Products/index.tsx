@@ -8,12 +8,14 @@ import { AuthContext } from '../../../context/auth.context';
 export default function Products() {
   const { search, categories, setCategories } = useContext(AuthContext);
 
-  const [page, setPage] = useState(1);
-  const pageSize = 12;
+  const [page, setPage] = useState(0);
+
+  const pageSize = 9;
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
+
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
@@ -201,10 +203,16 @@ export default function Products() {
                   <nav>
                     <ul className="pagination justify-content-center mb-0">
                       <li className="page-item">
-                        <a className="page-link" onClick={() => handlePageChange(page - 1)} aria-label="Previous" style={{ cursor: 'pointer' }}>
+                        <button
+                          className="page-link"
+                          disabled={page === 0 ? true : false}
+                          onClick={() => handlePageChange(page - 1)}
+                          aria-label="Previous"
+                          style={{ cursor: 'pointer' }}
+                        >
                           <span aria-hidden="true">«</span>
                           <span className="sr-only">Previous</span>
-                        </a>
+                        </button>
                       </li>
                       <li className="page-item active">
                         <span className="page-link">
@@ -214,10 +222,10 @@ export default function Products() {
                       </li>
 
                       <li className="page-item">
-                        <a className="page-link" onClick={() => handlePageChange(page + 1)} aria-label="Next" style={{ cursor: 'pointer' }}>
+                        <button className="page-link" onClick={() => handlePageChange(page + 1)} aria-label="Next" style={{ cursor: 'pointer' }}>
                           <span aria-hidden="true">»</span>
                           <span className="sr-only">Next</span>
-                        </a>
+                        </button>
                       </li>
                     </ul>
                   </nav>
