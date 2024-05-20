@@ -245,7 +245,7 @@ export default function Testimonials() {
             <div className="col-lg-6 col-md-6 mb-4">
               <div className="testimonial testimonial-style-02 border bg-light p-lg-5 p-4 text-center">
                 <div className="video-btn-circle mb-3">
-                  <a className="video-btn popup-youtube" href="client-video-01.mp4">
+                  <a className="video-btn popup-youtube" href="assets/client-video-01.mp4">
                     <i className="fas fa-play"></i>
                   </a>
                 </div>
@@ -258,7 +258,7 @@ export default function Testimonials() {
             <div className="col-lg-6 col-md-6 mb-4">
               <div className="testimonial testimonial-style-02 border bg-light p-lg-5 p-4 text-center">
                 <div className="video-btn-circle mb-3">
-                  <a className="video-btn popup-youtube" href="client-video-01.mp4">
+                  <a className="video-btn popup-youtube" href="assets/client-video-01.mp4">
                     <i className="fas fa-play"></i>
                   </a>
                 </div>
@@ -271,7 +271,7 @@ export default function Testimonials() {
             <div className="col-lg-6 col-md-6 mb-4">
               <div className="testimonial testimonial-style-02 border bg-light p-lg-5 p-4 text-center">
                 <div className="video-btn-circle mb-3">
-                  <a className="video-btn popup-youtube" href="client-video-01.mp4">
+                  <a className="video-btn popup-youtube" href="assets/client-video-01.mp4">
                     <i className="fas fa-play"></i>
                   </a>
                 </div>
@@ -284,7 +284,7 @@ export default function Testimonials() {
             <div className="col-lg-6 col-md-6 mb-4">
               <div className="testimonial testimonial-style-02 border bg-light p-lg-5 p-4 text-center">
                 <div className="video-btn-circle mb-3">
-                  <a className="video-btn popup-youtube" href="client-video-01.mp4">
+                  <a className="video-btn popup-youtube" href="assets/client-video-01.mp4">
                     <i className="fas fa-play"></i>
                   </a>
                 </div>
