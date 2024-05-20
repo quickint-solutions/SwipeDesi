@@ -169,6 +169,16 @@ NOTE: This file contains all scripts for the actual Template.
     }
   };
 
+  $(document).ready(function () {
+    $('.popup-youtube').magnificPopup({
+      type: 'iframe',
+      mainClass: 'mfp-fade',
+      removalDelay: 160,
+      preloader: false,
+      fixedContentPos: false,
+    });
+  });
+
   /*************************
     Swiper slider
 *************************/
