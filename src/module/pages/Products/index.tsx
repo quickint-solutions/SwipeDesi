@@ -19,38 +19,28 @@ export default function Products() {
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
 
   useEffect(() => {
-    mutate({ categories: categories, search });
-  }, [categories, search]);
+    mutate({ categories, search, pageSize, page });
+  }, [categories, search, page]);
 
   const params = new URLSearchParams(window.location.search);
   const categoryName = params.get('category');
-  const category = categoriesData.find((i: any) => {
-    if (i._id === categoryName) {
-      return i.name;
-    }
-  });
+  const category = categoriesData.find((i: any) => i._id === categoryName);
 
-  const handlePageChange = (page: number) => {
-    setPage(page);
+  useEffect(() => {
+    setCategories(categoryName || '');
+  }, [categoryName, setCategories]);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
   };
 
-  useEffect(() => {
-    if (page >= 0) {
-      getItems({ categories: categories, search, pageSize, page });
-    }
-  }, [page, pageSize]);
-
-  useEffect(() => {
-    setCategories(categoryName as string);
-  }, [categoryName]);
-
-  const pCategoty = category?.parentCategory ? categoriesList?.result?.find((i: any) => i._id === i.parentCategory?._id) || {} : category;
+  const pCategory = category?.parentCategory ? categoriesList?.result?.find((i: any) => i._id === i.parentCategory?._id) || {} : category;
 
   return (
     <div>
       <section
         className="header-inner header-inner-menu bg-overlay-secondary mandir-bg"
-        style={{ backgroundImage: 'url(' + pCategoty?.banner + ')' }}
+        style={{ backgroundImage: `url(${pCategory?.banner || ''})` }}
       >
         <div className="container">
           <div className="row d-flex justify-content-center">
@@ -93,8 +83,8 @@ export default function Products() {
                       <ul className="list-unstyled list-style list-style-underline mb-0">
                         {categoriesData.map((category: any) => {
                           const subCategories = categoriesList?.result?.filter((i: any) => i.parentCategory?._id === category._id) || [];
-                          const totalItems = subCategories?.length
-                            ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0) + category.itemCount
+                          const totalItems = subCategories.length
+                            ? subCategories.reduce((acc: number, curr: any) => acc + curr.itemCount, 0) + category.itemCount
                             : category.itemCount;
 
                           return (
@@ -146,41 +136,37 @@ export default function Products() {
                     <h5 className="title">Featured Product</h5>
                   </div>
                   <div className="widget-content">
-                    {getProducts?.result?.slice(0, 3).map((categories: any) => {
-                      return (
-                        <>
-                          <div className="widget-product">
-                            <div className="product d-flex align-items-center mb-3">
-                              <div className="product-image">
-                                <div className="product-thumb-inner">
-                                  <a href={'/shopSingle?productId=' + categories?._id}>
-                                    <img className="img-fluid" src={categories.images[0]} alt="image" />
-                                  </a>
-                                </div>
-                              </div>
-
-                              <div className="product-content py-0">
-                                <div className="product-info">
-                                  <div className="product-title">
-                                    <h3>
-                                      <a href={`/shopSingle?productId=${categories?._id}`} style={{ cursor: 'pointer' }}>
-                                        {categories.name || ''}
-                                      </a>
-                                    </h3>
-                                  </div>
-                                </div>
-
-                                <div className="product-prize">
-                                  <p>
-                                    <span className="me-2">${categories.price || 'N/A'}</span>
-                                  </p>
-                                </div>
-                              </div>
+                    {getProducts?.result?.slice(0, 3).map((categories: any) => (
+                      <div className="widget-product" key={categories._id}>
+                        <div className="product d-flex align-items-center mb-3">
+                          <div className="product-image">
+                            <div className="product-thumb-inner">
+                              <a href={`/shopSingle?productId=${categories?._id}`}>
+                                <img className="img-fluid" src={categories.images[0]} alt="image" />
+                              </a>
                             </div>
                           </div>
-                        </>
-                      );
-                    })}
+
+                          <div className="product-content py-0">
+                            <div className="product-info">
+                              <div className="product-title">
+                                <h3>
+                                  <a href={`/shopSingle?productId=${categories?._id}`} style={{ cursor: 'pointer' }}>
+                                    {categories.name || ''}
+                                  </a>
+                                </h3>
+                              </div>
+                            </div>
+
+                            <div className="product-prize">
+                              <p>
+                                <span className="me-2">${categories.price || 'N/A'}</span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -188,20 +174,21 @@ export default function Products() {
             <div className="col-xl-9 col-lg-8 mt-4 mt-md-5 mt-lg-0">
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 {isLoading && <h3>Loading...</h3>}
-                {getProducts?.result?.length === 0 && <h3>No products found</h3>}
+                {!isLoading && getProducts?.result?.length === 0 && <h3>No products found</h3>}
               </div>
 
-              <div className="row">
-                {getProducts?.result.map((product: any) => {
-                  return <ProductItem key={product._id} product={product} large />;
-                })}
-              </div>
+              <div className="row">{getProducts?.result.map((product: any) => <ProductItem key={product._id} product={product} large />)}</div>
               <div className="row">
                 <div className="col-12 text-center mt-4 mt-sm-5">
                   <nav>
                     <ul className="pagination justify-content-center mb-0">
-                      <li className="page-item">
-                        <a className="page-link" onClick={() => handlePageChange(page - 1)} aria-label="Previous" style={{ cursor: 'pointer' }}>
+                      <li className={`page-item ${page === 1 ? 'disabled' : ''}`}>
+                        <a
+                          className="page-link"
+                          onClick={() => page > 1 && handlePageChange(page - 1)}
+                          aria-label="Previous"
+                          style={{ cursor: page > 1 ? 'pointer' : 'not-allowed' }}
+                        >
                           <span aria-hidden="true">«</span>
                           <span className="sr-only">Previous</span>
                         </a>
@@ -212,9 +199,13 @@ export default function Products() {
                           <span className="sr-only">(current)</span>
                         </span>
                       </li>
-
-                      <li className="page-item">
-                        <a className="page-link" onClick={() => handlePageChange(page + 1)} aria-label="Next" style={{ cursor: 'pointer' }}>
+                      <li className={`page-item ${getProducts?.result?.length < pageSize ? 'disabled' : ''}`}>
+                        <a
+                          className="page-link"
+                          onClick={() => getProducts?.result?.length >= pageSize && handlePageChange(page + 1)}
+                          aria-label="Next"
+                          style={{ cursor: getProducts?.result?.length >= pageSize ? 'pointer' : 'not-allowed' }}
+                        >
                           <span aria-hidden="true">»</span>
                           <span className="sr-only">Next</span>
                         </a>
