@@ -18,6 +18,9 @@ import TermsCondition from './TermsCondition';
 import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
+import dhl from '../../images/dhl_dhknd_shipping_parther-large.jpg';
+import purolator from '../../images/purolator_dhknd_shipping_parther-large.jpg';
+import logo1 from '../../images/DHKND-Final-Logo.png';
 import AboutUs from './AboutUs';
 import languageLogo from '../../images/canada.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
@@ -1012,6 +1015,8 @@ const RouteComponent: React.FC = () => {
           <div className="row">
             <div className="col-sm-6 col-lg-4 mb-4 mb-lg-0">
               <h4 className="text-white mb-4">Contact Us</h4>
+              <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo1} height="396px" width="200px" alt="logo" />
+
               <ul className="footer-contact list-unstyled">
                 <li>
                   <div className="footer-contact-info">
@@ -1110,6 +1115,19 @@ const RouteComponent: React.FC = () => {
                     I agree to the Privacy Policy.
                   </label>
                 </div> */}
+              </div>
+              <br />
+              <h5 className="text-white mb-4">OUR SHIPPING PARTNERS</h5>
+              <div style={{ textAlign: 'center', justifyContent: 'center', display: 'flex' }}>
+                <img className="img-fluid" style={{ objectFit: 'cover' }} src={dhl} height="396px" width="200px" alt="logo" />
+                <img
+                  className="img-fluid"
+                  style={{ objectFit: 'cover', marginLeft: '10px' }}
+                  src={purolator}
+                  height="396px"
+                  width="200px"
+                  alt="logo"
+                />
               </div>
             </div>
           </div>
