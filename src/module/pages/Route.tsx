@@ -198,6 +198,17 @@ const RouteComponent: React.FC = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  const handleMouseEnter = (id: string) => {
+    setOpenDropdown(id);
+  };
+
+  const handleMouseLeave = () => {
+    setOpenDropdown(null);
+  };
+
   return (
     <React.Fragment>
       {/* <!--=================================
@@ -458,37 +469,61 @@ const RouteComponent: React.FC = () => {
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
                 <li className="nav-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-                  <div
-                    className="nav-link nav-link-flex"
-                    aria-current="page"
-                    style={{ display: 'block', alignItems: 'center', placeContent: 'center' }}
-                  >
-                    <img src={homeIcon} style={{ width: '16px', marginRight: '2px' }} />
-                    <span style={{ fontWeight: '600', fontSize: '15px', marginLeft: '2px' }}>Home</span>
+                  <div className="nav-link nav-link-flex" aria-current="page">
+                    <img src={homeIcon} alt="home" />
+                    <span>Home</span>
                   </div>
                 </li>
-                {!categoriesLoading && categories && categories?.result?.length > 0
-                  ? categories?.result?.map((value: any, key: number) => {
-                      if (value.parentCategory) return null;
-                      return (
+                {!categoriesLoading &&
+                  categories &&
+                  categories.result.length > 0 &&
+                  categories.result.map((value: any, key: number) => {
+                    if (value.parentCategory) return null;
+                    return (
+                      <ul className="nav navbar-nav" key={key}>
                         <li
                           className="nav-item"
-                          onClick={() => {
-                            setCategories(value._id);
-                            navigate(`/products?category=${value._id}`);
-                          }}
-                          style={{ cursor: 'pointer' }} // Add cursor style here
-                          data-bs-toggle="collapse"
-                          data-bs-target=".navbar-collapse"
+                          key={key}
+                          style={{ cursor: 'pointer' }}
+                          onMouseEnter={() => handleMouseEnter(value._id)}
+                          onMouseLeave={handleMouseLeave}
                         >
-                          <div className="nav-link nav-link-flex" aria-current="page">
-                            <img src={value.icon} style={{ width: 18, marginRight: '2px' }} />
-                            <span style={{ fontWeight: '600', fontSize: '15px' }}>{value.name}</span>
+                          <div
+                            className="nav-link nav-link-flex"
+                            aria-current="page"
+                            onClick={() => {
+                              setCategories(value._id);
+                              navigate(`/products?category=${value._id}`);
+                            }}
+                            data-bs-toggle="collapse"
+                            data-bs-target=".navbar-collapse"
+                          >
+                            <img src={value.icon} alt={value.name ? String(value.name) : ''} />
+                            <span>{value.name}</span>
+                            <i className="fas fa-chevron-down"></i>
                           </div>
+                          {openDropdown === value._id && (
+                            <div className="dropdown-menu">
+                              {categories.result
+                                .filter((cat: any) => cat.parentCategory?._id === value._id)
+                                .map((subCategory: any) => (
+                                  <div
+                                    key={subCategory._id}
+                                    className="dropdown-item"
+                                    onClick={() => {
+                                      setCategories(subCategory._id);
+                                      navigate(`/products?category=${subCategory._id}`);
+                                    }}
+                                  >
+                                    {subCategory.name}
+                                  </div>
+                                ))}
+                            </div>
+                          )}
                         </li>
-                      );
-                    })
-                  : ''}
+                      </ul>
+                    );
+                  })}
               </ul>
             </div>
             <div className="text-end free-shipping d-none d-lg-block">
