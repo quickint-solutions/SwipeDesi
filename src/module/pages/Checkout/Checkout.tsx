@@ -1,21 +1,22 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import checkoutHttpRequest from '../../../api/checkoutHttpRequest';
-import { useAppDispatch, useAppSelector } from '../../../api/store/configureStore';
+
 import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
-import { getCartDetail } from '../Cart/cartSlice';
+
 import { AuthContext } from '../../../context/auth.context';
 import { CartContext } from '../../../context/cart.context';
 import { provinces } from '../../../utils/provinces';
 import { tax_structure } from '../../../utils/tax';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useStripe, useElements, PaymentElement, Elements } from '@stripe/react-stripe-js';
 import { useMutation } from 'react-query';
 import { createPaymentIntent } from '../../../apiV2/stripe';
 import { createOrderAPI } from '../../../apiV2/orders';
+import { stripePromise } from '../../../App';
 
-const Checkout: React.FC = () => {
+const CheckoutComponent: React.FC = () => {
   const { items, getTotal, getTaxAmount, getFinalTotal, emptyCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
+  const [clientSecret, setClientSecret] = useState<any>(undefined);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -48,20 +49,11 @@ const Checkout: React.FC = () => {
       return;
     }
 
-    const data = await createPayment({ amount: getFinalTotal(tax_structure[0].total) });
-
     const orderID = Math.floor(Math.random() * 1000000);
 
-    const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement) as any,
-        billing_details: {
-          name: billingDetail.firstName + ' ' + billingDetail.lastName,
-        },
-        metadata: {
-          orderID,
-        },
-      },
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      redirect: 'if_required',
     });
 
     if (paymentIntent?.status === 'succeeded') {
@@ -153,8 +145,14 @@ const Checkout: React.FC = () => {
     email: user?.email,
   });
 
+  const focus = async () => {
+    const data = await createPayment({ amount: getFinalTotal(tax_structure[0].total) });
+    setClientSecret(data.clientSecret);
+  };
+
   useEffect(() => {
     if (user) {
+      focus();
     } else {
       navigate('/');
     }
@@ -182,6 +180,8 @@ const Checkout: React.FC = () => {
       [key]: value,
     }));
   };
+
+  if (!clientSecret) return <div>Loading...</div>;
 
   return (
     <>
@@ -691,12 +691,19 @@ const Checkout: React.FC = () => {
                             </td>
                           </tr>
                           <tr>
-                            <th className="product-total">
+                            <th className="product-total" style={{ alignContent: 'flex-start' }}>
                               Card Details
                               <span style={{ color: 'red' }}>*</span>
                             </th>
                             <td>
-                              <CardElement />
+                              <PaymentElement
+                                options={{
+                                  layout: 'accordion',
+                                }}
+                                onReady={payments => {
+                                  console.log('payments -> ', payments);
+                                }}
+                              />
                             </td>
                           </tr>
                           <tr>
@@ -745,6 +752,28 @@ const Checkout: React.FC = () => {
         </section>
       )}
     </>
+  );
+};
+
+const Checkout = () => {
+  const { items, getTotal, getTaxAmount, getFinalTotal, emptyCart } = useContext(CartContext);
+  const taxDetails = tax_structure[0];
+  const taxAmount = getTaxAmount(taxDetails?.total || 0);
+  const amount = getFinalTotal(taxDetails?.total || 0) * 100;
+
+  return (
+    <Elements
+      stripe={stripePromise}
+      options={{
+        mode: 'payment',
+        amount: amount,
+        currency: 'cad',
+        payment_method_types: ['card', 'klarna'],
+        // clientSecret: "pi_1JZzZvJvIVD3jVvjJFvRwvAO_secret_7Z2Z2Z2Z2Z2Z2Z2Z2Z2Z2Z2Z2",
+      }}
+    >
+      <CheckoutComponent />
+    </Elements>
   );
 };
 
