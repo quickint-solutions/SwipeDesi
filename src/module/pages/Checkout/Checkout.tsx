@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
 
@@ -22,8 +22,52 @@ const CheckoutComponent: React.FC = () => {
   const elements = useElements();
   const [error, setError] = useState<any>(null);
 
+  // check in query params if q is success then show success message
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const success = searchParams.get('q');
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    const orderID = Math.floor(Math.random() * 1000000);
+
+    const orderItems = items.map((value: any) => ({
+      item: value._id,
+      quantity: value.quantity,
+      rate: value.price,
+    }));
+
+    const orderDetails = {
+      orderId: orderID,
+      subTotal: getFinalTotal(tax_structure[0].total),
+      shipping: 'shipping',
+      tax: tax_structure[0].total,
+      items: orderItems,
+      address: {
+        line1: billingDetail.addressLine1,
+        line2: billingDetail.addressLine2,
+        state: billingDetail.state,
+        city: billingDetail.city,
+        country: billingDetail.country,
+        zip: billingDetail.zip,
+      },
+      shippingAddress: {
+        name: {
+          first: shippingDetail.firstName,
+          last: shippingDetail.lastName,
+        },
+        phone: shippingDetail.phone,
+        companyName: shippingDetail.companyName,
+        line1: shippingDetail.addressLine1,
+        line2: shippingDetail.addressLine2,
+        state: shippingDetail.state,
+        city: shippingDetail.city,
+        country: shippingDetail.country,
+        zip: shippingDetail.zip,
+      },
+    };
+
+    localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
 
     // check all fields in billing and shipping details are filled
     if (
@@ -49,52 +93,29 @@ const CheckoutComponent: React.FC = () => {
       return;
     }
 
-    const orderID = Math.floor(Math.random() * 1000000);
+    const data = await createPayment({ amount: getFinalTotal(tax_structure[0].total) });
+
+    setClientSecret(data.clientSecret);
+
+    const { error: submitError } = await elements.submit();
+
+    console.log('submitError -> ', submitError);
 
     const { error, paymentIntent } = await stripe.confirmPayment({
+      clientSecret: data.clientSecret,
       elements,
       redirect: 'if_required',
+      confirmParams: {
+        return_url: 'https://dhknd.ca/checkout?q=success',
+      },
     });
 
     if (paymentIntent?.status === 'succeeded') {
-      const orderItems = items.map((value: any) => ({
-        item: value._id,
-        quantity: value.quantity,
-        rate: value.price,
-      }));
-      const order = await createOrder({
-        orderId: orderID,
-        subTotal: getFinalTotal(tax_structure[0].total),
-        shipping: 'shipping',
-        tax: tax_structure[0].total,
-        items: orderItems,
-        address: {
-          line1: billingDetail.addressLine1,
-          line2: billingDetail.addressLine2,
-          state: billingDetail.state,
-          city: billingDetail.city,
-          country: billingDetail.country,
-          zip: billingDetail.zip,
-        },
-        shippingAddress: {
-          name: {
-            first: shippingDetail.firstName,
-            last: shippingDetail.lastName,
-          },
-          phone: shippingDetail.phone,
-          companyName: shippingDetail.companyName,
-          line1: shippingDetail.addressLine1,
-          line2: shippingDetail.addressLine2,
-          state: shippingDetail.state,
-          city: shippingDetail.city,
-          country: shippingDetail.country,
-          zip: shippingDetail.zip,
-        },
-      });
+      const order = await createOrder(orderDetails);
 
-      alert('Order has been placed successfully');
+      localStorage.removeItem('orderDetails');
+
       emptyCart();
-      navigate('/my-account?ORDER=success');
     } else {
       alert('Payment failed');
     }
@@ -108,7 +129,12 @@ const CheckoutComponent: React.FC = () => {
   };
 
   const { mutateAsync: createPayment, isLoading } = useMutation(createPaymentIntent);
-  const { mutateAsync: createOrder, isLoading: createOrderLoading } = useMutation(createOrderAPI);
+  const { mutateAsync: createOrder, isLoading: createOrderLoading } = useMutation(createOrderAPI, {
+    onSuccess: data => {
+      alert('Order has been placed successfully');
+      navigate('/my-account?ORDER=success');
+    },
+  });
 
   const navigate = useNavigate();
 
@@ -145,14 +171,51 @@ const CheckoutComponent: React.FC = () => {
     email: user?.email,
   });
 
-  const focus = async () => {
-    const data = await createPayment({ amount: getFinalTotal(tax_structure[0].total) });
-    setClientSecret(data.clientSecret);
-  };
+  // const focus = async () => {
+  //   const data = await createPayment({ amount: getFinalTotal(tax_structure[0].total) });
+  //   setClientSecret(data.clientSecret);
+  // };
 
   useEffect(() => {
     if (user) {
-      focus();
+      // focus();
+      const data = localStorage.getItem('orderDetails');
+      if (data && success) {
+        const orderDetails = JSON.parse(data);
+        setBillingDetail({
+          firstName: orderDetails.address.firstName,
+          lastName: orderDetails.address.lastName,
+          companyName: orderDetails.address.companyName,
+          country: 'CA',
+          addressLine1: orderDetails.address.line1,
+          addressLine2: orderDetails.address.line2,
+          city: orderDetails.address.city,
+          state: orderDetails.address.state,
+          zip: orderDetails.address.zip,
+          phone: orderDetails.address.phone,
+          countryCode: '+1',
+          gst: orderDetails.address.gst,
+          email: user?.email,
+        });
+
+        setShippingDetail({
+          firstName: orderDetails.shippingAddress.name.first,
+          lastName: orderDetails.shippingAddress.name.last,
+          companyName: orderDetails.shippingAddress.companyName,
+          country: 'CA',
+          addressLine1: orderDetails.shippingAddress.line1,
+          addressLine2: orderDetails.shippingAddress.line2,
+          city: orderDetails.shippingAddress.city,
+          state: orderDetails.shippingAddress.state,
+          zip: orderDetails.shippingAddress.zip,
+          phone: orderDetails.shippingAddress.phone,
+          countryCode: '+1',
+          gst: user?.gst,
+          email: user?.email,
+        });
+
+        createOrder(orderDetails);
+      }
     } else {
       navigate('/');
     }
@@ -181,7 +244,7 @@ const CheckoutComponent: React.FC = () => {
     }));
   };
 
-  if (!clientSecret) return <div>Loading...</div>;
+  // if (!clientSecret) return <div>Loading...</div>;
 
   return (
     <>
@@ -769,6 +832,7 @@ const Checkout = () => {
         amount: amount,
         currency: 'cad',
         payment_method_types: ['card', 'klarna'],
+
         // clientSecret: "pi_1JZzZvJvIVD3jVvjJFvRwvAO_secret_7Z2Z2Z2Z2Z2Z2Z2Z2Z2Z2Z2Z2",
       }}
     >

@@ -12,9 +12,11 @@ import { Elements } from '@stripe/react-stripe-js';
 export const stripePromise = loadStripe(
   'pk_live_51IKSIZJvIVD3jVvjJFvRwvAOtq1zaukEOeqLfMNw9MWa9pALPUkH7OCpAlK6IzjwipnqIX9q9dcNwyLZg9mRgs6B0059UfSbHw',
 );
+
 // export const stripePromise = loadStripe(
 //   'pk_test_51OhE1ILaWLKJ299MykVFUl8LtKHkoxLYA2ck8f1fW5nVH83u4p3KXOOsnJBTiLgmXEkihHO0PWMB8M5ugiqrFwL400uSiPzNjc',
 // );
+
 // pk_test_51OhE1ILaWLKJ299MykVFUl8LtKHkoxLYA2ck8f1fW5nVH83u4p3KXOOsnJBTiLgmXEkihHO0PWMB8M5ugiqrFwL400uSiPzNjc
 
 // sk_test_51OhE1ILaWLKJ299M68wLw4JpAE7g1nULwQhecdES4kn3rLmeXeDIDflfNyAKih8VEUd0ISf6rDS2xSlAmzpGRPQb00j6FOoUeb
