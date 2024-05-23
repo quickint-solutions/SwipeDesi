@@ -117,16 +117,16 @@ const CheckoutComponent: React.FC = () => {
   const [billingDetail, setBillingDetail] = useState({
     firstName: user?.name?.first,
     lastName: user?.name?.last,
-    companyName: user?.company?.name,
+    companyName: user?.company?.name || '',
+    gst: user?.gst || '',
     country: 'CA',
     addressLine1: user?.address?.line1,
     addressLine2: user?.address?.line2,
     city: user?.address?.city,
-    state: user?.address?.state,
+    state: user?.address?.state || 'Alberta',
     zip: user?.address?.zip,
     phone: user?.phone?.number,
     countryCode: '+1',
-    gst: user?.gst,
     email: user?.email,
   });
   const [shippingDetail, setShippingDetail] = useState({
@@ -384,7 +384,9 @@ const CheckoutComponent: React.FC = () => {
                       </label>
                       <select className="form-control basic-select" onChange={e => handleChangeBillingDetail('state', e.target.value)}>
                         {provinces.map((value: any, key: number) => (
-                          <option value={value.value}>{value.label}</option>
+                          <option value={value.value} defaultValue={'Alberta'}>
+                            {value.label}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -559,7 +561,9 @@ const CheckoutComponent: React.FC = () => {
                         </label>
                         <select className="form-control basic-select" onChange={e => handleChangeShippingDetail('state', e.target.value)}>
                           {provinces.map((value: any, key: number) => (
-                            <option value={value.value}>{value.label}</option>
+                            <option value={value.value} defaultValue={'Alberta'}>
+                              {value.label}
+                            </option>
                           ))}
                         </select>
                       </div>
