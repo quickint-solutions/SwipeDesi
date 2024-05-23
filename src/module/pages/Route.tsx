@@ -482,6 +482,9 @@ const RouteComponent: React.FC = () => {
                   categories.result.length > 0 &&
                   categories.result.map((value: any, key: number) => {
                     if (value.parentCategory) return null;
+
+                    const subCategories = categories.result.filter((cat: any) => cat.parentCategory?._id === value._id);
+
                     return (
                       <ul className="nav navbar-nav" key={key}>
                         <li
@@ -503,24 +506,22 @@ const RouteComponent: React.FC = () => {
                           >
                             <img src={value.icon} alt={value.name ? String(value.name) : ''} />
                             <span>{value.name}</span>
-                            <i className="fas fa-chevron-down"></i>
+                            {subCategories.length > 0 && <i className="fas fa-chevron-down"></i>}
                           </div>
-                          {openDropdown === value._id && (
+                          {openDropdown === value._id && subCategories.length > 0 && (
                             <div className="dropdown-menu">
-                              {categories.result
-                                .filter((cat: any) => cat.parentCategory?._id === value._id)
-                                .map((subCategory: any) => (
-                                  <div
-                                    key={subCategory._id}
-                                    className="dropdown-item"
-                                    onClick={() => {
-                                      setCategories(subCategory._id);
-                                      navigate(`/products?category=${subCategory._id}`);
-                                    }}
-                                  >
-                                    {subCategory.name}
-                                  </div>
-                                ))}
+                              {subCategories.map((subCategory: any) => (
+                                <div
+                                  key={subCategory._id}
+                                  className="dropdown-item"
+                                  onClick={() => {
+                                    setCategories(subCategory._id);
+                                    navigate(`/products?category=${subCategory._id}`);
+                                  }}
+                                >
+                                  {subCategory.name}
+                                </div>
+                              ))}
                             </div>
                           )}
                         </li>

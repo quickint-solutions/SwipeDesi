@@ -468,7 +468,7 @@ const Login: React.FC = () => {
                     <div className="testimonial-quote-icon">
                       <QuoteSvg></QuoteSvg>
                     </div>
-                    <div className="testimonial-content">
+                    <div style={{ color: 'white', fontSize: '16px' }}>
                       <p className="mb-0">
                         <i>
                           I was extremely excited about finding this hidden Gem of a place. The owners were very helpful at locating the exact Mandir
@@ -491,7 +491,7 @@ const Login: React.FC = () => {
                     <div className="testimonial-quote-icon">
                       <QuoteSvg></QuoteSvg>
                     </div>
-                    <div className="testimonial-content">
+                    <div style={{ color: 'white', fontSize: '16px' }}>
                       <p className="mb-0">
                         <i>
                           We had an absolutely fantastic experience with DHKND when we recently bought a temple from them! Heema was incredibly kind,
@@ -499,7 +499,7 @@ const Login: React.FC = () => {
                           every member of their staff added to the great service. Their shop serves a niche purpose so well that I would highly
                           recommend this to anyone looking to purchase a temple or mandir for themselves. They went above and beyond the call of duty
                           - helping us not only decide but then carry the heavy temple out, secure it in our truck and then even texted us when we got
-                          home to ensure we had no problems. Great price, great service and incredible people - what more can you ask for
+                          home to ensure we had no problems. Great price, great service and incredible people - what more can you ask for!
                         </i>
                       </p>
                     </div>
@@ -515,7 +515,7 @@ const Login: React.FC = () => {
                     <div className="testimonial-quote-icon">
                       <QuoteSvg></QuoteSvg>
                     </div>
-                    <div className="testimonial-content">
+                    <div style={{ color: 'white', fontSize: '16px' }}>
                       <p className="mb-0">
                         <i>
                           I’m thrilled with the Sevan Wood Mandir and the outstanding service your team provided. The Mandir’s craftsmanship exceeded
@@ -523,7 +523,7 @@ const Login: React.FC = () => {
                           showcasing your commitment to quality. I appreciate the personalized call to showcase other collections and the effort to
                           ensure timely delivery. However, a minor inconvenience was the light wiring socket was Indian, requiring an additional
                           converter. Overall, we’re delighted with the product and your service. Thank you for delivering exactly what we were looking
-                          for
+                          for.
                         </i>{' '}
                       </p>
                     </div>
@@ -539,14 +539,15 @@ const Login: React.FC = () => {
                     <div className="testimonial-quote-icon">
                       <QuoteSvg></QuoteSvg>
                     </div>
-                    <div className="testimonial-content">
+                    <div style={{ color: 'white', fontSize: '16px' }}>
                       <p className="mb-0">
                         <i>
                           Can’t describe Heema ji’s efforts and compassion in words. She helped us to get our new Mandir at our new home before hawan
                           in every possible way. Arranging a new beautiful mandir and assembling it in just a one day notice time, and then further
                           extending her warm help to drop my mom and wife to our new home, as Mandir won’t fit in without lowering my car’s seats, she
                           truly stand out as a true person. I can’t thank enough for her beautiful gesture and kindness. Everyone at Hawan praised a
-                          lot for this beautiful mandir. Really happy to get a beautiful new home for our Kanha Thank you Heema ji. Stay blessed
+                          lot for this beautiful mandir. Really happy to get a beautiful new home for our Kanha 🙏🏻 Thank you Heema ji. Stay blessed
+                          🙏🏻.
                         </i>
                       </p>
                     </div>
