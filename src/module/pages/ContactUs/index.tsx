@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import img from '../../../images/bg/mandir-banner.jpg';
+import img from '../../../images/new-bg/Contact-Us.jpg';
 import { sendLead } from '../../../apiV2/leads';
 
 export default function ContactUs() {

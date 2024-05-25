@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
-import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
-import { useNavigate } from 'react-router-dom';
-import img from '../../../images/bg/mandir-banner.jpg';
 import { AuthContext } from '../../../context/auth.context';
 import 'magnific-popup/dist/magnific-popup.css';
 import 'magnific-popup';
 import $ from 'jquery';
+import img from '../../../images/new-bg/testimonials.jpg';
 
 export default function Testimonials() {
   const { search, categories, setCategories } = useContext(AuthContext);
@@ -30,7 +28,7 @@ export default function Testimonials() {
 
   return (
     <div>
-      <section className="header-inner header-inner-menu bg-overlay-secondary mandir-bg">
+      <section className="header-inner header-inner-menu bg-overlay-secondary mandir-bg" style={{ backgroundImage: `url(${img})` }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
@@ -55,7 +53,7 @@ export default function Testimonials() {
             </div>
           </div>
         </div>
-        <div className="header-inner-shape" style={{ backgroundImage: "url('images/bg/02.png')" }}></div>
+        {/* <div className="header-inner-shape" style={{ backgroundImage: `url${img}` }}></div> */}
       </section>
       <section className="space-ptb">
         <div className="container">

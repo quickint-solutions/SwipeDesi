@@ -4,7 +4,7 @@ import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
 import { useNavigate } from 'react-router-dom';
-import img from '../../../images/bg/mandir-banner.jpg';
+import img from '../../../images/new-bg/About-Us.jpg';
 import AboutImg from '../../../images/bg/about-img.jpg';
 import team from '../../../images/team/01.jpg';
 import gallery from '../../../images/gallery/01.jpg';

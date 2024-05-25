@@ -3,7 +3,7 @@ import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
 import { getCategories } from '../../../apiV2/categories';
 import { useNavigate } from 'react-router-dom';
-import img from '../../../images/bg/mandir-banner.jpg';
+import img from '../../../images/new-bg/Terms-and-Conditions.jpg';
 
 export default function TermsCondition() {
   const params = new URLSearchParams(window.location.search);
