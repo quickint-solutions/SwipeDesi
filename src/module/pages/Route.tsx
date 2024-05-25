@@ -173,8 +173,8 @@ const RouteComponent: React.FC = () => {
       alert('Password reset successfully please login now!');
       (window as any).$('#formLoginRegister').modal('show');
     },
-    onError: error => {
-      console.log('error -> ', error);
+    onError: (error: any) => {
+      alert(error.response.data.message || 'Password reset failed');
     },
   });
   const [isVisible, setIsVisible] = useState(false);
