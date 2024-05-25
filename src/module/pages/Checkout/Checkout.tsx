@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
-
+import BgImg from '../../../images/new-bg/Cart.jpg';
 import { AuthContext } from '../../../context/auth.context';
 import { CartContext } from '../../../context/cart.context';
 import { provinces } from '../../../utils/provinces';
@@ -248,7 +246,7 @@ const CheckoutComponent: React.FC = () => {
 
   return (
     <>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: 'url(' + MandirBgImg + ')' }}>
+      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: 'url(' + BgImg + ')' }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
