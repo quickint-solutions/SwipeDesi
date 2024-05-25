@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import img from '../../../images/bg/mandir-banner.jpg';
+import img from '../../../images/new-bg/blog.jpg';
 import { fetchBlogs } from '../../../apiV2/blogs';
 import { AuthContext } from '../../../context/auth.context';
 import { getCategories } from '../../../apiV2/categories';
