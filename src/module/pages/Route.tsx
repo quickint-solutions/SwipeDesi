@@ -167,6 +167,19 @@ const RouteComponent: React.FC = () => {
     },
   });
 
+  const samePasswordValidation = () => {
+    //notify this after 3 sec
+    setTimeout(() => {
+      (window as any).$('#forgotPasswordModal').modal('hide');
+    }, 3000);
+    if (resetPaswordDetails.password1 !== resetPaswordDetails.password2) {
+      alert('Password does not match');
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const { mutate: handleResetPassword } = useMutation(resetPasswordAPI, {
     onSuccess: data => {
       (window as any).$('#forgotPasswordModal').modal('hide');
@@ -964,7 +977,14 @@ const RouteComponent: React.FC = () => {
                             </div>
 
                             <div className="col-sm-12 d-grid mb-3">
-                              <button type="button" className="btn btn-primary btn-flat" onClick={() => handleResetPassword(resetPaswordDetails)}>
+                              <button
+                                type="button"
+                                className="btn btn-primary btn-flat"
+                                onClick={() => {
+                                  handleResetPassword(resetPaswordDetails);
+                                  samePasswordValidation;
+                                }}
+                              >
                                 Reset Password
                               </button>
                             </div>
