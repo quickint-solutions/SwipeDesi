@@ -374,7 +374,7 @@ const RouteComponent: React.FC = () => {
                   <div className="woo-action d-flex align-items-center">
                     {auth.user && (
                       <div className="Compare-action woo-action-icon" onClick={() => navigate('my-account')} style={{ cursor: 'pointer' }}>
-                        <a className="compare-icon" title="Compare products">
+                        <a className="compare-icon" title="Account Details">
                           <i className="bi bi-person"></i>
                         </a>
                       </div>

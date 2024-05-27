@@ -18,6 +18,7 @@ import { AuthContext } from '../../../context/auth.context';
 import { CartContext } from '../../../context/cart.context';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
+import ImageMagnifier from '../../../components/ImageMagnifier';
 
 const ShopSingle: React.FC = () => {
   const navigate = useNavigate();
@@ -165,6 +166,7 @@ const ShopSingle: React.FC = () => {
                         </div>
                       ))}
                     </OwlCarousel>
+                    <ImageMagnifier image={itemDetails?.images[0]} />
                   </div>
 
                   <div className="col-md-7">
