@@ -163,8 +163,7 @@ const RouteComponent: React.FC = () => {
       alert('Reset password link has been sent to your email');
     },
     onError: (error: any) => {
-      alert(error.response.data.message || 'Error resetting password');
-      console.log('error -> ', error);
+      alert(error?.response?.data?.message || 'Error resetting password');
     },
   });
 
@@ -983,7 +982,7 @@ const RouteComponent: React.FC = () => {
                                 className="btn btn-primary btn-flat"
                                 onClick={() => {
                                   handleResetPassword(resetPaswordDetails);
-                                  samePasswordValidation;
+                                  samePasswordValidation();
                                 }}
                               >
                                 Reset Password
