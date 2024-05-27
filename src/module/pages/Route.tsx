@@ -168,7 +168,6 @@ const RouteComponent: React.FC = () => {
   });
 
   const samePasswordValidation = () => {
-    //notify this after 3 sec
     setTimeout(() => {
       (window as any).$('#forgotPasswordModal').modal('hide');
     }, 3000);
@@ -981,8 +980,10 @@ const RouteComponent: React.FC = () => {
                                 type="button"
                                 className="btn btn-primary btn-flat"
                                 onClick={() => {
-                                  handleResetPassword(resetPaswordDetails);
                                   samePasswordValidation();
+                                  if (samePasswordValidation() === true) {
+                                    handleResetPassword(resetPaswordDetails);
+                                  }
                                 }}
                               >
                                 Reset Password
