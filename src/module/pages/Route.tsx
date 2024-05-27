@@ -162,7 +162,8 @@ const RouteComponent: React.FC = () => {
     onSuccess: data => {
       alert('Reset password link has been sent to your email');
     },
-    onError: error => {
+    onError: (error: any) => {
+      alert(error.response.data.message || 'Error resetting password');
       console.log('error -> ', error);
     },
   });
@@ -907,8 +908,8 @@ const RouteComponent: React.FC = () => {
                                   type="submit"
                                   className="btn btn-primary btn-flat"
                                   onClick={() => {
-                                    setForgotPasswordScreen1(false);
                                     handleForgotPassword(forgotPaswordDetails);
+                                    setForgotPasswordScreen1(false);
                                   }}
                                 >
                                   Next
