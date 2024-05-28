@@ -160,17 +160,16 @@ const RouteComponent: React.FC = () => {
 
   const { mutate: handleForgotPassword } = useMutation(forgotPasswordAPI, {
     onSuccess: data => {
-      alert('Reset password link has been sent to your email');
+      alert('Reset password OTP has been sent to your email');
+      setForgotPasswordScreen1(false);
     },
     onError: (error: any) => {
       alert(error?.response?.data?.message || 'Error resetting password');
+      setForgotPasswordScreen1(true);
     },
   });
 
   const samePasswordValidation = () => {
-    setTimeout(() => {
-      (window as any).$('#forgotPasswordModal').modal('hide');
-    }, 3000);
     if (resetPaswordDetails.password1 !== resetPaswordDetails.password2) {
       alert('Password does not match');
       return false;
@@ -181,8 +180,8 @@ const RouteComponent: React.FC = () => {
 
   const { mutate: handleResetPassword } = useMutation(resetPasswordAPI, {
     onSuccess: data => {
-      (window as any).$('#forgotPasswordModal').modal('hide');
       alert('Password reset successfully please login now!');
+      (window as any).$('#forgotPasswordModal').modal('hide');
       (window as any).$('#formLoginRegister').modal('show');
     },
     onError: (error: any) => {
@@ -903,11 +902,10 @@ const RouteComponent: React.FC = () => {
 
                               <div className="col-sm-12 d-grid mb-3">
                                 <button
-                                  type="submit"
+                                  type="button"
                                   className="btn btn-primary btn-flat"
                                   onClick={() => {
                                     handleForgotPassword(forgotPaswordDetails);
-                                    setForgotPasswordScreen1(false);
                                   }}
                                 >
                                   Next
