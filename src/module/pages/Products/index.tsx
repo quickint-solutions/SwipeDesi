@@ -10,19 +10,17 @@ export default function Products() {
 
   const [page, setPage] = useState(1);
 
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const [categoryName, setCategoryName] = useState('');
+
   const pageSize = 12;
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
 
-  const [openDropdown, setOpenDropdown] = useState(null);
-
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
-
-  useEffect(() => {
-    mutate({ categories, search, pageSize, page });
-  }, [categories, search, page]);
 
   //!Buisness Logic for finding the category parent image
   //!finding the categoryId of sub to parent category
@@ -31,13 +29,23 @@ export default function Products() {
 
   const categoryId = params.get('category');
 
-  const { data: subCategoriesData } = useQuery('getCategoriesById', async () => {
-    if (categoryId) {
-      return await getCategoriesById(categoryId);
-    }
-  });
+  const { data: subCategoriesData } = useQuery(
+    ['getCategoriesById', categoryId],
+    async () => {
+      if (categoryId) {
+        return await getCategoriesById(categoryId);
+      }
+    },
+    {
+      enabled: !!categoryId,
+    },
+  );
 
   console.log('subCategoriesData -> ', subCategoriesData);
+
+  useEffect(() => {
+    mutate({ categories, search, pageSize, page });
+  }, [categories, search, page]);
 
   useEffect(() => {
     setCategories(categoryId || '');
@@ -115,23 +123,29 @@ export default function Products() {
                                 <div className="widget-content" style={{ paddingLeft: 20 }}>
                                   <div className="widget-categories">
                                     <ul className="list-unstyled list-style list-style-underline mb-0">
-                                      {subCategories.map((subCategory: any) => (
-                                        <li key={subCategory._id}>
-                                          <div
-                                            style={{ cursor: 'pointer', marginBottom: 5 }}
-                                            className="d-flex"
-                                            onClick={() => {
-                                              setCategories(subCategory._id);
-                                              setPage(1);
-                                            }}
-                                          >
-                                            {subCategory?.name || ''}
-                                            <span className="ms-auto">
-                                              <div className="count">{subCategory?.itemCount}</div>
-                                            </span>
-                                          </div>
-                                        </li>
-                                      ))}
+                                      {subCategories.map((subCategory: any) => {
+                                        console.log('subCategory -> ', subCategory);
+                                        return (
+                                          <li key={subCategory._id}>
+                                            <div
+                                              style={{ cursor: 'pointer', marginBottom: 5 }}
+                                              className="d-flex"
+                                              onClick={() => {
+                                                setCategories(subCategory._id);
+                                                setPage(1);
+                                                const params = new URLSearchParams(window.location.search);
+                                                params.set('category', subCategory._id);
+                                                window.history.pushState({}, '', `${window.location.pathname}?${params}`);
+                                              }}
+                                            >
+                                              {subCategory?.name || ''}
+                                              <span className="ms-auto">
+                                                <div className="count">{subCategory?.itemCount}</div>
+                                              </span>
+                                            </div>
+                                          </li>
+                                        );
+                                      })}
                                     </ul>
                                   </div>
                                 </div>
@@ -170,7 +184,6 @@ export default function Products() {
                                 </h3>
                               </div>
                             </div>
-
                             <div className="product-prize">
                               <p>
                                 <span className="me-2">${categories?.price || 'N/A'}</span>
