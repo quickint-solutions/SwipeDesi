@@ -37,6 +37,8 @@ export default function Products() {
     }
   });
 
+  console.log('subCategoriesData -> ', subCategoriesData);
+
   useEffect(() => {
     setCategories(categoryId || '');
   }, [categoryId, setCategories]);
@@ -49,7 +51,7 @@ export default function Products() {
     <div>
       <section
         className="header-inner header-inner-menu bg-overlay-secondary mandir-bg"
-        style={{ backgroundImage: `url(${subCategoriesData?.parentCategory?.image || 'No Background image'})` }}
+        style={{ backgroundImage: `url(${subCategoriesData?.parentCategory?.banner || 'No Background image'})` }}
       >
         <div className="container">
           <div className="row d-flex justify-content-center">
@@ -75,7 +77,6 @@ export default function Products() {
             </div>
           </div>
         </div>
-        <div className="header-inner-shape" style={{ backgroundImage: "url('images/bg/02.png')" }}></div>
       </section>
 
       <section className="space-ptb">
