@@ -10,19 +10,17 @@ export default function Products() {
 
   const [page, setPage] = useState(1);
 
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const [categoryName, setCategoryName] = useState('');
+
   const pageSize = 12;
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
 
-  const [openDropdown, setOpenDropdown] = useState(null);
-
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
-
-  useEffect(() => {
-    mutate({ categories, search, pageSize, page });
-  }, [categories, search, page]);
 
   //!Buisness Logic for finding the category parent image
   //!finding the categoryId of sub to parent category
@@ -38,6 +36,10 @@ export default function Products() {
   });
 
   console.log('subCategoriesData -> ', subCategoriesData);
+
+  useEffect(() => {
+    mutate({ categories, search, pageSize, page });
+  }, [categories, search, page]);
 
   useEffect(() => {
     setCategories(categoryId || '');
