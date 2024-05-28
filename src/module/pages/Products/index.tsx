@@ -41,8 +41,6 @@ export default function Products() {
     },
   );
 
-  console.log('subCategoriesData -> ', subCategoriesData);
-
   useEffect(() => {
     mutate({ categories, search, pageSize, page });
   }, [categories, search, page]);
@@ -124,7 +122,6 @@ export default function Products() {
                                   <div className="widget-categories">
                                     <ul className="list-unstyled list-style list-style-underline mb-0">
                                       {subCategories.map((subCategory: any) => {
-                                        console.log('subCategory -> ', subCategory);
                                         return (
                                           <li key={subCategory._id}>
                                             <div
