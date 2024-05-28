@@ -1,17 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Slider from 'react-slick';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import Product1 from '../../../images/product/01.jpg';
-import Product2 from '../../../images/product/02.jpg';
-import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
-import MandirBgImg2 from '../../../images/bg/Mandir-1920-x-490-px.jpg';
 import shopSingleHttpRequest from '../../../api/shopSingleHttpRequest';
 import { useAppSelector } from '../../../api/store/configureStore';
 import { getUserDetail } from '../../../helpers/common';
-import cartHttpRequest from '../../../api/cart/cartHttpRequest';
 import { useQuery } from 'react-query';
 import { getItemsByCategory, getItemsById } from '../../../apiV2/items';
 import { AuthContext } from '../../../context/auth.context';
@@ -161,9 +155,11 @@ const ShopSingle: React.FC = () => {
                 <div className="row">
                   <div className="col-md-5 mb-4 mb-md-0">
                     <OwlCarousel
+                      style={{ cursor: 'pointer' }}
                       className="owl-theme2"
-                      autoplayTimeout={3000}
-                      autoplay={false}
+                      autoplayTimeout={2500}
+                      autoplay={true}
+                      autoplayHoverPause={true}
                       items={1}
                       loop={true}
                       margin={10}
@@ -183,7 +179,8 @@ const ShopSingle: React.FC = () => {
 
                     <OwlCarousel
                       className="owl-theme2"
-                      autoplay={false} // Control autoplay based on state
+                      autoplay={true}
+                      autoplayTimeout={2500}
                       items={3}
                       loop={true}
                       margin={10}
@@ -192,7 +189,7 @@ const ShopSingle: React.FC = () => {
                       responsive={{ 0: { items: 3 }, 600: { items: 5 }, 1000: { items: 7 } }}
                     >
                       {itemDetails?.images.map((image: string | undefined, index: React.Key | null | undefined) => (
-                        <div key={index} className="item product-img--main" data-scale="1.8">
+                        <div key={index} className="item product-img--main" style={{ cursor: 'pointer' }}>
                           <div className="product-label"></div>
                           <img src={image} alt={`Thumbnail ${index}`} />
                         </div>

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
-import { getCategories } from '../../../apiV2/categories';
+import { getCategories, getCategoriesById } from '../../../apiV2/categories';
 import { AuthContext } from '../../../context/auth.context';
 
 export default function Products() {
@@ -14,6 +14,9 @@ export default function Products() {
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
+
+  console.log('categoriesList -> ', categoriesList);
+
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
@@ -22,25 +25,32 @@ export default function Products() {
     mutate({ categories, search, pageSize, page });
   }, [categories, search, page]);
 
+  //!Buisness Logic for finding the category parent image
+  //!finding the categoryId of sub to parent category
+
   const params = new URLSearchParams(window.location.search);
-  const categoryName = params.get('category');
-  const category = categoriesData.find((i: any) => i._id === categoryName);
+
+  const categoryId = params.get('category');
+
+  const { data: subCategoriesData } = useQuery('getCategoriesById', async () => {
+    if (categoryId) {
+      return await getCategoriesById(categoryId);
+    }
+  });
 
   useEffect(() => {
-    setCategories(categoryName || '');
-  }, [categoryName, setCategories]);
+    setCategories(categoryId || '');
+  }, [categoryId, setCategories]);
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
 
-  const pCategory = category?.parentCategory ? categoriesList?.result?.find((i: any) => i._id === i.parentCategory?._id) || {} : category;
-
   return (
     <div>
       <section
         className="header-inner header-inner-menu bg-overlay-secondary mandir-bg"
-        style={{ backgroundImage: `url(${pCategory?.banner || ''})` }}
+        style={{ backgroundImage: `url(${subCategoriesData?.parentCategory?.image || 'No Background image'})` }}
       >
         <div className="container">
           <div className="row d-flex justify-content-center">
@@ -55,11 +65,11 @@ export default function Products() {
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">{category?.name || 'Products'}</li>
+                      <li className="breadcrumb-item active">{subCategoriesData?.parentCategory.name || 'Products'}</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>{category?.name || 'Products'}</strong>
+                    <strong>{subCategoriesData?.name || 'Products'}</strong>
                   </h2>
                 </div>
               </div>
@@ -110,7 +120,10 @@ export default function Products() {
                                           <div
                                             style={{ cursor: 'pointer', marginBottom: 5 }}
                                             className="d-flex"
-                                            onClick={() => setCategories(subCategory._id)}
+                                            onClick={() => {
+                                              setCategories(subCategory._id);
+                                              setPage(1);
+                                            }}
                                           >
                                             {subCategory.name}
                                             <span className="ms-auto">
