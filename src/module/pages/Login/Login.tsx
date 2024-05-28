@@ -462,6 +462,7 @@ const Login: React.FC = () => {
               </div>
               <div style={{ marginBottom: '20px' }}>
                 <a
+                  target="_blank"
                   href="https://www.google.com/maps/place/Dhknd.ca/@51.196195,-113.9958807,15z/data=!4m8!3m7!1s0x537163669fd77fd7:0x691c38ea08108896!8m2!3d51.196195!4d-113.9958807!9m1!1b1!16s%2Fg%2F11rb4jrn9j?entry=ttu"
                   className="btn btn-primary"
                 >
