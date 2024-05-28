@@ -483,7 +483,6 @@ const Login: React.FC = () => {
                       <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle">Baadshah Hai From Fiji</h6>
-                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
                   </div>
@@ -507,7 +506,6 @@ const Login: React.FC = () => {
                       <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle"> Deepti Kamal</h6>
-                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
                   </div>
@@ -531,7 +529,6 @@ const Login: React.FC = () => {
                       <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle"> Hemant Tripathi,Surrey, BC</h6>
-                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
                   </div>
@@ -555,7 +552,6 @@ const Login: React.FC = () => {
                       <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle"> Parijat Hasija</h6>
-                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
                   </div>
