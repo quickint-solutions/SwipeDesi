@@ -1891,20 +1891,17 @@ button.search-button {
   background-color: #F3601E !important;
 }
 
-.owl-nav .owl-prev {
+.owl-nav .owl-prev{
   width: 50px !important;
   height: 50px !important;
   line-height: 50px !important;
   font-size: 50px !important;
-  color: #F3F3F3 !important;
 }
-
 .owl-nav .owl-next {
   width: 50px !important;
   height: 50px !important;
   line-height: 50px !important;
   font-size: 50px !important;
-  color: #F3F3F3 !important;
 }
 
 .owl-carousel .owl-nav button:hover:before {
