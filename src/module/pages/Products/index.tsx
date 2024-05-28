@@ -12,8 +12,6 @@ export default function Products() {
 
   const [openDropdown, setOpenDropdown] = useState(null);
 
-  const [categoryName, setCategoryName] = useState('');
-
   const pageSize = 12;
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
@@ -53,11 +51,13 @@ export default function Products() {
     setPage(newPage);
   };
 
+  console.log('subCategoriesData -> ', subCategoriesData);
+
   return (
     <div>
       <section
         className="header-inner header-inner-menu bg-overlay-secondary mandir-bg"
-        style={{ backgroundImage: `url(${subCategoriesData?.parentCategory?.banner || 'No Background image'})` }}
+        style={{ backgroundImage: `url(${subCategoriesData?.banner || subCategoriesData?.parentCategory?.banner || 'No Background image'})` }}
       >
         <div className="container">
           <div className="row d-flex justify-content-center">
@@ -122,6 +122,7 @@ export default function Products() {
                                   <div className="widget-categories">
                                     <ul className="list-unstyled list-style list-style-underline mb-0">
                                       {subCategories.map((subCategory: any) => {
+                                        console.log('subCategory -> ', subCategory);
                                         return (
                                           <li key={subCategory._id}>
                                             <div
