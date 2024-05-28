@@ -18,6 +18,7 @@ import { AuthContext } from '../../../context/auth.context';
 import { CartContext } from '../../../context/cart.context';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
+import $ from 'jquery';
 
 const ShopSingle: React.FC = () => {
   const navigate = useNavigate();
@@ -79,6 +80,38 @@ const ShopSingle: React.FC = () => {
       (window as any).$('#formLoginRegister').modal('show');
     }
   };
+  const [autoplay, setAutoplay] = useState(true);
+
+  const handleMouseEnter = () => {
+    setAutoplay(false); // Pause autoplay
+  };
+
+  const handleMouseLeave = () => {
+    setAutoplay(true); // Resume autoplay
+  };
+
+  useEffect(() => {
+    $('.product-img--main')
+      .on('mouseover', function (this: HTMLElement) {
+        // Specify the type of 'this'
+        $(this)
+          .children('img')
+          .css({ transform: 'scale(' + $(this).attr('data-scale') + ')' });
+      })
+      .on('mouseout', function (this: HTMLElement) {
+        // Specify the type of 'this'
+        $(this).children('img').css({ transform: 'scale(1)' });
+      })
+      .on('mousemove', function (this: HTMLElement, e: { pageX: number; pageY: number }) {
+        // Specify the type of 'this' and 'e'
+        $(this)
+          .children('img')
+          .css({
+            'transform-origin':
+              ((e.pageX - $(this).offset().left) / $(this).width()) * 100 + '% ' + ((e.pageY - $(this).offset().top) / $(this).height()) * 100 + '%',
+          });
+      });
+  });
 
   const findCartItem = items.find((cartItem: any) => cartItem._id === itemDetails._id);
   if (isLoading)
@@ -130,7 +163,7 @@ const ShopSingle: React.FC = () => {
                     <OwlCarousel
                       className="owl-theme2"
                       autoplayTimeout={3000}
-                      autoplay={true}
+                      autoplay={false}
                       items={1}
                       loop={true}
                       margin={10}
@@ -139,7 +172,7 @@ const ShopSingle: React.FC = () => {
                       responsive={{ 0: { items: 1 }, 600: { items: 1 }, 1000: { items: 1 } }}
                     >
                       {itemDetails?.images.map((image: string | undefined, index: React.Key | null | undefined) => (
-                        <div key={index} className="item">
+                        <div key={index} className="item product-img--main" data-scale="1.8">
                           <div className="product-label">
                             <span className="onsale">{itemDetails.discount || 0}%</span>
                           </div>
@@ -150,8 +183,7 @@ const ShopSingle: React.FC = () => {
 
                     <OwlCarousel
                       className="owl-theme2"
-                      autoplayTimeout={3000}
-                      autoplay={true}
+                      autoplay={false} // Control autoplay based on state
                       items={3}
                       loop={true}
                       margin={10}
@@ -160,7 +192,8 @@ const ShopSingle: React.FC = () => {
                       responsive={{ 0: { items: 3 }, 600: { items: 5 }, 1000: { items: 7 } }}
                     >
                       {itemDetails?.images.map((image: string | undefined, index: React.Key | null | undefined) => (
-                        <div key={index} className="item">
+                        <div key={index} className="item product-img--main" data-scale="1.8">
+                          <div className="product-label"></div>
                           <img src={image} alt={`Thumbnail ${index}`} />
                         </div>
                       ))}
