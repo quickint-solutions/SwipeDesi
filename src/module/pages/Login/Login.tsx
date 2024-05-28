@@ -460,6 +460,14 @@ const Login: React.FC = () => {
                 <span className="sub-title left-divider">Testimonial</span>
                 <h2 className="title text-white">What to say about the client</h2>
               </div>
+              <div className="col-md-12 col-lg-4 col-xl-6 text-lg-end text-start mt-4 mt-lg-0">
+                <a
+                  href="https://www.google.com/maps/place/Dhknd.ca/@51.196195,-113.9958807,15z/data=!4m8!3m7!1s0x537163669fd77fd7:0x691c38ea08108896!8m2!3d51.196195!4d-113.9958807!9m1!1b1!16s%2Fg%2F11rb4jrn9j?entry=ttu"
+                  className="btn btn-primary"
+                >
+                  Read More<i className="fas fa-arrow-right-long ps-3"></i>
+                </a>
+              </div>
             </div>
             <div className="col-lg-7">
               <div className="testimonial-description">
