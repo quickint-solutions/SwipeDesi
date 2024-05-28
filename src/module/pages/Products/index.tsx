@@ -9,13 +9,12 @@ export default function Products() {
   const { search, categories, setCategories } = useContext(AuthContext);
 
   const [page, setPage] = useState(1);
+
   const pageSize = 12;
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
-
-  console.log('categoriesList -> ', categoriesList);
 
   const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -65,7 +64,7 @@ export default function Products() {
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">{subCategoriesData?.parentCategory.name || 'Products'}</li>
+                      <li className="breadcrumb-item active">{subCategoriesData?.parentCategory?.name || 'Products'}</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
@@ -104,14 +103,14 @@ export default function Products() {
                                 className="d-flex"
                                 onClick={() => (totalItems ? setOpenDropdown(openDropdown === category._id ? null : category._id) : null)}
                               >
-                                {category.name}
+                                {category?.name}
                                 <span className="ms-auto">
                                   <div>
-                                    {totalItems} {openDropdown === category._id ? '▼' : '▶'}
+                                    {totalItems} {openDropdown === category?._id ? '▼' : '▶'}
                                   </div>
                                 </span>
                               </div>
-                              {openDropdown === category._id && subCategories.length > 0 && (
+                              {openDropdown === category?._id && subCategories.length > 0 && (
                                 <div className="widget-content" style={{ paddingLeft: 20 }}>
                                   <div className="widget-categories">
                                     <ul className="list-unstyled list-style list-style-underline mb-0">
@@ -125,9 +124,9 @@ export default function Products() {
                                               setPage(1);
                                             }}
                                           >
-                                            {subCategory.name}
+                                            {subCategory?.name || ''}
                                             <span className="ms-auto">
-                                              <div className="count">{subCategory.itemCount}</div>
+                                              <div className="count">{subCategory?.itemCount}</div>
                                             </span>
                                           </div>
                                         </li>
@@ -155,7 +154,7 @@ export default function Products() {
                           <div className="product-image">
                             <div className="product-thumb-inner">
                               <a href={`/shopSingle?productId=${categories?._id}`}>
-                                <img className="img-fluid" src={categories.images[0]} alt="image" />
+                                <img className="img-fluid" src={categories?.images[0]} alt="image" />
                               </a>
                             </div>
                           </div>
@@ -165,7 +164,7 @@ export default function Products() {
                               <div className="product-title">
                                 <h3>
                                   <a href={`/shopSingle?productId=${categories?._id}`} style={{ cursor: 'pointer' }}>
-                                    {categories.name || ''}
+                                    {categories?.name || ''}
                                   </a>
                                 </h3>
                               </div>
@@ -173,7 +172,7 @@ export default function Products() {
 
                             <div className="product-prize">
                               <p>
-                                <span className="me-2">${categories.price || 'N/A'}</span>
+                                <span className="me-2">${categories?.price || 'N/A'}</span>
                               </p>
                             </div>
                           </div>
