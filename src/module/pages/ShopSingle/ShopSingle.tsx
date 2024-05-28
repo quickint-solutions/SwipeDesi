@@ -163,7 +163,8 @@ const ShopSingle: React.FC = () => {
                     <OwlCarousel
                       className="owl-theme2"
                       autoplayTimeout={3000}
-                      autoplay={false}
+                      autoplay={true}
+                      autoplayHoverPause={true}
                       items={1}
                       loop={true}
                       margin={10}
