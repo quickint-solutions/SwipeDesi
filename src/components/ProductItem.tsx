@@ -73,12 +73,12 @@ export default function ProductItem({ product, large }: { product: any; large?: 
                 <a data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist" onClick={() => addProductToWishList(wishListData)}>
                   <i className="far fa-heart"></i>
                 </a>
+              </li>
+              <li>
                 <a data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View" onClick={handleQuickViewClick}>
                   <i className="fa-regular fa-eye"></i>
                 </a>
                 {showModal && <QuickView product={product} onClose={handleModalClose} />}
-              </li>
-              <li>
                 {/* <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">
                   <i className="fas fa-shopping-cart"></i>
                 </a> */}
