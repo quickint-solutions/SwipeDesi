@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import shopSingleHttpRequest from '../api/shopSingleHttpRequest';
 import { getUserDetail } from '../helpers/common';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { CartContext } from '../context/cart.context';
 import { getItemsById } from '../apiV2/items';
 import OwlCarousel from 'react-owl-carousel';
+import { AuthContext } from '../context/auth.context';
 
 const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) => {
   const navigate = useNavigate();
@@ -16,23 +18,21 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
     }
   });
   const userDetail = getUserDetail();
+  const [quantity, setQuantity] = useState(1);
+  const { user } = useContext(AuthContext);
+  const { addItem, isItemInCart, items } = useContext(CartContext);
 
-  const addToWishlist = async () => {
-    if (userDetail) {
-      let wishlistData = await shopSingleHttpRequest.addToWishlist(userDetail?.userID, itemDetails?._id, 'add');
-      if (wishlistData[0]?.Status) {
-        navigate(`/wishlist?productId=${itemDetails?._id}`);
-      } else {
-        alert(wishlistData[0].Message);
-      }
+  const addToCart = async () => {
+    let productId = searchParams.get('productId');
+    if (user) {
+      addItem(itemDetails, quantity);
+      alert(quantity + ' Product added to cart');
     } else {
-      alert('Please login to add to wishlist');
-      (window as any).$('#formLoginRegister').modal('show');
       onClose();
+      (window as any).$('#formLoginRegister').modal('show');
+      alert('Please login first for add to cart');
     }
   };
-
-  console.log('product -> ', product);
 
   const buttonStyle = {
     backgroundColor: '#ff6600',
@@ -106,7 +106,7 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
                     </div>
                     <a
                       className="btn btn-primary mt-2 mt-sm-0 d-flex align-items-center justify-content-center"
-                      onClick={addToWishlist}
+                      onClick={addToCart}
                       style={buttonStyle}
                       onMouseOver={e => {
                         e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor;
@@ -115,7 +115,7 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
                         e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor;
                       }}
                     >
-                      <span>Add To Wishlist</span>
+                      <span>Add To Cart</span>
                     </a>
                   </div>
                   <hr className="hr-dark" />
