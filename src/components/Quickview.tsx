@@ -5,13 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getItemsById } from '../apiV2/items';
 
-const QuickView = ({
-  product,
-  onClose,
-}: {
-  product: { images: string[]; name: string; oldPrice?: number; price: number; description: string; sku: string };
-  onClose: () => void;
-}) => {
+const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { data: itemDetails, isLoading } = useQuery('itemDetails', async () => {
@@ -34,6 +28,8 @@ const QuickView = ({
       (window as any).$('#formLoginRegister').modal('show');
     }
   };
+
+  console.log('product -> ', product);
 
   const buttonStyle = {
     backgroundColor: '#ff6600',
@@ -78,7 +74,7 @@ const QuickView = ({
                       </h4>
                     </div>
                   </div>
-                  <p>{product.description}</p>
+                  <p className="Poppins-fonts" dangerouslySetInnerHTML={{ __html: product?.descriptions || 'No description' }}></p>
                   <div className="justify-content-start d-flex add-to-cart-input">
                     <div className="input-group">
                       <input type="number" name="quant[1]" className="form-control input-number mt-2 mt-sm-0" defaultValue="1" min="1" max="10" />
@@ -102,7 +98,7 @@ const QuickView = ({
                     <span>SKU: 9624 </span>
                     <span style={{ display: 'flex', alignItems: 'center' }}>
                       Category:
-                      <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{itemDetails?.categories?.name || 'No item category'}</span>
+                      <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{product?.categories?.name || 'No item category'}</span>
                     </span>
                   </div>
                 </div>
