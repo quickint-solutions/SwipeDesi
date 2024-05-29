@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import shopSingleHttpRequest from '../api/shopSingleHttpRequest';
-import { getUserDetail } from '../helpers/common';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { CartContext } from '../context/cart.context';
@@ -11,26 +9,24 @@ import { AuthContext } from '../context/auth.context';
 const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { data: itemDetails, isLoading } = useQuery('itemDetails', async () => {
-    let productId = searchParams.get('productId');
-    if (productId) {
-      return await getItemsById(productId);
-    }
+  const productId = searchParams.get('productId');
+  const { data: itemDetails, isLoading } = useQuery(['itemDetails', productId], () => getItemsById(productId || ''), {
+    enabled: !!productId,
   });
-  const userDetail = getUserDetail();
-  const [quantity, setQuantity] = useState(1);
+  const userDetail = useContext(AuthContext);
   const { user } = useContext(AuthContext);
-  const { addItem, isItemInCart, items } = useContext(CartContext);
+  const { addItem, isItemInCart } = useContext(CartContext);
 
-  const addToCart = async () => {
-    let productId = searchParams.get('productId');
+  const [quantity, setQuantity] = useState(1);
+
+  const addToCart = () => {
     if (user) {
-      addItem(itemDetails, quantity);
-      alert(quantity + ' Product added to cart');
+      addItem(product, quantity);
+      alert(`${quantity} Product(s) added to cart`);
     } else {
       onClose();
       (window as any).$('#formLoginRegister').modal('show');
-      alert('Please login first for add to cart');
+      alert('Please login first to add to cart');
     }
   };
 
@@ -38,12 +34,12 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
     backgroundColor: '#ff6600',
     color: '#ffffff',
     border: 'none',
-    padding: '30px 30px',
+    padding: '10px 20px',
     fontSize: '14px',
     cursor: 'pointer',
     textAlign: 'center' as 'center',
     display: 'inline-block',
-    borderRadius: '0px',
+    borderRadius: '4px',
     transition: 'background-color 0.3s ease',
     width: '200px',
     height: '60px',
@@ -64,7 +60,6 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
           <div className="modal-body quickview-modal">
             <div className="row">
               <div className="col-lg-6">
-                {/* <img className="img-fluid" src={product.images[0]} alt="Product" /> */}
                 <OwlCarousel
                   style={{ cursor: 'pointer' }}
                   className="owl-theme2"
@@ -102,9 +97,17 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
                   <p className="Poppins-fonts" dangerouslySetInnerHTML={{ __html: product?.descriptions || 'No description' }}></p>
                   <div className="justify-content-start d-flex add-to-cart-input">
                     <div className="input-group">
-                      <input type="number" name="quant[1]" className="form-control input-number mt-2 mt-sm-0" defaultValue="1" min="1" max="10" />
+                      <input
+                        type="number"
+                        name="quant[1]"
+                        className="form-control input-number mt-2 mt-sm-0"
+                        value={quantity}
+                        onChange={e => setQuantity(Number(e.target.value))}
+                        min="1"
+                        max="10"
+                      />
                     </div>
-                    <a
+                    <button
                       className="btn btn-primary mt-2 mt-sm-0 d-flex align-items-center justify-content-center"
                       onClick={addToCart}
                       style={buttonStyle}
@@ -116,7 +119,7 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
                       }}
                     >
                       <span>Add To Cart</span>
-                    </a>
+                    </button>
                   </div>
                   <hr className="hr-dark" />
                   <div>

@@ -9,20 +9,6 @@ import $ from 'jquery';
 
 export default function ProductItem({ product, large }: { product: any; large?: boolean }) {
   const { addItem, isItemInCart } = useContext(CartContext);
-
-  const handleAddToCart = async () => {
-    if (user) {
-      if (isProductInCart) {
-        alert('This product is already in your cart');
-      } else {
-        // Your existing logic to handle adding to cart
-      }
-    } else {
-      (window as any).$('#formLoginRegister').modal('show');
-      alert('Please login first to add to cart');
-    }
-  };
-
   const { user } = useContext(AuthContext);
   const isProductInCart = isItemInCart(product);
   const navigate = useNavigate();
@@ -37,10 +23,11 @@ export default function ProductItem({ product, large }: { product: any; large?: 
       alert(`Product: ${product?.name || ''} added to wishlist`);
     },
     onError: () => {
-      alert(`Error adding Product: ${product.name || ''} to wishlist please Login`);
+      alert(`Error adding Product: ${product.name || ''} to wishlist, please Login`);
       (window as any).$('#formLoginRegister').modal('show');
     },
   });
+
   const [showModal, setShowModal] = useState(false);
 
   const handleQuickViewClick = () => {
@@ -51,15 +38,37 @@ export default function ProductItem({ product, large }: { product: any; large?: 
     setShowModal(false);
   };
 
+  const handleAddToCart = async () => {
+    if (user) {
+      if (isProductInCart) {
+        alert('This product is already in your cart');
+      } else {
+        addItem(product);
+        alert('Product added to cart');
+      }
+    } else {
+      (window as any).$('#formLoginRegister').modal('show');
+      alert('Please login first to add to cart');
+    }
+  };
+
   useEffect(() => {
-    $(`#product-${product?._id}`).hover(
+    const productElement = $(`#product-${product?._id}`);
+    const productImgElement = $(`#product-img-${product?._id}`);
+
+    productElement.hover(
       function () {
-        $(`#product-img-${product?._id}`).attr('src', product?.images?.[1] || product?.images?.[0]);
+        productImgElement.attr('src', product?.images?.[1] || product?.images?.[0]);
       },
-      function () {},
+      function () {
+        productImgElement.attr('src', product?.images?.[0]);
+      },
     );
-    $(`#product-img-${product?._id}`).attr('src', product?.images?.[0]);
-  });
+
+    return () => {
+      productElement.off('hover');
+    };
+  }, [product]);
 
   return (
     <div className={`col-xl-${large ? '4' : '3'} col-md-6`} style={{ cursor: 'pointer' }} id={`product-${product?._id}`}>
@@ -88,25 +97,11 @@ export default function ProductItem({ product, large }: { product: any; large?: 
                   <i className="fa-regular fa-eye"></i>
                 </a>
                 {showModal && <QuickView product={product} onClose={handleModalClose} />}
-                {/* <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">
-                  <i className="fas fa-shopping-cart"></i>
-                </a> */}
               </li>
-              {/* <li>
-                <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare">
-                  <i className="fa-solid fa-code-compare"></i>
-                </a>
-              </li> */}
             </ul>
           </div>
           <div className="product-btn">
-            <button
-              onClick={() => {
-                handleAddToCart();
-              }}
-              style={{ cursor: 'pointer', width: '100%' }}
-              className="btn btn-light d-block"
-            >
+            <button onClick={handleAddToCart} style={{ cursor: 'pointer', width: '100%' }} className="btn btn-light d-block">
               {isProductInCart ? 'In Cart' : 'Add To Cart'}
               <i className="fas fa-arrow-right-long ps-3"></i>
             </button>
@@ -116,7 +111,7 @@ export default function ProductItem({ product, large }: { product: any; large?: 
           <div className="product-info">
             <div className="product-title">
               <h3>
-                <a onClick={() => navigate(`/shopSingle?productId=${product?._id}`)}>{product.name || `no product name`}</a>
+                <a onClick={() => navigate(`/shopSingle?productId=${product?._id}`)}>{product.name || 'no product name'}</a>
               </h3>
             </div>
           </div>
