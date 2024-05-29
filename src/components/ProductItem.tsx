@@ -75,17 +75,14 @@ export default function ProductItem({ product, large }: { product: any; large?: 
                 </a>
               </li>
               <li>
-                <a data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart" onClick={() => handleAddToCart()}>
-                  <i className="fas fa-shopping-cart"></i>
-                </a>
-              </li>
-              <li>
                 <a data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View" onClick={handleQuickViewClick}>
                   <i className="fa-regular fa-eye"></i>
                 </a>
                 {showModal && <QuickView product={product} onClose={handleModalClose} />}
+                {/* <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">
+                  <i className="fas fa-shopping-cart"></i>
+                </a> */}
               </li>
-
               {/* <li>
                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare">
                   <i className="fa-solid fa-code-compare"></i>
