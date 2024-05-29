@@ -29,7 +29,8 @@ export default function ProductItem({ product, large }: { product: any; large?: 
       alert(`Product: ${product?.name || ''} added to wishlist`);
     },
     onError: () => {
-      alert(`Error adding Product: ${product.name || ''} to wishlist`);
+      alert(`Error adding Product: ${product.name || ''} to wishlist please Login`);
+      (window as any).$('#formLoginRegister').modal('show');
     },
   });
   const [showModal, setShowModal] = useState(false);

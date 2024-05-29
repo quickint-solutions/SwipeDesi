@@ -4,6 +4,7 @@ import { getUserDetail } from '../helpers/common';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getItemsById } from '../apiV2/items';
+import OwlCarousel from 'react-owl-carousel';
 
 const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) => {
   const navigate = useNavigate();
@@ -25,7 +26,9 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
         alert(wishlistData[0].Message);
       }
     } else {
+      alert('Please login to add to wishlist');
       (window as any).$('#formLoginRegister').modal('show');
+      onClose();
     }
   };
 
@@ -61,7 +64,29 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
           <div className="modal-body quickview-modal">
             <div className="row">
               <div className="col-lg-6">
-                <img className="img-fluid" src={product.images[0]} alt="Product" />
+                {/* <img className="img-fluid" src={product.images[0]} alt="Product" /> */}
+                <OwlCarousel
+                  style={{ cursor: 'pointer' }}
+                  className="owl-theme2"
+                  autoplayTimeout={2500}
+                  autoplay={true}
+                  autoplayHoverPause={true}
+                  items={1}
+                  loop={true}
+                  margin={10}
+                  nav={true}
+                  dots={false}
+                  responsive={{ 0: { items: 1 }, 600: { items: 1 }, 1000: { items: 1 } }}
+                >
+                  {product?.images.map((image: string | undefined, index: React.Key | null | undefined) => (
+                    <div key={index} className="item product-img--main" data-scale="1.8">
+                      <div className="product-label">
+                        <span className="onsale">{product.discount || 0}%</span>
+                      </div>
+                      <img src={image} alt={`Product ${index}`} />
+                    </div>
+                  ))}
+                </OwlCarousel>
               </div>
               <div className="col-lg-6 mt-4 mt-lg-0">
                 <div className="product-detail">
