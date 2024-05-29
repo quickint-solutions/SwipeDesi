@@ -10,9 +10,17 @@ import $ from 'jquery';
 export default function ProductItem({ product, large }: { product: any; large?: boolean }) {
   const { addItem, isItemInCart } = useContext(CartContext);
 
-  const handleAddToCart = () => {
-    addItem(product);
-    // alert('Product added to cart');
+  const handleAddToCart = async () => {
+    if (user) {
+      if (isProductInCart) {
+        alert('This product is already in your cart');
+      } else {
+        // Your existing logic to handle adding to cart
+      }
+    } else {
+      (window as any).$('#formLoginRegister').modal('show');
+      alert('Please login first to add to cart');
+    }
   };
 
   const { user } = useContext(AuthContext);
