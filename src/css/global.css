@@ -388,7 +388,6 @@
 .nav-item .nav-link {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .nav-item .nav-link img {
