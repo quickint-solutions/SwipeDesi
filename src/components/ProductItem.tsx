@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/cart.context';
 import { useMutation } from 'react-query';
 import { addWishList } from '../apiV2/wishlist';
 import { AuthContext } from '../context/auth.context';
 import { useNavigate } from 'react-router-dom';
+import QuickView from './Quickview';
 import $ from 'jquery';
 
 export default function ProductItem({ product, large }: { product: any; large?: boolean }) {
@@ -31,6 +32,15 @@ export default function ProductItem({ product, large }: { product: any; large?: 
       alert(`Error adding Product: ${product.name || ''} to wishlist`);
     },
   });
+  const [showModal, setShowModal] = useState(false);
+
+  const handleQuickViewClick = () => {
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     $(`#product-${product?._id}`).hover(
@@ -63,6 +73,10 @@ export default function ProductItem({ product, large }: { product: any; large?: 
                 <a data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist" onClick={() => addProductToWishList(wishListData)}>
                   <i className="far fa-heart"></i>
                 </a>
+                <a data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View" onClick={handleQuickViewClick}>
+                  <i className="fa-regular fa-eye"></i>
+                </a>
+                {showModal && <QuickView product={product} onClose={handleModalClose} />}
               </li>
               <li>
                 {/* <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">

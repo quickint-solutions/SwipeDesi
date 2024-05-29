@@ -1773,6 +1773,41 @@ button.search-button {
   border-radius: 50%;
 }
 
+
+/************
+     Quickview modal
+*************/
+
+.quickview-modal .product-detail .input-group {
+  float: left;
+  margin-right: 20px;
+  width: 90px;
+}
+
+.quickview-modal .product-detail .product-price-rating .product-price h4 {
+  font-size: 20px;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.quickview-modal .product-detail .product-price-rating .product-price h4 del {
+  color: #7c8087;
+}
+
+.quickview-modal .product-detail .product-price-rating .product-price h4 span {
+  color: #F3601E;
+  margin-left: 10px;
+}
+
+.quickview-modal .product-detail .product-detail-meta {
+  margin-bottom: 35px;
+}
+
+.quickview-modal .product-detail .product-detail-meta span {
+  display: block;
+  margin: 15px 0;
+}
+
 /******************************
          furniture
 *******************************/
