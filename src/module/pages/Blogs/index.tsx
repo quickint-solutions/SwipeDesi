@@ -8,11 +8,13 @@ import { getCategories } from '../../../apiV2/categories';
 export default function Blogs() {
   //blogs mapping
   const { data: blogsList } = useQuery('Blogs', fetchBlogs);
+
   const blogsData = blogsList?.result || [];
 
   const { setCategories } = useContext(AuthContext);
 
   const { data: categoriesList } = useQuery('categories', getCategories);
+
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
@@ -71,7 +73,7 @@ export default function Blogs() {
                           <img className="img-fluid" src={blog?.image} alt="#" />
                         </div>
                         <div className="blog-info">
-                          <span>February 4, 2022</span>
+                          <span>{blog?.createdAt || 'No date specified'}</span>
                           <h4 className="blog-tittle">
                             <a>{blog?.title || 'No title given'}</a>
                           </h4>
