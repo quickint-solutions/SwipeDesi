@@ -1043,6 +1043,26 @@ const RouteComponent: React.FC = () => {
       footer--> */}
       <footer className="footer space-pt bg-secondary">
         <div className="container position-relative">
+          <div className="footer-top">
+            <div className="row align-items-center">
+              <div className="col-lg-6">
+                <h4 className="text-white">Sign Up To Get Latest Update</h4>
+                <p className="text-white mb-3 mb-lg-0">Subscribe to our newsletter to get our latest news and articals.</p>
+              </div>
+              <div className="offset-xl-1 col-xl-5 col-lg-6">
+                <div className="newsletter">
+                  <form className="d-flex form-dark form-bg-transparent">
+                    <div className="input-group">
+                      <input type="email" className="form-control" placeholder="Enter Your Email" />
+                      <button className="btn btn-primary btn-hover-white" type="button" id="button-addon2">
+                        Subscribe Now
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="row">
             <div className="col-sm-6 col-lg-4 mb-4 mb-lg-0">
               <h4 className="text-white mb-4">Contact Us</h4>
