@@ -223,6 +223,16 @@ const RouteComponent: React.FC = () => {
     setOpenDropdown(null);
   };
 
+  const handleCategoryClick = (categoryId: React.SetStateAction<string | null>) => {
+    if (openDropdown === categoryId) {
+      // If the dropdown is already open, close it
+      setOpenDropdown(null);
+    } else {
+      // If the dropdown is closed, open it
+      setOpenDropdown(categoryId);
+    }
+  };
+
   return (
     <React.Fragment>
       {/* <!--=================================
@@ -493,7 +503,6 @@ const RouteComponent: React.FC = () => {
                   categories.result.length > 0 &&
                   categories.result.map((value: any, key: number) => {
                     if (value.parentCategory) return null;
-
                     const subCategories = categories.result.filter((cat: any) => cat.parentCategory?._id === value._id);
 
                     return (
@@ -509,11 +518,10 @@ const RouteComponent: React.FC = () => {
                             className="nav-link nav-link-flex"
                             aria-current="page"
                             onClick={() => {
+                              handleCategoryClick(value._id); // Handle click on the main category
                               setCategories(value._id);
                               navigate(`/products?category=${value._id}`);
                             }}
-                            data-bs-toggle="collapse"
-                            data-bs-target=".navbar-collapse"
                           >
                             <img src={value.icon} alt={value.name ? String(value.name) : ''} />
                             <span>{value.name}</span>
@@ -526,9 +534,12 @@ const RouteComponent: React.FC = () => {
                                   key={subCategory._id}
                                   className="dropdown-item"
                                   onClick={() => {
-                                    setCategories(subCategory._id);
-                                    navigate(`/products?category=${subCategory._id}`);
+                                    setOpenDropdown(null);
+                                    setCategories(subCategory?._id?.toString() || '');
+                                    navigate(`/products?category=${subCategory?._id?.toString()}`);
                                   }}
+                                  data-bs-toggle="collapse"
+                                  data-bs-target=".navbar-collapse"
                                 >
                                   {subCategory.name}
                                 </div>
