@@ -69,7 +69,8 @@ export default function BlogSingle() {
                       <div className="time-card me-3 d-flex align-items-center">
                         <a>
                           <i className="fa-regular fa-clock me-1 text-primary"></i>
-                          <span>Feb 4, 2022 By</span>
+                          <img className="img-fluid" src={blogData?.image} alt="#" />
+                          <span>{blogData?.createdAt || 'No date specified'}</span>
                         </a>
                       </div>
                       <div className="user d-flex align-items-center me-3">

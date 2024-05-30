@@ -69,6 +69,7 @@ const Login: React.FC = () => {
   const isMobile = window.innerWidth < 768;
 
   const blogs = blogData?.result?.slice(0, 3) || [];
+
   return (
     <>
       {/* <!--=================================
@@ -602,7 +603,7 @@ const Login: React.FC = () => {
                             <img className="img-fluid" src={blog.image} alt={blog.image} />
                           </div>
                           <div className="blog-info">
-                            <span>April 27, 2024</span>
+                            <span>{blog?.createdAt || 'No date specified'}</span>
                             <h4 className="blog-tittle">
                               <a>{blog?.title || 'No title'}</a>
                             </h4>
