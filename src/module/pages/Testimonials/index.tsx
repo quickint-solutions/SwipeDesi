@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
-import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
-import { useNavigate } from 'react-router-dom';
-import img from '../../../images/bg/mandir-banner.jpg';
 import { AuthContext } from '../../../context/auth.context';
+import 'magnific-popup/dist/magnific-popup.css';
+import 'magnific-popup';
+import $ from 'jquery';
+import img from '../../../images/new-bg/testimonials.jpg';
 
 export default function Testimonials() {
   const { search, categories, setCategories } = useContext(AuthContext);
@@ -15,10 +16,19 @@ export default function Testimonials() {
   const { data: categoriesList } = useQuery('categories', getCategories);
 
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
+  useEffect(() => {
+    $('.popup-youtube').magnificPopup({
+      type: 'iframe',
+      mainClass: 'mfp-fade',
+      removalDelay: 160,
+      preloader: false,
+      fixedContentPos: false,
+    });
+  }, []);
 
   return (
     <div>
-      <section className="header-inner header-inner-menu bg-overlay-secondary mandir-bg">
+      <section className="header-inner header-inner-menu bg-overlay-secondary mandir-bg" style={{ backgroundImage: `url(${img})` }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
@@ -43,7 +53,7 @@ export default function Testimonials() {
             </div>
           </div>
         </div>
-        <div className="header-inner-shape" style={{ backgroundImage: "url('images/bg/02.png')" }}></div>
+        {/* <div className="header-inner-shape" style={{ backgroundImage: `url${img}` }}></div> */}
       </section>
       <section className="space-ptb">
         <div className="container">
@@ -225,6 +235,60 @@ export default function Testimonials() {
                     <h6 className="author-tittle">Tanvi Gurav</h6>
                     <span className="">Product Designer</span>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-6 col-md-6 mb-4">
+              <div className="testimonial testimonial-style-02 border bg-light p-lg-5 p-4 text-center">
+                <div className="video-btn-circle mb-3">
+                  <a className="video-btn popup-youtube" href="assets/client-video-01.mp4">
+                    <i className="fas fa-play"></i>
+                  </a>
+                </div>
+                <div className="testimonial-name">
+                  <h6 className="author-tittle text-primary">Alice Williams</h6>
+                  <span className="">Product Designer</span>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-6 mb-4">
+              <div className="testimonial testimonial-style-02 border bg-light p-lg-5 p-4 text-center">
+                <div className="video-btn-circle mb-3">
+                  <a className="video-btn popup-youtube" href="assets/client-video-01.mp4">
+                    <i className="fas fa-play"></i>
+                  </a>
+                </div>
+                <div className="testimonial-name">
+                  <h6 className="author-tittle text-primary">Alice Williams</h6>
+                  <span className="">Product Designer</span>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-6 mb-4">
+              <div className="testimonial testimonial-style-02 border bg-light p-lg-5 p-4 text-center">
+                <div className="video-btn-circle mb-3">
+                  <a className="video-btn popup-youtube" href="assets/client-video-01.mp4">
+                    <i className="fas fa-play"></i>
+                  </a>
+                </div>
+                <div className="testimonial-name">
+                  <h6 className="author-tittle text-primary">Alice Williams</h6>
+                  <span className="">Product Designer</span>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-6 mb-4">
+              <div className="testimonial testimonial-style-02 border bg-light p-lg-5 p-4 text-center">
+                <div className="video-btn-circle mb-3">
+                  <a className="video-btn popup-youtube" href="assets/client-video-01.mp4">
+                    <i className="fas fa-play"></i>
+                  </a>
+                </div>
+                <div className="testimonial-name">
+                  <h6 className="author-tittle text-primary">Alice Williams</h6>
+                  <span className="">Product Designer</span>
                 </div>
               </div>
             </div>

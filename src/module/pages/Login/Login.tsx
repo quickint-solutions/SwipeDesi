@@ -22,11 +22,12 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getBanners } from '../../../apiV2/banners';
 import { getCategories } from '../../../apiV2/categories';
-import { getFeaturedItems } from '../../../apiV2/items';
+import { getFeaturedItems, getHaveliMandirItems, getPremiumJhulaItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { AuthContext } from '../../../context/auth.context';
 import { InstagramEmbed } from 'react-social-media-embed';
 import { getInstagram } from '../../../apiV2/instagram';
+import { fetchBlogs } from '../../../apiV2/blogs';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -44,9 +45,14 @@ const Login: React.FC = () => {
 
   const { isLoading: featuredItemsLoading, data: featuredItems } = useQuery('getFeaturedItems', getFeaturedItems);
 
+  const { isLoading: haveliMandirLoading, data: haveliMandirItems } = useQuery('getHaveliMandirItems', getHaveliMandirItems);
+
+  const { isLoading: premiumJhulaLoading, data: premiumJhulaItems } = useQuery('getPremiumJhulaItems', getPremiumJhulaItems);
+
   const { isLoading: instagramLoading, data: instagramImages } = useQuery('instagramImages', getInstagram);
 
   const { data: banners, isLoading: bannersLoading } = useQuery('getBanners', getBanners);
+
   // get first 2 banners
   const bannersList = banners?.result?.slice(0, 2) || [];
 
@@ -58,8 +64,11 @@ const Login: React.FC = () => {
     navigate('/wishlist');
   };
 
+  const { data: blogData } = useQuery('Blogs Data', fetchBlogs);
+
   const isMobile = window.innerWidth < 768;
 
+  const blogs = blogData?.result?.slice(0, 3) || [];
   return (
     <>
       {/* <!--=================================
@@ -396,354 +405,41 @@ const Login: React.FC = () => {
             {featuredItems?.result?.length > 0
               ? featuredItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
               : ''}
-            {/* <div className="col-xl-3 col-lg-4 col-md-6">
-                            <div className="product">
-                                <div className="product-label">
-                                    <span className="onsale">17%</span>
-                                </div>
-                                <div className="product-image">
-                                    <div className="product-thumb-inner">
-                                        <a href="#">
-                                            <img className="img-fluid" src={Product01} alt="image" />
-                                        </a>
-                                    </div>
-                                    <div className="custom-icon">
-                                        <ul className="list-unstyled">
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist"><i className="far fa-heart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i className="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare"><i className="fa-solid fa-code-compare"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="product-btn">
-                                        <a href="#" className="btn btn-light d-block">Add To cart<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                    </div>
-                                </div>
-                                <div className="product-content">
-                                    <div className="product-info">
-                                        <div className="product-title">
-                                            <h3><a href="shop-single.html">Hand Carving Sevan Wood Temple</a></h3>
-                                        </div>
-                                        <div className="product-star">
-                                            <ul className="list-unstyled mb-1">
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="far fa-star-half-alt"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="product-prize">
-                                        <p><span className="me-2">$81,000.00</span>$95,000.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
-                            <div className="product">
-                                <div className="product-label">
-                                    <span className="onsale">Sale</span>
-                                    <span className="featured">Hot</span>
-                                </div>
-                                <div className="product-image">
-                                    <div className="product-thumb-inner">
-                                        <a href="#">
-                                            <img className="img-fluid" src={Product01} alt="image" />
-                                        </a>
-                                    </div>
-                                    <div className="custom-icon">
-                                        <ul className="list-unstyled">
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist"><i className="far fa-heart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i className="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare"><i className="fa-solid fa-code-compare"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="product-btn">
-                                        <a href="#" className="btn btn-light d-block">Add To cart<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                    </div>
-                                </div>
-                                <div className="product-content">
-                                    <div className="product-info">
-                                        <div className="product-title">
-                                            <h3><a href="shop-single.html">Hand Carving Sevan Wood Temple</a></h3>
-                                        </div>
-                                        <div className="product-star">
-                                            <ul className="list-unstyled mb-1">
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="far fa-star-half-alt"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="product-prize">
-                                        <p><span className="me-2">$81,000.00</span>$95,000.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
-                            <div className="product">
-                                <div className="product-label">
-                                    <span className="featured">Hot</span>
-                                </div>
-                                <div className="product-image">
-                                    <div className="product-thumb-inner">
-                                        <a href="#">
-                                            <img className="img-fluid" src={Product01} alt="image" />
-                                        </a>
-                                    </div>
-                                    <div className="custom-icon">
-                                        <ul className="list-unstyled">
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist"><i className="far fa-heart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i className="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare"><i className="fa-solid fa-code-compare"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="product-btn">
-                                        <a href="#" className="btn btn-light d-block">Add To cart<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                    </div>
-                                </div>
-                                <div className="product-content">
-                                    <div className="product-info">
-                                        <div className="product-title">
-                                            <h3><a href="shop-single.html">Hand Carving Sevan Wood Temple</a></h3>
-                                        </div>
-                                        <div className="product-star">
-                                            <ul className="list-unstyled mb-1">
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="far fa-star-half-alt"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="product-prize">
-                                        <p><span className="me-2">$81,000.00</span>$95,000.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
-                            <div className="product">
-                                <div className="product-label">
-                                    <span className="onsale">20%</span>
-                                    <span className="featured">Hot</span>
-                                </div>
-                                <div className="product-image">
-                                    <div className="product-thumb-inner">
-                                        <a href="#">
-                                            <img className="img-fluid" src={Product01} alt="image" />
-                                        </a>
-                                    </div>
-                                    <div className="custom-icon">
-                                        <ul className="list-unstyled">
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist"><i className="far fa-heart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i className="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare"><i className="fa-solid fa-code-compare"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="product-btn">
-                                        <a href="#" className="btn btn-light d-block">Add To cart<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                    </div>
-                                </div>
-                                <div className="product-content">
-                                    <div className="product-info">
-                                        <div className="product-title">
-                                            <h3><a href="shop-single.html">Hand Carving Sevan Wood Temple</a></h3>
-                                        </div>
-                                        <div className="product-star">
-                                            <ul className="list-unstyled mb-1">
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="far fa-star-half-alt"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="product-prize">
-                                        <p><span className="me-2">$81,000.00</span>$95,000.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
-                            <div className="product">
-                                <div className="product-label">
-                                    <span className="onsale">Sale</span>
-                                </div>
-                                <div className="product-image">
-                                    <div className="product-thumb-inner">
-                                        <a href="#">
-                                            <img className="img-fluid" src={Product01} alt="image" />
-                                        </a>
-                                    </div>
-                                    <div className="custom-icon">
-                                        <ul className="list-unstyled">
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist"><i className="far fa-heart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i className="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare"><i className="fa-solid fa-code-compare"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="product-btn">
-                                        <a href="#" className="btn btn-light d-block">Add To cart<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                    </div>
-                                </div>
-                                <div className="product-content">
-                                    <div className="product-info">
-                                        <div className="product-title">
-                                            <h3><a href="shop-single.html">Hand Carving Sevan Wood Temple</a></h3>
-                                        </div>
-                                        <div className="product-star">
-                                            <ul className="list-unstyled mb-1">
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="far fa-star-half-alt"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="product-prize">
-                                        <p><span className="me-2">$81,000.00</span>$95,000.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
-                            <div className="product">
-                                <div className="product-label">
-                                    <span className="onsale">30%</span>
-                                    <span className="featured">Hot</span>
-                                </div>
-                                <div className="product-image">
-                                    <div className="product-thumb-inner">
-                                        <a href="#">
-                                            <img className="img-fluid" src={Product01} alt="image" />
-                                        </a>
-                                    </div>
-                                    <div className="custom-icon">
-                                        <ul className="list-unstyled">
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist"><i className="far fa-heart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i className="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare"><i className="fa-solid fa-code-compare"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="product-btn">
-                                        <a href="#" className="btn btn-light d-block">Add To cart<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                    </div>
-                                </div>
-                                <div className="product-content">
-                                    <div className="product-info">
-                                        <div className="product-title">
-                                            <h3><a href="shop-single.html">Hand Carving Sevan Wood Temple</a></h3>
-                                        </div>
-                                        <div className="product-star">
-                                            <ul className="list-unstyled mb-1">
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="far fa-star-half-alt"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="product-prize">
-                                        <p><span className="me-2">$81,000.00</span>$95,000.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
-                            <div className="product">
-                                <div className="product-label">
-                                    <span className="featured">Hot</span>
-                                </div>
-                                <div className="product-image">
-                                    <div className="product-thumb-inner">
-                                        <a href="#">
-                                            <img className="img-fluid" src={Product01} alt="image" />
-                                        </a>
-                                    </div>
-                                    <div className="custom-icon">
-                                        <ul className="list-unstyled">
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist"><i className="far fa-heart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i className="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare"><i className="fa-solid fa-code-compare"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="product-btn">
-                                        <a href="#" className="btn btn-light d-block">Add To cart<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                    </div>
-                                </div>
-                                <div className="product-content">
-                                    <div className="product-info">
-                                        <div className="product-title">
-                                            <h3><a href="shop-single.html">Hand Carving Sevan Wood Temple</a></h3>
-                                        </div>
-                                        <div className="product-star">
-                                            <ul className="list-unstyled mb-1">
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="far fa-star-half-alt"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="product-prize">
-                                        <p><span className="me-2">$81,000.00</span>$95,000.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
-                            <div className="product">
-                                <div className="product-label">
-                                    <span className="onsale">Sale</span>
-                                    <span className="featured">Hot</span>
-                                </div>
-                                <div className="product-image">
-                                    <div className="product-thumb-inner">
-                                        <a href="#">
-                                            <img className="img-fluid" src={Product01} alt="image" />
-                                        </a>
-                                    </div>
-                                    <div className="custom-icon">
-                                        <ul className="list-unstyled">
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist"><i className="far fa-heart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i className="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare"><i className="fa-solid fa-code-compare"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="product-btn">
-                                        <a href="#" className="btn btn-light d-block">Add To cart<i className="fas fa-arrow-right-long ps-3"></i></a>
-                                    </div>
-                                </div>
-                                <div className="product-content">
-                                    <div className="product-info">
-                                        <div className="product-title">
-                                            <h3><a href="shop-single.html">Hand Carving Sevan Wood Temple</a></h3>
-                                        </div>
-                                        <div className="product-star">
-                                            <ul className="list-unstyled mb-1">
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="fas fa-star"></i></li>
-                                                <li><i className="far fa-star-half-alt"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="product-prize">
-                                        <p><span className="me-2">$81,000.00</span>$95,000.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="section-title section-title-style-1 text-center">
+                <span className="sub-title left-divider">HANDCRAFTED WITH INTEGRITY</span>
+                <h2 className="title">Premium Jhula</h2>
+                <div className="description">
+                  <p>
+                    Products that work out best in satisfying our customers, and define transparency.Products that work out best in satisfying our
+                    customers, and define transparency.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            {premiumJhulaItems?.result?.length > 0
+              ? premiumJhulaItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
+              : ''}
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="section-title section-title-style-1 text-center">
+                <span className="sub-title left-divider">Top trending</span>
+                <h2 className="title">Haveli Mandir</h2>
+                <div className="description">
+                  <p>Products that work out best in satisfying our customers, and define transparency.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            {haveliMandirItems?.result?.length > 0
+              ? haveliMandirItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
+              : ''}
           </div>
         </div>
       </section>
@@ -764,6 +460,15 @@ const Login: React.FC = () => {
                 <span className="sub-title left-divider">Testimonial</span>
                 <h2 className="title text-white">What to say about the client</h2>
               </div>
+              <div style={{ marginBottom: '20px' }}>
+                <a
+                  target="_blank"
+                  href="https://www.google.com/maps/place/Dhknd.ca/@51.196195,-113.9958807,15z/data=!4m8!3m7!1s0x537163669fd77fd7:0x691c38ea08108896!8m2!3d51.196195!4d-113.9958807!9m1!1b1!16s%2Fg%2F11rb4jrn9j?entry=ttu"
+                  className="btn btn-primary"
+                >
+                  Read More<i className="fas fa-arrow-right-long ps-3"></i>
+                </a>
+              </div>
             </div>
             <div className="col-lg-7">
               <div className="testimonial-description">
@@ -772,7 +477,7 @@ const Login: React.FC = () => {
                     <div className="testimonial-quote-icon">
                       <QuoteSvg></QuoteSvg>
                     </div>
-                    <div className="testimonial-content">
+                    <div style={{ color: 'white', fontSize: '16px' }}>
                       <p className="mb-0">
                         <i>
                           I was extremely excited about finding this hidden Gem of a place. The owners were very helpful at locating the exact Mandir
@@ -784,12 +489,9 @@ const Login: React.FC = () => {
                       </p>
                     </div>
                     <div className="testimonial-author info-right">
-                      <div className="testimonial-avatar avatar">
-                        <img className="img-fluid" src={AvtarIcon01} alt="" />
-                      </div>
+                      <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle">Baadshah Hai From Fiji</h6>
-                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
                   </div>
@@ -797,7 +499,7 @@ const Login: React.FC = () => {
                     <div className="testimonial-quote-icon">
                       <QuoteSvg></QuoteSvg>
                     </div>
-                    <div className="testimonial-content">
+                    <div style={{ color: 'white', fontSize: '16px' }}>
                       <p className="mb-0">
                         <i>
                           We had an absolutely fantastic experience with DHKND when we recently bought a temple from them! Heema was incredibly kind,
@@ -805,17 +507,14 @@ const Login: React.FC = () => {
                           every member of their staff added to the great service. Their shop serves a niche purpose so well that I would highly
                           recommend this to anyone looking to purchase a temple or mandir for themselves. They went above and beyond the call of duty
                           - helping us not only decide but then carry the heavy temple out, secure it in our truck and then even texted us when we got
-                          home to ensure we had no problems. Great price, great service and incredible people - what more can you ask for
+                          home to ensure we had no problems. Great price, great service and incredible people - what more can you ask for!
                         </i>
                       </p>
                     </div>
                     <div className="testimonial-author info-right">
-                      <div className="testimonial-avatar avatar">
-                        <img className="img-fluid" src={AvtarIcon01} alt="" />
-                      </div>
+                      <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle"> Deepti Kamal</h6>
-                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
                   </div>
@@ -823,7 +522,7 @@ const Login: React.FC = () => {
                     <div className="testimonial-quote-icon">
                       <QuoteSvg></QuoteSvg>
                     </div>
-                    <div className="testimonial-content">
+                    <div style={{ color: 'white', fontSize: '16px' }}>
                       <p className="mb-0">
                         <i>
                           I’m thrilled with the Sevan Wood Mandir and the outstanding service your team provided. The Mandir’s craftsmanship exceeded
@@ -831,17 +530,14 @@ const Login: React.FC = () => {
                           showcasing your commitment to quality. I appreciate the personalized call to showcase other collections and the effort to
                           ensure timely delivery. However, a minor inconvenience was the light wiring socket was Indian, requiring an additional
                           converter. Overall, we’re delighted with the product and your service. Thank you for delivering exactly what we were looking
-                          for
+                          for.
                         </i>{' '}
                       </p>
                     </div>
                     <div className="testimonial-author info-right">
-                      <div className="testimonial-avatar avatar">
-                        <img className="img-fluid" src={AvtarIcon01} alt="" />
-                      </div>
+                      <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle"> Hemant Tripathi,Surrey, BC</h6>
-                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
                   </div>
@@ -849,24 +545,22 @@ const Login: React.FC = () => {
                     <div className="testimonial-quote-icon">
                       <QuoteSvg></QuoteSvg>
                     </div>
-                    <div className="testimonial-content">
+                    <div style={{ color: 'white', fontSize: '16px' }}>
                       <p className="mb-0">
                         <i>
                           Can’t describe Heema ji’s efforts and compassion in words. She helped us to get our new Mandir at our new home before hawan
                           in every possible way. Arranging a new beautiful mandir and assembling it in just a one day notice time, and then further
                           extending her warm help to drop my mom and wife to our new home, as Mandir won’t fit in without lowering my car’s seats, she
                           truly stand out as a true person. I can’t thank enough for her beautiful gesture and kindness. Everyone at Hawan praised a
-                          lot for this beautiful mandir. Really happy to get a beautiful new home for our Kanha Thank you Heema ji. Stay blessed
+                          lot for this beautiful mandir. Really happy to get a beautiful new home for our Kanha 🙏🏻 Thank you Heema ji. Stay blessed
+                          🙏🏻.
                         </i>
                       </p>
                     </div>
                     <div className="testimonial-author info-right">
-                      <div className="testimonial-avatar avatar">
-                        <img className="img-fluid" src={AvtarIcon01} alt="" />
-                      </div>
+                      <div className="testimonial-avatar avatar"></div>
                       <div className="testimonial-name d-flex align-items-center">
                         <h6 className="author-tittle"> Parijat Hasija</h6>
-                        {/* <span className="text-white">Product Designer</span> */}
                       </div>
                     </div>
                   </div>
@@ -887,85 +581,41 @@ const Login: React.FC = () => {
           <div className="row d-flex align-items-center mb-4 pb-3">
             <div className="col-md-12 col-lg-8 col-xl-6">
               <div className="section-title section-title-style-1 mb-0">
-                <span className="sub-title left-divider">RECENT ARTICLES</span>
-                <h2 className="title mb-0">Recent articles and news</h2>
+                <span className="sub-title left-divider">RECENT BLOGS</span>
+                <h2 className="title mb-0">Recent articles and Blogs</h2>
               </div>
             </div>
             <div className="col-md-12 col-lg-4 col-xl-6 text-lg-end text-start mt-4 mt-lg-0">
-              <a href="#" className="btn btn-primary">
+              <a href="/Blogs" className="btn btn-primary">
                 Visit the Blog<i className="fas fa-arrow-right-long ps-3"></i>
               </a>
             </div>
           </div>
           <div className="row">
-            {/* {recentArticleData.length > 0
-              ? recentArticleData.map((value: any, key: number) => (
-                  <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <div className="blog-post">
-                      <div className="blog-img">
-                        <img className="img-fluid" src={BlogImage} alt="#" />
-                      </div>
-                      <div className="blog-info">
-                        <span>{moment(new Date(value.date)).format('MMM DD, YYYY')}</span>
-                        <h4 className="blog-tittle">
-                          <a href="blog-single.html">{value.articleName}</a>
-                        </h4>
-                        <a className="blog-link" href="blog-single.html">
-                          Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
-                        </a>
+            {blogs
+              ? blogs.map((blog: any, index: any) => {
+                  return (
+                    <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                      <div className="blog-post">
+                        <div key={index}>
+                          <div className="blog-img">
+                            <img className="img-fluid" src={blog.image} alt={blog.image} />
+                          </div>
+                          <div className="blog-info">
+                            <span>April 27, 2024</span>
+                            <h4 className="blog-tittle">
+                              <a>{blog?.title || 'No title'}</a>
+                            </h4>
+                            <a className="blog-link" href={`/blog-single?id=${blog._id}`}>
+                              Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))
-              : ''} */}
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <div className="blog-post">
-                <div className="blog-img">
-                  <img className="img-fluid" src={BlogImage} alt="#" />
-                </div>
-                <div className="blog-info">
-                  <span>April 27, 2024</span>
-                  <h4 className="blog-tittle">
-                    <a href="blog-single.html">Article 1</a>
-                  </h4>
-                  <a className="blog-link" href="blog-single.html">
-                    Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <div className="blog-post">
-                <div className="blog-img">
-                  <img className="img-fluid" src={BlogImage1} alt="#" />
-                </div>
-                <div className="blog-info">
-                  <span>April 27, 2024</span>
-                  <h4 className="blog-tittle">
-                    <a href="blog-single.html">Article 1</a>
-                  </h4>
-                  <a className="blog-link" href="blog-single.html">
-                    Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="blog-post mb-0">
-                <div className="blog-img">
-                  <img className="img-fluid" src={BlogImage2} alt="#" />
-                </div>
-                <div className="blog-info">
-                  <span>April 27, 2024</span>
-                  <h4 className="blog-tittle">
-                    <a href="blog-single.html">Article 1</a>
-                  </h4>
-                  <a className="blog-link" href="blog-single.html">
-                    Read More<i className="fa-solid fa-arrow-right-long ps-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
+                  );
+                })
+              : ''}
           </div>
         </div>
       </section>

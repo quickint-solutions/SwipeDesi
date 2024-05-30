@@ -6,7 +6,8 @@ export const getItems = async (params?: any) => {
     params: {
       searchFields: 'name',
       search: params.search,
-      pageSize: 1000,
+      pageSize: params.pageSize,
+      page: params.page,
       filter: params.categories
         ? JSON.stringify({
             categories: params.categories,
@@ -19,6 +20,16 @@ export const getItems = async (params?: any) => {
 
 export const getFeaturedItems = async () => {
   const response = await axios.get('/item?filter={"featured":true}');
+  return response.data;
+};
+
+export const getHaveliMandirItems = async () => {
+  const response = await axios.get('/item?filter={"haveliMandir":true}');
+  return response.data;
+};
+
+export const getPremiumJhulaItems = async () => {
+  const response = await axios.get('/item?filter={"premiumJhula":true}');
   return response.data;
 };
 

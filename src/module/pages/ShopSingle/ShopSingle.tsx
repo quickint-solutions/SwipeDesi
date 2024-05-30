@@ -1,23 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Slider from 'react-slick';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import Product1 from '../../../images/product/01.jpg';
-import Product2 from '../../../images/product/02.jpg';
-import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
-import MandirBgImg2 from '../../../images/bg/Mandir-1920-x-490-px.jpg';
 import shopSingleHttpRequest from '../../../api/shopSingleHttpRequest';
 import { useAppSelector } from '../../../api/store/configureStore';
 import { getUserDetail } from '../../../helpers/common';
-import cartHttpRequest from '../../../api/cart/cartHttpRequest';
 import { useQuery } from 'react-query';
 import { getItemsByCategory, getItemsById } from '../../../apiV2/items';
 import { AuthContext } from '../../../context/auth.context';
 import { CartContext } from '../../../context/cart.context';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
+import $ from 'jquery';
 
 const ShopSingle: React.FC = () => {
   const navigate = useNavigate();
@@ -79,6 +74,38 @@ const ShopSingle: React.FC = () => {
       (window as any).$('#formLoginRegister').modal('show');
     }
   };
+  const [autoplay, setAutoplay] = useState(true);
+
+  const handleMouseEnter = () => {
+    setAutoplay(false); // Pause autoplay
+  };
+
+  const handleMouseLeave = () => {
+    setAutoplay(true); // Resume autoplay
+  };
+
+  useEffect(() => {
+    $('.product-img--main')
+      .on('mouseover', function (this: HTMLElement) {
+        // Specify the type of 'this'
+        $(this)
+          .children('img')
+          .css({ transform: 'scale(' + $(this).attr('data-scale') + ')' });
+      })
+      .on('mouseout', function (this: HTMLElement) {
+        // Specify the type of 'this'
+        $(this).children('img').css({ transform: 'scale(1)' });
+      })
+      .on('mousemove', function (this: HTMLElement, e: { pageX: number; pageY: number }) {
+        // Specify the type of 'this' and 'e'
+        $(this)
+          .children('img')
+          .css({
+            'transform-origin':
+              ((e.pageX - $(this).offset().left) / $(this).width()) * 100 + '% ' + ((e.pageY - $(this).offset().top) / $(this).height()) * 100 + '%',
+          });
+      });
+  });
 
   const findCartItem = items.find((cartItem: any) => cartItem._id === itemDetails._id);
   if (isLoading)
@@ -127,8 +154,46 @@ const ShopSingle: React.FC = () => {
               <div className="col-lg-12">
                 <div className="row">
                   <div className="col-md-5 mb-4 mb-md-0">
-                    <OwlCarousel autoplayTimeout={3000} autoplay={true} items={1} loop={true} margin={10}>
-                      {itemDetails?.images.map((value: any, key: number) => <img className="img-fluid" src={value} alt="" />)}
+                    <OwlCarousel
+                      style={{ cursor: 'pointer' }}
+                      className="owl-theme2"
+                      autoplayTimeout={2500}
+                      autoplay={true}
+                      autoplayHoverPause={true}
+                      items={1}
+                      loop={true}
+                      margin={10}
+                      nav={true}
+                      dots={false}
+                      responsive={{ 0: { items: 1 }, 600: { items: 1 }, 1000: { items: 1 } }}
+                    >
+                      {itemDetails?.images.map((image: string | undefined, index: React.Key | null | undefined) => (
+                        <div key={index} className="item product-img--main" data-scale="1.8">
+                          <div className="product-label">
+                            <span className="onsale">{itemDetails.discount || 0}%</span>
+                          </div>
+                          <img src={image} alt={`Product ${index}`} />
+                        </div>
+                      ))}
+                    </OwlCarousel>
+
+                    <OwlCarousel
+                      className="owl-theme2"
+                      autoplay={true}
+                      autoplayTimeout={2500}
+                      items={3}
+                      loop={true}
+                      margin={10}
+                      nav={false}
+                      dots={false}
+                      responsive={{ 0: { items: 3 }, 600: { items: 5 }, 1000: { items: 7 } }}
+                    >
+                      {itemDetails?.images.map((image: string | undefined, index: React.Key | null | undefined) => (
+                        <div key={index} className="item product-img--main" style={{ cursor: 'pointer' }}>
+                          <div className="product-label"></div>
+                          <img src={image} alt={`Thumbnail ${index}`} />
+                        </div>
+                      ))}
                     </OwlCarousel>
                   </div>
 
@@ -153,7 +218,7 @@ const ShopSingle: React.FC = () => {
                           </h4>
                         </div>
                       </div>
-                      <p className="sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails.descriptions }}></p>
+                      <p className="Poppins-fonts" dangerouslySetInnerHTML={{ __html: itemDetails.descriptions }}></p>
                       {/* <p className="mb-4 mb-sm-5">The best way is to develop and follow a plan. Start with your goals in mind and then work backwards to develop the plan. What steps are required to get you to the goals? Make the plan as detailed as possible. Try to visualize and then plan for, every possible setback. Commit the plan to paper and then keep it with you at all times. Review it regularly and ensure that every step takes you closer to your Vision and Goals. If the plan doesn’t support the vision then change it!</p> */}
                       <div className="justify-content-start d-flex add-to-cart-input">
                         <div className="input-group">
@@ -255,7 +320,7 @@ const ShopSingle: React.FC = () => {
                       </nav>
                       <div className="tab-content" id="nav-tabContent">
                         <div className="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
-                          <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.custom }}></div>
+                          <div className="row Poppins-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.custom }}></div>
                         </div>
                         <div className="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
                           <div className="row">
@@ -428,7 +493,7 @@ const ShopSingle: React.FC = () => {
                         <div className="tab-pane fade" id="nav-custom" role="tabpanel" aria-labelledby="nav-custom-tab">
                           <div className="row">
                             <div className="col-12">
-                              <div className="row sora-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.installationGuide }}></div>
+                              <div className="row Poppins-fonts" dangerouslySetInnerHTML={{ __html: itemDetails?.installationGuide }}></div>
                             </div>
                           </div>
                         </div>

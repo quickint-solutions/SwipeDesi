@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
-import Product1 from '../../../images/product/01.jpg';
-import Product2 from '../../../images/product/02.jpg';
+import BgImg from '../../../images/new-bg/Cart.jpg';
 import { getUserDetail } from '../../../helpers/common';
 import cartHttpRequest from '../../../api/cart/cartHttpRequest';
 import { useAppDispatch, useAppSelector } from '../../../api/store/configureStore';
@@ -135,7 +133,7 @@ const Cart: React.FC = () => {
 
   return (
     <>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: 'url(' + MandirBgImg + ')' }}>
+      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: 'url(' + BgImg + ')' }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">

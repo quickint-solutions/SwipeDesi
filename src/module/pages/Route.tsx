@@ -7,6 +7,7 @@ import { getCategories } from '../../apiV2/categories';
 import { signup } from '../../apiV2/signup';
 import ContactUs from './ContactUs';
 import FAQ from './FAQ';
+import BlogSingle from './BlogSingle';
 import Blogs from './Blogs';
 import Inquiry from './Inquiry';
 import { login } from '../../apiV2/login';
@@ -18,8 +19,11 @@ import TermsCondition from './TermsCondition';
 import MyAccount from './MyAccountPage';
 import { CartContext } from '../../context/cart.context';
 import logo from '../../images/logo1.jpg';
+import dhl from '../../images/dhl_dhknd_shipping_parther-large.jpg';
+import purolator from '../../images/purolator_dhknd_shipping_parther-large.jpg';
+import logo1 from '../../images/DHKND-Final-Logo.png';
 import AboutUs from './AboutUs';
-import languageLogo from '../../images/en.png';
+import languageLogo from '../../images/canada.png';
 import expertLogo from '../../images/topbar-avtar-icon.png';
 import homeIcon from '../../images/home.png';
 import { getWishList } from '../../apiV2/wishlist';
@@ -74,6 +78,7 @@ const RouteComponent: React.FC = () => {
     zip: '',
     profileImage: '',
   });
+
   const [isShowRefisterFirstScreen, setIsShowRegisterFirstScreen] = useState(true);
 
   const { user, search, setSearch, setCategories } = useContext(AuthContext);
@@ -156,24 +161,78 @@ const RouteComponent: React.FC = () => {
 
   const { mutate: handleForgotPassword } = useMutation(forgotPasswordAPI, {
     onSuccess: data => {
-      alert('Reset password link has been sent to your email');
+      alert('Reset password OTP has been sent to your email');
+      setForgotPasswordScreen1(false);
     },
-    onError: error => {
-      console.log('error -> ', error);
+    onError: (error: any) => {
+      alert(error?.response?.data?.message || 'Error resetting password');
+      setForgotPasswordScreen1(true);
     },
   });
 
+  const samePasswordValidation = () => {
+    if (resetPaswordDetails.password1 !== resetPaswordDetails.password2) {
+      alert('Password does not match');
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const { mutate: handleResetPassword } = useMutation(resetPasswordAPI, {
     onSuccess: data => {
-      console.log('ForgotPassworddata -> ', data);
-      (window as any).$('#forgotPasswordModal').modal('hide');
       alert('Password reset successfully please login now!');
+      (window as any).$('#forgotPasswordModal').modal('hide');
       (window as any).$('#formLoginRegister').modal('show');
     },
-    onError: error => {
-      console.log('error -> ', error);
+    onError: (error: any) => {
+      alert(error.response.data.message || 'Password reset failed');
     },
   });
+  const [isVisible, setIsVisible] = useState(false);
+  // Show or hide the button based on scroll position
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  const handleMouseEnter = (id: string) => {
+    setOpenDropdown(id);
+  };
+
+  const handleMouseLeave = () => {
+    setOpenDropdown(null);
+  };
+
+  const handleCategoryClick = (categoryId: React.SetStateAction<string | null>) => {
+    if (openDropdown === categoryId) {
+      // If the dropdown is already open, close it
+      setOpenDropdown(null);
+    } else {
+      // If the dropdown is closed, open it
+      setOpenDropdown(categoryId);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -244,7 +303,7 @@ const RouteComponent: React.FC = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.facebook.com/dhknd.ca/" target="_blank">
+                          <a href="https://www.twitter.com/dhknd.ca/" target="_blank">
                             <i className="fa-brands fa-square-x-twitter" style={{ fontSize: '20px' }}></i>
                           </a>
                         </li>
@@ -262,8 +321,13 @@ const RouteComponent: React.FC = () => {
                           <i className="bi bi-telephone me-2"></i>+1 (587) 969-7008
                         </a>
                       </div>
-                      <div className="info-box-icon ps-3 d-none d-lg-flex">
-                        <a onClick={() => window.open(`https://wa.me/+1 (587) 969-7008`, '_blank')} className="d-flex align-items-center">
+                      <div className="info-box-icon ps-3 d-none d-lg-flex" style={{ cursor: 'pointer' }}>
+                        <a
+                          onClick={() =>
+                            window.open(`https://api.whatsapp.com/send?phone=15879697008&text=Hello%20How%20Can%20I%20Help%20You%3F`, '_blank')
+                          }
+                          className="d-flex align-items-center"
+                        >
                           <img src={expertLogo} alt="image" />
                           <span className="ps-2">Contact with an expert</span>
                         </a>
@@ -430,37 +494,63 @@ const RouteComponent: React.FC = () => {
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
                 <li className="nav-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-                  <div
-                    className="nav-link nav-link-flex"
-                    aria-current="page"
-                    style={{ display: 'flex', alignItems: 'center', placeContent: 'center' }}
-                  >
-                    <img src={homeIcon} style={{ width: '16px', marginRight: '2px' }} />
-                    <span style={{ fontWeight: '600', fontSize: '15px', marginLeft: '2px' }}>Home</span>
+                  <div className="nav-link nav-link-flex" aria-current="page" style={{ marginRight: '-20px' }}>
+                    <img src={homeIcon} alt="home" />
+                    <span>Home</span>
                   </div>
                 </li>
-                {!categoriesLoading && categories && categories?.result?.length > 0
-                  ? categories?.result?.map((value: any, key: number) => {
-                      if (value.parentCategory) return null;
-                      return (
+                {!categoriesLoading &&
+                  categories &&
+                  categories.result.length > 0 &&
+                  categories.result.map((value: any, key: number) => {
+                    if (value.parentCategory) return null;
+                    const subCategories = categories.result.filter((cat: any) => cat.parentCategory?._id === value._id);
+
+                    return (
+                      <ul className="nav navbar-nav" key={key}>
                         <li
                           className="nav-item"
-                          onClick={() => {
-                            setCategories(value._id);
-                            navigate(`/products?category=${value._id}`);
-                          }}
-                          style={{ cursor: 'pointer' }} // Add cursor style here
-                          data-bs-toggle="collapse"
-                          data-bs-target=".navbar-collapse"
+                          key={key}
+                          style={{ cursor: 'pointer' }}
+                          onMouseEnter={() => handleMouseEnter(value._id)}
+                          onMouseLeave={handleMouseLeave}
                         >
-                          <div className="nav-link nav-link-flex" aria-current="page">
-                            <img src={value.icon} style={{ width: 18, marginRight: '2px' }} />
-                            <span style={{ fontWeight: '600', fontSize: '15px' }}>{value.name}</span>
+                          <div
+                            className="nav-link nav-link-flex"
+                            aria-current="page"
+                            onClick={() => {
+                              handleCategoryClick(value._id); // Handle click on the main category
+                              setCategories(value._id);
+                              navigate(`/products?category=${value._id}`);
+                            }}
+                          >
+                            <img src={value.icon} alt={value.name ? String(value.name) : ''} />
+                            <span>{value.name}</span>
+                            {subCategories.length > 0 && <i className="fas fa-chevron-down"></i>}
                           </div>
+                          {openDropdown === value._id && subCategories.length > 0 && (
+                            <div className="dropdown-menu">
+                              {subCategories.map((subCategory: any) => (
+                                <div
+                                  key={subCategory._id}
+                                  className="dropdown-item"
+                                  onClick={() => {
+                                    setOpenDropdown(null);
+                                    setCategories(subCategory?._id?.toString() || '');
+                                    navigate(`/products?category=${subCategory?._id?.toString()}`);
+                                  }}
+                                  data-bs-toggle="collapse"
+                                  data-bs-target=".navbar-collapse"
+                                >
+                                  {subCategory.name}
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </li>
-                      );
-                    })
-                  : ''}
+                      </ul>
+                    );
+                  })}
               </ul>
             </div>
             <div className="text-end free-shipping d-none d-lg-block">
@@ -485,17 +575,21 @@ const RouteComponent: React.FC = () => {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
+          <div className="modal-content" style={{ overflow: 'hidden' }}>
             <div className="modal-header">
               <button type="button" className="btn-close" onClick={() => closeLoginModal()} data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body" style={{ maxHeight: '80vh', overflowY: 'auto', padding: '1rem' }}>
               <div className="box-content">
                 <div className={isShowLoginForm ? 'form-login active' : 'form-login'}>
                   <form className="login">
                     <h4 className="form-title">Sign in</h4>
                     <div className="row content">
                       <div className="mb-3 col-sm-12 username">
+                        <label className="form-label">
+                          Email
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
                         <input
                           type="text"
                           className="form-control"
@@ -508,16 +602,29 @@ const RouteComponent: React.FC = () => {
                         />
                       </div>
                       <div className="mb-3 col-sm-12 password">
-                        <input
-                          className="form-control"
-                          type="password"
-                          value={userDetail.password}
-                          required
-                          name="password"
-                          id="password"
-                          placeholder="Password"
-                          onChange={e => handleUserCredential('password', e.target.value)}
-                        />
+                        <label className="form-label">
+                          Password
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
+                        <div className="input-group">
+                          <input
+                            className="form-control"
+                            type={showPassword ? 'text' : 'password'}
+                            value={userDetail.password}
+                            required
+                            name="password"
+                            id="password"
+                            placeholder="Password"
+                            onChange={e => handleUserCredential('password', e.target.value)}
+                          />
+                          <span
+                            className="input-group-text"
+                            onClick={() => setShowPassword(!showPassword)}
+                            style={{ cursor: 'pointer', backgroundColor: 'transparent' }}
+                          >
+                            {showPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye-slash-fill"></i>}
+                          </span>
+                        </div>
                       </div>
                       <div className="mb-3 col-sm-12 rememberme-lost d-sm-flex justify-content-between">
                         <div className="rememberme">
@@ -546,7 +653,7 @@ const RouteComponent: React.FC = () => {
                       </div>
                       <div className="col-sm-12 d-grid mb-3">
                         <button type="button" className="btn btn-gray btn-flat btn-next-register" onClick={() => setIsShowLoginForm(false)}>
-                          Creat An Account
+                          Create An Account
                         </button>
                       </div>
                     </div>
@@ -558,6 +665,10 @@ const RouteComponent: React.FC = () => {
                     {isShowRefisterFirstScreen ? (
                       <div className="row content">
                         <div className="mb-3 col-sm-6 name">
+                          <label className="form-label">
+                            First Name
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
                           <input
                             type="text"
                             className="form-control"
@@ -569,28 +680,25 @@ const RouteComponent: React.FC = () => {
                           />
                         </div>
                         <div className="mb-3 col-sm-6 name">
+                          <label className="form-label">
+                            Last Name
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
                           <input
                             type="text"
                             className="form-control"
                             value={registrationDetail.last}
                             name="lastName"
                             id="lastName"
-                            placeholder="last Name"
+                            placeholder="Last Name"
                             onChange={e => handleRegistrationDetail('last', e.target.value)}
                           />
                         </div>
-                        {/* <div className="mb-3 col-sm-3 email">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={registrationDetail.countryCode}
-                            name="countryCode"
-                            id="countryCode"
-                            placeholder="Country Code"
-                            onChange={e => handleRegistrationDetail('countryCode', e.target.value)}
-                          />
-                        </div> */}
                         <div className="mb-3 col-sm-12 email">
+                          <label className="form-label">
+                            Phone Number
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
                           <input
                             type="text"
                             className="form-control"
@@ -602,6 +710,10 @@ const RouteComponent: React.FC = () => {
                           />
                         </div>
                         <div className="mb-3 col-sm-12 name">
+                          <label className="form-label">
+                            Email
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
                           <input
                             type="text"
                             className="form-control"
@@ -613,15 +725,28 @@ const RouteComponent: React.FC = () => {
                           />
                         </div>
                         <div className="mb-3 col-sm-12 password">
-                          <input
-                            className="form-control"
-                            type="password"
-                            value={registrationDetail.password}
-                            name="password"
-                            id="password"
-                            placeholder="Password"
-                            onChange={e => handleRegistrationDetail('password', e.target.value)}
-                          />
+                          <label className="form-label">
+                            Password
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className="input-group">
+                            <input
+                              className="form-control"
+                              type={showPassword ? 'text' : 'password'}
+                              value={registrationDetail.password}
+                              name="password"
+                              id="password"
+                              placeholder="Password"
+                              onChange={e => handleRegistrationDetail('password', e.target.value)}
+                            />
+                            <span
+                              className="input-group-text"
+                              onClick={() => setShowPassword(!showPassword)}
+                              style={{ cursor: 'pointer', backgroundColor: 'transparent' }}
+                            >
+                              {showPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye-slash-fill"></i>}
+                            </span>
+                          </div>
                         </div>
 
                         <div className="col-sm-12 d-grid mb-3">
@@ -631,7 +756,6 @@ const RouteComponent: React.FC = () => {
                               type="button"
                               className="btn btn-secondary btn-flat"
                               onClick={() => {
-                                // check all fields are filled
                                 if (
                                   !registrationDetail.first ||
                                   !registrationDetail.last ||
@@ -642,20 +766,16 @@ const RouteComponent: React.FC = () => {
                                   alert('Please fill all fields');
                                   return;
                                 }
-
                                 handleSignup(registrationDetail);
                               }}
                             >
                               {isLoading ? 'Loading' : 'Register'}
                             </button>
                           </div>
-                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
-                            Back
-                          </button> */}
+                          <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowLoginForm(true)}>
+                            Back to Login
+                          </button>
                         </div>
-                        {/* <div className="col-sm-12 d-grid mb-3">
-                                                <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
-                                            </div> */}
                       </div>
                     ) : (
                       <div className="row content">
@@ -747,17 +867,10 @@ const RouteComponent: React.FC = () => {
                           </button>
                         </div>
                         <div className="col-sm-12 d-grid mb-3 text-center">
-                          {/* <button type="button" className="btn btn-secondary btn-flat" onClick={() => setIsShowRegisterFirstScreen(true)}>
-                            Back
-                          </button> */}
                           <a href="#" className="back-to-login" onClick={() => setIsShowRegisterFirstScreen(true)}>
                             <i className="bi bi-arrow-left me-2"></i>Back
                           </a>
                         </div>
-
-                        {/* <div className="col-sm-12 d-grid mb-3">
-                                                <button type="submit" className="btn btn-gray btn-flat btn-next-login">Already has an account</button>
-                                            </div> */}
                       </div>
                     )}
                   </form>
@@ -801,10 +914,9 @@ const RouteComponent: React.FC = () => {
 
                               <div className="col-sm-12 d-grid mb-3">
                                 <button
-                                  type="submit"
+                                  type="button"
                                   className="btn btn-primary btn-flat"
                                   onClick={() => {
-                                    setForgotPasswordScreen1(false);
                                     handleForgotPassword(forgotPaswordDetails);
                                   }}
                                 >
@@ -836,29 +948,54 @@ const RouteComponent: React.FC = () => {
                               />
                             </div>
                             <div className="mb-3 col-sm-12 email">
-                              <input
-                                type="password"
-                                className="form-control"
-                                value={resetPaswordDetails.password1}
-                                name="forgotPaswordOtp"
-                                id="forgotPaswordOtp"
-                                placeholder="Create New Password"
-                                onChange={e => handleResetPasswordDetail('password1', e.target.value)}
-                              />
+                              <div className="input-group">
+                                <input
+                                  type={showPassword ? 'text' : 'password'}
+                                  className="form-control"
+                                  value={resetPaswordDetails.password1}
+                                  name="forgotPaswordOtp"
+                                  id="forgotPaswordOtp"
+                                  placeholder="Create New Password"
+                                  onChange={e => handleResetPasswordDetail('password1', e.target.value)}
+                                />
+                                <span className="input-group-text" onClick={() => setShowPassword(!showPassword)} style={{ cursor: 'pointer' }}>
+                                  {showPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye-slash-fill"></i>}
+                                </span>
+                              </div>
                             </div>
+
                             <div className="mb-3 col-sm-12 email">
-                              <input
-                                type="password"
-                                className="form-control"
-                                value={resetPaswordDetails.password2}
-                                name="forgotPaswordOtp"
-                                id="forgotPaswordOtp"
-                                placeholder="Confirm New Password"
-                                onChange={e => handleResetPasswordDetail('password2', e.target.value)}
-                              />
+                              <div className="input-group">
+                                <input
+                                  type={showConfirmPassword ? 'text' : 'password'}
+                                  className="form-control"
+                                  value={resetPaswordDetails.password2}
+                                  name="forgotPaswordOtp"
+                                  id="forgotPaswordOtp"
+                                  placeholder="Confirm New Password"
+                                  onChange={e => handleResetPasswordDetail('password2', e.target.value)}
+                                />
+                                <span
+                                  className="input-group-text"
+                                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                  style={{ cursor: 'pointer', backgroundColor: 'transparent' }}
+                                >
+                                  {showConfirmPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye-slash-fill"></i>}
+                                </span>
+                              </div>
                             </div>
+
                             <div className="col-sm-12 d-grid mb-3">
-                              <button type="button" className="btn btn-primary btn-flat" onClick={() => handleResetPassword(resetPaswordDetails)}>
+                              <button
+                                type="button"
+                                className="btn btn-primary btn-flat"
+                                onClick={() => {
+                                  samePasswordValidation();
+                                  if (samePasswordValidation() === true) {
+                                    handleResetPassword(resetPaswordDetails);
+                                  }
+                                }}
+                              >
                                 Reset Password
                               </button>
                             </div>
@@ -893,6 +1030,7 @@ const RouteComponent: React.FC = () => {
         <Route path="/faqs" element={<FAQ />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/inquiry" element={<Inquiry />} />
+        <Route path="/blog-single" element={<BlogSingle />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/contact-us" element={<ContactUs />} />
@@ -910,6 +1048,8 @@ const RouteComponent: React.FC = () => {
           <div className="row">
             <div className="col-sm-6 col-lg-4 mb-4 mb-lg-0">
               <h4 className="text-white mb-4">Contact Us</h4>
+              <img className="img-fluid" style={{ objectFit: 'cover' }} src={logo1} height="396px" width="200px" alt="logo" />
+
               <ul className="footer-contact list-unstyled">
                 <li>
                   <div className="footer-contact-info">
@@ -1012,6 +1152,19 @@ const RouteComponent: React.FC = () => {
                   </label>
                 </div> */}
               </div>
+              <br />
+              <h5 className="text-white mb-4">OUR SHIPPING PARTNERS</h5>
+              <div style={{ textAlign: 'center', justifyContent: 'center', display: 'flex' }}>
+                <img className="img-fluid" style={{ objectFit: 'cover' }} src={dhl} height="396px" width="200px" alt="logo" />
+                <img
+                  className="img-fluid"
+                  style={{ objectFit: 'cover', marginLeft: '10px' }}
+                  src={purolator}
+                  height="396px"
+                  width="200px"
+                  alt="logo"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -1041,8 +1194,8 @@ const RouteComponent: React.FC = () => {
         </div>
       </footer>
 
-      <div id="back-to-top" className="back-to-top">
-        <a href="#">
+      <div id="back-to-top" className={`back-to-top ${isVisible ? 'show' : ''}`} onClick={scrollToTop}>
+        <a>
           <i className="fas fa-angle-up"></i>
         </a>
       </div>

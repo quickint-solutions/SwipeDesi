@@ -6,7 +6,6 @@ export const resetPasswordAPI = async (body: any) => {
     password: body.password2,
   };
 
-  console.log('resetPasswordBody -> ', resetPasswordBody);
   const response = await axios.post('/auth/reset-password', resetPasswordBody);
   return response.data;
 };

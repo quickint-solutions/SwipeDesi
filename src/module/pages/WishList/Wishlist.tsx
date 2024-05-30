@@ -1,11 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import MandirBgImg from '../../../images/bg/mandir-banner.jpg';
+import BgImg from '../../../images/new-bg/Wishlist.jpg';
 import Product1 from '../../../images/product/01.jpg';
-import Product2 from '../../../images/product/02.jpg';
-import shopSingleHttpRequest from '../../../api/shopSingleHttpRequest';
 import { getUserDetail } from '../../../helpers/common';
-import cartHttpRequest from '../../../api/cart/cartHttpRequest';
 import { useMutation, useQuery } from 'react-query';
 import { getWishList, removeWishList } from '../../../apiV2/wishlist';
 import { CartContext } from '../../../context/cart.context';
@@ -45,7 +42,7 @@ const Wishist: React.FC = () => {
 
   return (
     <>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: 'url(' + MandirBgImg + ')' }}>
+      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: 'url(' + BgImg + ')' }}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">

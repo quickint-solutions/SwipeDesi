@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { getItems } from '../../../apiV2/items';
-import ProductItem from '../../../components/ProductItem';
 import { getCategories } from '../../../apiV2/categories';
 import { useNavigate } from 'react-router-dom';
-import img from '../../../images/bg/mandir-banner.jpg';
+import img from '../../../images/new-bg/FAQs.jpg';
 
 export default function FAQ() {
   const params = new URLSearchParams(window.location.search);
   const category = params.get('category');
   const [categoryValue, setCategoryValue] = useState(category);
-
-  const navigate = useNavigate();
 
   const { data: getProducts, mutate } = useMutation(getItems);
 
