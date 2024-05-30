@@ -75,9 +75,11 @@ const QuickView = ({ product, onClose }: { product: any; onClose: () => void }) 
                 >
                   {product?.images.map((image: string | undefined, index: React.Key | null | undefined) => (
                     <div key={index} className="item product-img--main" data-scale="1.8">
-                      <div className="product-label">
-                        <span className="onsale">{product.discount || 0}%</span>
-                      </div>
+                      {product.discount > 0 && (
+                        <div className="product-label">
+                          <span className="onsale">{product.discount}%</span>
+                        </div>
+                      )}
                       <img src={image} alt={`Product ${index}`} />
                     </div>
                   ))}
