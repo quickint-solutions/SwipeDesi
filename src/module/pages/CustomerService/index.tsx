@@ -6,7 +6,7 @@ import { getCategories } from '../../../apiV2/categories';
 import { useNavigate } from 'react-router-dom';
 import img from '../../../images/bg/mandir-banner.jpg';
 
-export default function Inquiry() {
+export default function CustomerService() {
   const params = new URLSearchParams(window.location.search);
   const category = params.get('category');
   const [categoryValue, setCategoryValue] = useState(category);
@@ -40,11 +40,11 @@ export default function Inquiry() {
                           Home
                         </a>
                       </li>
-                      <li className="breadcrumb-item active">Inquiry</li>
+                      <li className="breadcrumb-item active">Customer Services</li>
                     </ol>
                   </div>
                   <h2 className="title text-white">
-                    <strong>Inquiry</strong>
+                    <strong>Customer Services</strong>
                   </h2>
                 </div>
               </div>

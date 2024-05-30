@@ -9,7 +9,7 @@ import ContactUs from './ContactUs';
 import FAQ from './FAQ';
 import BlogSingle from './BlogSingle';
 import Blogs from './Blogs';
-import Inquiry from './Inquiry';
+import CustomerService from './CustomerService';
 import { login } from '../../apiV2/login';
 import Testimonials from './Testimonials';
 import { AuthContext } from '../../context/auth.context';
@@ -1029,7 +1029,7 @@ const RouteComponent: React.FC = () => {
         <Route path="/terms-and-conditions" element={<TermsCondition />} />
         <Route path="/faqs" element={<FAQ />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/inquiry" element={<Inquiry />} />
+        <Route path="/customerservice" element={<CustomerService />} />
         <Route path="/blog-single" element={<BlogSingle />} />
         <Route path="/shopSingle" element={<ShopSingle />} />
         <Route path="/wishlist" element={<Wishlist />} />
@@ -1133,7 +1133,7 @@ const RouteComponent: React.FC = () => {
                     <a href="/blogs">Blogs</a>
                   </li>
                   <li>
-                    <a href="/inquiry">Inquiry</a>
+                    <a href="/customerservice">Customer Services</a>
                   </li>
                 </ul>
               </div>
