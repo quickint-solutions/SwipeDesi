@@ -26,7 +26,7 @@ export default function CustomerService() {
 
   return (
     <div>
-      <section className="header-inner header-inner-menu bg-overlay-secondary" style={{ backgroundImage: `url(${img})` }}>
+      <section className="header-inner header-inner-menu bg-overlay-secondary">
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-md-12 position-relative">
