@@ -4,6 +4,7 @@ import { getBlogsById } from '../../../apiV2/blogs';
 import { AuthContext } from '../../../context/auth.context';
 import { getCategories } from '../../../apiV2/categories';
 import img from '../../../images/bg/mandir-banner.jpg';
+import moment from 'moment';
 
 export default function BlogSingle() {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -69,8 +70,7 @@ export default function BlogSingle() {
                       <div className="time-card me-3 d-flex align-items-center">
                         <a>
                           <i className="fa-regular fa-clock me-1 text-primary"></i>
-                          <img className="img-fluid" src={blogData?.image} alt="#" />
-                          <span>{blogData?.createdAt || 'No date specified'}</span>
+                          <span>{blogData?.createdAt ? moment(blogData?.createdAt).format('YYYY-MM-DD') : 'No date specified'}</span>
                         </a>
                       </div>
                       <div className="user d-flex align-items-center me-3">

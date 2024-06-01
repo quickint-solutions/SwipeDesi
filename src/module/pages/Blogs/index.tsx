@@ -4,6 +4,7 @@ import img from '../../../images/new-bg/blog.jpg';
 import { fetchBlogs } from '../../../apiV2/blogs';
 import { AuthContext } from '../../../context/auth.context';
 import { getCategories } from '../../../apiV2/categories';
+import moment from 'moment';
 
 export default function Blogs() {
   //blogs mapping
@@ -73,7 +74,7 @@ export default function Blogs() {
                           <img className="img-fluid" src={blog?.image} alt="#" />
                         </div>
                         <div className="blog-info">
-                          <span>{blog?.createdAt || 'No date specified'}</span>
+                          <span>{blog?.createdAt ? moment(blog?.createdAt).format('YYYY-MM-DD') : 'No date specified'}</span>
                           <h4 className="blog-tittle">
                             <a>{blog?.title || 'No title given'}</a>
                           </h4>

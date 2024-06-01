@@ -1,17 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import moment from 'moment';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { ReactComponent as QuoteSvg } from '../../../images/testimonial/quote.svg';
-import AvtarIcon01 from '../../../images/avatar/01.jpg';
 import BgImage from '../../../images/bg/banner-sale-off.jpg';
 import BgImage1 from '../../../images/bg/bg-01.jpg';
 import furnitureImage from '../../../images/furniture/img-01.jpg';
 import furnitureImage1 from '../../../images/furniture/img-02.jpg';
-import BlogImage from '../../../images/blogimage/blog-01.jpg';
-import BlogImage1 from '../../../images/blogimage/blog-02.jpg';
-import BlogImage2 from '../../../images/blogimage/blog-03.jpg';
 import zula from '../../../images/zula.jpg';
 import diwan from '../../../images/diwan.jpg';
 import _ from 'lodash';
@@ -25,9 +20,9 @@ import { getCategories } from '../../../apiV2/categories';
 import { getFeaturedItems, getHaveliMandirItems, getPremiumJhulaItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { AuthContext } from '../../../context/auth.context';
-import { InstagramEmbed } from 'react-social-media-embed';
 import { getInstagram } from '../../../apiV2/instagram';
 import { fetchBlogs } from '../../../apiV2/blogs';
+import moment from 'moment';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -603,7 +598,7 @@ const Login: React.FC = () => {
                             <img className="img-fluid" src={blog.image} alt={blog.image} />
                           </div>
                           <div className="blog-info">
-                            <span>{blog?.createdAt || 'No date specified'}</span>
+                            <span>{blog?.createdAt ? moment(blog?.createdAt).format('YYYY-MM-DD') : 'No date specified'}</span>
                             <h4 className="blog-tittle">
                               <a>{blog?.title || 'No title'}</a>
                             </h4>
