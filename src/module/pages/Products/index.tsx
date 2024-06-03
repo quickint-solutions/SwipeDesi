@@ -12,6 +12,12 @@ export default function Products() {
 
   const [openDropdown, setOpenDropdown] = useState(null);
 
+  const [minPrice, setMinPrice] = useState('');
+
+  const [maxPrice, setMaxPrice] = useState('');
+
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+
   const pageSize = 12;
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
@@ -20,8 +26,12 @@ export default function Products() {
 
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
 
-  //!Buisness Logic for finding the category parent image
-  //!finding the categoryId of sub to parent category
+  const minPriceHandleChange = (e: any) => {
+    setMinPrice(e.target.value);
+  };
+  const maxPriceHandleChange = (e: any) => {
+    setMaxPrice(e.target.value);
+  };
 
   const params = new URLSearchParams(window.location.search);
 
@@ -40,8 +50,8 @@ export default function Products() {
   );
 
   useEffect(() => {
-    mutate({ categories, search, pageSize, page });
-  }, [categories, search, page]);
+    mutate({ categories, search, pageSize, page, minPrice, maxPrice, selectedColors });
+  }, [categories, search, page, minPrice, maxPrice, selectedColors]);
 
   useEffect(() => {
     setCategories(categoryId || '');
@@ -51,7 +61,20 @@ export default function Products() {
     setPage(newPage);
   };
 
-  console.log('subCategoriesData -> ', subCategoriesData);
+  const handleColorChange = (color: string) => {
+    setSelectedColors(prevColors => {
+      if (prevColors.includes(color)) {
+        return prevColors.filter(c => c !== color);
+      } else {
+        return [...prevColors, color];
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (selectedColors.length > 0) {
+    }
+  }, [selectedColors]);
 
   return (
     <div>
@@ -122,7 +145,6 @@ export default function Products() {
                                   <div className="widget-categories">
                                     <ul className="list-unstyled list-style list-style-underline mb-0">
                                       {subCategories.map((subCategory: any) => {
-                                        console.log('subCategory -> ', subCategory);
                                         return (
                                           <li key={subCategory._id}>
                                             <div
@@ -151,6 +173,129 @@ export default function Products() {
                             </li>
                           );
                         })}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="widget">
+                    <div className="widget-title">
+                      <h5 className="title">Filter by price</h5>
+                    </div>
+                    <div className="widget-content">
+                      <div className="mb-3">
+                        <div className="collapse show" id="price">
+                          <div className="property-price-slider">
+                            <input
+                              type="text"
+                              id="property-price-slider"
+                              style={{ marginBottom: 10 }}
+                              placeholder="minimum price"
+                              onChange={minPriceHandleChange}
+                            />
+                            <input type="text" id="property-price-slider" placeholder="maximum price" onChange={maxPriceHandleChange} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="price-filter">
+                        <div className="price_label">
+                          Price: <span className="from">$10 — $382</span>
+                        </div>
+                        <a className="">
+                          <i className="fas fa-filter"></i>Filter
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="widget-content">
+                    <div className="widget-color">
+                      <ul className="list-unstyled list-style list-style-underline mb-0">
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('yellow')}>
+                            <span className="filter-color" style={{ backgroundColor: '#dad810' }}>
+                              <input value="yellow" name="filter_color" type="checkbox" checked={selectedColors.includes('yellow')} readOnly />
+                            </span>
+                            Yellow
+                            <span className="ms-auto">
+                              <div className="count">8</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('green')}>
+                            <span className="filter-color" style={{ backgroundColor: '#10da21' }}>
+                              <input value="green" name="filter_color" type="checkbox" checked={selectedColors.includes('green')} readOnly />
+                            </span>
+                            Green
+                            <span className="ms-auto">
+                              <div className="count">16</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('blue')}>
+                            <span className="filter-color" style={{ backgroundColor: '#1072da' }}>
+                              <input value="blue" name="filter_color" type="checkbox" checked={selectedColors.includes('blue')} readOnly />
+                            </span>
+                            Blue
+                            <span className="ms-auto">
+                              <div className="count">12</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('pink')}>
+                            <span className="filter-color" style={{ backgroundColor: '#da10a4' }}>
+                              <input value="pink" name="filter_color" type="checkbox" checked={selectedColors.includes('pink')} readOnly />
+                            </span>
+                            Pink
+                            <span className="ms-auto">
+                              <div className="count">8</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('red')}>
+                            <span className="filter-color" style={{ backgroundColor: '#da1021' }}>
+                              <input value="red" name="filter_color" type="checkbox" checked={selectedColors.includes('red')} readOnly />
+                            </span>
+                            Red
+                            <span className="ms-auto">
+                              <div className="count">18</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('brown')}>
+                            <span className="filter-color" style={{ backgroundColor: '#9b6c07' }}>
+                              <input value="brown" name="filter_color" type="checkbox" checked={selectedColors.includes('brown')} readOnly />
+                            </span>
+                            Brown
+                            <span className="ms-auto">
+                              <div className="count">20</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('grey')}>
+                            <span className="filter-color" style={{ backgroundColor: '#9f9f9f' }}>
+                              <input value="grey" name="filter_color" type="checkbox" checked={selectedColors.includes('grey')} readOnly />
+                            </span>
+                            Grey
+                            <span className="ms-auto">
+                              <div className="count">12</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('nude')}>
+                            <span className="filter-color" style={{ backgroundColor: '#e2e39d' }}>
+                              <input value="nude" name="filter_color" type="checkbox" checked={selectedColors.includes('nude')} readOnly />
+                            </span>
+                            Nude
+                            <span className="ms-auto">
+                              <div className="count">9</div>
+                            </span>
+                          </a>
+                        </li>
                       </ul>
                     </div>
                   </div>
