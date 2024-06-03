@@ -51,8 +51,6 @@ export default function Products() {
     setPage(newPage);
   };
 
-  console.log('subCategoriesData -> ', subCategoriesData);
-
   return (
     <div>
       <section
@@ -122,7 +120,6 @@ export default function Products() {
                                   <div className="widget-categories">
                                     <ul className="list-unstyled list-style list-style-underline mb-0">
                                       {subCategories.map((subCategory: any) => {
-                                        console.log('subCategory -> ', subCategory);
                                         return (
                                           <li key={subCategory._id}>
                                             <div
@@ -152,6 +149,127 @@ export default function Products() {
                           );
                         })}
                       </ul>
+                    </div>
+                  </div>
+                  <div className="widget">
+                    <div className="widget-title">
+                      <h5 className="title">Filter by price</h5>
+                    </div>
+                    <div className="widget-content">
+                      <div className="mb-3">
+                        <div className="collapse show" id="price">
+                          <div className="property-price-slider">
+                            <input type="text" id="property-price-slider" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="price-filter">
+                        <div className="price_label">
+                          Price: <span className="from">$10 — $382</span>
+                        </div>
+                        <a className="">
+                          <i className="fas fa-filter"></i>Filter
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="widget">
+                    <div className="widget-title">
+                      <h5 className="title">Color</h5>
+                    </div>
+                    <div className="widget-content">
+                      <div className="widget-color">
+                        <ul className="list-unstyled list-style list-style-underline mb-0">
+                          <li>
+                            <a className="d-flex">
+                              <span className="filter-color" style={{ backgroundColor: '#dad810' }}>
+                                <input value="yellow" name="filter_color" type="checkbox" />
+                              </span>
+                              Yellow
+                              <span className="ms-auto">
+                                <div className="count">8</div>
+                              </span>
+                            </a>
+                          </li>
+                          <li>
+                            <a className="d-flex">
+                              <span className="filter-color" style={{ backgroundColor: '#10da21' }}>
+                                <input value="yellow" name="filter_color" type="checkbox" />
+                              </span>
+                              Green
+                              <span className="ms-auto">
+                                <div className="count">16</div>
+                              </span>
+                            </a>
+                          </li>
+                          <li>
+                            <a className="d-flex">
+                              <span className="filter-color" style={{ backgroundColor: '#1072da' }}>
+                                <input value="yellow" name="filter_color" type="checkbox" />
+                              </span>
+                              Blue
+                              <span className="ms-auto">
+                                <div className="count">12</div>
+                              </span>
+                            </a>
+                          </li>
+                          <li>
+                            <a className="d-flex">
+                              <span className="filter-color" style={{ backgroundColor: '#da10a4' }}>
+                                <input value="yellow" name="filter_color" type="checkbox" />
+                              </span>
+                              Pink
+                              <span className="ms-auto">
+                                <div className="count">8</div>
+                              </span>
+                            </a>
+                          </li>
+                          <li>
+                            <a className="d-flex">
+                              <span className="filter-color" style={{ backgroundColor: '#da1021' }}>
+                                <input value="yellow" name="filter_color" type="checkbox" />
+                              </span>
+                              Red
+                              <span className="ms-auto">
+                                <div className="count">18</div>
+                              </span>
+                            </a>
+                          </li>
+                          <li>
+                            <a className="d-flex">
+                              <span className="filter-color" style={{ backgroundColor: '#9b6c07' }}>
+                                <input value="yellow" name="filter_color" type="checkbox" />
+                              </span>
+                              Brown
+                              <span className="ms-auto">
+                                <div className="count">20</div>
+                              </span>
+                            </a>
+                          </li>
+                          <li>
+                            <a className="d-flex">
+                              <span className="filter-color" style={{ backgroundColor: '#9f9f9f' }}>
+                                <input value="yellow" name="filter_color" type="checkbox" />
+                              </span>
+                              Grey
+                              <span className="ms-auto">
+                                <div className="count">12</div>
+                              </span>
+                            </a>
+                          </li>
+                          <li>
+                            <a className="d-flex">
+                              <span className="filter-color" style={{ backgroundColor: '#e2e39d' }}>
+                                <input value="yellow" name="filter_color" type="checkbox" />
+                              </span>
+                              nude
+                              <span className="ms-auto">
+                                <div className="count">9</div>
+                              </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
