@@ -8,6 +8,9 @@ export const getItems = async (params?: any) => {
       search: params.search,
       pageSize: params.pageSize,
       page: params.page,
+      price_min: params.minPrice,
+      price_max: params.maxPrice,
+      color: params.selectedColors.length > 0 ? params.selectedColors.join(',') : '',
       filter: params.categories
         ? JSON.stringify({
             categories: params.categories,

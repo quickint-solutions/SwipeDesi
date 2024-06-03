@@ -12,6 +12,12 @@ export default function Products() {
 
   const [openDropdown, setOpenDropdown] = useState(null);
 
+  const [minPrice, setMinPrice] = useState('');
+
+  const [maxPrice, setMaxPrice] = useState('');
+
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+
   const pageSize = 12;
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
@@ -20,8 +26,12 @@ export default function Products() {
 
   const categoriesData = categoriesList?.result?.filter((i: any) => !i.parentCategory) || [];
 
-  //!Buisness Logic for finding the category parent image
-  //!finding the categoryId of sub to parent category
+  const minPriceHandleChange = (e: any) => {
+    setMinPrice(e.target.value);
+  };
+  const maxPriceHandleChange = (e: any) => {
+    setMaxPrice(e.target.value);
+  };
 
   const params = new URLSearchParams(window.location.search);
 
@@ -40,8 +50,8 @@ export default function Products() {
   );
 
   useEffect(() => {
-    mutate({ categories, search, pageSize, page });
-  }, [categories, search, page]);
+    mutate({ categories, search, pageSize, page, minPrice, maxPrice, selectedColors });
+  }, [categories, search, page, minPrice, maxPrice, selectedColors]);
 
   useEffect(() => {
     setCategories(categoryId || '');
@@ -50,7 +60,6 @@ export default function Products() {
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
   const handleColorChange = (color: string) => {
     setSelectedColors(prevColors => {
@@ -64,7 +73,6 @@ export default function Products() {
 
   useEffect(() => {
     if (selectedColors.length > 0) {
-      console.log(selectedColors.join(', '));
     }
   }, [selectedColors]);
 
@@ -176,7 +184,14 @@ export default function Products() {
                       <div className="mb-3">
                         <div className="collapse show" id="price">
                           <div className="property-price-slider">
-                            <input type="text" id="property-price-slider" />
+                            <input
+                              type="text"
+                              id="property-price-slider"
+                              style={{ marginBottom: 10 }}
+                              placeholder="minimum price"
+                              onChange={minPriceHandleChange}
+                            />
+                            <input type="text" id="property-price-slider" placeholder="maximum price" onChange={maxPriceHandleChange} />
                           </div>
                         </div>
                       </div>
