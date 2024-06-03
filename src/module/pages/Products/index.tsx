@@ -12,6 +12,32 @@ export default function Products() {
 
   const [openDropdown, setOpenDropdown] = useState(null);
 
+  const [minPrice, setMinPrice] = useState('');
+
+  const [maxPrice, setMaxPrice] = useState('');
+
+  let colourArray: any = [];
+
+  console.log('colourArray -> ', colourArray);
+
+  const minPriceHandleChange = (e: any) => {
+    setMinPrice(e.target.value);
+  };
+
+  const maxPriceHandleChange = (e: any) => {
+    setMaxPrice(e.target.value);
+  };
+
+  const colourHandleChange = (colour: string) => {
+    console.log('colour -> ', colour);
+    if (colourArray.includes(colour)) {
+      colourArray = colourArray.filter((i: any) => i !== colour);
+    } else {
+      colourArray.push(colour);
+      console.log('colourArray -> ', colourArray);
+    }
+  };
+
   const pageSize = 12;
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
@@ -40,14 +66,14 @@ export default function Products() {
   );
 
   useEffect(() => {
-    mutate({ categories, search, pageSize, page });
+    mutate({ categories, search, pageSize, page, colourArray });
   }, [categories, search, page]);
 
   useEffect(() => {
     setCategories(categoryId || '');
   }, [categoryId, setCategories]);
 
-  const handlePageChange = (newPage: number) => {
+  const handlePageChange = (newPage: any) => {
     setPage(newPage);
   };
 
@@ -98,7 +124,7 @@ export default function Products() {
                         {categoriesData.map((category: any) => {
                           const subCategories = categoriesList?.result?.filter((i: any) => i.parentCategory?._id === category._id) || [];
                           const totalItems = subCategories.length
-                            ? subCategories.reduce((acc: number, curr: any) => acc + curr.itemCount, 0) + category.itemCount
+                            ? subCategories.reduce((acc: any, curr: any) => acc + curr.itemCount, 0) + category.itemCount
                             : category.itemCount;
 
                           return (
@@ -158,18 +184,17 @@ export default function Products() {
                     <div className="widget-content">
                       <div className="mb-3">
                         <div className="collapse show" id="price">
-                          <div className="property-price-slider">
-                            <input type="text" id="property-price-slider" />
+                          <div className="property-price-slider ">
+                            <input
+                              type="text"
+                              id="property-price-slider"
+                              style={{ marginBottom: 10 }}
+                              placeholder="minimum price"
+                              onChange={minPriceHandleChange}
+                            />
+                            <input type="text" id="property-price-slider" placeholder="maximum price" onChange={maxPriceHandleChange} />
                           </div>
                         </div>
-                      </div>
-                      <div className="price-filter">
-                        <div className="price_label">
-                          Price: <span className="from">$10 — $382</span>
-                        </div>
-                        <a className="">
-                          <i className="fas fa-filter"></i>Filter
-                        </a>
                       </div>
                     </div>
                   </div>
@@ -182,8 +207,8 @@ export default function Products() {
                         <ul className="list-unstyled list-style list-style-underline mb-0">
                           <li>
                             <a className="d-flex">
-                              <span className="filter-color" style={{ backgroundColor: '#dad810' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
+                              <span className="filter-color" style={{ backgroundColor: '#dad810', cursor: 'pointer' }}>
+                                <input value="yellow" name="filter_color" type="checkbox" onChange={() => colourHandleChange('yellow')} />
                               </span>
                               Yellow
                               <span className="ms-auto">
@@ -194,7 +219,7 @@ export default function Products() {
                           <li>
                             <a className="d-flex">
                               <span className="filter-color" style={{ backgroundColor: '#10da21' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
+                                <input value="green" name="filter_color" />
                               </span>
                               Green
                               <span className="ms-auto">
@@ -205,7 +230,7 @@ export default function Products() {
                           <li>
                             <a className="d-flex">
                               <span className="filter-color" style={{ backgroundColor: '#1072da' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
+                                <input value="blue" name="filter_color" type="checkbox" />
                               </span>
                               Blue
                               <span className="ms-auto">
@@ -216,7 +241,7 @@ export default function Products() {
                           <li>
                             <a className="d-flex">
                               <span className="filter-color" style={{ backgroundColor: '#da10a4' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
+                                <input value="pink" name="filter_color" type="checkbox" />
                               </span>
                               Pink
                               <span className="ms-auto">
@@ -227,7 +252,7 @@ export default function Products() {
                           <li>
                             <a className="d-flex">
                               <span className="filter-color" style={{ backgroundColor: '#da1021' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
+                                <input value="red" name="filter_color" type="checkbox" />
                               </span>
                               Red
                               <span className="ms-auto">
@@ -238,7 +263,7 @@ export default function Products() {
                           <li>
                             <a className="d-flex">
                               <span className="filter-color" style={{ backgroundColor: '#9b6c07' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
+                                <input value="brown" name="filter_color" type="checkbox" />
                               </span>
                               Brown
                               <span className="ms-auto">
@@ -249,7 +274,7 @@ export default function Products() {
                           <li>
                             <a className="d-flex">
                               <span className="filter-color" style={{ backgroundColor: '#9f9f9f' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
+                                <input value="grey" name="filter_color" type="checkbox" />
                               </span>
                               Grey
                               <span className="ms-auto">
@@ -260,9 +285,9 @@ export default function Products() {
                           <li>
                             <a className="d-flex">
                               <span className="filter-color" style={{ backgroundColor: '#e2e39d' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
+                                <input value="nude" name="filter_color" type="checkbox" />
                               </span>
-                              nude
+                              Nude
                               <span className="ms-auto">
                                 <div className="count">9</div>
                               </span>
