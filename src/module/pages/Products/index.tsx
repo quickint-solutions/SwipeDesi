@@ -50,6 +50,23 @@ export default function Products() {
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+
+  const handleColorChange = (color: string) => {
+    setSelectedColors(prevColors => {
+      if (prevColors.includes(color)) {
+        return prevColors.filter(c => c !== color);
+      } else {
+        return [...prevColors, color];
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (selectedColors.length > 0) {
+      console.log(selectedColors.join(', '));
+    }
+  }, [selectedColors]);
 
   return (
     <div>
@@ -173,103 +190,98 @@ export default function Products() {
                       </div>
                     </div>
                   </div>
-                  <div className="widget">
-                    <div className="widget-title">
-                      <h5 className="title">Color</h5>
-                    </div>
-                    <div className="widget-content">
-                      <div className="widget-color">
-                        <ul className="list-unstyled list-style list-style-underline mb-0">
-                          <li>
-                            <a className="d-flex">
-                              <span className="filter-color" style={{ backgroundColor: '#dad810' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
-                              </span>
-                              Yellow
-                              <span className="ms-auto">
-                                <div className="count">8</div>
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="d-flex">
-                              <span className="filter-color" style={{ backgroundColor: '#10da21' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
-                              </span>
-                              Green
-                              <span className="ms-auto">
-                                <div className="count">16</div>
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="d-flex">
-                              <span className="filter-color" style={{ backgroundColor: '#1072da' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
-                              </span>
-                              Blue
-                              <span className="ms-auto">
-                                <div className="count">12</div>
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="d-flex">
-                              <span className="filter-color" style={{ backgroundColor: '#da10a4' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
-                              </span>
-                              Pink
-                              <span className="ms-auto">
-                                <div className="count">8</div>
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="d-flex">
-                              <span className="filter-color" style={{ backgroundColor: '#da1021' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
-                              </span>
-                              Red
-                              <span className="ms-auto">
-                                <div className="count">18</div>
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="d-flex">
-                              <span className="filter-color" style={{ backgroundColor: '#9b6c07' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
-                              </span>
-                              Brown
-                              <span className="ms-auto">
-                                <div className="count">20</div>
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="d-flex">
-                              <span className="filter-color" style={{ backgroundColor: '#9f9f9f' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
-                              </span>
-                              Grey
-                              <span className="ms-auto">
-                                <div className="count">12</div>
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="d-flex">
-                              <span className="filter-color" style={{ backgroundColor: '#e2e39d' }}>
-                                <input value="yellow" name="filter_color" type="checkbox" />
-                              </span>
-                              nude
-                              <span className="ms-auto">
-                                <div className="count">9</div>
-                              </span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
+                  <div className="widget-content">
+                    <div className="widget-color">
+                      <ul className="list-unstyled list-style list-style-underline mb-0">
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('yellow')}>
+                            <span className="filter-color" style={{ backgroundColor: '#dad810' }}>
+                              <input value="yellow" name="filter_color" type="checkbox" checked={selectedColors.includes('yellow')} readOnly />
+                            </span>
+                            Yellow
+                            <span className="ms-auto">
+                              <div className="count">8</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('green')}>
+                            <span className="filter-color" style={{ backgroundColor: '#10da21' }}>
+                              <input value="green" name="filter_color" type="checkbox" checked={selectedColors.includes('green')} readOnly />
+                            </span>
+                            Green
+                            <span className="ms-auto">
+                              <div className="count">16</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('blue')}>
+                            <span className="filter-color" style={{ backgroundColor: '#1072da' }}>
+                              <input value="blue" name="filter_color" type="checkbox" checked={selectedColors.includes('blue')} readOnly />
+                            </span>
+                            Blue
+                            <span className="ms-auto">
+                              <div className="count">12</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('pink')}>
+                            <span className="filter-color" style={{ backgroundColor: '#da10a4' }}>
+                              <input value="pink" name="filter_color" type="checkbox" checked={selectedColors.includes('pink')} readOnly />
+                            </span>
+                            Pink
+                            <span className="ms-auto">
+                              <div className="count">8</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('red')}>
+                            <span className="filter-color" style={{ backgroundColor: '#da1021' }}>
+                              <input value="red" name="filter_color" type="checkbox" checked={selectedColors.includes('red')} readOnly />
+                            </span>
+                            Red
+                            <span className="ms-auto">
+                              <div className="count">18</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('brown')}>
+                            <span className="filter-color" style={{ backgroundColor: '#9b6c07' }}>
+                              <input value="brown" name="filter_color" type="checkbox" checked={selectedColors.includes('brown')} readOnly />
+                            </span>
+                            Brown
+                            <span className="ms-auto">
+                              <div className="count">20</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('grey')}>
+                            <span className="filter-color" style={{ backgroundColor: '#9f9f9f' }}>
+                              <input value="grey" name="filter_color" type="checkbox" checked={selectedColors.includes('grey')} readOnly />
+                            </span>
+                            Grey
+                            <span className="ms-auto">
+                              <div className="count">12</div>
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="d-flex" onClick={() => handleColorChange('nude')}>
+                            <span className="filter-color" style={{ backgroundColor: '#e2e39d' }}>
+                              <input value="nude" name="filter_color" type="checkbox" checked={selectedColors.includes('nude')} readOnly />
+                            </span>
+                            Nude
+                            <span className="ms-auto">
+                              <div className="count">9</div>
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
