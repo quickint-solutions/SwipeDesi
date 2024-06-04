@@ -119,7 +119,7 @@ export default function Products() {
                   </div>
                   <div className="widget-content">
                     <div className="widget-categories">
-                      <ul className="list-unstyled list-style list-style-underline mb-0">
+                      <ul className="list-unstyled list-style list-style-underline mb-10">
                         {categoriesData.map((category: any) => {
                           const subCategories = categoriesList?.result?.filter((i: any) => i.parentCategory?._id === category._id) || [];
                           const totalItems = subCategories.length
@@ -176,6 +176,7 @@ export default function Products() {
                       </ul>
                     </div>
                   </div>
+
                   <div className="widget">
                     <div className="widget-title">
                       <h5 className="title">Filter by price</h5>
@@ -195,17 +196,12 @@ export default function Products() {
                           </div>
                         </div>
                       </div>
-                      <div className="price-filter">
-                        <div className="price_label">
-                          Price: <span className="from">$10 — $382</span>
-                        </div>
-                        <a className="">
-                          <i className="fas fa-filter"></i>Filter
-                        </a>
-                      </div>
                     </div>
                   </div>
                   <div className="widget-content">
+                    <div className="widget-title">
+                      <h5 className="title">Filter by Colour</h5>
+                    </div>
                     <div className="widget-color">
                       <ul className="list-unstyled list-style list-style-underline mb-0">
                         <li>
@@ -214,9 +210,6 @@ export default function Products() {
                               <input value="yellow" name="filter_color" type="checkbox" checked={selectedColors.includes('yellow')} readOnly />
                             </span>
                             Yellow
-                            <span className="ms-auto">
-                              <div className="count">8</div>
-                            </span>
                           </a>
                         </li>
                         <li>
@@ -225,9 +218,6 @@ export default function Products() {
                               <input value="green" name="filter_color" type="checkbox" checked={selectedColors.includes('green')} readOnly />
                             </span>
                             Green
-                            <span className="ms-auto">
-                              <div className="count">16</div>
-                            </span>
                           </a>
                         </li>
                         <li>
@@ -236,9 +226,6 @@ export default function Products() {
                               <input value="blue" name="filter_color" type="checkbox" checked={selectedColors.includes('blue')} readOnly />
                             </span>
                             Blue
-                            <span className="ms-auto">
-                              <div className="count">12</div>
-                            </span>
                           </a>
                         </li>
                         <li>
@@ -247,9 +234,6 @@ export default function Products() {
                               <input value="pink" name="filter_color" type="checkbox" checked={selectedColors.includes('pink')} readOnly />
                             </span>
                             Pink
-                            <span className="ms-auto">
-                              <div className="count">8</div>
-                            </span>
                           </a>
                         </li>
                         <li>
@@ -258,9 +242,6 @@ export default function Products() {
                               <input value="red" name="filter_color" type="checkbox" checked={selectedColors.includes('red')} readOnly />
                             </span>
                             Red
-                            <span className="ms-auto">
-                              <div className="count">18</div>
-                            </span>
                           </a>
                         </li>
                         <li>
@@ -269,9 +250,6 @@ export default function Products() {
                               <input value="brown" name="filter_color" type="checkbox" checked={selectedColors.includes('brown')} readOnly />
                             </span>
                             Brown
-                            <span className="ms-auto">
-                              <div className="count">20</div>
-                            </span>
                           </a>
                         </li>
                         <li>
@@ -280,9 +258,6 @@ export default function Products() {
                               <input value="grey" name="filter_color" type="checkbox" checked={selectedColors.includes('grey')} readOnly />
                             </span>
                             Grey
-                            <span className="ms-auto">
-                              <div className="count">12</div>
-                            </span>
                           </a>
                         </li>
                         <li>
@@ -291,9 +266,6 @@ export default function Products() {
                               <input value="nude" name="filter_color" type="checkbox" checked={selectedColors.includes('nude')} readOnly />
                             </span>
                             Nude
-                            <span className="ms-auto">
-                              <div className="count">9</div>
-                            </span>
                           </a>
                         </li>
                       </ul>
