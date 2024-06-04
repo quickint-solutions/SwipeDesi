@@ -1672,7 +1672,7 @@ button.search-button {
 
 /*** section Title **/
 .section-title {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -2668,7 +2668,7 @@ button.search-button {
 }
 
 .header-inner-menu .header-inner-title {
-  margin: 25px 0px;
+  margin: 20px 4px;
 }
 
 .header-inner-menu .header-inner-title .section-title .sub-title span {
