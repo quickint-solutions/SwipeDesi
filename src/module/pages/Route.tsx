@@ -494,7 +494,7 @@ const RouteComponent: React.FC = () => {
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
                 <li className="nav-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-                  <div className="nav-link nav-link-flex" aria-current="page" style={{ marginRight: '-20px' }}>
+                  <div className="nav-link nav-link-flex" aria-current="page">
                     <img src={homeIcon} alt="home" />
                     <span>Home</span>
                   </div>

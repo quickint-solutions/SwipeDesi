@@ -1212,7 +1212,7 @@ button {
 }
 
 .header .topbar .dropdown .dropdown-toggle img {
-  height: 20px;
+  height: 30px;
   margin-right: 10px;
 }
 
@@ -1232,9 +1232,7 @@ button {
   position: relative;
 }
 
-.header .navbar .navbar-nav .nav-item {
-  margin-right: 24px;
-}
+
 
 .header .navbar .navbar-nav .nav-item .nav-link img {
   width: 20px;
