@@ -1236,7 +1236,9 @@ button {
   position: relative;
 }
 
-
+.header .navbar .navbar-nav .nav-item {
+  /* margin-right: 24px; */
+}
 
 .header .navbar .navbar-nav .nav-item .nav-link img {
   width: 20px;
