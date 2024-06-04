@@ -71,7 +71,7 @@ const Login: React.FC = () => {
             banner --> */}
       <section className="banner-02">
         <div className="banner-section-wrapper">
-          <div className="row g-0 g-md-1 g-lg-2">
+          <div className="row gx-0 gx-sm-1 gx-lg-2">
             <div className="col-sm-7 col-12 mb-1">
               <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
@@ -100,7 +100,7 @@ const Login: React.FC = () => {
               </div>
             </div>
             <div className="col-sm-5 col-12">
-              <div className="row g-1">
+              <div className="row gx-1">
                 {!bannersLoading &&
                   banners &&
                   bannersList.length > 0 &&
@@ -131,6 +131,7 @@ const Login: React.FC = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="section-title section-title-style-1 text-center">
+                <span className="storke-title">New Arrivals</span>
                 <span className="sub-title left-divider">Our Categories</span>
                 <h2 className="title">Shop by Department</h2>
                 <div className="description">
@@ -389,6 +390,7 @@ const Login: React.FC = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="section-title section-title-style-1 text-center">
+                <span className="storke-title">New Products</span>
                 <span className="sub-title left-divider">Latest Collection</span>
                 <h2 className="title">Featured Products</h2>
                 <div className="description">
@@ -402,9 +404,14 @@ const Login: React.FC = () => {
               ? featuredItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
               : ''}
           </div>
+        </div>
+      </section>
+      <section className='bg-grey space-ptb'>
+        <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="section-title section-title-style-1 text-center">
+                <span className="storke-title">Top Tranding</span>
                 <span className="sub-title left-divider">HANDCRAFTED WITH INTEGRITY</span>
                 <h2 className="title">Premium Jhula</h2>
                 <div className="description">
@@ -421,9 +428,14 @@ const Login: React.FC = () => {
               ? premiumJhulaItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
               : ''}
           </div>
+        </div>
+      </section>
+      <section className="space-pt pb-md-5 pb-4" id="featuredItems">
+        <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="section-title section-title-style-1 text-center">
+                <span className="storke-title">Top Tranding</span>
                 <span className="sub-title left-divider">Top trending</span>
                 <h2 className="title">Haveli Mandir</h2>
                 <div className="description">
@@ -437,7 +449,7 @@ const Login: React.FC = () => {
               ? haveliMandirItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
               : ''}
           </div>
-        </div>
+          </div>
       </section>
       {/* <!--=================================
             Product--> */}
@@ -625,6 +637,7 @@ const Login: React.FC = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="section-title section-title-style-1 text-center">
+                <span className="storke-title">Latest Images</span>
                 <span className="sub-title left-divider">IN THE SPOTLIGHT</span>
                 <h2 className="title">Our Instagram</h2>
                 <div className="description">

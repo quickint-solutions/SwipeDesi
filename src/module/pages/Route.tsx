@@ -271,7 +271,7 @@ const RouteComponent: React.FC = () => {
                           </a>
                         </div>
                       </div>
-                      <div className="d-none d-sm-block">
+                      <div className="d-none d-md-block">
                         <ul className="list-unstyled ps-2">
                           {/* <li>
                             <a href="#">Gift cards</a>
@@ -552,6 +552,16 @@ const RouteComponent: React.FC = () => {
                     );
                   })}
               </ul>
+              <div className="d-md-none d-md-none mobile-foot-menu border-top">
+                <ul className="list-unstyled d-flex mb-0">
+                  <li className='me-3'>
+                    <a href="/contact-us">Showrooms</a>
+                  </li>
+                  <li>
+                    <a href="home/about-us">About Us</a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div className="text-end free-shipping d-none d-lg-block">
               <a href="#">Transforming Houses into Homes</a>

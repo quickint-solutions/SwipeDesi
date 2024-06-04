@@ -24,7 +24,9 @@
 .bg-primary {
   background: #F3601E !important;
 }
-
+.bg-grey {
+  background-color: #F9F5F0;
+}
 .bg-holder {
   background-size: cover;
   background-position: center center;
@@ -1105,7 +1107,7 @@ button {
 }
 
 .header .topbar-inner .topbar-left a i {
-  color: #F3601E;
+  color: #fff;
 }
 
 .header .topbar-inner .topbar-left .topbar-call {
@@ -1173,7 +1175,7 @@ button {
 }
 
 .header .topbar .dropdown .dropdown-menu {
-  top: 50% !important;
+  /* top: 50% !important; */
   padding: 10px;
   -webkit-box-shadow: 0px 2px 5px 0px rgba(9, 28, 58, 0.1);
   box-shadow: 0px 2px 5px 0px rgba(9, 28, 58, 0.1);
@@ -1197,6 +1199,8 @@ button {
   width: 1px;
   right: 0;
   background: rgb(255, 255, 255);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .header .topbar .dropdown .dropdown-toggle {
@@ -1584,7 +1588,16 @@ button.search-button {
   background-color: #f5f5f5;
 }
 
-
+.mobile-foot-menu ul {
+  padding: 15px 26px;
+}
+.mobile-foot-menu li a {
+  color: #121212;
+  font-weight: 700;
+}
+.mobile-foot-menu li a:hover {
+  color: #F3601E;
+}
 
 /*Banner 02*/
 .banner-section-wrapper {
@@ -1706,6 +1719,17 @@ button.search-button {
   font-weight: 600;
 }
 
+.section-title .storke-title {
+  font-size: 74px;
+  font-weight: 600;
+  color: rgba(18, 18, 18, 0.05);
+  position: absolute;
+  top: -20px;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 
 /***** categories ***/
 
@@ -4765,11 +4789,17 @@ ul.list li i {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .header .navbar-brand {
     max-width: 180px;
   }
-
+  .header .topbar-inner .topbar-divider::after {
+    display: none;
+  }
+  .section-title .storke-title {
+    font-size: 60px;
+    top: -18px;
+  }
   .testimonial-dark-bg .testimonial-description {
     padding: 30px 50px 30px 50px;
   }
@@ -4828,8 +4858,10 @@ ul.list li i {
   .header .topbar-inner .topbar-divider::after {
     display: none;
   }
-
-
+  .section-title .storke-title {
+    font-size: 46px;
+    top: -18px;
+  }
   .featured-categories-column {
     width: 50%;
   }
