@@ -553,17 +553,19 @@ const RouteComponent: React.FC = () => {
                     );
                   })}
               </ul>
-              <div className="d-lg-none d-flex">
-                <div className="nav-link nav-link-flex" aria-current="page" style={{ position: 'relative' }}>
-                  <a href="/contact-us" style={{ color: 'black', fontSize: '16px' }}>
-                    Showrooms
-                  </a>
-                </div>
-                <div className="nav-link nav-link-flex" aria-current="page">
-                  <a href="home/about-us" style={{ color: 'black', fontSize: '16px' }}>
-                    About Us
-                  </a>
-                </div>
+              <div className="d-md-none d-md-none mobile-foot-menu border-top">
+                <ul className="list-unstyled d-flex mb-0">
+                  <li className="me-3">
+                    <a href="/contact-us" style={{ fontWeight: 'normal' }}>
+                      Showrooms
+                    </a>
+                  </li>
+                  <li>
+                    <a href="home/about-us" style={{ fontWeight: 'normal' }}>
+                      About Us
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
             <div className="text-end free-shipping d-none d-lg-block">
