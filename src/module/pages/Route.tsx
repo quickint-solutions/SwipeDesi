@@ -499,6 +499,7 @@ const RouteComponent: React.FC = () => {
                     <span>Home</span>
                   </div>
                 </li>
+
                 {!categoriesLoading &&
                   categories &&
                   categories.result.length > 0 &&
@@ -519,7 +520,7 @@ const RouteComponent: React.FC = () => {
                             className="nav-link nav-link-flex"
                             aria-current="page"
                             onClick={() => {
-                              handleCategoryClick(value._id); // Handle click on the main category
+                              handleCategoryClick(value._id);
                               setCategories(value._id);
                               navigate(`/products?category=${value._id}`);
                             }}
@@ -552,6 +553,18 @@ const RouteComponent: React.FC = () => {
                     );
                   })}
               </ul>
+              <div className="d-lg-none d-flex">
+                <div className="nav-link nav-link-flex" aria-current="page" style={{ position: 'relative' }}>
+                  <a href="/contact-us" style={{ color: 'black', fontSize: '16px' }}>
+                    Showrooms
+                  </a>
+                </div>
+                <div className="nav-link nav-link-flex" aria-current="page">
+                  <a href="home/about-us" style={{ color: 'black', fontSize: '16px' }}>
+                    About Us
+                  </a>
+                </div>
+              </div>
             </div>
             <div className="text-end free-shipping d-none d-lg-block">
               <a href="#">Transforming Houses into Homes</a>

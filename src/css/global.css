@@ -4739,7 +4739,17 @@ ul.list li i {
   right: 0;
   top: 77px;
 } */
+/* Default state (desktop view) */
+.mobile-only {
+  display: none;
+}
 
+/* Mobile view */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+}
   .account-action {
     margin-left: 10px;
   }
