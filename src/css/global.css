@@ -1717,7 +1717,7 @@ button.search-button {
 
 .section-title h2,
 .section-title h1 {
-  margin-bottom: 15px;
+  margin-bottom: -15px;
   font-weight: 600;
 }
 
@@ -2692,7 +2692,7 @@ button.search-button {
 }
 
 .header-inner-menu .header-inner-title {
-  margin: 20px 4px;
+  margin: 0px 4px;
 }
 
 .header-inner-menu .header-inner-title .section-title .sub-title span {
@@ -2705,7 +2705,7 @@ button.search-button {
 }
 
 .header-inner-menu .header-inner-title .title {
-  font-size: 48px;
+  font-size: 40px;
 }
 
 .header-inner-shape {
