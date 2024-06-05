@@ -20,7 +20,11 @@ export default function Products() {
 
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
+  const [value, setValue] = useState([0, 1000]);
+
   const pageSize = 12;
+
+  //!API'S call
 
   const { data: getProducts, mutate, isLoading } = useMutation(getItems);
 
@@ -51,14 +55,6 @@ export default function Products() {
     },
   );
 
-  useEffect(() => {
-    mutate({ categories, search, pageSize, page, minPrice, maxPrice, selectedColors });
-  }, [categories, search, page, minPrice, maxPrice, selectedColors]);
-
-  useEffect(() => {
-    setCategories(categoryId || '');
-  }, [categoryId, setCategories]);
-
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
@@ -73,26 +69,24 @@ export default function Products() {
     });
   };
 
+  const rangeSelector = (event: any, newValue: any) => {
+    setValue(newValue as number[]);
+    setMinPrice(newValue[0]);
+    setMaxPrice(newValue[1]);
+  };
+
   useEffect(() => {
     if (selectedColors.length > 0) {
     }
   }, [selectedColors]);
 
-  const [value, setValue] = useState([0, 1000]); // Initial price range
+  useEffect(() => {
+    mutate({ categories, search, pageSize, page, minPrice, maxPrice, selectedColors });
+  }, [categories, search, page, minPrice, maxPrice, selectedColors]);
 
-  const rangeSelector = (event: any, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  };
-
-  const handleMinInputChange = (event: { target: { value: string } }) => {
-    const minValue = parseInt(event.target.value);
-    setValue([minValue, value[1]]);
-  };
-
-  const handleMaxInputChange = (event: { target: { value: string } }) => {
-    const maxValue = parseInt(event.target.value);
-    setValue([value[0], maxValue]);
-  };
+  useEffect(() => {
+    setCategories(categoryId || '');
+  }, [categoryId, setCategories]);
 
   return (
     <div>
@@ -200,7 +194,7 @@ export default function Products() {
                       <h5 className="title">Filter by price</h5>
                     </div>
                     <div style={{ margin: 'auto', display: 'block', width: 'fit-content' }}>
-                      <div className="widget-content">
+                      {/* <div className="widget-content">
                         <div className="mb-3">
                           <div className="collapse show" id="price">
                             <div className="property-price-slider">
@@ -208,19 +202,16 @@ export default function Products() {
                                 type="text"
                                 style={{ marginBottom: 10 }}
                                 placeholder="minimum price"
-                                value={value[0]}
-                                onChange={handleMinInputChange}
+                                value={minPrice}
+                                onChange={minPriceHandleChange}
                               />
-                              <input type="text" placeholder="maximum price" value={value[1]} onChange={handleMaxInputChange} />
+                              <input type="text" placeholder="maximum price" value={maxPrice} onChange={maxPriceHandleChange} />
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <Typography id="range-slider" gutterBottom>
-                        Select Price Range:
-                      </Typography>
-                      <Slider value={value} onChange={rangeSelector} valueLabelDisplay="auto" min={0} max={1000} />
-                      Your range of Price is between {value[0]} /- and {value[1]} /-
+                      </div> */}
+                      <Slider value={value} onChange={rangeSelector} valueLabelDisplay="auto" min={0} max={10000} style={{ color: '#F3601E' }} />
+                      Price filter between {value[0]} - and {value[1]}
                     </div>
                   </div>
                   <div className="widget-content">
