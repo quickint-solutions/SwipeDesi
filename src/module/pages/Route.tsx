@@ -271,7 +271,7 @@ const RouteComponent: React.FC = () => {
                           </a>
                         </div>
                       </div>
-                      <div className="d-none d-sm-block">
+                      <div className="d-none d-md-block">
                         <ul className="list-unstyled ps-2">
                           {/* <li>
                             <a href="#">Gift cards</a>
