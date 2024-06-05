@@ -4,6 +4,8 @@ import { getItems } from '../../../apiV2/items';
 import ProductItem from '../../../components/ProductItem';
 import { getCategories, getCategoriesById } from '../../../apiV2/categories';
 import { AuthContext } from '../../../context/auth.context';
+import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
 
 export default function Products() {
   const { search, categories, setCategories } = useContext(AuthContext);
@@ -75,6 +77,22 @@ export default function Products() {
     if (selectedColors.length > 0) {
     }
   }, [selectedColors]);
+
+  const [value, setValue] = useState([0, 1000]); // Initial price range
+
+  const rangeSelector = (event: any, newValue: number | number[]) => {
+    setValue(newValue as number[]);
+  };
+
+  const handleMinInputChange = (event: { target: { value: string } }) => {
+    const minValue = parseInt(event.target.value);
+    setValue([minValue, value[1]]);
+  };
+
+  const handleMaxInputChange = (event: { target: { value: string } }) => {
+    const maxValue = parseInt(event.target.value);
+    setValue([value[0], maxValue]);
+  };
 
   return (
     <div>
@@ -181,21 +199,28 @@ export default function Products() {
                     <div className="widget-title">
                       <h5 className="title">Filter by price</h5>
                     </div>
-                    <div className="widget-content">
-                      <div className="mb-3">
-                        <div className="collapse show" id="price">
-                          <div className="property-price-slider">
-                            <input
-                              type="text"
-                              id="property-price-slider"
-                              style={{ marginBottom: 10 }}
-                              placeholder="minimum price"
-                              onChange={minPriceHandleChange}
-                            />
-                            <input type="text" id="property-price-slider" placeholder="maximum price" onChange={maxPriceHandleChange} />
+                    <div style={{ margin: 'auto', display: 'block', width: 'fit-content' }}>
+                      <div className="widget-content">
+                        <div className="mb-3">
+                          <div className="collapse show" id="price">
+                            <div className="property-price-slider">
+                              <input
+                                type="text"
+                                style={{ marginBottom: 10 }}
+                                placeholder="minimum price"
+                                value={value[0]}
+                                onChange={handleMinInputChange}
+                              />
+                              <input type="text" placeholder="maximum price" value={value[1]} onChange={handleMaxInputChange} />
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <Typography id="range-slider" gutterBottom>
+                        Select Price Range:
+                      </Typography>
+                      <Slider value={value} onChange={rangeSelector} valueLabelDisplay="auto" min={0} max={1000} />
+                      Your range of Price is between {value[0]} /- and {value[1]} /-
                     </div>
                   </div>
                   <div className="widget-content">
