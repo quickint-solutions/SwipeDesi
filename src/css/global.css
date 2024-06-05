@@ -1717,7 +1717,7 @@ button.search-button {
 
 .section-title h2,
 .section-title h1 {
-  margin-bottom: -15px;
+  margin-bottom: 15px;
   font-weight: 600;
 }
 
