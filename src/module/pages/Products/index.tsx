@@ -210,9 +210,6 @@ export default function Products() {
                           </div>
                         </div>
                       </div> */}
-                      <Typography id="range-slider" gutterBottom>
-                        Select Price Range:
-                      </Typography>
                       <Slider value={value} onChange={rangeSelector} valueLabelDisplay="auto" min={0} max={10000} style={{ color: '#F3601E' }} />
                       Price filter between {value[0]} - and {value[1]}
                     </div>
