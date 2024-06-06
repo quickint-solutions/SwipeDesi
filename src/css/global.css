@@ -2686,6 +2686,15 @@ button.search-button {
 
 
 /*Inner Header*/
+
+.header-inner {
+  padding: 20px 0 5px;
+}
+
+.header-inner .section-title {
+  margin-bottom: 0;
+}
+
 .header-inner-menu {
   background-position: center;
   background-size: cover;
