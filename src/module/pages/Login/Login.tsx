@@ -5,7 +5,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { ReactComponent as QuoteSvg } from '../../../images/testimonial/quote.svg';
 import BgImage from '../../../images/bg/banner-sale-off.jpg';
 import BgImage1 from '../../../images/bg/bg-01.jpg';
-import furnitureImage from '../../../images/furniture/img-01.jpg';
+import furnitureImage from '../../../images/room-set.jpg';
 import furnitureImage1 from '../../../images/furniture/img-02.jpg';
 import zula from '../../../images/zula.jpg';
 import diwan from '../../../images/diwan.jpg';
@@ -289,7 +289,7 @@ const Login: React.FC = () => {
                 </div>
                 <div className="furniture-info">
                   <p className="text-white text-uppercase mb-2">Sale up to 20% OFF all items</p>
-                  <h3 className="furniture-title text-white mb-3 mb-sm-4">Dining Table Set</h3>
+                  <h3 className="furniture-title text-white mb-3 mb-sm-4">Living Room Set</h3>
                   <a href={`/products?category=6628c8c9927e3edd23258e23`} className="btn btn-light">
                     Shop Now<i className="fas fa-arrow-right-long ps-3"></i>
                   </a>
@@ -406,7 +406,7 @@ const Login: React.FC = () => {
           </div>
         </div>
       </section>
-      <section className='bg-grey space-ptb'>
+      <section className="bg-grey space-ptb">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -449,7 +449,7 @@ const Login: React.FC = () => {
               ? haveliMandirItems?.result.map((value: any, key: number) => <ProductItem product={value} key={key} />)
               : ''}
           </div>
-          </div>
+        </div>
       </section>
       {/* <!--=================================
             Product--> */}
