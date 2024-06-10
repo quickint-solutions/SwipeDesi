@@ -7,8 +7,8 @@ import BgImage from '../../../images/bg/banner-sale-off.jpg';
 import BgImage1 from '../../../images/bg/bg-01.jpg';
 import furnitureImage from '../../../images/room-set.jpg';
 import furnitureImage1 from '../../../images/furniture/img-02.jpg';
-import zula from '../../../images/zula.jpg';
-import diwan from '../../../images/diwan.jpg';
+import zula from '../../../images/Zula.png';
+import diwan from '../../../images/Diwan.png';
 import _ from 'lodash';
 
 import { useAppSelector } from '../../../api/store/configureStore';
