@@ -135,7 +135,7 @@ const Login: React.FC = () => {
                 <span className="sub-title left-divider">Our Categories</span>
                 <h2 className="title">Shop by Department</h2>
                 <div className="description">
-                  <p>Products with a tres chic attitude and a traditional twist end up becoming a nice piece of art.</p>
+                  <p>Unveil the artistry by dhknd, that transforms a house into a home.</p>
                 </div>
               </div>
             </div>
@@ -271,7 +271,7 @@ const Login: React.FC = () => {
                 <span className="sub-title left-divider">Best Collection</span>
                 <h2 className="title">Living Room Furniture</h2>
                 <div className="description">
-                  <p>Products with a tres chic attitude and a traditional twist end up becoming a nice piece of art.</p>
+                  <p>Timeless artistry, for generations: Living rooms, diwans, jhulas - steeped in heritage</p>
                 </div>
               </div>
             </div>
@@ -394,7 +394,7 @@ const Login: React.FC = () => {
                 <span className="sub-title left-divider">Latest Collection</span>
                 <h2 className="title">Featured Products</h2>
                 <div className="description">
-                  <p>Products with a tres chic attitude and a traditional twist end up becoming a nice piece of art.</p>
+                  <p>Beyond décor, a legacy: Unveil handcrafted mandirs and furniture, woven in our traditions</p>
                 </div>
               </div>
             </div>
@@ -416,8 +416,7 @@ const Login: React.FC = () => {
                 <h2 className="title">Premium Jhula</h2>
                 <div className="description">
                   <p>
-                    Products that work out best in satisfying our customers, and define transparency.Products that work out best in satisfying our
-                    customers, and define transparency.
+                    Where comfort meets heritage: Discover the unparalleled elegance of our premium jhula.
                   </p>
                 </div>
               </div>
@@ -439,7 +438,7 @@ const Login: React.FC = () => {
                 <span className="sub-title left-divider">Top trending</span>
                 <h2 className="title">Haveli Mandir</h2>
                 <div className="description">
-                  <p>Products that work out best in satisfying our customers, and define transparency.</p>
+                  <p>Where stories come alive: Embrace tradition with our exquisitely crafted Haveli Mandirs.</p>
                 </div>
               </div>
             </div>
