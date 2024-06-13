@@ -48,5 +48,6 @@ body {
   padding: 0;
   overflow: auto;
   margin: 0;
+  overscroll-behavior-y: none;
   -webkit-overflow-scrolling: touch;
 }
