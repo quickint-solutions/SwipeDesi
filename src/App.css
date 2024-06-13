@@ -41,6 +41,10 @@ html {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  overscroll-behavior-y: none;
+  
+  -webkit-overflow-scrolling: auto !important;
+  width: 50vw !important;
 }
 
 body {
@@ -49,5 +53,6 @@ body {
   overflow: auto;
   margin: 0;
   overscroll-behavior-y: none;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: auto !important;
+  width: 50vw !important;
 }
