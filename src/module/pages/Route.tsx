@@ -31,6 +31,7 @@ import { sendLead } from '../../apiV2/leads';
 import Order from './Order/Order';
 import { forgotPasswordAPI } from '../../apiV2/forgotpassword';
 import { resetPasswordAPI } from '../../apiV2/resetPassword';
+import $ from 'jquery';
 
 // pages
 const Login = lazy(() => import('./Login/Login'));
@@ -189,26 +190,20 @@ const RouteComponent: React.FC = () => {
       alert(error.response.data.message || 'Password reset failed');
     },
   });
-  const [isVisible, setIsVisible] = useState(false);
-  // Show or hide the button based on scroll position
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    $(window).scroll(() => {
+      const $window = $(window);
+      if ($window.scrollTop() > 300) {
+        $('#back-to-top').fadeIn();
+      } else {
+        $('#back-to-top').fadeOut();
+      }
+    });
+
+    $('#back-to-top').click(function () {
+      $('html, body').animate({ scrollTop: 0 }, 800);
+      return false;
+    });
   }, []);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -1229,7 +1224,7 @@ const RouteComponent: React.FC = () => {
         </div>
       </footer>
 
-      <div id="back-to-top" className={`back-to-top ${isVisible ? 'show' : ''}`} onClick={scrollToTop}>
+      <div id="back-to-top" className="back-to-top">
         <a>
           <i className="fas fa-angle-up"></i>
         </a>
