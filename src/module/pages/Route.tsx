@@ -365,7 +365,14 @@ const RouteComponent: React.FC = () => {
                 <div className="add-listing">
                   <div className="account-action">
                     {auth.user ? (
-                      <a href="javascript:void(0)" className="account-icon" onClick={() => auth.logout()}>
+                      <a
+                        href="javascript:void(0)"
+                        className="account-icon"
+                        onClick={() => {
+                          auth.logout();
+                          alert('You have been logged out successfully!');
+                        }}
+                      >
                         <i className="bi bi-box-arrow-right"></i>
                         <span>Log Out</span>
                       </a>
