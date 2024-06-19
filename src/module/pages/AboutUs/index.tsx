@@ -156,7 +156,7 @@ export default function AboutUs() {
               <div className="col-md-10 col-sm-12 team-info-wrapper order-2 order-md-1">
                 <div className="team-detail team-detail-img-right">
                   <h4 className="team-title mb-2">
-                    <a href="team-detail.html">Daxesh Dalwadi</a>
+                    <a>Daxesh Dalwadi</a>
                   </h4>
                   <span className="team-label">Founder</span>
                   <div className="team-social">
@@ -209,7 +209,7 @@ export default function AboutUs() {
               <div className="offset-md-2 col-md-10 col-sm-12 team-info-wrapper order-2 order-md-1">
                 <div className="team-detail team-detail-img-left">
                   <h4 className="team-title mb-2">
-                    <a href="team-detail.html">Heema Dalwadi</a>
+                    <a>Heema Dalwadi</a>
                   </h4>
                   <span className="team-label">Co - Founder</span>
                   <div className="team-social">
@@ -238,7 +238,7 @@ export default function AboutUs() {
               <div className="col-md-10 col-sm-12 team-info-wrapper order-2 order-md-1">
                 <div className="team-detail team-detail-img-right">
                   <h4 className="team-title mb-2">
-                    <a href="team-detail.html">Kavya Dalwadi</a>
+                    <a>Kavya Dalwadi</a>
                   </h4>
                   <span className="team-label">Assistant Director</span>
                   <div className="team-social">
