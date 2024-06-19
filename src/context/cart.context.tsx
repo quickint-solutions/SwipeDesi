@@ -1,5 +1,3 @@
-// create a context for the auth state
-
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -40,24 +38,29 @@ export const CartProvider = ({ children }: any) => {
   const [coupon, setCoupon] = useState<string>('');
 
   useEffect(() => {
-    if (items.length) localStorage.setItem('cart', JSON.stringify(items));
-    else localStorage.removeItem('cart');
-
-    if (coupon) localStorage.setItem('coupon', coupon);
-    else localStorage.removeItem('coupon');
-  }, [items]);
-
-  useEffect(() => {
     const cart = localStorage.getItem('cart');
-    const coupon = localStorage.getItem('coupon');
+    const storedCoupon = localStorage.getItem('coupon');
     if (cart) {
       setItems(JSON.parse(cart));
     }
-
-    if (coupon) {
-      setCoupon(coupon);
+    if (storedCoupon) {
+      setCoupon(storedCoupon);
     }
   }, []);
+
+  useEffect(() => {
+    if (items.length) {
+      localStorage.setItem('cart', JSON.stringify(items));
+    } else {
+      localStorage.removeItem('cart');
+    }
+
+    if (coupon) {
+      localStorage.setItem('coupon', coupon);
+    } else {
+      localStorage.removeItem('coupon');
+    }
+  }, [items, coupon]);
 
   const addItem = (item: any, quantity: number = 1) => {
     item = { ...item, price: Number(item.price) };
@@ -118,7 +121,7 @@ export const CartProvider = ({ children }: any) => {
     try {
       const response = await axios.get(`/coupons/validate?code=${couponId}`);
       if (response.data.length) {
-        setCoupon(coupon);
+        setCoupon(couponId);
       } else {
         throw new Error('Invalid coupon');
       }
