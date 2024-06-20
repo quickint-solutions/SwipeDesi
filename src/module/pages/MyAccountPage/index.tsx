@@ -377,7 +377,7 @@ export default function Myaccount() {
                       type="text"
                       className="form-control"
                       id="state"
-                      placeholder="Last Name"
+                      placeholder="State"
                       required
                       value={userDetails?.state}
                       onChange={e => {
