@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import img from '../../../images/new-bg/Contact-Us.jpg';
@@ -12,6 +12,10 @@ export default function ContactUs() {
     phone: '',
     message: '',
   });
+  const [errors, setErrors] = useState({
+    email: '',
+    phone: '',
+  });
 
   const { mutate: handleLead } = useMutation(sendLead, {
     onSuccess: lead => {
@@ -22,6 +26,36 @@ export default function ContactUs() {
       alert('Error sending lead. Please try again later.');
     },
   });
+
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    const regex = /^[0-9]{10,15}$/;
+    return regex.test(phone);
+  };
+
+  const handleSubmit = () => {
+    let emailError = '';
+    let phoneError = '';
+
+    if (!validateEmail(lead.email)) {
+      emailError = 'Invalid email address';
+    }
+
+    if (!validatePhone(lead.phone)) {
+      phoneError = 'Invalid phone number';
+    }
+
+    if (emailError || phoneError) {
+      setErrors({ email: emailError, phone: phoneError });
+    } else {
+      setErrors({ email: '', phone: '' });
+      handleLead(lead);
+    }
+  };
 
   return (
     <div>
@@ -56,7 +90,7 @@ export default function ContactUs() {
         <div className="container">
           <div className="row justify-content-start g-0">
             <div className="col-md-12 col-lg-8 h-100">
-              <div className="contact-form py-lg-5 px-lg-5  py-md-5 px-md-5 px-4 py-4 box-shadow border-radius">
+              <div className="contact-form py-lg-5 px-lg-5 py-md-5 px-md-5 px-4 py-4 box-shadow border-radius">
                 <div className="section-title section-title-style-1">
                   <span className="sub-title left-divider">Contact Us</span>
                   <h2 className="title">
@@ -81,7 +115,13 @@ export default function ContactUs() {
                         id="phone"
                         placeholder="Phone Number"
                         onChange={e => setLead({ ...lead, phone: e.target.value })}
+                        onKeyPress={e => {
+                          if (!/[0-9]/.test(e.key)) {
+                            e.preventDefault();
+                          }
+                        }}
                       />
+                      {errors.phone && <div className="text-danger">{errors.phone}</div>}
                     </div>
                     <div className="mb-3 col-md-12">
                       <input
@@ -91,6 +131,7 @@ export default function ContactUs() {
                         placeholder="Email"
                         onChange={e => setLead({ ...lead, email: e.target.value })}
                       />
+                      {errors.email && <div className="text-danger">{errors.email}</div>}
                     </div>
                     <div className="col-lg-12">
                       <textarea
@@ -102,15 +143,15 @@ export default function ContactUs() {
                     </div>
                   </div>
                   <div className="d-flex mt-4">
-                    <a className="btn btn-primary d-inline" onClick={() => handleLead(lead)}>
+                    <button type="button" className="btn btn-primary d-inline" onClick={handleSubmit}>
                       Send your Message
-                    </a>
+                    </button>
                   </div>
                 </form>
               </div>
             </div>
             <div className="col-md-12 col-lg-4">
-              <div className="bg-primary message-info h-100 box-shadow  border-radius">
+              <div className="bg-primary message-info h-100 box-shadow border-radius">
                 <h3 className="title text-white mb-4">
                   Contact <strong>Information</strong>
                 </h3>
@@ -143,35 +184,10 @@ export default function ContactUs() {
                       </li>
                     </ul>
                   </div>
-                  {/* <div className="social-icon">
-                    <ul>
-                      <li>
-                        <a href="#">
-                          <i className="fa-brands fa-facebook-f"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fa-brands fa-twitter"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fa-brands fa-linkedin-in"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fab fa-instagram"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div> */}
                 </div>
               </div>
             </div>
             <div style={{ height: '400px', width: '100%' }}>
-              {/* Google Maps iframe */}
               <iframe
                 title="Google Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.2506837149044!2d-113.9990259229972!3d51.19603233340157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x537160e36b7269cb%3A0x5b09f369d21078f9!2s260300%20Writing%20Creek%20Cres%20i28%2C%20Balzac%2C%20AB%20T0M%200E0%2C%20Canada!5e0!3m2!1sen!2sin!4v1683714410738!5m2!1sen!2sin"
@@ -179,8 +195,8 @@ export default function ContactUs() {
                 height="100%"
                 frameBorder="0"
                 style={{ border: 0 }}
-                allowFullScreen={true} // Pass a boolean value instead of an empty string
-                aria-hidden={false} // Pass a boolean value instead of a string
+                allowFullScreen={true}
+                aria-hidden={false}
               ></iframe>
             </div>
           </div>

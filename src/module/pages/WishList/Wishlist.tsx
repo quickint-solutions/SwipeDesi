@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import BgImg from '../../../images/new-bg/Wishlist.jpg';
 import Product1 from '../../../images/product/01.jpg';
@@ -7,21 +7,10 @@ import { useMutation, useQuery } from 'react-query';
 import { getWishList, removeWishList } from '../../../apiV2/wishlist';
 import { CartContext } from '../../../context/cart.context';
 
-const Wishist: React.FC = () => {
+const Wishlist: React.FC = () => {
   const navigate = useNavigate();
   const userDetail = getUserDetail();
   const [searchParams] = useSearchParams();
-  const [wishlistData, setWishlistData] = useState([]);
-
-  // useEffect(() => {
-  //   let productId = searchParams.get('productId');
-  //   if (productId) {
-  //     getWishlistData(Number(productId));
-  //   } else {
-  //     getWishlistData(0);
-  //   }
-  // }, []);
-
   const { addItem } = useContext(CartContext);
 
   const addItemToCart = async (data: any) => {
@@ -39,6 +28,8 @@ const Wishist: React.FC = () => {
       alert('Error removing product from wishlist');
     },
   });
+
+  const filteredWishlist = fetchWishlist?.result?.filter((item: any) => item.userId === userDetail.id) || [];
 
   return (
     <>
@@ -87,145 +78,43 @@ const Wishist: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {fetchWishlist?.result?.length > 0
-                        ? fetchWishlist?.result?.map((value: any, key: number) => (
-                            <tr>
-                              <td className="product-remove">
-                                <a href="javascript:void(0)" onClick={() => removeItemFromWishlist(value._id)}>
-                                  <i className="fa-solid fa-xmark"></i>
-                                </a>
-                              </td>
-                              <td className="product-thumbnail">
-                                <a href="#">
-                                  <img src={Product1} alt="" />
-                                </a>
-                              </td>
-                              <td className="product-name">
-                                <a href="#">{value?.item?.name || 'No name'}</a>
-                              </td>
-                              <td className="product-price">
-                                <span className="amount">${value?.item?.price || 'No price for now'}</span>
-                              </td>
-                              <td className="product-stock">
-                                {value?.item?.stock ? <span>{value?.item?.stock}</span> : <span style={{ color: 'red' }}>{`out of stock`}</span>}
-                              </td>
-                              <td className="product-subtotal">
-                                <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => addItemToCart(value)}>
-                                  {' '}
-                                  Add to Cart
-                                </a>
-                              </td>
-                            </tr>
-                          ))
-                        : ''}
-                      {/* <tr>
-                        <td className="product-remove">
-                          <a href="#">
-                            <i className="fa-solid fa-xmark"></i>
-                          </a>
-                        </td>
-                        <td className="product-thumbnail">
-                          <a href="#">
-                            <img src={Product1} alt="" />
-                          </a>
-                        </td>
-                        <td className="product-name">
-                          <a href="#">Yellow worker helmet</a>
-                        </td>
-                        <td className="product-price">
-                          <span className="amount">$180</span>
-                        </td>
-                        <td className="product-stock">
-                          <span>In Stock</span>
-                        </td>
-                        <td className="product-subtotal">
-                          <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
-                        
-                            Add to Cart
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="product-remove">
-                          <a href="#">
-                            <i className="fa-solid fa-xmark"></i>
-                          </a>
-                        </td>
-                        <td className="product-thumbnail">
-                          <a href="#">
-                            <img src={Product2} alt="" />
-                          </a>
-                        </td>
-                        <td className="product-name">
-                          <a href="#">Screwdriver with handle</a>
-                        </td>
-                        <td className="product-price">
-                          <span className="amount">$180</span>
-                        </td>
-                        <td className="product-stock">
-                          <span>In Stock</span>
-                        </td>
-                        <td className="product-subtotal">
-                          <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
-                            {' '}
-                            Add to Cart
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="product-remove">
-                          <a href="#">
-                            <i className="fa-solid fa-xmark"></i>
-                          </a>
-                        </td>
-                        <td className="product-thumbnail">
-                          <a href="#">
-                            <img src={Product1} alt="" />
-                          </a>
-                        </td>
-                        <td className="product-name">
-                          <a href="#">3d rendered solar panel</a>
-                        </td>
-                        <td className="product-price">
-                          <span className="amount">$200</span>
-                        </td>
-                        <td className="product-stock">
-                          <span>In Stock</span>
-                        </td>
-                        <td className="product-subtotal">
-                          <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
-                            {' '}
-                            Add to Cart
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="product-remove">
-                          <a href="#">
-                            <i className="fa-solid fa-xmark"></i>
-                          </a>
-                        </td>
-                        <td className="product-thumbnail">
-                          <a href="#">
-                            <img src={Product2} alt="" />
-                          </a>
-                        </td>
-                        <td className="product-name">
-                          <a href="#">Screwdriver with handle</a>
-                        </td>
-                        <td className="product-price">
-                          <span className="amount">$200</span>
-                        </td>
-                        <td className="product-stock">
-                          <span>In Stock</span>
-                        </td>
-                        <td className="product-subtotal">
-                          <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => navigate('/Cart')}>
-                            {' '}
-                            Add to Cart
-                          </a>
-                        </td>
-                      </tr> */}
+                      {filteredWishlist.length > 0 ? (
+                        filteredWishlist.map((value: any, key: number) => (
+                          <tr key={key}>
+                            <td className="product-remove">
+                              <a href="javascript:void(0)" onClick={() => removeItemFromWishlist(value._id)}>
+                                <i className="fa-solid fa-xmark"></i>
+                              </a>
+                            </td>
+                            <td className="product-thumbnail">
+                              <a href="#">
+                                <img src={Product1} alt="" />
+                              </a>
+                            </td>
+                            <td className="product-name">
+                              <a href="#">{value?.item?.name || 'No name'}</a>
+                            </td>
+                            <td className="product-price">
+                              <span className="amount">${value?.item?.price || 'No price for now'}</span>
+                            </td>
+                            <td className="product-stock">
+                              {value?.item?.stock ? <span>{value?.item?.stock}</span> : <span style={{ color: 'red' }}>{`out of stock`}</span>}
+                            </td>
+                            <td className="product-subtotal">
+                              <a className="btn btn-primary min-w-auto" href="javascript:void(0)" onClick={() => addItemToCart(value)}>
+                                {' '}
+                                Add to Cart
+                              </a>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={6} className="text-center">
+                            No items in wishlist
+                          </td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -238,4 +127,4 @@ const Wishist: React.FC = () => {
   );
 };
 
-export default Wishist;
+export default Wishlist;
