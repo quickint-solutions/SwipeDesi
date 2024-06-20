@@ -1159,20 +1159,25 @@ const RouteComponent: React.FC = () => {
             <div className="col-md-6 col-12 offset-lg-1 col-lg-4">
               <div className="footer-newsletter newsletter-style-02">
                 <h4 className="text-white mb-4">Get Callback</h4>
-
                 <div className="form-group">
                   <input
                     type="text"
                     value={phoneNumber}
                     className="form-control"
-                    placeholder="Enter your phone number"
+                    placeholder="Enter your 10-digit phone number"
+                    maxLength={10}
                     onChange={e => {
-                      setPhoneNumber(e.target.value);
+                      const value = e.target.value.replace(/\D/g, '').slice(0, 10); // Remove non-digit characters and limit to 10 digits
+                      setPhoneNumber(value);
                     }}
                   />
                 </div>
                 <button
                   onClick={async () => {
+                    if (!/^\d{10}$/.test(phoneNumber)) {
+                      alert('Please enter a valid 10-digit phone number');
+                      return;
+                    }
                     setPhoneNumber('');
                     alert('We will call you back soon');
                     await sendLead({ phone: phoneNumber, message: 'Call back request', email: 'CALL BACK', name: 'CALL BACK' });
