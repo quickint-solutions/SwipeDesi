@@ -6,6 +6,7 @@ import { getCategories, getCategoriesById } from '../../../apiV2/categories';
 import { AuthContext } from '../../../context/auth.context';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
+import $ from 'jquery';
 
 export default function Products() {
   const { search, categories, setCategories } = useContext(AuthContext);
@@ -57,6 +58,7 @@ export default function Products() {
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
   };
 
   const handleColorChange = (color: string) => {
