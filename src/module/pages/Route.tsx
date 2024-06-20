@@ -228,6 +228,14 @@ const RouteComponent: React.FC = () => {
       setOpenDropdown(categoryId);
     }
   };
+  const handleNumberChange = (e: { target: { value: any } }) => {
+    const value = e.target.value;
+    const regex = /^[0-9]*$/;
+
+    if (value === '' || regex.test(value)) {
+      handleRegistrationDetail('number', value);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -723,7 +731,7 @@ const RouteComponent: React.FC = () => {
                             name="number"
                             id="number"
                             placeholder="Number"
-                            onChange={e => handleRegistrationDetail('number', e.target.value)}
+                            onChange={e => handleNumberChange(e)}
                           />
                         </div>
                         <div className="mb-3 col-sm-12 name">
