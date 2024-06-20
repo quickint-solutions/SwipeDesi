@@ -368,7 +368,9 @@ export default function Myaccount() {
                       required
                       value={userDetails?.zip}
                       onChange={e => {
-                        setUserDetails({ ...userDetails, zip: e.target.value });
+                        const inputMobile = e.target.value;
+                        const onlyNumbers = inputMobile.replace(/\D/g, ''); // Replace any non-digit character (\D) with an empty string
+                        setUserDetails({ ...userDetails, zip: onlyNumbers });
                       }}
                     />
                   </div>
@@ -392,11 +394,13 @@ export default function Myaccount() {
                       type="text"
                       className="form-control"
                       id="mobile"
-                      placeholder="mobile number"
+                      placeholder="Mobile Number"
                       required
                       value={userDetails?.mobile}
                       onChange={e => {
-                        setUserDetails({ ...userDetails, mobile: e.target.value });
+                        const inputMobile = e.target.value;
+                        const onlyNumbers = inputMobile.replace(/\D/g, ''); // Replace any non-digit character (\D) with an empty string
+                        setUserDetails({ ...userDetails, mobile: onlyNumbers });
                       }}
                     />
                   </div>
