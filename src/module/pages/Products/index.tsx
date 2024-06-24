@@ -167,7 +167,7 @@ export default function Products() {
                                               className="d-flex"
                                               onClick={() => {
                                                 setCategories(subCategory._id);
-                                                setPage(1); // Reset page to 1 when sub-category is selected
+                                                setPage(1);
                                                 const params = new URLSearchParams(window.location.search);
                                                 params.set('category', subCategory._id);
                                                 window.history.pushState({}, '', `${window.location.pathname}?${params}`);
