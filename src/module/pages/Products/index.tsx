@@ -88,6 +88,7 @@ export default function Products() {
 
   useEffect(() => {
     setCategories(categoryId || '');
+    setPage(1);
   }, [categoryId, setCategories]);
 
   return (
@@ -166,7 +167,7 @@ export default function Products() {
                                               className="d-flex"
                                               onClick={() => {
                                                 setCategories(subCategory._id);
-                                                setPage(1);
+                                                setPage(1); // Reset page to 1 when sub-category is selected
                                                 const params = new URLSearchParams(window.location.search);
                                                 params.set('category', subCategory._id);
                                                 window.history.pushState({}, '', `${window.location.pathname}?${params}`);
@@ -196,22 +197,6 @@ export default function Products() {
                       <h5 className="title">Filter by price</h5>
                     </div>
                     <div style={{ margin: 'auto', display: 'block', width: 'fit-content' }}>
-                      {/* <div className="widget-content">
-                        <div className="mb-3">
-                          <div className="collapse show" id="price">
-                            <div className="property-price-slider">
-                              <input
-                                type="text"
-                                style={{ marginBottom: 10 }}
-                                placeholder="minimum price"
-                                value={minPrice}
-                                onChange={minPriceHandleChange}
-                              />
-                              <input type="text" placeholder="maximum price" value={maxPrice} onChange={maxPriceHandleChange} />
-                            </div>
-                          </div>
-                        </div>
-                      </div> */}
                       <Slider value={value} onChange={rangeSelector} valueLabelDisplay="auto" min={0} max={10000} style={{ color: '#F3601E' }} />
                       Price filter between {value[0]} - and {value[1]}
                     </div>
