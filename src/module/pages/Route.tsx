@@ -379,6 +379,7 @@ const RouteComponent: React.FC = () => {
                         onClick={() => {
                           auth.logout();
                           alert('You have been logged out successfully!');
+                          window.location.href = '/';
                         }}
                       >
                         <i className="bi bi-box-arrow-right"></i>
