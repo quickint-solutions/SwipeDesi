@@ -4792,7 +4792,15 @@ ul.list li i {
   .add-listing {
     padding-right: 15px;
   }
-    
+   
+  .about-video iframe {
+    height: 400px;
+    margin-bottom: -120px;
+  }
+
+  .our-team-section {
+    padding-top: 200px;
+  }
   
 /* .header .navbar {
   position: absolute;
@@ -4878,6 +4886,14 @@ ul.list li i {
 
   .team .team-detail {
     padding: 80px 50px 50px;
+  }
+  .about-video iframe {
+    height: 250px;
+    margin-bottom: -60px;
+  }
+
+  .our-team-section {
+    padding-top: 140px;
   }
 }
 
@@ -4997,5 +5013,11 @@ ul.list li i {
   }
   .login-register-modal form {
     padding: 40px 20px 20px;
+  }
+  .about-video iframe {
+    height: auto;
+  }
+  .our-team-section {
+    padding-top: 120px;
   }
 }
